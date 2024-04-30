@@ -18,14 +18,19 @@ function HomeScreen({ navigation }) {
 }
 function Second({navigation}) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 6, alignItems: 'center', justifyContent: 'center', backgroundColor:"ffb345" }}>
       <Text>Home 2  </Text>
       <TouchableOpacity onPress={()=>navigation.goBack()}>
-        <Text>
-          back
+        <Text style={{color:"red", fontSize:20 }}
+        onPress={()=>{alert("Home")}}
+        >
+          Please subscribe
         </Text>
+    
+
       </TouchableOpacity>
     </View>
+    
   );
 }
 
