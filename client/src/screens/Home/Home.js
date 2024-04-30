@@ -17,17 +17,13 @@ import {
   MedicineFalteList,
   DoctorListData,
 } from '../../utils/Sliderimagedata';
-// import { useDispatch } from "react-redux";
-import Button from '../../components/commoncomponets/Button';
-// import { get_doctore_category_action } from '../../../redux/action/DoctoreCategoryAction';
-// import { useSelector } from "react-redux";
+
+import Button from '../../components/Button';
+
 import images from '../../images/index';
 import {Rating} from 'react-native-ratings';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
-// import { get_doctore_detailes_action } from '../../../redux/action/DoctoreDataAction';
-// import { price_symbol_action } from '../../../redux/action/CommonAction';
-// import { HomeFirstImageSlider, SearchHeaderScreen } from '../../../screens';
 
 const HomeTabset = props => {
   const TodayDeals = [
@@ -121,11 +117,11 @@ const HomeTabset = props => {
             </View>
             <View style={Styles.flexrocenterjusty}>
               <View style={Styles.addbutttonwidth}>
-                <Button
+                {/* <Button
                   buttonTextStyle={{color: 'red'}}
                   buttonStyle={{height: 45}}
                   title={item.buttonaadtext}
-                />
+                /> */}
               </View>
             </View>
           </View>
