@@ -14,6 +14,8 @@ import FORGET_PASSWORD_SCREEN from './src/screens/RegistrationScreen/ForgotPassw
 import ProductList from './src/screens/ProductList/ProductList'
 import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
+import ProfileTab from './src/screens/UserProfile/Profile';
+import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,8 +24,6 @@ function App() {
 
     <NavigationContainer>
       <Stack.Navigator>
-      
-
         <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="GetstartedSliderscreen" component={GetstartedSliderscreen} options={{ headerShown: false }} />
         <Stack.Screen name="LoginandRegistrationScreen" options={{ headerShown: false }} component={LoginandRegistrationScreen} />
@@ -54,11 +54,24 @@ function App() {
         <Stack.Screen name={RouteName.HOME_SCREEN} options={{ headerShown: false }} component={TabNavigator} />    */}
 
 
-        {/* <Stack.Screen options={{ headerShown: false }}  name="Home" component={HomeScreen} /> */}
-        <Stack.Screen options={{ headerShown: false }}  name="Home" component={Home} />
+      <Stack.Screen options={{ headerShown: false }}  name="Home" component={Home} />
+      <Stack.Screen options={{ headerShown: false }}  name="UserProfile" component={ProfileTab} />
+       
       <Stack.Screen options={{ headerShown: false }}  name="Categories" component={Category} />
       <Stack.Screen options={{ headerShown: false }}  name="Favorites" component={FavoriteTab} />
-      <Stack.Screen options={{ headerShown: false }}  name="ProductList" component={ProductList} />
+     
+      <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'Edit Profile',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="EditProfile" component={EditProfileScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>
