@@ -14,6 +14,8 @@ import IconF from 'react-native-vector-icons/dist/FontAwesome';
 // import { get_doctore_detailes_action } from '../../../redux/action/DoctoreDataAction';
 // import { price_symbol_action } from '../../../redux/action/CommonAction';
 // import { HomeFirstImageSlider, SearchHeaderScreen } from '../../../screens';
+// import  HomeScsreenTabAll  from '../TabNavigator/Tab'
+
 
 const HomeTabset = (props) => {
   const { navigation } = props;
@@ -460,8 +462,8 @@ const HomeTabset = (props) => {
             </View>
           </View>
         </View>
-
       </ScrollView>
+    
     </View>
   );
 };
