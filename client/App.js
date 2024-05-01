@@ -11,25 +11,9 @@ import GetstartedSliderscreen from './src/screens/GetstartedSliderscreen/Getstar
 import LoginandRegistrationScreen from './src/screens/RegistrationScreen/LoginandRegistrationScreen'
 import OTP_VERIFY_SCREEN from './src/screens/RegistrationScreen/OtpVerifyScreen'
 import FORGET_PASSWORD_SCREEN from './src/screens/RegistrationScreen/ForgotPassword'
-
-
-function Second({navigation}) {
-  return (
-    <View style={{ flex: 6, alignItems: 'center', justifyContent: 'center', backgroundColor:"ffb345" }}>
-      <Text>Home 2  </Text>
-      <TouchableOpacity onPress={()=>navigation.goBack()}>
-        <Text style={{color:"red", fontSize:20 }}
-        onPress={()=>{alert("Home")}}
-        >
-          Please subscribe
-        </Text>
-    
-
-      </TouchableOpacity>
-    </View>
-    
-  );
-}
+import ProductList from './src/screens/ProductList/ProductList'
+import Category from './src/screens/Categories/Categories';
+import FavoriteTab from './src/screens/Favorites/Favorite';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +22,8 @@ function App() {
 
     <NavigationContainer>
       <Stack.Navigator>
+      
+
         <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="GetstartedSliderscreen" component={GetstartedSliderscreen} options={{ headerShown: false }} />
         <Stack.Screen name="LoginandRegistrationScreen" options={{ headerShown: false }} component={LoginandRegistrationScreen} />
@@ -70,6 +56,10 @@ function App() {
 
         {/* <Stack.Screen options={{ headerShown: false }}  name="Home" component={HomeScreen} /> */}
         <Stack.Screen options={{ headerShown: false }}  name="Home" component={Home} />
+      <Stack.Screen options={{ headerShown: false }}  name="Categories" component={Category} />
+      <Stack.Screen options={{ headerShown: false }}  name="Favorites" component={FavoriteTab} />
+      <Stack.Screen options={{ headerShown: false }}  name="ProductList" component={ProductList} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
