@@ -15,6 +15,7 @@ const RouteName = {
     Favorite_TAB: "Favorite",
     CHECK_OUT: "CheckOutScreen",
     PROFILE_TAB: "Profile",
+    Vet_PROFILE_TAB: "VetProfile",
     HOME_TAB: "Home",
     DRAWER_HELP_SCREEN: "HelpScreen",
     PAYMENTSCREEN: "PaymentScreen",

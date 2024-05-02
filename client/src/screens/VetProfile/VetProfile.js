@@ -10,9 +10,9 @@ import { Button, SweetaelertModal } from '../../components';
 import { useNavigation } from '@react-navigation/native';
 // import { RouteName } from '../../../routes';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
-import { colors } from '../../utils';
+// import { colors } from '../../utils';
 // import { useSelector } from "react-redux";
-
+import AppointmentView from './MyVet';
 const ProfileTab = () => {
   const  colorrdata = "#feb344"
   const navigation = useNavigation();
@@ -81,7 +81,7 @@ const ProfileTab = () => {
             <View style={AccountTabStyle.minviewsigninscreen}>
               <View style={[AccountTabStyle.flexrowtwxtspace, AccountTabStyle.bgcolorset]}>
                 <Text style={AccountTabStyle.persnaltext}>Personal details</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+                <TouchableOpacity onPress={() => navigation.navigate('EditVetProfile')}>
                   <Text style={[AccountTabStyle.edittextset, { color: colorrdata }]}>Edit</Text>
                 </TouchableOpacity>
               </View>
@@ -91,10 +91,10 @@ const ProfileTab = () => {
                     <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={images.Ningthty_img} />
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
-                    <Text style={AccountTabStyle.sumanyatextset}>Sumanya K.</Text>
-                    <Text style={AccountTabStyle.setgimailtext}>sumanyak@gmail.com</Text>
-                    <Text style={AccountTabStyle.setgimailtextwo}>+91 xxxxxxxxxxx</Text>
-                    <Text style={AccountTabStyle.addreshtext}>1417 Timberbrook Lane, Denver, CO 80204, United States</Text>
+                    <Text style={AccountTabStyle.sumanyatextset}>testt</Text>
+                    <Text style={AccountTabStyle.setgimailtext}>test@gmail.com</Text>
+                    <Text style={AccountTabStyle.setgimailtextwo}>xxxxxxxxxxx</Text>
+                    <Text style={AccountTabStyle.addreshtext}>United States</Text>
                   </View>
                 </View>
               </View>
@@ -132,6 +132,16 @@ const ProfileTab = () => {
                   </View>
                 </TouchableOpacity>
               </View>
+              <TouchableOpacity onPress={() => navigation.navigate('Myvet')}style={AccountTabStyle.setbgcolorwhite}>
+        <View>
+          <View style={AccountTabStyle.flexrowsettile}>
+            <Icon name="vet" size={20} color={colorrdata} />
+          </View>
+          <Text style={AccountTabStyle.bookmarktextstyle}>My Vet</Text>
+        </View>
+      </TouchableOpacity>
+  
+
               <FlatList
                 data={setuserdata}
                 renderItem={({ item, index }) => Userdatatext(item, index)}
@@ -168,7 +178,6 @@ const ProfileTab = () => {
           </View>
         </KeyboardAvoidingView>
       </ScrollView>
-      {/* Log out Modal start */}
       <View>
         <View style={Style.centeredView}>
           <Modal
