@@ -115,7 +115,7 @@ const LoginScreen = () => {
         
           }
               {DisplayAlert !== 0 ?
-                <SweetaelertModal message='Login Successful' link={"Home"} />
+                <SweetaelertModal message='Login Successful' link={"tab"} />
                 :
                 null
               }

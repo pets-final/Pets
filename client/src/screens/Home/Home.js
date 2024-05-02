@@ -11,10 +11,8 @@ import images from '../../../index';
 import { Rating } from 'react-native-ratings';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
-// import { get_doctore_detailes_action } from '../../../redux/action/DoctoreDataAction';
-// import { price_symbol_action } from '../../../redux/action/CommonAction';
-// import { HomeFirstImageSlider, SearchHeaderScreen } from '../../../screens';
-// import  HomeScsreenTabAll  from '../TabNavigator/Tab'
+
+import auth from '@react-native-firebase/auth'; // Import the auth module
 
 
 const HomeTabset = (props) => {
@@ -26,22 +24,18 @@ const HomeTabset = (props) => {
   const [timer, setTimer] = useState(24339); // 25 minutes
   const [start, setStart] = useState(true);
   const tick = useRef();
+  const [user, setUser] = useState(null); // State to hold the user object
 
-  let PriceSymbol = '$';
 
-  // useEffect(() => {
-  //   dispatch(price_symbol_action(PriceSymbol))
-  //   if (start) {
-  //     tick.current = setInterval(() => {
-  //       setTimer((timer) => timer - 1);
-  //     }, 1000);
-  //   }
-  //   return () => clearInterval(tick.current);
-  // }, [start]);
-
-  // const toggleStart = () => {
-  //   setStart(!start);
-  // };
+  useEffect(() => {
+    // Get the current user when the component mounts
+    const subscriber = auth().onAuthStateChanged((user) => {
+      setUser(user);
+      console.log('subscriber',user);
+    });
+    // Cleanup subscription on unmount
+    return subscriber;
+  }, []);
   const dispSecondsAsMins = (value) => {
     const sec = parseInt(value, 10);
     let hours = Math.floor(sec / 3600);
