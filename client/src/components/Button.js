@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 
 
 function Button(props) {
-  const { title, onPress, buttonStyle, disable,iconname, buttonTextStyle, imagesource, spacedImages } = props;
+  const { title, onPress, buttonStyle, disable,iconname, buttonTextStyle, imagesource, spacedImages , color } = props;
 
   // const dispatch = useDispatch();
   
@@ -16,7 +16,7 @@ function Button(props) {
     () =>
       StyleSheet.create({
         buttonStyle: {
-          backgroundColor: "#feb344" ,
+          backgroundColor: color || "#feb344" ,
           alignItems: 'center',
           borderRadius: 100,
           justifyContent: 'center',

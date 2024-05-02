@@ -14,7 +14,6 @@ function SweetaelertModal(props) {
     return (
         
         <View>
-            {console.log("color", props.color)}
             <View style={Style.centeredView}>
                 <Modal
                     animationType="slide"
@@ -25,8 +24,8 @@ function SweetaelertModal(props) {
                         <View style={Style.centeredView}>
                             <View style={Style.modalView}>
                                 <View style={Style.setroundcenter}>
-                                    <View style={[Style.checkiconright,{ borderColor:"#feb344" }]}>
-                                        <IconF style={[Style.setbackgroundicon,{color: props.color || "#feb344"}]} name={props.iconName ? props.iconName : 'check'} size={45} />
+                                    <View style={[Style.checkiconright,{ borderColor:props.color || "#feb344" }]}>
+                                        <IconF style={[Style.setbackgroundicon,{color: props.color || "#feb344"}]} name={  'block' || 'check'} size={45} />
                                     </View>
                                 </View>
                                 <View style={Style.registertextset}>
@@ -35,6 +34,7 @@ function SweetaelertModal(props) {
                                 <View style={Style.buttonminviewdettwo}>
                                     <View style={Style.setokbutton}>
                                         <Button title="Ok"
+                                            color={color || "#feb344"}
                                             buttonTextStyle={Style.setbuttontextstyle}
                                             buttonStyle={Style.setbuttonstyletwo}
                                             onPress={() => { setModalVisible(!modalVisible);  if (link){ navigation.navigate(props.link)} }}

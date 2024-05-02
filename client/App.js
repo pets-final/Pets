@@ -17,6 +17,7 @@ import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import ProfileTab from './src/screens/UserProfile/Profile';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
+import TabNavigator from './src/routes/TabNavigator'
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +26,8 @@ function App() {
 
     <NavigationContainer>
       <Stack.Navigator>
-      {/* <Stack.Screen name="EDIT_PROFILE_SCREEN"
+
+       {/* <Stack.Screen name="EDIT_PROFILE_SCREEN"
           options={{
             headerShadowVisible: false,
             title: 'Edit Profile',
@@ -37,11 +39,11 @@ function App() {
               fontWeight: '700',
             },
           }}
-          component={EDIT_PROFILE_SCREEN} /> */}
+          component={EDIT_PROFILE_SCREEN} />  */}
         <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="GetstartedSliderscreen" component={GetstartedSliderscreen} options={{ headerShown: false }} />
         <Stack.Screen name="LoginandRegistrationScreen" options={{ headerShown: false }} component={LoginandRegistrationScreen} />
-        <Stack.Screen name="OTP_VERIFY_SCREEN"  options={{ headerShown: false }} component={OTP_VERIFY_SCREEN} />
+        <Stack.Screen name="OTP_VERIFY_SCREEN"  options={{ headerShown: false }} component={OTP_VERIFY_SCREEN} /> 
 
 
         {/* <Stack.Screen name="FORGET_PASSWORD_SCREEN"

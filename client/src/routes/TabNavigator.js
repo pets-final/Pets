@@ -1,8 +1,12 @@
 // import React from 'react';
 // import { TouchableOpacity, View } from 'react-native';
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import  {createBottomTabNavigator}  from '@react-navigation/bottom-tabs';
 // import Icon from 'react-native-vector-icons/Feather';
-// import { HomeTab, FavoriteTab, ProductTab, ProfileTab, CategoryTab, VideoTab } from '../screens';
+// import HomeTab from '../screens/Home/Home';
+// import FavoriteTab from '../screens/Favorites/Favorite';
+// import ProductTab from '../screens/ProductList/ProductList';
+// import CategoryTab from '../screens/Categories/Categories';
+// import VideoTab  from '../screens/EditProfile/EditProfileScreen';
 // import IconP from 'react-native-vector-icons/FontAwesome';
 // import IconO from 'react-native-vector-icons/MaterialIcons';
 // import IconE from 'react-native-vector-icons/EvilIcons';
@@ -15,7 +19,7 @@
 // import Style from '../styles/CommonStyle/Style';
 // // import HeaderScreenAddresh from '../components/commoncomponets/HeaderScreenAddresh';
 // import { ColorPicker, HeaderScreenAddresh, CustomSidebarMenu } from '../components';
-// import { useSelector } from "react-redux";
+// // import { useSelector } from "react-redux";
 // import { RouteName } from '../routes';
 
 // const Tab = createBottomTabNavigator();
@@ -79,17 +83,17 @@
 //               <HeaderScreenAddresh />
 //             </View>
 //           ),
-//           headerRight: () => (
-//             <View style={{ flexDirection: 'row', alignItems: "center", }}>
-//               <TouchableOpacity onPress={() => navigation.navigate(RouteName.POPULAR_SCREEN)}>
-//                 <IconE name="search" size={30} color="black" />
-//               </TouchableOpacity>
-//               <TouchableOpacity onPress={() => navigation.navigate(RouteName.CART_SCREEN)}>
-//                 <IconH name="shoppingcart" style={{ marginRight: 5 }} size={23} color="black" />
-//               </TouchableOpacity>
-//               <ColorPicker />
-//             </View>
-//           ),
+//         //   headerRight: () => (
+//         //     <View style={{ flexDirection: 'row', alignItems: "center", }}>
+//         //       <TouchableOpacity onPress={() => navigation.navigate(RouteName.POPULAR_SCREEN)}>
+//         //         <IconE name="search" size={30} color="black" />
+//         //       </TouchableOpacity>
+//         //       <TouchableOpacity onPress={() => navigation.navigate(RouteName.CART_SCREEN)}>
+//         //         <IconH name="shoppingcart" style={{ marginRight: 5 }} size={23} color="black" />
+//         //       </TouchableOpacity>
+//         //       <ColorPicker />
+//         //     </View>
+//         //   ),
 //         }}
 //       />
 //     </Stack.Navigator>
@@ -113,14 +117,14 @@
 
 //             fontWeight: '700',
 //           },
-//           headerLeft: () => (
-//             <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-//               <IconE style={Style.setbariconmarginright} name="navicon" color={colorrdata} size={35} />
-//             </TouchableOpacity>
-//           ),
-//           headerRight: () => (
-//             <ColorPicker />
-//           ),
+//         //   headerLeft: () => (
+//         //     <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+//         //       <IconE style={Style.setbariconmarginright} name="navicon" color={colorrdata} size={35} />
+//         //     </TouchableOpacity>
+//         //   ),
+//         //   headerRight: () => (
+//         //     <ColorPicker />
+//         //   ),
 //         }}
 //       />
 //     </Stack.Navigator>
@@ -143,14 +147,14 @@
 //           headerStyle: {
 //             backgroundColor: '#fff',
 //           },
-//           headerLeft: () => (
-//             <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-//               <IconE style={Style.setbariconmarginright} name="navicon" color={colorrdata} size={35} />
-//             </TouchableOpacity>
-//           ),
-//           headerRight: () => (
-//             <ColorPicker />
-//           ),
+//         //   headerLeft: () => (
+//         //     <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+//         //       <IconE style={Style.setbariconmarginright} name="navicon" color={colorrdata} size={35} />
+//         //     </TouchableOpacity>
+//         //   ),
+//         //   headerRight: () => (
+//         //     <ColorPicker />
+//         //   ),
 //         }}
 //       />
 //     </Stack.Navigator>
@@ -173,14 +177,14 @@
 //           headerStyle: {
 //             backgroundColor: '#fff',
 //           },
-//           headerLeft: () => (
-//             <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-//               <IconE style={Style.setbariconmarginright} name="navicon" color={colorrdata} size={35} />
-//             </TouchableOpacity>
-//           ),
-//           headerRight: () => (
-//             <ColorPicker />
-//           ),
+//         //   headerLeft: () => (
+//         //     <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+//         //       <IconE style={Style.setbariconmarginright} name="navicon" color={colorrdata} size={35} />
+//         //     </TouchableOpacity>
+//         //   ),
+//         //   headerRight: () => (
+//         //     <ColorPicker />
+//         //   ),
 //         }}
 //       />
 //     </Stack.Navigator>
@@ -201,11 +205,11 @@
 //             color: colorrdata,
 //             fontWeight: '700',
 //           },
-//           headerLeft: () => (
-//             <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-//               <IconE style={Style.setbariconmarginright} name="navicon" color={colorrdata} size={35} />
-//             </TouchableOpacity>
-//           ),
+//         //   headerLeft: () => (
+//         //     <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+//         //       <IconE style={Style.setbariconmarginright} name="navicon" color={colorrdata} size={35} />
+//         //     </TouchableOpacity>
+//         //   ),
 
 //         }}
 //       />
@@ -227,11 +231,11 @@
 //             color: colorrdata,
 //             fontWeight: '700',
 //           },
-//           headerLeft: () => (
-//             <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-//               <IconE style={Style.setbariconmarginright} name="navicon" color={colorrdata} size={35} />
-//             </TouchableOpacity>
-//           ),
+//         //   headerLeft: () => (
+//         //     <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+//         //       <IconE style={Style.setbariconmarginright} name="navicon" color={colorrdata} size={35} />
+//         //     </TouchableOpacity>
+//         //   ),
 
 //         }}
 //       />

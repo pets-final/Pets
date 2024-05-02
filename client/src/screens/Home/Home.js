@@ -11,16 +11,16 @@ import images from '../../../index';
 import { Rating } from 'react-native-ratings';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
-// import { get_doctore_detailes_action } from '../../../redux/action/DoctoreDataAction';
-// import { price_symbol_action } from '../../../redux/action/CommonAction';
+import TabNavigator from '../../routes/TabNavigator'
+
+
 // import { HomeFirstImageSlider, SearchHeaderScreen } from '../../../screens';
-// import  HomeScsreenTabAll  from '../TabNavigator/Tab'
+
 
 
 const HomeTabset = (props) => {
   const { navigation } = props;
-  // const dispatch = useDispatch();
-  // const { doctoreDetaile } = useSelector(state => state.doctorDataReducer) || { doctoreDetaile };
+ 
    const pricesymboldata  = '$'
   const [liked, setLiked] = useState([]);
   const [timer, setTimer] = useState(24339); // 25 minutes
@@ -463,6 +463,8 @@ const HomeTabset = (props) => {
           </View>
         </View>
       </ScrollView>
+
+ 
     
     </View>
   );
