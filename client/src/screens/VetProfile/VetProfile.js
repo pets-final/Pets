@@ -39,6 +39,12 @@ const ProfileTab = () => {
   const [setuserdata] = useState([
     {
       "id": 1,
+      "title": "my Vet",
+      "seticonview": <IconR name="chevron-right" size={20} />,
+      "url": 'Myvet',
+    },
+    {
+      "id": 1,
       "title": "Your Orders",
       "seticonview": <IconR name="chevron-right" size={20} />,
       "url": '',
@@ -132,14 +138,7 @@ const ProfileTab = () => {
                   </View>
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity onPress={() => navigation.navigate('Myvet')}style={AccountTabStyle.setbgcolorwhite}>
-        <View>
-          <View style={AccountTabStyle.flexrowsettile}>
-            <Icon name="vet" size={20} color={colorrdata} />
-          </View>
-          <Text style={AccountTabStyle.bookmarktextstyle}>My Vet</Text>
-        </View>
-      </TouchableOpacity>
+            
   
 
               <FlatList
@@ -226,4 +225,3 @@ const ProfileTab = () => {
   );
 };
 export default ProfileTab;
-

@@ -15,9 +15,7 @@ const AppointmentView = ({ appointment }) => {
     setDeclined(true);
   };
   const handleContact = () => {
-
-    // Linking.openURL();
-
+    console.log('contact to chat');
   };
 
   return (
@@ -32,7 +30,7 @@ const AppointmentView = ({ appointment }) => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={[styles.button, styles.approveButton]} onPress={handleApprove}>
             <Text style={styles.buttonText}>Approve</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> 
           <TouchableOpacity style={[styles.button, styles.declineButton]} onPress={handleDecline}>
             <Text style={styles.buttonText}>Decline</Text>
           </TouchableOpacity>

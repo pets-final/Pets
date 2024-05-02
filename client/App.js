@@ -26,10 +26,10 @@ function App() {
 
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="GetstartedSliderscreen" component={GetstartedSliderscreen} options={{ headerShown: false }} />
         <Stack.Screen name="LoginandRegistrationScreen" options={{ headerShown: false }} component={LoginandRegistrationScreen} />
-        <Stack.Screen name="OTP_VERIFY_SCREEN"  options={{ headerShown: false }} component={OTP_VERIFY_SCREEN} /> */}
+        <Stack.Screen name="OTP_VERIFY_SCREEN"  options={{ headerShown: false }} component={OTP_VERIFY_SCREEN} />
 
 
         {/* <Stack.Screen name="FORGET_PASSWORD_SCREEN"
@@ -55,11 +55,11 @@ function App() {
 
         <Stack.Screen name={RouteName.HOME_SCREEN} options={{ headerShown: false }} component={TabNavigator} />    */}
 
-{/* 
+
       <Stack.Screen options={{ headerShown: false }}  name="Home" component={Home} />
       
       <Stack.Screen options={{ headerShown: false }}  name="Categories" component={Category} />
-    <Stack.Screen options={{ headerShown: false }}  name="Favorites" component={FavoriteTab} /> */}
+    <Stack.Screen options={{ headerShown: false }}  name="Favorites" component={FavoriteTab} />
      
     <Stack.Screen options={{ headerShown: false }}  name="VetProfileTab" component={VetProfileTab} />
       <Stack.Screen options={{
