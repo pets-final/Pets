@@ -8,7 +8,7 @@ import Button  from '../../components/Button';
 // import {RouteName} from '../../routes';
 import IconG from 'react-native-vector-icons/Ionicons';
 import  SweetaelertModal from '../../components/SweetAlertModal';
-
+import auth from "@react-native-firebase/auth";
 
 
 const LoginScreen = () => {
@@ -18,6 +18,9 @@ const LoginScreen = () => {
   const [textInputpassword, setTextInputPassword] = useState('');
   const [Error1, setError1] = useState(0)
   const [Error2, setError2] = useState(0)
+  const [error, setError] = useState(null);
+  const [refresh, setrefresh] = useState(false);
+
 
   const [DisplayAlert, setDisplayAlert] = useState(0)
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
@@ -27,7 +30,7 @@ const LoginScreen = () => {
     navigation.addListener('focus', () => {
       setDisplayAlert(0);
     });
-  }, [navigation]);
+  }, [navigation,error]);
 
   const checkTextInput = () => {
     if (!textInputName.trim()) {
@@ -38,12 +41,17 @@ const LoginScreen = () => {
       setError2(1)
       return;
     }
-    setDisplayAlert(1);
-    return(
-      // navigation.navigate("OTP_VERIFY_SCREEN")
-    setDisplayAlert(1)
-
-    )   
+    auth().signInWithEmailAndPassword(textInputName,textInputpassword)
+    .then(()=>{
+      setDisplayAlert(1);     
+    })
+    .catch((error)=>{
+      console.log(error.message);          
+      setError(error.message);
+      setrefresh(!error)
+      navigation.navigate('LoginandRegistrationScreen')
+    }) 
+    
   };
   return (
     <View>     
@@ -52,7 +60,7 @@ const LoginScreen = () => {
           <View style={Login.tabminview}>
             <View style={Style.inputUnderLine}>
               <TextInput
-                placeholder="Username or Mobile Number"
+                placeholder="Email"
                 style={Style.inputtextstyle}
                 onChangeText={(value) => { setError1(0); setTextInputName(value); }}
                 underlineColorAndroid="transparent"
@@ -69,7 +77,7 @@ const LoginScreen = () => {
                 <TextInput
                   style={Style.textpassworedsert}
                   name="password"
-                  onPress={handlePasswordVisibility}
+                  // onPress={handlePasswordVisibility}
                   placeholder="Password"
                   placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
                   autoCapitalize="none"
@@ -81,10 +89,10 @@ const LoginScreen = () => {
                 />
               </View>
               <View>
+              </View>
                 <Pressable onPress={handlePasswordVisibility}>
                   <IconG name={rightIcon} size={25} style={Login.eyeiconset} />
                 </Pressable>
-              </View>
             </View>
             {Error2 === 1 ?
               <Text style={Login.pleseentername}>* Please Enter the password</Text>
@@ -102,13 +110,24 @@ const LoginScreen = () => {
               />
             </View>
             <View style={Login.centeredView}>
+            {error &&
+          <SweetaelertModal message={error}   />
+        
+          }
               {DisplayAlert !== 0 ?
                 <SweetaelertModal message='Login Successful' link={"Home"} />
                 :
                 null
               }
             </View>
-            <Text style={Login.textcolorset}>or</Text>
+
+
+
+
+
+
+            
+            {/* <Text style={Login.textcolorset}>or</Text>
             <Button title="Log In with Facebook"
               iconname="sc-facebook"
               onPress={() => Linking.openURL('https://www.facebook.com/login/?privacy_mutation_token=eyJ0eXBlIjowLCJjcmVhdGlvbl90aW1lIjoxNjU5Njk2NDc2LCJjYWxsc2l0ZV9pZCI6MjY5NTQ4NDUzMDcyMDk1MX0%3D')}
@@ -122,7 +141,7 @@ const LoginScreen = () => {
               buttonTextStyle={Login.buttonimagtexthree}
               buttonStyle={Login.setbuttonborderradiuswhite}
             />
-            </View>
+            </View> */}
           </View>
         </View>    
     </View>

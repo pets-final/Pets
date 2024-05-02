@@ -11,6 +11,7 @@ import GetstartedSliderscreen from './src/screens/GetstartedSliderscreen/Getstar
 import LoginandRegistrationScreen from './src/screens/RegistrationScreen/LoginandRegistrationScreen'
 import OTP_VERIFY_SCREEN from './src/screens/RegistrationScreen/OtpVerifyScreen'
 import FORGET_PASSWORD_SCREEN from './src/screens/RegistrationScreen/ForgotPassword'
+import EDIT_PROFILE_SCREEN from './src/screens/EditProfile/EditProfileScreen'
 
 
 function Second({navigation}) {
@@ -38,6 +39,19 @@ function App() {
 
     <NavigationContainer>
       <Stack.Navigator>
+      {/* <Stack.Screen name="EDIT_PROFILE_SCREEN"
+          options={{
+            headerShadowVisible: false,
+            title: 'Edit Profile',
+            headerTintColor: "#feb344",
+            headerTitleStyle: {
+              color: "#feb344",
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            },
+          }}
+          component={EDIT_PROFILE_SCREEN} /> */}
         <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="GetstartedSliderscreen" component={GetstartedSliderscreen} options={{ headerShown: false }} />
         <Stack.Screen name="LoginandRegistrationScreen" options={{ headerShown: false }} component={LoginandRegistrationScreen} />

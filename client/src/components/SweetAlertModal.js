@@ -24,7 +24,7 @@ function SweetaelertModal(props) {
                             <View style={Style.modalView}>
                                 <View style={Style.setroundcenter}>
                                     <View style={[Style.checkiconright,{borderColor: "#feb344"}]}>
-                                        <IconF style={[Style.setbackgroundicon,{color: "#feb344"}]} name="check" size={45} />
+                                        <IconF style={[Style.setbackgroundicon,{color: "#feb344"}]} name="block" size={45} />
                                     </View>
                                 </View>
                                 <View style={Style.registertextset}>
@@ -35,7 +35,7 @@ function SweetaelertModal(props) {
                                         <Button title="Ok"
                                             buttonTextStyle={Style.setbuttontextstyle}
                                             buttonStyle={Style.setbuttonstyletwo}
-                                            onPress={() => { setModalVisible(!modalVisible); navigation.navigate(props.link) }}
+                                            onPress={() => { setModalVisible(!modalVisible);  if (link){ navigation.navigate(props.link)} }}
                                         />
                                     </View>
                                 </View>

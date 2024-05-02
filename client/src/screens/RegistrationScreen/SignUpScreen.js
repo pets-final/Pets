@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Image, Linking, Pressable, TextInput, TouchableOpacity, } from "react-native";
+import { Text, View, Image, Linking, Pressable, TextInput, TouchableOpacity,Alert } from "react-native";
 import { Login, Style } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import { useTogglePasswordVisibility } from '../../utils';
@@ -8,6 +8,7 @@ import Button from '../../components/Button';
 import  SweetaelertModal from '../../components/SweetAlertModal';
 import IconA from 'react-native-vector-icons/EvilIcons';
 import IconG from 'react-native-vector-icons/Ionicons';
+import auth from "@react-native-firebase/auth";
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -20,6 +21,7 @@ const SignUpScreen = () => {
   const [passwordrerror, setpasswordrerror] = useState(0)
   const [conformpasswordaerror, setconformpasswordaerror] = useState(0)
   const [DisplayAlert, setDisplayAlert] = useState(0)
+  const [error, setError] = useState(null);
 
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
@@ -48,8 +50,24 @@ const SignUpScreen = () => {
       setconformpasswordaerror(1)
       return;
     }
-    setDisplayAlert(1);
-  }
+    
+    auth().createUserWithEmailAndPassword(fullname,password)
+    .then(()=>{
+      setDisplayAlert(1);
+     
+    })
+    .catch((error)=>{
+      console.log(error.message);          
+      setError(error.message);
+    })   
+    }
+
+
+  
+
+
+
+
 
   return (
 
@@ -99,7 +117,7 @@ const SignUpScreen = () => {
           <TextInput
             style={Style.textpassworedsert}
             name="password"
-            onPress={handlePasswordVisibility}
+            // onPress={handlePasswordVisibility}
             placeholder="Password"
             placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
             autoCapitalize="none"
@@ -152,14 +170,19 @@ const SignUpScreen = () => {
       <View style={Login.flexrowbutton}>
         <View style={Login.setbuttonvieLogininup}>
           <Button title="Signup"
-            onPress={signupbutton}
+            onPress={()=>{
+              signupbutton();
+            }}
             buttonStyle={{ backgroundColor:  "#feb344" }}
             buttonTextStyle={Login.textcolorsetwhite}
           />
         </View>
         <View style={Login.centeredView}>
-          {DisplayAlert !== 0 ?
-            <SweetaelertModal message='SignUp Successful' link={"Home"} />
+
+          {error &&
+          <SweetaelertModal message={error}   />}
+          {DisplayAlert !== 0 ? 
+           <SweetaelertModal message='SignUp Successful' link={"Home"} />           
             :
             null
           }
