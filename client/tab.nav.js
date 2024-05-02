@@ -73,7 +73,7 @@ const TabBarIcon = (props) => {
       />
     )
   }
-const nav = () => {
+const Nav = () => {
 
   return (
    
@@ -146,6 +146,6 @@ const nav = () => {
   )
 }
 
-export default nav
+export default Nav
 
 const styles = StyleSheet.create({})
