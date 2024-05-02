@@ -12,25 +12,11 @@ import LoginandRegistrationScreen from './src/screens/RegistrationScreen/Loginan
 import OTP_VERIFY_SCREEN from './src/screens/RegistrationScreen/OtpVerifyScreen'
 import FORGET_PASSWORD_SCREEN from './src/screens/RegistrationScreen/ForgotPassword'
 import EDIT_PROFILE_SCREEN from './src/screens/EditProfile/EditProfileScreen'
-
-
-function Second({navigation}) {
-  return (
-    <View style={{ flex: 6, alignItems: 'center', justifyContent: 'center', backgroundColor:"ffb345" }}>
-      <Text>Home 2  </Text>
-      <TouchableOpacity onPress={()=>navigation.goBack()}>
-        <Text style={{color:"red", fontSize:20 }}
-        onPress={()=>{alert("Home")}}
-        >
-          Please subscribe
-        </Text>
-    
-
-      </TouchableOpacity>
-    </View>
-    
-  );
-}
+import ProductList from './src/screens/ProductList/ProductList'
+import Category from './src/screens/Categories/Categories';
+import FavoriteTab from './src/screens/Favorites/Favorite';
+import ProfileTab from './src/screens/UserProfile/Profile';
+import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -82,8 +68,25 @@ function App() {
         <Stack.Screen name={RouteName.HOME_SCREEN} options={{ headerShown: false }} component={TabNavigator} />    */}
 
 
-        {/* <Stack.Screen options={{ headerShown: false }}  name="Home" component={HomeScreen} /> */}
-        <Stack.Screen options={{ headerShown: false }}  name="Home" component={Home} />
+      <Stack.Screen options={{ headerShown: false }}  name="Home" component={Home} />
+      <Stack.Screen options={{ headerShown: false }}  name="UserProfile" component={ProfileTab} />
+       
+      <Stack.Screen options={{ headerShown: false }}  name="Categories" component={Category} />
+      <Stack.Screen options={{ headerShown: false }}  name="Favorites" component={FavoriteTab} />
+     
+      <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'Edit Profile',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="EditProfile" component={EditProfileScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
