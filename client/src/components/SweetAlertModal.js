@@ -8,11 +8,13 @@ import { useNavigation } from '@react-navigation/native';
 // import { useSelector } from "react-redux";
 
 function SweetaelertModal(props) {
-    const { link, onPress, buttonTextStyle, imagesource, spacedImages } = props;
+    const { link, onPress, buttonTextStyle, imagesource, spacedImages,color,iconName } = props;
     const [modalVisible, setModalVisible] = useState(true);
     const navigation = useNavigation();
     return (
+        
         <View>
+            {console.log("color", props.color)}
             <View style={Style.centeredView}>
                 <Modal
                     animationType="slide"
@@ -23,8 +25,8 @@ function SweetaelertModal(props) {
                         <View style={Style.centeredView}>
                             <View style={Style.modalView}>
                                 <View style={Style.setroundcenter}>
-                                    <View style={[Style.checkiconright,{borderColor: "#feb344"}]}>
-                                        <IconF style={[Style.setbackgroundicon,{color: "#feb344"}]} name="block" size={45} />
+                                    <View style={[Style.checkiconright,{ borderColor:"#feb344" }]}>
+                                        <IconF style={[Style.setbackgroundicon,{color: props.color || "#feb344"}]} name={props.iconName ? props.iconName : 'check'} size={45} />
                                     </View>
                                 </View>
                                 <View style={Style.registertextset}>

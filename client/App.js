@@ -71,7 +71,17 @@ function App() {
       <Stack.Screen options={{ headerShown: false }}  name="Home" component={Home} />
       <Stack.Screen options={{ headerShown: false }}  name="UserProfile" component={ProfileTab} />
        
-      <Stack.Screen options={{ headerShown: false }}  name="Categories" component={Category} />
+      <Stack.Screen  options={{
+            headerShadowVisible: false,
+            title: 'Category',
+            headerTintColor: "#feb344",
+            headerTitleStyle: {
+              color: "#feb344",
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            },
+          }}  name="Categories" component={Category} />
       <Stack.Screen options={{ headerShown: false }}  name="Favorites" component={FavoriteTab} />
      
       <Stack.Screen options={{
