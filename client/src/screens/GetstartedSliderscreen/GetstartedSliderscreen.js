@@ -135,7 +135,7 @@ const slides = [
     text: <Icon name="chevrons-right" size={27} color="white" />,
     longtitle: 'Best Price Guarantee',
     image: <Image style={Styles.logoimg} resizeMode='contain' source={images.app_logo} />,
-    // imagetwo: <LottieAnimation Lottiewidthstyle={Styles.longimagetwo} source={images.Firstimage_Slider} />
+    imagetwo: <LottieAnimation Lottiewidthstyle={Styles.longimagetwo} source={images.Firstimage_Slider} />
   },
 
   {
@@ -143,13 +143,13 @@ const slides = [
     text: <Icon name="chevrons-right" size={27} color="white" />,
     longtitletwo: 'Quality Assurance',
     image: <Image style={Styles.logoimg} resizeMode='contain' source={images.app_logo} />,
-    // imagetwo: <LottieAnimation Lottiewidthstyle={Styles.longimagetwo} source={images.Two_Slider} />
+    imagetwo: <LottieAnimation Lottiewidthstyle={Styles.longimagetwo} source={images.Two_Slider} />
   },
   {
     key: 's3',
     text: <Icon name="chevrons-right" size={27} color="white" />,
     longtitle: 'No Minimum Buy',
     image: <Image style={Styles.logoimg} resizeMode='contain' source={images.app_logo} />,
-    // imagetwo: <LottieAnimation Lottiewidthstyle={Styles.longimagetwoonee} source={images.Three_Slider} />
+    imagetwo: <LottieAnimation Lottiewidthstyle={Styles.longimagetwoonee} source={images.Three_Slider} />
   },
 ];

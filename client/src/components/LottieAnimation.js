@@ -34,7 +34,7 @@ function LottieAnimation(props) {
     <View style={styles.centerlottw}>
       <Lottie
         resizeMode="cover"
-        style={[styles.Setlottesfilestyle, { ...Lottiewidthstyle }]}
+        style={[styles.Setlottesfilestyle, Lottiewidthstyle]}
         autoPlay={false}
         loop={false}
         source={source}

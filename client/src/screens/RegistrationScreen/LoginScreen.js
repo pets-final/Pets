@@ -49,7 +49,7 @@ const LoginScreen = () => {
       console.log(error.message);          
       setError(error.message);
       setrefresh(!error)
-      navigation.navigate('LoginandRegistrationScreen')
+      setError2(1); // Set Error2 to 1 to display error message below the password field
     }) 
     
   };
@@ -95,9 +95,9 @@ const LoginScreen = () => {
                 </Pressable>
             </View>
             {Error2 === 1 ?
-              <Text style={Login.pleseentername}>* Please Enter the password</Text>
-              : null
-            }
+  <Text style={[Login.pleseentername, { color: "red" }]}>Wrong Email or password </Text>
+  : null
+}
      
             <TouchableOpacity onPress={() => navigation.navigate("FORGET_PASSWORD_SCREEN")}>
               <Text style={[Login.textstyle, {color: "#feb344" }]} >Forgot password?</Text>

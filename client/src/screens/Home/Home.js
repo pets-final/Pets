@@ -189,11 +189,11 @@ const HomeTabset = (props) => {
             <View>
               <View style={{ opacity: 0.4 }}>
                 <TouchableOpacity style={Styles.flexrowsecenterimage}
-                  onPress={() => doctordata(item)}>
+                  onPress={() => navigation.navigate('productDetails')}>
                   <Image style={Styles.whiteboximage} resizeMode="contain" source={item.image} />
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity onPress={() => doctordata(item)}>
+              <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
                 <Text style={[Styles.setnormatextstyle, { color: "#feb344" }]}>{item.text}</Text>
               </TouchableOpacity>
               <Text style={[Styles.settextcolorcenterthree, Styles.settextcolorcenterthreetow]}>{item.hospitalname}</Text>
@@ -217,10 +217,10 @@ const HomeTabset = (props) => {
             :
             <View>
               <TouchableOpacity style={Styles.flexrowsecenterimage}
-                onPress={() => doctordata(item)}>
+                onPress={() => navigation.navigate('productDetails')}>
                 <Image style={Styles.whiteboximage} resizeMode="contain" source={item.image} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => doctordata(item)}>
+              <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
                 <Text style={[Styles.setnormatextstyle, { color: "#feb344" }]}>{item.text}</Text>
               </TouchableOpacity>
               <Text style={[Styles.settextcolorcenterthree, Styles.settextcolorcenterthreetow]}>{item.hospitalname}</Text>
@@ -253,7 +253,7 @@ const HomeTabset = (props) => {
     return (
       <View>
         <View style={Styles.minbgviewset}>
-          <TouchableOpacity style={Styles.imagecengter} onPress={() => doctordata(item)}>
+          <TouchableOpacity style={Styles.imagecengter} onPress={() => navigation.navigate('productDetails')}>
             <Image style={[Styles.whiteboximagetwoset, Styles.whiteboximagetwosettwo]} resizeMode='contain' source={item.image} />
           </TouchableOpacity>
           <TouchableOpacity
@@ -306,11 +306,11 @@ const HomeTabset = (props) => {
     return (
       <View style={Styles.populaitemnearby}>
         <View style={Styles.flexrowtextandimage}>
-          <TouchableOpacity onPress={() => doctordata(item)}>
+          <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
             <Image style={Styles.whiteboximagetwoset} resizeMode="cover" source={item.image} />
           </TouchableOpacity>
           <View style={Styles.setwidthalltext}>
-            <TouchableOpacity onPress={() => doctordata(item)}>
+            <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
               <Text style={[Styles.settextpricebold, { color: "#feb344" }]} >{item.text}</Text>
             </TouchableOpacity>
             <Text style={[Styles.settextcolorcentertwo]}>{item.hospitalname}</Text>
@@ -324,7 +324,7 @@ const HomeTabset = (props) => {
               </View>
             </View>
           </View>
-          <TouchableOpacity style={Styles.setplusicon} onPress={() => doctordata(item)}>
+          <TouchableOpacity style={Styles.setplusicon} onPress={() => navigation.navigate('productDetails')}>
             <IconF name={item.plusicon} size={30} color={"#feb344"} />
           </TouchableOpacity>
         </View>
