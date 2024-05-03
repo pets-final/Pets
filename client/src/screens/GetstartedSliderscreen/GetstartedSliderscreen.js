@@ -3,7 +3,7 @@ import { SafeAreaView, View, Text, Image, ScrollView, StatusBar, TouchableOpacit
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Styles from '../../styles/GetstartedSliderStyle';
 import Button from '../../components/Button';
-import LottieAnimation from '../../components/LottieAnimation';
+// import LottieAnimation from '../../components/LottieAnimation';
 import images from '../../images';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';

@@ -13,7 +13,7 @@ const SplashScreen = () => {
     useEffect(() => {
         setTimeout(async () => {  
             navigation.replace('GetstartedSliderscreen');
-        }, 2100);
+        }, 4100);
       
     }, []);
     return (
