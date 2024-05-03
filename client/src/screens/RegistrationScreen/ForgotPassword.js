@@ -84,7 +84,7 @@ const ForgotPassword = () => {
           }
         </View>
         <View style={Styles.centerarrow}>
-          <TouchableOpacity style={[Styles.setpositionabsolute, { backgroundColor:  "#feb344" }]} onPress={handleValidEmail}>
+          <TouchableOpacity style={[Styles.setpositionabsolute, { backgroundColor:  "#861088" }]} onPress={handleValidEmail}>
             <IconA name="arrowright" size={25} color="white" />
           </TouchableOpacity>
         </View>

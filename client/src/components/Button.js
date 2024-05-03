@@ -16,7 +16,7 @@ function Button(props) {
     () =>
       StyleSheet.create({
         buttonStyle: {
-          backgroundColor: color || "#feb344" ,
+          backgroundColor: color || "#861088" ,
           alignItems: 'center',
           borderRadius: 100,
           justifyContent: 'center',

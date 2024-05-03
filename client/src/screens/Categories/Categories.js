@@ -13,7 +13,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 
 const Category = () => {
 
-  const  colorrdata = "#feb344"
+  const  colorrdata = "#861088"
   const  pricesymboldata  = '$'
   const navigation = useNavigation();
   const [hearticon, Sethearticon] = useState(0);

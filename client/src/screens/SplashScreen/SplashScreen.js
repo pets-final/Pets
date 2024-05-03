@@ -17,8 +17,8 @@ const SplashScreen = () => {
       
     }, []);
     return (
-        <View style={Style.setimageviewstyle} backgroundColor="#feb344" >
-            <StatusBar barStyle="light-content" backgroundColor="#feb344" /> 
+        <View style={Style.setimageviewstyle} backgroundColor= "#861088">
+            <StatusBar barStyle="light-content" backgroundColor="#861088" /> 
             
             <View style={Style.setbgcolorwhitelogo}>  
                 <Image style={Style.splshimg} source={images.app_logo} resizeMode='center' />

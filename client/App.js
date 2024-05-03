@@ -17,9 +17,10 @@ import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import ProfileTab from './src/screens/UserProfile/Profile';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
-import map from './src/screens/Map/map'
+// import map from './src/screens/Map/map'
 import Nav from './tab.nav'
-import blogDetails from './src/screens/blogs/blogDetails'import TabNavigator from './src/routes/TabNavigator'
+import blogDetails from './src/screens/blogs/blogDetails'
+import TabNavigator from './src/routes/TabNavigator'
 
 const Stack = createNativeStackNavigator();
 
@@ -33,9 +34,9 @@ function App() {
           options={{
             headerShadowVisible: false,
             title: 'Edit Profile',
-            headerTintColor: "#feb344",
+            headerTintColor: "#861088",
             headerTitleStyle: {
-              color: "#feb344",
+              color: "#861088",
               fontFamily: Fonts.Metropolis_Medium,
               fontSize: 17,
               fontWeight: '700',
@@ -48,13 +49,13 @@ function App() {
       <Stack.Screen name="tab"  options={{ headerShown: false }} component={Nav} />
       <Stack.Screen options={{ headerShown: false }}  name="Home" component={Home} />
 
-      <Stack.Screen name="map"  options={{ headerShown: false }} component={map} />
+      {/* <Stack.Screen name="map"  options={{ headerShown: false }} component={map} /> */}
       <Stack.Screen name="blogDetails" options={{
             headerShadowVisible: true,
             title: 'Blog',
-            headerTintColor:  "#feb344",
+            headerTintColor:  "#861088",
             headerTitleStyle: {
-              color:  "#feb344",
+              color:  "#861088",
               fontFamily: Fonts.Metropolis_Medium,
               fontSize: 17,
               fontWeight: '700',
@@ -66,9 +67,9 @@ function App() {
           options={{
             headerShadowVisible: true,
             title: 'Forget Password',
-            headerTintColor:  "#feb344",
+            headerTintColor:  "#861088",
             headerTitleStyle: {
-              color:  "#feb344",
+              color:  "#861088",
               fontFamily: Fonts.Metropolis_Medium,
               fontSize: 17,
               fontWeight: '700',
@@ -90,9 +91,9 @@ function App() {
       <Stack.Screen  options={{
             headerShadowVisible: false,
             title: 'Category',
-            headerTintColor: "#feb344",
+            headerTintColor: "#861088",
             headerTitleStyle: {
-              color: "#feb344",
+              color: "#861088",
               fontFamily: Fonts.Metropolis_Medium,
               fontSize: 17,
               fontWeight: '700',
@@ -104,9 +105,9 @@ function App() {
           headerShown: true,
           headerShadowVisible: false,
           title: 'Edit Profile',
-          headerTintColor: "#feb344",
+          headerTintColor: "#861088",
           headerTitleStyle: {
-            color: "#feb344",
+            color: "#861088",
             fontSize: 17,
             fontSize: 20,
             marginLeft: 17,

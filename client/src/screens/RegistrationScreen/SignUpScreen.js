@@ -29,6 +29,9 @@ const SignUpScreen = () => {
     useTogglePasswordVisibility();
 
   useEffect(() => {
+  //   GoogleSignin.configure({
+  //     webClientId: '',
+  //   });
     navigation.addListener('focus', () => {
       setDisplayAlert(0);
     });
@@ -63,7 +66,18 @@ const SignUpScreen = () => {
     }
 
 
-  
+    async function onGoogleButtonPress() {
+      // Check if your device supports Google Play
+      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+      // Get the users ID token
+      const { idToken } = await GoogleSignin.signIn();
+    
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    
+      // Sign-in the user with the credential
+      return auth().signInWithCredential(googleCredential);
+    }
 
 
 
@@ -74,7 +88,7 @@ const SignUpScreen = () => {
     <View style={Login.tabminview}>
       <View style={Login.flexrowtwxtandgoogle}>
         <View>
-          <Text style={[Login.registertextstyle, { color:  "#feb344" }]}>Register</Text>
+          <Text style={[Login.registertextstyle, { color:  "#861088" }]}>Register</Text>
         </View>
         <View style={Login.flexrowtwxtanimage}>
           <TouchableOpacity style={Login.gooleiconsetwhiteshadow} onPress={() => Linking.openURL('https://accounts.google.com/signin/v2/challenge/pwd?rart=ANgoxcdbbNxH1nYXChBQ7n_DhSet9sRm1XXzUFTdrodQQJThJv3oPCktvjFuZq-YDK8WsXHW_gXYeU7G-XB1iBPG0qMJAeBgcA&TL=AKqFyY83GsHjazXV_PwFHjgH9TWEYKp_-8XvbZBPldYwb-yZ9LPv7QjDq-AK6ysc&flowName=GlifWebSignIn&cid=1&flowEntry=ServiceLogin')}>
@@ -165,7 +179,7 @@ const SignUpScreen = () => {
       }
       <View style={Login.allreadylogintext} >
         <Text style={Login.settextstyle}>Already a Member? </Text>      
-         <TouchableOpacity onPress={() => (navigation.replace("LoginandRegistrationScreen"))}><Text style={[Login.logintext, { color:  "#feb344" }]}>Login</Text></TouchableOpacity> 
+         <TouchableOpacity onPress={() => (navigation.replace("LoginandRegistrationScreen"))}><Text style={[Login.logintext, { color:  "#861088" }]}>Login</Text></TouchableOpacity> 
       </View>
       <View style={Login.flexrowbutton}>
         <View style={Login.setbuttonvieLogininup}>
@@ -173,7 +187,7 @@ const SignUpScreen = () => {
             onPress={()=>{
               signupbutton();
             }}
-            buttonStyle={{ backgroundColor:  "#feb344" }}
+            buttonStyle={{ backgroundColor:  "#861088" }}
             buttonTextStyle={Login.textcolorsetwhite}
           />
         </View>
@@ -187,6 +201,8 @@ const SignUpScreen = () => {
             null
           }
         </View>
+      
+        
       </View>
     </View>
 
