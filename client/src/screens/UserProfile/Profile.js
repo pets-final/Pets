@@ -12,18 +12,37 @@ import { useNavigation } from '@react-navigation/native';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
 import { colors } from '../../utils';
 // import { useSelector } from "react-redux";
+import auth from '@react-native-firebase/auth';
 
 const ProfileTab = () => {
-  const  colorrdata = "#feb344"
+  const  colorrdata = "#861088"
   const navigation = useNavigation();
   const [DisplayAlert, setDisplayAlert] = useState(0)
   const [modalVisible, setModalVisible] = useState(false);
+  const [User,setUser] = useState('')
+  const handleLogout = async () => {
+    try {
+      await auth().signOut();
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'LoginandRegistrationScreen' }],
+        })
+      );
+    } catch (error) {
+      console.error('Logout Error:', error);
+    }
+  };
   useEffect(() => {
-    navigation.addListener('focus', () => {
-      setModalVisible(false);
-      setDisplayAlert(0);
+    const subscriber = auth().onAuthStateChanged((user) => {
+      setUser(user);
+      console.log('subscriber',user);
     });
-  }, [navigation]);
+    // Cleanup subscription on unmount
+    return subscriber;
+  }, []);
+
+
   const paymentscreen = () => {
     navigation.navigate(RouteName.PAYMENTSCREEN);
   }
@@ -92,7 +111,7 @@ const ProfileTab = () => {
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
                     <Text style={AccountTabStyle.sumanyatextset}>Sumanya K.</Text>
-                    <Text style={AccountTabStyle.setgimailtext}>sumanyak@gmail.com</Text>
+                    <Text style={AccountTabStyle.setgimailtext}>{User.email}</Text>
                     <Text style={AccountTabStyle.setgimailtextwo}>+91 xxxxxxxxxxx</Text>
                     <Text style={AccountTabStyle.addreshtext}>1417 Timberbrook Lane, Denver, CO 80204, United States</Text>
                   </View>
@@ -196,7 +215,7 @@ const ProfileTab = () => {
                       <Button title="Signout"
                         buttonTextStyle={Style.setbuttontextstyle}
                         buttonStyle={Style.setbuttonstyletwo}
-                        onPress={() => navigation.navigate(RouteName.LOGIN_AND_REGISTRATION)}
+                        onPress={() => handleLogout()}
                       />
                     </View>
                     <View style={Style.setokbuttontwo}>

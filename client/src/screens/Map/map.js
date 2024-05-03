@@ -11,10 +11,9 @@ import { useSelector } from "react-redux";
 import Geocoder from 'react-native-geocoding';
 import env from '../../../env'
 const GOOGLE_MAPS_API_KEY = env.GOOGLE_MAPS_API_KEY
-console.log(GOOGLE_MAPS_API_KEY,'ddddjksgdfkjldsqgfkjlsqdglkjfgqsdlkd')
 Geocoder.init(GOOGLE_MAPS_API_KEY);
 const ConformLocation = () => {
-  const colorrdata = "#feb344";
+  const colorrdata = "#861088";
   const navigation = useNavigation();
   const OnLoginPress = () => {
     navigation.replace(RouteName.LOCATION_HOME_OFFICE_SCREEN);

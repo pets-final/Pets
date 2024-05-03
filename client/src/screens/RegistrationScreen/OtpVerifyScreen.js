@@ -36,13 +36,13 @@ const OtpVeryfyScreen = () => {
                 </View>
               </View>
               <View style={Login.tabminview}>
-                <Text style={[Login.signintextset, { color: "#feb344"  }]}>Enter  6  Digit OTP</Text>
+                <Text style={[Login.signintextset, { color: "#861088"  }]}>Enter  6  Digit OTP</Text>
                 <Text style={Login.paregraph}>Enter the OTP code from the phone we just sent you.</Text>
                 <OTPInputView
                   style={Login.otpinputstyleaet}
                   pinCount={6}
                   autoFocusOnLoad
-                  codeInputFieldStyle={[Login.otpbuttonstyle, { color: "#feb344" , borderColor: "#feb344" , }]}
+                  codeInputFieldStyle={[Login.otpbuttonstyle, { color: "#861088" , borderColor: "#861088" , }]}
                 />
                 <View style={Login.flexrowsettext}>
                   <Text style={Login.paregraphotpbottom}>Didn't receive OTP Code!</Text>
@@ -55,7 +55,7 @@ const OtpVeryfyScreen = () => {
                   <View style={Login.accountbutton}>
                     <Button
                       title="Submit"
-                      buttonStyle={{ backgroundColor: "#feb344"  }}
+                      buttonStyle={{ backgroundColor: "#861088"  }}
                       onPress={
                         () => setDisplayAlerttwo(1)}
                     />

@@ -4,18 +4,33 @@ import images from '../../index';
 import Style from '../../styles/CommonStyle/Style';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
+import auth from "@react-native-firebase/auth";
 
 const SplashScreen = () => {
     const navigation = useNavigation();
 
     useEffect(() => {
-        setTimeout(() => {  
-            navigation.replace('GetstartedSliderscreen');
-        }, 5000); // Change the timeout to 5000 milliseconds (5 seconds)
+        const timeout = setTimeout(() => {
+            const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+            return () => subscriber(); // unsubscribe on unmount
+        }, 2000); // Change the timeout to 2000 milliseconds (2 seconds)
+
+        return () => clearTimeout(timeout);
     }, []);
+
+    const onAuthStateChanged = (user) => {
+        if (user) {
+            // User is logged in, navigate to the main screen
+            navigation.replace('tab');
+        } else {
+            // User is not logged in, navigate to the get started screen
+            navigation.replace('GetstartedSliderscreen');
+        }
+    };
+
     return (
-        <View style={[Style.setimageviewstyle, { backgroundColor: "#feb344", justifyContent: 'center', alignItems: 'center' }]}>
-            <StatusBar barStyle="light-content" backgroundColor="#feb344" />
+        <View style={[Style.setimageviewstyle, { backgroundColor: "#861088", justifyContent: 'center', alignItems: 'center' }]}>
+            <StatusBar barStyle="light-content" backgroundColor="#861088" />
             <View style={Style.setbgcolorwhitelogo}>
                 <Image style={Style.splshimg} source={images.app_logo} resizeMode='center' />
             </View>

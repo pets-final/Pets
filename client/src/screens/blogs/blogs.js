@@ -8,7 +8,7 @@ import IconE from "react-native-vector-icons/Entypo";
 
 const VideoTab = () => {
 
-  const  colorrdata =  "#feb344"
+  const  colorrdata =  "#861088"
   const  pricesymboldata = '$'
   const navigation = useNavigation();
   const [hearticon, Sethearticon] = useState(0);

@@ -19,8 +19,8 @@ const GetstartedSliderscreen = () => {
   const RenderItem = ({ item }) => {
     return (
       <View>
-        <View style={[Styles.minstyleviewphotograpgy, { backgroundColor: "#feb344" }]}>
-          <StatusBar barStyle="dark-content" backgroundColor="#feb344" />
+        <View style={[Styles.minstyleviewphotograpgy, { backgroundColor: "#861088" }]}>
+          <StatusBar barStyle="dark-content" backgroundColor="#861088" />
           <View>
             <ScrollView
               keyboardShouldPersistTaps="handled"
@@ -51,7 +51,7 @@ const GetstartedSliderscreen = () => {
               </View>
             </ScrollView>
             <TouchableOpacity onPress={() => navigation.replace("LoginandRegistrationScreen")} style={Styles.settextstyle}>
-              <View style={[Styles.setbgcolorviewtwoview, { backgroundColor: "#feb344" }]}>
+              <View style={[Styles.setbgcolorviewtwoview, { backgroundColor: "#861088" }]}>
                 <Text style={Styles.textstyle}>
                   <Icon name="chevrons-right" size={27} color="white" />
                 </Text>
@@ -74,7 +74,7 @@ const GetstartedSliderscreen = () => {
              
             }}
             buttonStyle={Styles.bgwhite}
-            buttonTextStyle={{ color: "#feb344" }}
+            buttonTextStyle={{ color: "#861088" }}
           />
         </View>
       </View>

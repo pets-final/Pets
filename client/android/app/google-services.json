@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "709257126464",
-    "project_id": "pets-c7",
-    "storage_bucket": "pets-c7.appspot.com"
+    "project_number": "220888624389",
+    "project_id": "my-petsproject",
+    "storage_bucket": "my-petsproject.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:709257126464:android:fffa2b419a3a5a9fbef5a5",
+        "mobilesdk_app_id": "1:220888624389:android:3a710234419c03793a9b6c",
         "android_client_info": {
           "package_name": "com.myproject"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD2LSu-gWkFFWjV0tjNuYSzJzHIcNaNCkI"
+          "current_key": "AIzaSyCqMnGgSMwDbA5vdri9HICe7P1FiHjynys"
         }
       ],
       "services": {

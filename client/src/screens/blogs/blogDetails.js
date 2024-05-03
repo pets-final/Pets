@@ -9,7 +9,7 @@ import Video from 'react-native-video';
 import IconE from "react-native-vector-icons/Entypo";
 
 const VideoPlay = ({ navigation }) => {
-    const  colorrdata = "#feb344"
+    const  colorrdata = "#861088"
     const route = useRoute();
     const videoPlayer = React.useRef();
     const goFullScreen = () => {
