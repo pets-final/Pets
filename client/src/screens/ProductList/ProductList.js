@@ -37,16 +37,16 @@ const ProductTab = () => {
             </TouchableOpacity>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate((RouteName.PRODUCT_DETAILS_SCREEN), { img: item.image, title: item.text, hname: item.hospitalname })}>
-            <Text style={[ProductitemList.textoftitle, { color: "#feb344" }]}>{item.text}</Text>
+            <Text style={[ProductitemList.textoftitle, { color: "#861088" }]}>{item.text}</Text>
           </TouchableOpacity>
           <Text style={ProductitemList.settextcolorcenterlist}>{item.hospitalname}</Text>
           <View style={ProductitemList.setflexstadr}>
             {item.ratingsset}
-            <Text style={[ProductitemList.setratingtextstyle, { color: "#feb344" }]}>{item.ratingtext}</Text>
+            <Text style={[ProductitemList.setratingtextstyle, { color: "#861088" }]}>{item.ratingtext}</Text>
           </View>
           <View style={ProductitemList.justicenterflexrow}>
             <Text style={ProductitemList.boldpricetext}>{pricesymboldata} {item.price}</Text>
-            <TouchableOpacity style={[ProductitemList.setplusbgcolorset, { backgroundColor: "#feb344" }]} onPress={() => navigation.navigate(RouteName.CART_SCREEN)}>
+            <TouchableOpacity style={[ProductitemList.setplusbgcolorset, { backgroundColor: "#861088" }]} onPress={() => navigation.navigate(RouteName.CART_SCREEN)}>
               <Text>{item.iconplusset}</Text>
             </TouchableOpacity>
           </View>
@@ -63,7 +63,7 @@ const ProductTab = () => {
             <Icon
               name="heart"
               size={25}
-              style={{ color: liked.includes(index) ? "#feb344" : 'lightgrey' }}
+              style={{ color: liked.includes(index) ? "#861088" : 'lightgrey' }}
             />
           </TouchableOpacity>
         </View>

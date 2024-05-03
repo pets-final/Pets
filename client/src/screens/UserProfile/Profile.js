@@ -14,7 +14,7 @@ import { colors } from '../../utils';
 // import { useSelector } from "react-redux";
 
 const ProfileTab = () => {
-  const  colorrdata = "#feb344"
+  const  colorrdata = "#861088"
   const navigation = useNavigation();
   const [DisplayAlert, setDisplayAlert] = useState(0)
   const [modalVisible, setModalVisible] = useState(false);

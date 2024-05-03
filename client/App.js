@@ -14,7 +14,7 @@ import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import ProfileTab from './src/screens/UserProfile/Profile';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
-import map from './src/screens/Map/map';
+// import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
 import Cart from './src/screens/cart/cart';
@@ -38,7 +38,7 @@ function App() {
         <Stack.Screen options={{ headerShown: false }} name="cart" component={Cart} />
         <Stack.Screen options={{ headerShown: false }} name="checkout" component={CheckOutScreen} />
         <Stack.Screen options={{ headerShown: false }} name="paymentSucces" component={PaytmSuccessFully} />
-      <Stack.Screen name="map" options={{ headerShown: false }} component={map} />
+      {/* <Stack.Screen name="map" options={{ headerShown: false }} component={map} /> */}
       <Stack.Screen options={{ headerShown: false }} name="productDetails" component={ProductDetailesScreen} />
       
 
@@ -80,9 +80,10 @@ function App() {
           headerShown: true,
           headerShadowVisible: false,
           title: 'Edit Profile',
-          headerTintColor: "#feb344",
+          headerTintColor: "#861088",
           headerTitleStyle: {
             color: "#feb344",
+            fontSize: 17,
             fontSize: 20,
             marginLeft: 17,
           },
