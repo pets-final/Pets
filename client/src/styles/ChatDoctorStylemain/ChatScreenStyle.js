@@ -6,7 +6,7 @@ export const ChatScreenStyle= StyleSheet.create({
   minstyleviewphotograpgy: {
     flexDirection: 'row',
     justifyContent: 'center',
-    // alignItems: 'center',
+    alignItems: 'center',
     height: '100%',
     width: '100%',
     // backgroundColor:colorsset.theme_backgound_second,
@@ -42,19 +42,19 @@ export const ChatScreenStyle= StyleSheet.create({
     alignItems:'center'
   },
   textcolormessage: {
-    color:'white',
+    color:'black',
     fontFamily: 'DMSans-Medium',
     fontSize:16,
   },
   textcolormessagetwoset: {
-    color:'white',
+    color:'black',
     fontFamily: 'DMSans-Medium',
     fontSize:12,
     paddingTop:6,
     textAlign:'right'
   },
   textcolormessagetwosettwo: {
-    color:'white',
+    color:'black',
     fontFamily: 'DMSans-Medium',
     fontSize:12,
     paddingTop:6,

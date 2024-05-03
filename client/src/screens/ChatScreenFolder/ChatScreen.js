@@ -35,7 +35,7 @@ const ChartScreenset = () => {
                   <View style={ChatScreenStyle.leftimage}>
                     <Image source={images.Chat_With_Doctor} style={ChatScreenStyle.seimagstyleendcall} resizeMode={'cover'} />
                   </View>
-                  <View style={ChatScreenStyle.messageminviewowner}>
+                  <View style={ChatScreenStyle.messageminviewowner}> 
                     <Text style={ChatScreenStyle.textcolormessage}>I see, well let's take a look at him. Can you tell me a bit more about the symptoms?</Text>
                     <View style={ChatScreenStyle.flexcheckset}>
                       <View>
