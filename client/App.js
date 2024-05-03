@@ -28,17 +28,20 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="productDetails" component={ProductDetailesScreen} />
+
       
         <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="GetstartedSliderscreen" component={GetstartedSliderscreen} options={{ headerShown: false }} />
         <Stack.Screen name="LoginandRegistrationScreen" options={{ headerShown: false }} component={LoginandRegistrationScreen} />
         <Stack.Screen name="tab" options={{ headerShown: false }} component={Nav} />
         <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
-        <Stack.Screen name="map" options={{ headerShown: false }} component={map} />
         <Stack.Screen options={{ headerShown: false }} name="cart" component={Cart} />
         <Stack.Screen options={{ headerShown: false }} name="checkout" component={CheckOutScreen} />
         <Stack.Screen options={{ headerShown: false }} name="paymentSucces" component={PaytmSuccessFully} />
+      <Stack.Screen name="map" options={{ headerShown: false }} component={map} />
+      <Stack.Screen options={{ headerShown: false }} name="productDetails" component={ProductDetailesScreen} />
+      
+
         <Stack.Screen name="blogDetails" options={{
           headerShadowVisible: true,
           title: 'Blog',
