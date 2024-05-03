@@ -120,6 +120,7 @@ const image = {
   Search_Popular_screen_img7: require('./test.png'),
   Dog_Video: require('./three_hundred.mp4'),
   rating : require('./onetwenty.png'),
+  loading : require('./loading.json')
 }
 export default image;
 

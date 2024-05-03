@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import Geocoder from 'react-native-geocoding';
 import env from '../../../env'
 const GOOGLE_MAPS_API_KEY = env.GOOGLE_MAPS_API_KEY
-console.log(GOOGLE_MAPS_API_KEY,'ddddjksgdfkjldsqgfkjlsqdglkjfgqsdlkd')
 Geocoder.init(GOOGLE_MAPS_API_KEY);
 const ConformLocation = () => {
   const colorrdata = "#861088";
