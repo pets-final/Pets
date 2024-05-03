@@ -10,8 +10,7 @@ import { Button, SweetaelertModal } from '../../components';
 import { useNavigation } from '@react-navigation/native';
 // import { RouteName } from '../../../routes';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
-// import { colors } from '../../utils';
-// import { useSelector } from "react-redux";
+
 
 const ProfileTab = () => {
   const  colorrdata = "#feb344"

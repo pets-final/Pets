@@ -24,6 +24,10 @@ import Cart from './src/screens/cart/cart';
 import CheckOutScreen from './src/screens/cart/checkout';
 import PaytmSuccessFully from './src/screens/cart/paymentSucces';
 import {ProductDetailesScreen} from './src/screens/ProductList/Productdetails';
+import ChatDoctorScreen from './src/screens/ChatScreen/ChatDoctorScreen';
+import ChatScreen from './src/screens/ChatScreenFolder/ChatScreen'
+// import DrawerChatScreen from './src/screens/ChatScreenFolder/DrawerChatScreen'
+
 
 const Stack = createNativeStackNavigator();
 
@@ -31,7 +35,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="productDetails" component={ProductDetailesScreen} />
+      {/* <Stack.Screen options={{ headerShown: false }} name="productDetails" component={ProductDetailesScreen} />
       
         <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="GetstartedSliderscreen" component={GetstartedSliderscreen} options={{ headerShown: false }} />
@@ -98,8 +102,43 @@ function App() {
             fontSize: 20,
             marginLeft: 17,
           },
-        }}  name="Myvet" component={MyVet} />
-
+        }}  name="Myvet" component={MyVet} /> */}
+   {/* <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'DrawerChatScreen',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="DrawerChatScreen" component={DrawerChatScreen} /> */}
+           <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'ChatScreen',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="ChatScreen" component={ChatScreen} />
+          {/* <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'ChatDoctorScreen',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="ChatDoctorScreen" component={ChatDoctorScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
