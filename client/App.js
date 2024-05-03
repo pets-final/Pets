@@ -16,7 +16,7 @@ import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import ProfileTab from './src/screens/UserProfile/Profile';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
-
+import VetoProfile from './src/screens/VetoProfile/VetoProfile'
 const Stack = createNativeStackNavigator();
 
 function App() {  
@@ -24,8 +24,10 @@ function App() {
 
     <NavigationContainer>
       <Stack.Navigator>
+          <Stack.Screen name="VetoProfile" component={VetoProfile} options={{ headerShown: false }} />
         <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="GetstartedSliderscreen" component={GetstartedSliderscreen} options={{ headerShown: false }} />
+
         <Stack.Screen name="LoginandRegistrationScreen" options={{ headerShown: false }} component={LoginandRegistrationScreen} />
         <Stack.Screen name="OTP_VERIFY_SCREEN"  options={{ headerShown: false }} component={OTP_VERIFY_SCREEN} />
 
