@@ -9,11 +9,10 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import { useSelector } from "react-redux";
 import Geocoder from 'react-native-geocoding';
-const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY; 
-
-Geocoder.init(GOOGLE_MAPS_API_KEY);
+import env from '../../../env'
+Geocoder.init(env.GOOGLE_MAPS_API_KEY);
 const ConformLocation = () => {
-  const colorrdata = "#feb344";
+  const colorrdata = "#861088";
   const navigation = useNavigation();
   const OnLoginPress = () => {
     navigation.replace(RouteName.LOCATION_HOME_OFFICE_SCREEN);

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, Image, Linking, Pressable, TextInput, TouchableOpacity,Alert } from "react-native";
+import React, { useState } from "react";
+import { Text, View, Image, Linking, Pressable, TextInput, TouchableOpacity } from "react-native";
 import { Login, Style } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import { useTogglePasswordVisibility } from '../../utils';
@@ -12,15 +12,18 @@ import auth from "@react-native-firebase/auth";
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
-  const [fullname, setfullname] = useState('')
-  const [mobilenumber, setmobilenumber] = useState('')
+  const [fullname, setfullname] = useState('');
+  const [mobilenumber, setmobilenumber] = useState('');
+  const [Email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [conformpassword, setconformpassword] = useState('');
-  const [fullnameaerror, setfullnameaerror] = useState(0)
-  const [mobilenumbererror, setmobilenumbererror] = useState(0)
-  const [passwordrerror, setpasswordrerror] = useState(0)
-  const [conformpasswordaerror, setconformpasswordaerror] = useState(0)
-  const [DisplayAlert, setDisplayAlert] = useState(0)
+  const [role, setRole] = useState('');
+  const [fullnameaerror, setfullnameaerror] = useState(0);
+  const [mobilenumbererror, setmobilenumbererror] = useState(0);
+  const [passwordrerror, setpasswordrerror] = useState(0);
+  const [conformpasswordaerror, setconformpasswordaerror] = useState(0);
+  const [roleError, setRoleError] = useState('');
+  const [DisplayAlert, setDisplayAlert] = useState(0);
   const [error, setError] = useState(null);
 
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
@@ -28,53 +31,56 @@ const SignUpScreen = () => {
   const { passwordVisibilitytwo, rightIcontwo, handlePasswordVisibilitytwo } =
     useTogglePasswordVisibility();
 
-  useEffect(() => {
-    navigation.addListener('focus', () => {
-      setDisplayAlert(0);
-    });
-  }, [navigation]);
   const signupbutton = () => {
     if (!fullname.trim()) {
-      setfullnameaerror(1)
+      setfullnameaerror(1);
       return;
     }
     if (!mobilenumber.trim()) {
-      setmobilenumbererror(1)
+      setmobilenumbererror(1);
       return;
     }
     if (!password.trim()) {
-      setpasswordrerror(1)
+      setpasswordrerror(1);
       return;
     }
     if (!conformpassword.trim()) {
-      setconformpasswordaerror(1)
+      setconformpasswordaerror(1);
+      return;
+    }
+    if (!role) {
+      setRoleError("Please select a role");
+      return;
+    }
+    if (password !== conformpassword) {
+      setError("Passwords do not match");
       return;
     }
     
-    auth().createUserWithEmailAndPassword(fullname,password)
-    .then(()=>{
-      setDisplayAlert(1);
-     
+    auth().createUserWithEmailAndPassword(Email,password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      return user.updateProfile({
+        displayName: fullname,
+        phoneNumber: mobilenumber,
+        Role: role
+      });
     })
-    .catch((error)=>{
-      console.log(error.message);          
+    .then(() => {
+      setDisplayAlert(1);
+      console.log('Success');
+    })
+    .catch((error) => {
+      console.error(error.message);          
       setError(error.message);
-    })   
-    }
-
-
-  
-
-
-
-
+    });
+  };
 
   return (
-
     <View style={Login.tabminview}>
       <View style={Login.flexrowtwxtandgoogle}>
         <View>
-          <Text style={[Login.registertextstyle, { color:  "#feb344" }]}>Register</Text>
+          <Text style={[Login.registertextstyle, { color:  "#861088" }]}>Register</Text>
         </View>
         <View style={Login.flexrowtwxtanimage}>
           <TouchableOpacity style={Login.gooleiconsetwhiteshadow} onPress={() => Linking.openURL('https://accounts.google.com/signin/v2/challenge/pwd?rart=ANgoxcdbbNxH1nYXChBQ7n_DhSet9sRm1XXzUFTdrodQQJThJv3oPCktvjFuZq-YDK8WsXHW_gXYeU7G-XB1iBPG0qMJAeBgcA&TL=AKqFyY83GsHjazXV_PwFHjgH9TWEYKp_-8XvbZBPldYwb-yZ9LPv7QjDq-AK6ysc&flowName=GlifWebSignIn&cid=1&flowEntry=ServiceLogin')}>
@@ -97,6 +103,18 @@ const SignUpScreen = () => {
       </View>
       {fullnameaerror === 1 ?
         <Text style={Login.pleseentername}>* Please Enter the Full Name</Text>
+        : null
+      }
+      <View style={Style.inputUnderLine}>
+        <TextInput
+          placeholder="email"
+          style={Style.inputtextstyle}
+          placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
+          onChangeText={(value) => { setfullnameaerror(0); setEmail(value); }}
+        />
+      </View>
+      {fullnameaerror === 1 ?
+        <Text style={Login.pleseentername}>* Please Enter the Email</Text>
         : null
       }
       <View style={Style.inputUnderLine}>
@@ -163,9 +181,41 @@ const SignUpScreen = () => {
         <Text style={Login.pleseentername}>* Please Enter Confirm Password</Text>
         : null
       }
+      <View style={Style.inputUnderLine}>
+        <View style={Login.roleContainer}>
+          <TouchableOpacity
+            style={[Login.roleButton, role === "User" ? Login.selectedRole : null]}
+            onPress={() => { setRole("User"); setRoleError(''); }}
+          >
+            <Text style={Login.roleButtonText}>User</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[Login.roleButton, role === "Vet" ? Login.selectedRole : null]}
+            onPress={() => { setRole("Vet"); setRoleError(''); }}
+          >
+            <Text style={Login.roleButtonText}>Vet</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[Login.roleButton, role === "Shoper" ? Login.selectedRole : null]}
+            onPress={() => { setRole("Shoper"); setRoleError(''); }}
+          >
+            <Text style={Login.roleButtonText}>Shoper</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[Login.roleButton, role === "Hotel" ? Login.selectedRole : null]}
+            onPress={() => { setRole("Hotel"); setRoleError(''); }}
+          >
+            <Text style={Login.roleButtonText}>Hotel</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      {roleError !== '' ?
+        <Text style={Login.pleseentername}>* {roleError}</Text>
+        : null
+      }
       <View style={Login.allreadylogintext} >
         <Text style={Login.settextstyle}>Already a Member? </Text>      
-         <TouchableOpacity onPress={() => (navigation.replace("LoginandRegistrationScreen"))}><Text style={[Login.logintext, { color:  "#feb344" }]}>Login</Text></TouchableOpacity> 
+         <TouchableOpacity onPress={() => (navigation.replace("LoginandRegistrationScreen"))}><Text style={[Login.logintext, { color:  "#861088" }]}>Login</Text></TouchableOpacity> 
       </View>
       <View style={Login.flexrowbutton}>
         <View style={Login.setbuttonvieLogininup}>
@@ -173,23 +223,20 @@ const SignUpScreen = () => {
             onPress={()=>{
               signupbutton();
             }}
-            buttonStyle={{ backgroundColor:  "#feb344" }}
+            buttonStyle={{ backgroundColor:  "#861088" }}
             buttonTextStyle={Login.textcolorsetwhite}
           />
         </View>
         <View style={Login.centeredView}>
-
-          {error &&
-          <SweetaelertModal message={error} color={"red" }  iconNAme={"block" }/>}
+          {error && <SweetaelertModal message={error} />}
           {DisplayAlert !== 0 ? 
-           <SweetaelertModal message='SignUp Successful' link={"Home"}   />           
+           <SweetaelertModal message='SignUp Successful' link={"tab"}   />           
             :
             null
           }
         </View>
       </View>
     </View>
-
   );
 };
 

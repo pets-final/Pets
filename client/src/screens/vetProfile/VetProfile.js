@@ -10,39 +10,20 @@ import { Button, SweetaelertModal } from '../../components';
 import { useNavigation } from '@react-navigation/native';
 // import { RouteName } from '../../../routes';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
-import { colors } from '../../utils';
+// import { colors } from '../../utils';
 // import { useSelector } from "react-redux";
-import auth from '@react-native-firebase/auth';
-
+import AppointmentView from './Myvet';
 const ProfileTab = () => {
-  const  colorrdata = "#861088"
+  const  colorrdata = "#feb344"
   const navigation = useNavigation();
   const [DisplayAlert, setDisplayAlert] = useState(0)
   const [modalVisible, setModalVisible] = useState(false);
-  const [User,setUser] = useState('')
-  const handleLogout = async () => {
-    try {
-      await auth().signOut();
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: 'LoginandRegistrationScreen' }],
-        })
-      );
-    } catch (error) {
-      console.error('Logout Error:', error);
-    }
-  };
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged((user) => {
-      setUser(user);
-      console.log('subscriber',user);
+    navigation.addListener('focus', () => {
+      setModalVisible(false);
+      setDisplayAlert(0);
     });
-    // Cleanup subscription on unmount
-    return subscriber;
-  }, []);
-
-
+  }, [navigation]);
   const paymentscreen = () => {
     navigation.navigate(RouteName.PAYMENTSCREEN);
   }
@@ -56,6 +37,12 @@ const ProfileTab = () => {
     navigation.navigate(RouteName.NOTIFICATION_SCREEN);
   }
   const [setuserdata] = useState([
+    {
+      "id": 1,
+      "title": "my Vet",
+      "seticonview": <IconR name="chevron-right" size={20} />,
+      "url": 'Myvet',
+    },
     {
       "id": 1,
       "title": "Your Orders",
@@ -100,7 +87,7 @@ const ProfileTab = () => {
             <View style={AccountTabStyle.minviewsigninscreen}>
               <View style={[AccountTabStyle.flexrowtwxtspace, AccountTabStyle.bgcolorset]}>
                 <Text style={AccountTabStyle.persnaltext}>Personal details</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+                <TouchableOpacity onPress={() => navigation.navigate('EditVetProfile')}>
                   <Text style={[AccountTabStyle.edittextset, { color: colorrdata }]}>Edit</Text>
                 </TouchableOpacity>
               </View>
@@ -110,10 +97,10 @@ const ProfileTab = () => {
                     <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={images.Ningthty_img} />
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
-                    <Text style={AccountTabStyle.sumanyatextset}>{ User.displayName}</Text>
-                    <Text style={AccountTabStyle.setgimailtext}>{ User.email}</Text>
-                    <Text style={AccountTabStyle.setgimailtextwo}>+91 xxxxxxxxxxx</Text>
-                    <Text style={AccountTabStyle.addreshtext}>1417 Timberbrook Lane, Denver, CO 80204, United States</Text>
+                    <Text style={AccountTabStyle.sumanyatextset}>testt</Text>
+                    <Text style={AccountTabStyle.setgimailtext}>test@gmail.com</Text>
+                    <Text style={AccountTabStyle.setgimailtextwo}>xxxxxxxxxxx</Text>
+                    <Text style={AccountTabStyle.addreshtext}>United States</Text>
                   </View>
                 </View>
               </View>
@@ -151,6 +138,9 @@ const ProfileTab = () => {
                   </View>
                 </TouchableOpacity>
               </View>
+            
+  
+
               <FlatList
                 data={setuserdata}
                 renderItem={({ item, index }) => Userdatatext(item, index)}
@@ -187,7 +177,6 @@ const ProfileTab = () => {
           </View>
         </KeyboardAvoidingView>
       </ScrollView>
-      {/* Log out Modal start */}
       <View>
         <View style={Style.centeredView}>
           <Modal
@@ -215,7 +204,7 @@ const ProfileTab = () => {
                       <Button title="Signout"
                         buttonTextStyle={Style.setbuttontextstyle}
                         buttonStyle={Style.setbuttonstyletwo}
-                        onPress={() => handleLogout()}
+                        onPress={() => navigation.navigate(RouteName.LOGIN_AND_REGISTRATION)}
                       />
                     </View>
                     <View style={Style.setokbuttontwo}>
@@ -236,4 +225,3 @@ const ProfileTab = () => {
   );
 };
 export default ProfileTab;
-

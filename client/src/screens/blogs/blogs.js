@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Image, ScrollView, StatusBar, FlatList, KeyboardAvoidingView, TouchableOpacity, } from "react-native";
+import { Text, View, Image, StatusBar, FlatList, TouchableOpacity } from "react-native";
 import { VideoTabStyle, ProductitemList } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import images from "../../../index";
@@ -7,18 +7,10 @@ import { colors } from '../../utils';
 import IconE from "react-native-vector-icons/Entypo";
 
 const VideoTab = () => {
-
-  const  colorrdata =  "#feb344"
-  const  pricesymboldata = '$'
+  const colorrdata = "#861088";
   const navigation = useNavigation();
   const [hearticon, Sethearticon] = useState(0);
-//   const dispatch = useDispatch();
   const [liked, setLiked] = useState([]);
-
-  let PriceSymbol = '$';
-
- 
-
 
   const [exerciseList, setExerciseList] = useState([
     {
@@ -58,44 +50,31 @@ const VideoTab = () => {
     },
   ]);
 
-  const ItemRender = (item, index) => {
+  const ItemRender = ({ item }) => {
     return (
-      <TouchableOpacity style={VideoTabStyle.itemChildeBox}
-        onPress={() => navigation.navigate('blogDetails', { title: item.title })}>
+      <TouchableOpacity style={VideoTabStyle.itemChildeBox} onPress={() => navigation.navigate('blogDetails', { title: item.title })}>
         <View style={VideoTabStyle.itemChilde}>
-          <Image source={item.img}
-            style={VideoTabStyle.itemImg}
-            resizeMode={'cover'} />
+          <Image source={item.img} style={VideoTabStyle.itemImg} resizeMode={'cover'} />
           <View style={VideoTabStyle.textWidthset}>
             <Text style={VideoTabStyle.itemText}>{item.title}</Text>
-            <Text style={VideoTabStyle.itemTextTime}><IconE name="back-in-time" size={16} color={colorrdata}/> {item.post}</Text>
+            <Text style={VideoTabStyle.itemTextTime}><IconE name="back-in-time" size={16} color={colorrdata} /> {item.post}</Text>
           </View>
         </View>
       </TouchableOpacity>
     );
-  }
+  };
+
   return (
     <View style={[ProductitemList.minstyleviewphotograpgy, ProductitemList.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={{
-          width: '100%',
-          height: 'auto',
-        }}>
-        <View style={VideoTabStyle.minviewallcontent}>
-          <FlatList
-            data={exerciseList}
-            renderItem={({ item, index }) => ItemRender(item, index)}
-            keyExtractor={item => item.title}
-            style={VideoTabStyle.flatelist}
-          />
-        </View>
-      </ScrollView>
-
+      <FlatList
+        data={exerciseList}
+        renderItem={ItemRender}
+        keyExtractor={item => item.title}
+        style={VideoTabStyle.flatelist}
+      />
     </View>
   );
 };
+
 export default VideoTab;
-
-

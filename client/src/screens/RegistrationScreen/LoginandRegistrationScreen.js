@@ -37,13 +37,13 @@ const LoginandRegistrationScreen = () => {
               </View>
               {tabShow == '1' ?
                 <View style={Login.paddingbottom}>
-                  <Text style={[Login.bordersetactive, { backgroundColor: "#feb344"  }]}></Text>
+                  <Text style={[Login.bordersetactive, { backgroundColor: "#861088"  }]}></Text>
                   <LoginScreen />
                 </View>
                 : null}
               {tabShow == '2' ?
                 <View style={Login.paddingbottom}>
-                  <Text style={[Login.bordersetactivetwo, { backgroundColor: "#feb344"  }]}></Text>
+                  <Text style={[Login.bordersetactivetwo, { backgroundColor: "#861088"  }]}></Text>
                   <SignUpScreen />
                 </View>
                 : null}
