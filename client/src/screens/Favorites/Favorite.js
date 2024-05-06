@@ -1,27 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, Image, ScrollView, StatusBar, FlatList, KeyboardAvoidingView, TouchableOpacity, } from "react-native";
+import React, { useState } from "react";
+import { Text, View, Image, FlatList, KeyboardAvoidingView, TouchableOpacity, StatusBar } from "react-native";
 import { ProductitemList } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
-// import { RouteName } from '../../../routes';
 import { FavrouteItemList } from '../../utils/Sliderimagedata';
-// import { useDispatch } from "react-redux";
-// import { get_doctore_detailes_action } from '../../../redux/action/DoctoreDataAction';
-import { colors } from '../../utils';
-// import { useSelector } from "react-redux";
 import Icon from "react-native-vector-icons/AntDesign";
-// import { price_symbol_action } from '../../../redux/action/CommonAction';
 
 const FavoriteTab = () => {
-
-  const  colorrdata = "#861088"
-  const  pricesymboldata  = "$"
+  const colorrdata = "#861088";
+  const pricesymboldata = "$";
   const navigation = useNavigation();
-  const [hearticon, Sethearticon] = useState(0);
-  // const dispatch = useDispatch();
   const [liked, setLiked] = useState([]);
-
-  let PriceSymbol = '$';
-
 
   const Docterproductdataitem = (item, index) => {
     return (
@@ -53,7 +41,6 @@ const FavoriteTab = () => {
             onPress={() => {
               if (liked.includes(index)) {
                 setLiked([...liked, index]);
-
               } else {
                 let unlike = liked.filter((elem) => elem !== index);
                 setLiked(unlike);
@@ -70,33 +57,24 @@ const FavoriteTab = () => {
       </TouchableOpacity>
     );
   }
+
   return (
     <View style={[ProductitemList.minstyleviewphotograpgy, ProductitemList.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'#ffffff'} />
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={{
-          width: '100%',
-          height: 'auto',
-        }}>
-        <KeyboardAvoidingView enabled>
-          <View style={ProductitemList.minflexview}>
-            <View style={ProductitemList.minviewsigninscreen}>
-              <View style={ProductitemList.bgcolorwhiteset}>
-                <FlatList
-                  data={FavrouteItemList}
-                  numColumns={2}
-                  renderItem={({ item, index }) => Docterproductdataitem(item, index)}
-                  keyExtractor={item => item.id}
-                />
-              </View>
-            </View>
+      <View style={ProductitemList.minflexview}>
+        <View style={ProductitemList.minviewsigninscreen}>
+          <View style={ProductitemList.bgcolorwhiteset}>
+            <FlatList
+              data={FavrouteItemList}
+              numColumns={2}
+              renderItem={({ item, index }) => Docterproductdataitem(item, index)}
+              keyExtractor={item => item.id}
+            />
           </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
+        </View>
+      </View>
     </View>
   );
 };
+
 export default FavoriteTab;
-
-
