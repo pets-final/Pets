@@ -3,10 +3,10 @@ import { SafeAreaView, View, Text, Image, ScrollView, StatusBar, TouchableOpacit
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Styles from '../../styles/GetstartedSliderStyle';
 import Button from '../../components/Button';
-import LottieAnimation from '../../components/LottieAnimation';
 import images from '../../images';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
 
 const GetstartedSliderscreen = () => {
   const navigation = useNavigation();
@@ -19,8 +19,8 @@ const GetstartedSliderscreen = () => {
   const RenderItem = ({ item }) => {
     return (
       <View>
-        <View style={[Styles.minstyleviewphotograpgy, { backgroundColor: "#feb344" }]}>
-          <StatusBar barStyle="dark-content" backgroundColor="#feb344" />
+        <View style={[Styles.minstyleviewphotograpgy, { backgroundColor: "#861088" }]}>
+          <StatusBar barStyle="dark-content" backgroundColor="#861088" />
           <View>
             <ScrollView
               keyboardShouldPersistTaps="handled"
@@ -51,7 +51,7 @@ const GetstartedSliderscreen = () => {
               </View>
             </ScrollView>
             <TouchableOpacity onPress={() => navigation.replace("LoginandRegistrationScreen")} style={Styles.settextstyle}>
-              <View style={[Styles.setbgcolorviewtwoview, { backgroundColor: "#feb344" }]}>
+              <View style={[Styles.setbgcolorviewtwoview, { backgroundColor: "#861088" }]}>
                 <Text style={Styles.textstyle}>
                   <Icon name="chevrons-right" size={27} color="white" />
                 </Text>
@@ -71,10 +71,10 @@ const GetstartedSliderscreen = () => {
             title="Get Started"
             onPress={() => {
               navigation.navigate("LoginandRegistrationScreen")
-              console.log("test");
+             
             }}
             buttonStyle={Styles.bgwhite}
-            buttonTextStyle={{ color: "#feb344" }}
+            buttonTextStyle={{ color: "#861088" }}
           />
         </View>
       </View>
@@ -135,7 +135,12 @@ const slides = [
     text: <Icon name="chevrons-right" size={27} color="white" />,
     longtitle: 'Best Price Guarantee',
     image: <Image style={Styles.logoimg} resizeMode='contain' source={images.app_logo} />,
-    // imagetwo: <LottieAnimation Lottiewidthstyle={Styles.longimagetwo} source={images.Firstimage_Slider} />
+     imagetwo:  <LottieView
+    source={require('../../images/LotteAnimation/FirstimageSlider.json')}
+    autoPlay
+    loop
+    style={{ width: 300, height: 300 }} // Adjust the dimensions as needed
+/>
   },
 
   {
@@ -143,13 +148,23 @@ const slides = [
     text: <Icon name="chevrons-right" size={27} color="white" />,
     longtitletwo: 'Quality Assurance',
     image: <Image style={Styles.logoimg} resizeMode='contain' source={images.app_logo} />,
-    // imagetwo: <LottieAnimation Lottiewidthstyle={Styles.longimagetwo} source={images.Two_Slider} />
+     imagetwo:  <LottieView
+     source={require('../../images/LotteAnimation/TwoSwiperimage.json')}
+     autoPlay
+     loop
+     style={{ width: 300, height: 300 }} // Adjust the dimensions as needed
+ />
   },
   {
     key: 's3',
     text: <Icon name="chevrons-right" size={27} color="white" />,
     longtitle: 'No Minimum Buy',
     image: <Image style={Styles.logoimg} resizeMode='contain' source={images.app_logo} />,
-    // imagetwo: <LottieAnimation Lottiewidthstyle={Styles.longimagetwoonee} source={images.Three_Slider} />
+    imagetwo:  <LottieView
+    source={require('../../images/LotteAnimation/ThreeAnimation.json')}
+    autoPlay
+    loop
+    style={{ width: 300, height: 300 }} // Adjust the dimensions as needed
+/>
   },
 ];

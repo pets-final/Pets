@@ -10,6 +10,29 @@ export default StyleSheet.create({
     width: '100%',
     backgroundColor: 'white'
   },
+   roleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+  roleButton: {
+    backgroundColor: "#FFF",
+    borderColor: "#861088",
+    borderWidth: 1,
+    borderRadius: 25,
+    width: "23%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  roleButtonText: {
+    color: "#861088",
+    fontWeight: "bold",
+    fontSize: 15,
+  },
+  selectedRole: {
+    backgroundColor: "#861088",
+  },
   bgcolorset: {
     backgroundColor: ColorTheme.BGScreen
   },

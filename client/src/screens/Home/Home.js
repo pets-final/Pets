@@ -11,37 +11,30 @@ import images from '../../../index';
 import { Rating } from 'react-native-ratings';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
-// import { get_doctore_detailes_action } from '../../../redux/action/DoctoreDataAction';
-// import { price_symbol_action } from '../../../redux/action/CommonAction';
-// import { HomeFirstImageSlider, SearchHeaderScreen } from '../../../screens';
-// import  HomeScsreenTabAll  from '../TabNavigator/Tab'
+
+import auth from '@react-native-firebase/auth'; // Import the auth module
 
 
 const HomeTabset = (props) => {
   const { navigation } = props;
-  // const dispatch = useDispatch();
-  // const { doctoreDetaile } = useSelector(state => state.doctorDataReducer) || { doctoreDetaile };
+ 
    const pricesymboldata  = '$'
   const [liked, setLiked] = useState([]);
   const [timer, setTimer] = useState(24339); // 25 minutes
   const [start, setStart] = useState(true);
   const tick = useRef();
+  const [user, setUser] = useState(null); // State to hold the user object
 
-  let PriceSymbol = '$';
 
-  // useEffect(() => {
-  //   dispatch(price_symbol_action(PriceSymbol))
-  //   if (start) {
-  //     tick.current = setInterval(() => {
-  //       setTimer((timer) => timer - 1);
-  //     }, 1000);
-  //   }
-  //   return () => clearInterval(tick.current);
-  // }, [start]);
-
-  // const toggleStart = () => {
-  //   setStart(!start);
-  // };
+  useEffect(() => {
+    // Get the current user when the component mounts
+    const subscriber = auth().onAuthStateChanged((user) => {
+      setUser(user);
+      console.log('subscriber',user);
+    });
+    // Cleanup subscription on unmount
+    return subscriber;
+  }, []);
   const dispSecondsAsMins = (value) => {
     const sec = parseInt(value, 10);
     let hours = Math.floor(sec / 3600);
@@ -195,27 +188,27 @@ const HomeTabset = (props) => {
             <View>
               <View style={{ opacity: 0.4 }}>
                 <TouchableOpacity style={Styles.flexrowsecenterimage}
-                  onPress={() => doctordata(item)}>
+                  onPress={() => navigation.navigate('productDetails')}>
                   <Image style={Styles.whiteboximage} resizeMode="contain" source={item.image} />
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity onPress={() => doctordata(item)}>
-                <Text style={[Styles.setnormatextstyle, { color: "#feb344" }]}>{item.text}</Text>
+              <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
+                <Text style={[Styles.setnormatextstyle, { color: "#861088" }]}>{item.text}</Text>
               </TouchableOpacity>
               <Text style={[Styles.settextcolorcenterthree, Styles.settextcolorcenterthreetow]}>{item.hospitalname}</Text>
               <View style={Styles.flexrowjuctycenter}>
                 {item.rating}
               </View>
               <View style={Styles.flexrowsettext}>
-                <Text style={[Styles.settextprice, { color: "#feb344" }]}>{pricesymboldata}{item.price}</Text>
+                <Text style={[Styles.settextprice, { color: "#861088" }]}>{pricesymboldata}{item.price}</Text>
                 <Text style={Styles.settextpricetwo}>{item.pricetwo}</Text>
               </View>
               <View style={Styles.flexrocenterjusty}>
                 <View style={Styles.addbutttonwidth}>
-                  <Button onPress={() => navigation.navigate(RouteName.CART_SCREEN)} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#feb344" }} title={item.buttonaadtext} />
+                  <Button onPress={() => navigation.navigate(RouteName.CART_SCREEN)} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={item.buttonaadtext} />
                 </View>
               </View>
-              <View style={[Styles.settextinbgcolor, { opacity: 0.6 }, { backgroundColor: "#feb344" }]}>
+              <View style={[Styles.settextinbgcolor, { opacity: 0.6 }, { backgroundColor: "#861088" }]}>
                 <Text style={Styles.setdescounrtextstyle}>{item.offdecount}</Text>
               </View>
               <Text style={Styles.outoftextset}>{item.outofstock}</Text>
@@ -223,26 +216,26 @@ const HomeTabset = (props) => {
             :
             <View>
               <TouchableOpacity style={Styles.flexrowsecenterimage}
-                onPress={() => doctordata(item)}>
+                onPress={() => navigation.navigate('productDetails')}>
                 <Image style={Styles.whiteboximage} resizeMode="contain" source={item.image} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => doctordata(item)}>
-                <Text style={[Styles.setnormatextstyle, { color: "#feb344" }]}>{item.text}</Text>
+              <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
+                <Text style={[Styles.setnormatextstyle, { color: "#861088" }]}>{item.text}</Text>
               </TouchableOpacity>
               <Text style={[Styles.settextcolorcenterthree, Styles.settextcolorcenterthreetow]}>{item.hospitalname}</Text>
               <View style={Styles.flexrowjuctycenter}>
                 {item.rating}
               </View>
               <View style={Styles.flexrowsettext}>
-                <Text style={[Styles.settextprice, { color: "#feb344" }]}>{pricesymboldata}{item.price}</Text>
+                <Text style={[Styles.settextprice, { color: "#861088" }]}>{pricesymboldata}{item.price}</Text>
                 <Text style={Styles.settextpricetwo}>{item.pricetwo}</Text>
               </View>
               <View style={Styles.flexrocenterjusty}>
                 <View style={Styles.addbutttonwidth}>
-                  <Button onPress={() => navigation.navigate(RouteName.CART_SCREEN)} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#feb344" }} title={item.buttonaadtext} />
+                  <Button onPress={() => navigation.navigate(RouteName.CART_SCREEN)} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={item.buttonaadtext} />
                 </View>
               </View>
-              <View style={[Styles.settextinbgcolor, { backgroundColor: "#feb344" }]}>
+              <View style={[Styles.settextinbgcolor, { backgroundColor: "#861088" }]}>
                 <Text style={Styles.setdescounrtextstyle}>{item.offdecount}</Text>
               </View>
             </View>
@@ -259,12 +252,12 @@ const HomeTabset = (props) => {
     return (
       <View>
         <View style={Styles.minbgviewset}>
-          <TouchableOpacity style={Styles.imagecengter} onPress={() => doctordata(item)}>
+          <TouchableOpacity style={Styles.imagecengter} onPress={() => navigation.navigate('productDetails')}>
             <Image style={[Styles.whiteboximagetwoset, Styles.whiteboximagetwosettwo]} resizeMode='contain' source={item.image} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate((RouteName.PRODUCT_DETAILS_SCREEN), { title: item.text, img: item.image, hname: item.hospitalname })}>
-            <Text style={[Styles.settextcolorcenter, { color: "#feb344" }]}>{item.text}</Text>
+            <Text style={[Styles.settextcolorcenter, { color: "#861088" }]}>{item.text}</Text>
           </TouchableOpacity>
           <Text style={Styles.settextcolorcentertwo}>{item.hospitalname}</Text>
           <View style={Styles.flexrowseticon}>
@@ -274,13 +267,13 @@ const HomeTabset = (props) => {
           </View>
           <View style={Styles.flexrowseticonNewArrival}>
             <View>
-              <Text style={[Styles.settextpricebold, { color: "#feb344" }]}>{pricesymboldata} {item.price}</Text>
+              <Text style={[Styles.settextpricebold, { color: "#861088" }]}>{pricesymboldata} {item.price}</Text>
             </View>
-            <TouchableOpacity onPress={() => doctordatatendingmenu(item)} style={[Styles.seticonbgcolorview, { backgroundColor: "#feb344" }]}>
+            <TouchableOpacity onPress={() => doctordatatendingmenu(item)} style={[Styles.seticonbgcolorview, { backgroundColor: "#861088" }]}>
               <IconF name={item.plusicon} size={20} color={'white'} />
             </TouchableOpacity>
           </View>
-          <View style={[Styles.settextinbgcolor, { backgroundColor: "#feb344" }]}>
+          <View style={[Styles.settextinbgcolor, { backgroundColor: "#861088" }]}>
             <Text style={Styles.setdescounrtextstyle}>{item.discount}</Text>
           </View>
           <TouchableOpacity
@@ -312,12 +305,12 @@ const HomeTabset = (props) => {
     return (
       <View style={Styles.populaitemnearby}>
         <View style={Styles.flexrowtextandimage}>
-          <TouchableOpacity onPress={() => doctordata(item)}>
+          <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
             <Image style={Styles.whiteboximagetwoset} resizeMode="cover" source={item.image} />
           </TouchableOpacity>
           <View style={Styles.setwidthalltext}>
-            <TouchableOpacity onPress={() => doctordata(item)}>
-              <Text style={[Styles.settextpricebold, { color: "#feb344" }]} >{item.text}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
+              <Text style={[Styles.settextpricebold, { color: "#861088" }]} >{item.text}</Text>
             </TouchableOpacity>
             <Text style={[Styles.settextcolorcentertwo]}>{item.hospitalname}</Text>
             <View style={Styles.flexstarticon}>
@@ -326,12 +319,12 @@ const HomeTabset = (props) => {
             </View>
             <View style={Styles.flexrowsetrating}>
               <View style={Styles.dicscounttextflex}>
-                <Text style={[Styles.settextpricebold, { color: "#feb344" }]}>{pricesymboldata} {item.price}</Text>
+                <Text style={[Styles.settextpricebold, { color: "#861088" }]}>{pricesymboldata} {item.price}</Text>
               </View>
             </View>
           </View>
-          <TouchableOpacity style={Styles.setplusicon} onPress={() => doctordata(item)}>
-            <IconF name={item.plusicon} size={30} color={"#feb344"} />
+          <TouchableOpacity style={Styles.setplusicon} onPress={() => navigation.navigate('productDetails')}>
+            <IconF name={item.plusicon} size={30} color={"#861088"} />
           </TouchableOpacity>
         </View>
       </View>
@@ -367,7 +360,7 @@ const HomeTabset = (props) => {
             <TouchableOpacity onPress={() => navigation.navigate(RouteName.CHAT_WITH_DOCTOR_SCREEN)}>
               <Image style={Styles.Doctorimage} resizeMode="contain" source={item.doctorImg} />
             </TouchableOpacity>
-            <Text style={[Styles.Doctornametext, { color: "#feb344" }]} >{item.doctorname}</Text>
+            <Text style={[Styles.Doctornametext, { color: "#861088" }]} >{item.doctorname}</Text>
             <Text style={Styles.doctorSpec}>{item.spec}</Text>
             <View style={Styles.flexstarticon}>
               {item.ratings}
@@ -396,7 +389,7 @@ const HomeTabset = (props) => {
               <View style={Styles.FlexRowBetwn}>
                 <Text style={Styles.settopcategories}>Trending Categories</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('Categories')}>
-                  <Text style={[Styles.SeeAlltext, { color: "#feb344" }]}>See All</Text>
+                  <Text style={[Styles.SeeAlltext, { color: "#861088" }]}>See All</Text>
                 </TouchableOpacity>
               </View>
               <FlatList
@@ -463,6 +456,8 @@ const HomeTabset = (props) => {
           </View>
         </View>
       </ScrollView>
+
+ 
     
     </View>
   );
