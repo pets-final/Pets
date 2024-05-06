@@ -1,21 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, ScrollView, Text, KeyboardAvoidingView, TouchableOpacity, Image, FlatList, StatusBar } from "react-native";
 import Styles from '../../styles/Tab/HometabStyle';
-// import { RouteName } from '../../../routes';
 import { MedicineCategoryHomeTab, MegaMedicine, MedicineFalteList, DoctorListData } from '../../utils/Sliderimagedata';
-// import { useDispatch } from "react-redux";
 import  Button  from '../../components/Button';
-// import { get_doctore_category_action } from '../../../redux/action/DoctoreCategoryAction';
 import { useSelector } from "react-redux";
 import images from '../../../index';
 import { Rating } from 'react-native-ratings';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
-
 import auth from '@react-native-firebase/auth'; // Import the auth module
+
+import firestore from '@react-native-firebase/firestore';
+
+
 
 
 const HomeTabset = (props) => {
+
+  const getdatatest= async ()=>{
+    const usersCollection =  await firestore().collection('User').get();
+    console.log("all ifno ",usersCollection.docs[0].data());
+
+  }
   const { navigation } = props;
  
    const pricesymboldata  = '$'
@@ -23,11 +29,12 @@ const HomeTabset = (props) => {
   const [timer, setTimer] = useState(24339); // 25 minutes
   const [start, setStart] = useState(true);
   const tick = useRef();
-  const [user, setUser] = useState(null); // State to hold the user object
+  const [user, setUser] = useState(null); // State to hold the user object 
 
 
   useEffect(() => {
     // Get the current user when the component mounts
+    getdatatest()
     const subscriber = auth().onAuthStateChanged((user) => {
       setUser(user);
       console.log('subscriber',user);
