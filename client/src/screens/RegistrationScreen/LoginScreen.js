@@ -5,14 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 import images from '../../index';
 import  useTogglePasswordVisibility  from '../../utils/useTogglePasswordVisibility';
 import Button  from '../../components/Button';
-// import {RouteName} from '../../routes';
 import IconG from 'react-native-vector-icons/Ionicons';
 import  SweetaelertModal from '../../components/SweetAlertModal';
 import auth from "@react-native-firebase/auth";
 
 
 const LoginScreen = () => {
-  // const { colorrdata } = useSelector(state => state.commonReducer) || {};
   const navigation = useNavigation();
   const [textInputName, setTextInputName] = useState('');
   const [textInputpassword, setTextInputPassword] = useState('');
@@ -43,13 +41,14 @@ const LoginScreen = () => {
     }
     auth().signInWithEmailAndPassword(textInputName,textInputpassword)
     .then(()=>{
-      setDisplayAlert(1);     
+      console.log('succes');
+      setDisplayAlert(1)
+      navigation.navigate('tab')     
     })
     .catch((error)=>{
       console.log(error.message);          
-      setError(error.message);
       setrefresh(!error)
-      setError2(1); // Set Error2 to 1 to display error message below the password field
+      setError2(1); 
     }) 
     
   };
