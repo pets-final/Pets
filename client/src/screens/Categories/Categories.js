@@ -1,29 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Image, ScrollView, StatusBar, FlatList, KeyboardAvoidingView, TouchableOpacity, } from "react-native";
+import { Text, View, Image, FlatList, StatusBar, KeyboardAvoidingView, TouchableOpacity } from "react-native";
 import { ProductitemList } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
-// import { RouteName } from '../../../routes';
 import { CategoryData } from '../../utils/Sliderimagedata';
-// import { useDispatch } from "react-redux";
-// import { get_doctore_detailes_action } from '../../../redux/action/DoctoreDataAction';
 import { colors } from '../../utils';
-// import { useSelector } from "react-redux";
 import Icon from "react-native-vector-icons/AntDesign";
-// import { price_symbol_action } from '../../../redux/action/CommonAction';
 
 const Category = () => {
 
-  const  colorrdata = "#861088"
-  const  pricesymboldata  = '$'
+  const colorrdata = "#861088";
+  const pricesymboldata = '$';
   const navigation = useNavigation();
   const [hearticon, Sethearticon] = useState(0);
-  // const dispatch = useDispatch();
   const [liked, setLiked] = useState([]);
-
-  let PriceSymbol = '$';
-
-  
- 
 
   const Docterproductdataitem = (item, index) => {
     return (
@@ -39,30 +28,23 @@ const Category = () => {
       </TouchableOpacity>
     );
   }
+
   return (
     <View style={[ProductitemList.minstyleviewphotograpgyTwo, ProductitemList.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={{
-          width: '100%',
-          height: 'auto',
-        }}>
-        <KeyboardAvoidingView enabled>
-          <View style={ProductitemList.minflexview}>
-            <View style={ProductitemList.Cat_bgcolorwhiteset}>
-              <FlatList
-                data={CategoryData}
-                numColumns={3}
-                renderItem={({ item, index }) => Docterproductdataitem(item, index)}
-                keyExtractor={item => item.id}
-              />
-            </View>
+      <KeyboardAvoidingView enabled>
+        <View style={ProductitemList.minflexview}>
+          <View style={ProductitemList.Cat_bgcolorwhiteset}>
+            <FlatList
+              data={CategoryData}
+              numColumns={3}
+              renderItem={({ item, index }) => Docterproductdataitem(item, index)}
+              keyExtractor={item => item.id}
+            />
           </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
+        </View>
+      </KeyboardAvoidingView>
     </View>
   );
 };
 export default Category;
-

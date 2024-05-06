@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { View, StatusBar, Image } from 'react-native';
+import { View, StatusBar, Image, Alert } from 'react-native';
 import images from '../../index';
 import Style from '../../styles/CommonStyle/Style';
 import { useNavigation } from '@react-navigation/native';
+import NetInfo from "@react-native-community/netinfo";
 import LottieView from 'lottie-react-native';
 import auth from "@react-native-firebase/auth";
 
@@ -10,21 +11,46 @@ const SplashScreen = () => {
     const navigation = useNavigation();
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-            return () => subscriber(); // unsubscribe on unmount
-        }, 2000); // Change the timeout to 2000 milliseconds (2 seconds)
-
-        return () => clearTimeout(timeout);
+        checkInternetConnection();
     }, []);
 
-    const onAuthStateChanged = (user) => {
-        if (user) {
-            // User is logged in, navigate to the main screen
-            navigation.replace('tab');
+    const checkInternetConnection = async () => {
+        const state = await NetInfo.fetch();
+        if (state.isConnected) {
+            checkUserAuthentication();
         } else {
-            // User is not logged in, navigate to the get started screen
+            Alert.alert(
+                "No Internet Connection",
+                "Please check your internet connection and try again.",
+                [{ text: "OK", onPress: () => checkInternetConnection() }]
+            );
+        }
+    };
+
+    const checkUserAuthentication = async () => {
+        const user = auth().currentUser;
+        if (user) {
+            const timestamp = user.metadata.lastSignInTime;
+            const lastSignInTime = new Date(timestamp).getTime();
+            const currentTime = Date.now();
+            const elapsedTime = currentTime - lastSignInTime;
+
+            if (elapsedTime > 2592000000) {
+                await handleLogout();
+            } else {
+                navigation.replace('tab');
+            }
+        } else {
             navigation.replace('GetstartedSliderscreen');
+        }
+    };
+
+    const handleLogout = async () => {
+        try {
+            await auth().signOut();
+            navigation.replace('LoginandRegistrationScreen');
+        } catch (error) {
+            console.error('Logout Error:', error);
         }
     };
 

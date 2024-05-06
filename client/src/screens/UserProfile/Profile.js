@@ -110,8 +110,8 @@ const ProfileTab = () => {
                     <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={images.Ningthty_img} />
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
-                    <Text style={AccountTabStyle.sumanyatextset}>Sumanya K.</Text>
-                    <Text style={AccountTabStyle.setgimailtext}>{User.email}</Text>
+                    <Text style={AccountTabStyle.sumanyatextset}>{ User.displayName}</Text>
+                    <Text style={AccountTabStyle.setgimailtext}>{ User.email}</Text>
                     <Text style={AccountTabStyle.setgimailtextwo}>+91 xxxxxxxxxxx</Text>
                     <Text style={AccountTabStyle.addreshtext}>1417 Timberbrook Lane, Denver, CO 80204, United States</Text>
                   </View>
