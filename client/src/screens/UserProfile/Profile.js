@@ -14,12 +14,15 @@ import { colors } from '../../utils';
 // import { useSelector } from "react-redux";
 import auth from '@react-native-firebase/auth';
 
-const ProfileTab = () => {
+const ProfileTab = ({route}) => {
+  console.log('route.params.key',route.params?.key);
+
   const  colorrdata = "#861088"
   const navigation = useNavigation();
   const [DisplayAlert, setDisplayAlert] = useState(0)
   const [modalVisible, setModalVisible] = useState(false);
   const [User,setUser] = useState('')
+  const [isFilled,setIsFilled] = useState(false)
   const handleLogout = async () => {
     try {
       await auth().signOut();
@@ -38,6 +41,9 @@ const ProfileTab = () => {
       setUser(user);
       console.log('subscriber',user);
     });
+    if(route.params?.key){
+      setIsFilled(route.params.key)
+    }
     // Cleanup subscription on unmount
     return subscriber;
   }, []);
@@ -106,12 +112,15 @@ const ProfileTab = () => {
               </View>
               <View style={AccountTabStyle.useraccountwhitebox}>
                 <View style={AccountTabStyle.fleximageandtext}>
+                <Icon name="bookmark" size={30} color="#4F8EF7" style={{ position: 'absolute', top: 0, left: 0 }} />
+
                   <TouchableOpacity>
                     <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={images.Ningthty_img} />
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
                     <Text style={AccountTabStyle.sumanyatextset}>{ User.displayName}</Text>
                     <Text style={AccountTabStyle.setgimailtext}>{ User.email}</Text>
+                    <Text style={AccountTabStyle.setgimailtext}>Verified : {isFilled ? 'Yes' : 'No'}</Text>
                     <Text style={AccountTabStyle.setgimailtextwo}>+91 xxxxxxxxxxx</Text>
                     <Text style={AccountTabStyle.addreshtext}>1417 Timberbrook Lane, Denver, CO 80204, United States</Text>
                   </View>
@@ -167,6 +176,9 @@ const ProfileTab = () => {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate(RouteName.HOME_SCREEN)}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Rate us on the Play Store</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Slider')}>
+                  <Text style={AccountTabStyle.sendfeedbacktext}>Become A Vet</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setModalVisible(true)}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Log Out</Text>

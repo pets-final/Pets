@@ -15,10 +15,10 @@ const ConformLocation = () => {
   const colorrdata = "#861088";
   const navigation = useNavigation();
   const OnLoginPress = () => {
-    navigation.replace(RouteName.LOCATION_HOME_OFFICE_SCREEN);
+    navigation.replace('');
   }
   const Homescreenonpress = () => {
-    navigation.replace(RouteName.HOME_SCREEN);
+    navigation.replace('');
   }
 
   const [position, setPosition] = useState({
@@ -124,7 +124,7 @@ const ConformLocation = () => {
           <View>
             <Button title="Confirm Location "
               buttonStyle={{ backgroundColor: colorrdata }}
-              onPress={() => Homescreenonpress()}
+              onPress={() => navigation.navigate('WelcomeSumnya', { address })}
             />
           </View>
         </View>

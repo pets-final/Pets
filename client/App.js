@@ -12,7 +12,6 @@ import EDIT_PROFILE_SCREEN from './src/screens/EditProfile/EditProfileScreen';
 import ProductList from './src/screens/ProductList/ProductList';
 import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
-import ProfileTab from './src/screens/UserProfile/Profile';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 import VetProfileTab from './src/screens/VetProfile/VetProfile'
 import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
@@ -29,59 +28,160 @@ import ChatScreen from './src/screens/ChatScreenFolder/ChatScreen'
 // import DrawerChatScreen from './src/screens/ChatScreenFolder/DrawerChatScreen'
 
 
+import WelcomeSumnya from './src/screens/Map/ConfirmAdress'
+import Slider from './src/screens/vetSliderScreen/Slider';
+import VetForm from './src/screens/vetSliderScreen/VetForm';
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-    {/* <Stack.Screen options={{ headerShown: false }} name="productDetails" component={ProductDetailesScreen} />
       
-        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="GetstartedSliderscreen" component={GetstartedSliderscreen} options={{ headerShown: false }} />
-        <Stack.Screen name="LoginandRegistrationScreen" options={{ headerShown: false }} component={LoginandRegistrationScreen} />
-        <Stack.Screen name="tab" options={{ headerShown: false }} component={Nav} />
-        <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
-        <Stack.Screen name="map" options={{ headerShown: false }} component={map} />
-        <Stack.Screen options={{ headerShown: false }} name="cart" component={Cart} />
-        <Stack.Screen options={{ headerShown: false }} name="checkout" component={CheckOutScreen} />
-        <Stack.Screen options={{ headerShown: false }} name="paymentSucces" component={PaytmSuccessFully} />
-        <Stack.Screen name="blogDetails" options={{
-          headerShadowVisible: true,
-          title: 'Blog',
-          headerTintColor: "#feb344",
-          headerTitleStyle: {
-            color: "#feb344",
-            fontFamily: Fonts.Metropolis_Medium,
-            fontSize: 17,
-            fontWeight: '700',
-          },
-        }} component={blogDetails} />
-        <Stack.Screen name="FORGET_PASSWORD_SCREEN" options={{
-          headerShadowVisible: true,
-          title: 'Forget Password',
-          headerTintColor: "#feb344",
-          headerTitleStyle: {
-            color: "#feb344",
-            fontFamily: Fonts.Metropolis_Medium,
-            fontSize: 17,
-            fontWeight: '700',
-          },
-        }} component={FORGET_PASSWORD_SCREEN} />
-        <Stack.Screen options={{
-          headerShadowVisible: false,
-          title: 'Category',
-          headerTintColor: "#feb344",
-          headerTitleStyle: {
-            color: "#feb344",
-            fontFamily: Fonts.Metropolis_Medium,
-            fontSize: 17,
-            fontWeight: '700',
-          },
-        }} name="Categories" component={Category} />
-        <Stack.Screen options={{ headerShown: false }} name="Favorites" component={FavoriteTab} /> */}
-   
-        {/* <Stack.Screen options={{
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="GetstartedSliderscreen"
+          component={GetstartedSliderscreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="LoginandRegistrationScreen"
+          options={{headerShown: false}}
+          component={LoginandRegistrationScreen}
+        />
+         <Stack.Screen
+          name="WelcomeSumnya"
+          component={WelcomeSumnya}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="tab"
+          options={{headerShown: false}}
+          component={Nav}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Home"
+          component={Home}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="cart"
+          component={Cart}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="checkout"
+          component={CheckOutScreen}
+        />
+       
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Slider"
+          component={Slider}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="paymentSucces"
+          component={PaytmSuccessFully}
+        />
+        <Stack.Screen
+          options={{
+            headerShadowVisible: true,
+            title: 'Form',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            },
+          }}
+          name="VetForm"
+          component={VetForm}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="productDetails"
+          component={ProductDetailesScreen}
+        />
+        <Stack.Screen
+          name="map"
+          options={{headerShown: false}}
+          component={map}
+        />
+
+        <Stack.Screen
+          name="blogDetails"
+          options={{
+            headerShadowVisible: true,
+            title: 'Blog',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            },
+          }}
+          component={blogDetails}
+        />
+        <Stack.Screen
+          name="FORGET_PASSWORD_SCREEN"
+          options={{
+            headerShadowVisible: true,
+            title: 'Forget Password',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            },
+          }}
+          component={FORGET_PASSWORD_SCREEN}
+        />
+        <Stack.Screen
+          options={{
+            headerShadowVisible: false,
+            title: 'Category',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            },
+          }}
+          name="Categories"
+          component={Category}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Favorites"
+          component={FavoriteTab}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+            title: 'Edit Profile',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontSize: 17,
+              fontSize: 20,
+              marginLeft: 17,
+            },
+          }}
+          name="EditProfile"
+          component={EditProfileScreen}
+        />
+             {/* <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
           title: 'Edit Vet Profile',
@@ -129,135 +229,6 @@ function App() {
             marginLeft: 17,
           },
         }}  name="ChatScreen" component={ChatScreen} />
-          {/* <Stack.Screen options={{
-          headerShown: true,
-          headerShadowVisible: false,
-          title: 'ChatDoctorScreen',
-          headerTintColor: "#feb344",
-          headerTitleStyle: {
-            color: "#feb344",
-            fontSize: 17,
-            fontSize: 20,
-            marginLeft: 17,
-          },
-        }}  name="ChatDoctorScreen" component={ChatDoctorScreen} /> */}
-        <Stack.Screen
-          name="SplashScreen"
-          component={SplashScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="GetstartedSliderscreen"
-          component={GetstartedSliderscreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="LoginandRegistrationScreen"
-          options={{headerShown: false}}
-          component={LoginandRegistrationScreen}
-        />
-        <Stack.Screen
-          name="tab"
-          options={{headerShown: false}}
-          component={Nav}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Home"
-          component={Home}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="cart"
-          component={Cart}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="checkout"
-          component={CheckOutScreen}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="paymentSucces"
-          component={PaytmSuccessFully}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="productDetails"
-          component={ProductDetailesScreen}
-        />
-        <Stack.Screen
-          name="map"
-          options={{headerShown: false}}
-          component={map}
-        />
-
-        <Stack.Screen
-          name="blogDetails"
-          options={{
-            headerShadowVisible: true,
-            title: 'Blog',
-            headerTintColor: '#feb344',
-            headerTitleStyle: {
-              color: '#feb344',
-              fontFamily: Fonts.Metropolis_Medium,
-              fontSize: 17,
-              fontWeight: '700',
-            },
-          }}
-          component={blogDetails}
-        />
-        <Stack.Screen
-          name="FORGET_PASSWORD_SCREEN"
-          options={{
-            headerShadowVisible: true,
-            title: 'Forget Password',
-            headerTintColor: '#feb344',
-            headerTitleStyle: {
-              color: '#feb344',
-              fontFamily: Fonts.Metropolis_Medium,
-              fontSize: 17,
-              fontWeight: '700',
-            },
-          }}
-          component={FORGET_PASSWORD_SCREEN}
-        />
-        <Stack.Screen
-          options={{
-            headerShadowVisible: false,
-            title: 'Category',
-            headerTintColor: '#feb344',
-            headerTitleStyle: {
-              color: '#feb344',
-              fontFamily: Fonts.Metropolis_Medium,
-              fontSize: 17,
-              fontWeight: '700',
-            },
-          }}
-          name="Categories"
-          component={Category}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Favorites"
-          component={FavoriteTab}
-        />
-        <Stack.Screen
-          options={{
-            headerShown: true,
-            headerShadowVisible: false,
-            title: 'Edit Profile',
-            headerTintColor: '#861088',
-            headerTitleStyle: {
-              color: '#feb344',
-              fontSize: 17,
-              fontSize: 20,
-              marginLeft: 17,
-            },
-          }}
-          name="EditProfile"
-          component={EditProfileScreen}
-        />
       </Stack.Navigator>
     </NavigationContainer>
   );
