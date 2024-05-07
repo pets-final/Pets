@@ -12,7 +12,6 @@ import EDIT_PROFILE_SCREEN from './src/screens/EditProfile/EditProfileScreen';
 import ProductList from './src/screens/ProductList/ProductList';
 import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
-import ProfileTab from './src/screens/UserProfile/Profile';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
@@ -21,13 +20,16 @@ import Cart from './src/screens/cart/cart';
 import CheckOutScreen from './src/screens/cart/checkout';
 import PaytmSuccessFully from './src/screens/cart/paymentSucces';
 import {ProductDetailesScreen} from './src/screens/ProductList/Productdetails';
-
+import WelcomeSumnya from './src/screens/Map/ConfirmAdress'
+import Slider from './src/screens/vetSliderScreen/Slider';
+import VetForm from './src/screens/vetSliderScreen/VetForm';
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -42,6 +44,11 @@ function App() {
           name="LoginandRegistrationScreen"
           options={{headerShown: false}}
           component={LoginandRegistrationScreen}
+        />
+         <Stack.Screen
+          name="WelcomeSumnya"
+          component={WelcomeSumnya}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="tab"
@@ -63,10 +70,31 @@ function App() {
           name="checkout"
           component={CheckOutScreen}
         />
+       
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Slider"
+          component={Slider}
+        />
         <Stack.Screen
           options={{headerShown: false}}
           name="paymentSucces"
           component={PaytmSuccessFully}
+        />
+        <Stack.Screen
+          options={{
+            headerShadowVisible: true,
+            title: 'Form',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            },
+          }}
+          name="VetForm"
+          component={VetForm}
         />
         <Stack.Screen
           options={{headerShown: false}}
@@ -84,9 +112,9 @@ function App() {
           options={{
             headerShadowVisible: true,
             title: 'Blog',
-            headerTintColor: '#feb344',
+            headerTintColor: '#861088',
             headerTitleStyle: {
-              color: '#feb344',
+              color: '#861088',
               fontFamily: Fonts.Metropolis_Medium,
               fontSize: 17,
               fontWeight: '700',
@@ -99,9 +127,9 @@ function App() {
           options={{
             headerShadowVisible: true,
             title: 'Forget Password',
-            headerTintColor: '#feb344',
+            headerTintColor: '#861088',
             headerTitleStyle: {
-              color: '#feb344',
+              color: '#861088',
               fontFamily: Fonts.Metropolis_Medium,
               fontSize: 17,
               fontWeight: '700',
@@ -113,9 +141,9 @@ function App() {
           options={{
             headerShadowVisible: false,
             title: 'Category',
-            headerTintColor: '#feb344',
+            headerTintColor: '#861088',
             headerTitleStyle: {
-              color: '#feb344',
+              color: '#861088',
               fontFamily: Fonts.Metropolis_Medium,
               fontSize: 17,
               fontWeight: '700',
@@ -136,7 +164,7 @@ function App() {
             title: 'Edit Profile',
             headerTintColor: '#861088',
             headerTitleStyle: {
-              color: '#feb344',
+              color: '#861088',
               fontSize: 17,
               fontSize: 20,
               marginLeft: 17,
