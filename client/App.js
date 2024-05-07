@@ -15,7 +15,7 @@ import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 import VetProfileTab from './src/screens/VetProfile/VetProfile'
 import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
-import MyVet from './src/screens/VetProfile/Myvet'
+import MyVet from './src/screens/VetProfile/MyVet'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
