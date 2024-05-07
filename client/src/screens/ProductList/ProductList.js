@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Image, StatusBar, FlatList, KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import { Text, View, Image, StatusBar, FlatList, KeyboardAvoidingView, TouchableOpacity , SafeAreaView} from "react-native";
 import { ProductitemList } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import { ProductData } from '../../utils/Sliderimagedata';
 import { colors } from '../../utils';
+import Styles from '../../styles/LoginRegisterStyle/LoginScreenStyle';
+import  Button  from '../../components/Button';
+
 import Icon from "react-native-vector-icons/AntDesign";
+import Style from '../../styles/CommonStyle/Style';
 
 const ProductTab = () => {
   const pricesymboldata ='$';
@@ -14,7 +18,11 @@ const ProductTab = () => {
 
   const Docterproductdataitem = ({ item, index }) => {
     return (
+
+     
       <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>
+
+         
         <View style={ProductitemList.bgwhiteboxminview}>
           <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
             <TouchableOpacity style={ProductitemList.setimageviewstyle} onPress={() => doctordata(item)}>
@@ -49,14 +57,24 @@ const ProductTab = () => {
               style={{ color: liked.includes(index) ? "#861088" : 'lightgrey' }}
             />
           </TouchableOpacity>
+          
         </View>
       </TouchableOpacity>
     );
   }
 
   return (
+    <SafeAreaView >
+      <Button title="Add New Product"
+        onPress={()=> (navigation.navigate('NewProduct'))}
+        buttonStyle={Styles.setbuttonborderradius}
+        buttonTextStyle={Styles.textcolorsetwhite}
+      
+      />
     <View style={[ProductitemList.minstyleviewphotograpgy, ProductitemList.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
+      <View style={Styles.flexrowbutton}>
+    </View>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
         <View style={ProductitemList.minflexview}>
           <View style={ProductitemList.minviewsigninscreen}>
@@ -72,6 +90,7 @@ const ProductTab = () => {
         </View>
       </KeyboardAvoidingView>
     </View>
+    </SafeAreaView>
   );
 };
 
