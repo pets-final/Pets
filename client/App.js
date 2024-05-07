@@ -13,6 +13,7 @@ import ProductList from './src/screens/ProductList/ProductList';
 import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
+// import VetoProfile from './src/screens/VetoProfile/VetoProfile'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
@@ -23,33 +24,48 @@ import {ProductDetailesScreen} from './src/screens/ProductList/Productdetails';
 import WelcomeSumnya from './src/screens/Map/ConfirmAdress'
 import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
+import NewProduct from './src/screens/ProductList/NewProduct'
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      
+      <Stack.Screen
+          name="LoginandRegistrationScreen"
+          options={{headerShown: false}}
+          component={LoginandRegistrationScreen}
+        />
+
+
+         <Stack.Screen
+          name="NewProduct"
+          component={NewProduct}
+          options={{headerShown: false}}
+        />
+
+
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
           options={{headerShown: false}}
         />
+
+
         <Stack.Screen
           name="GetstartedSliderscreen"
           component={GetstartedSliderscreen}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="LoginandRegistrationScreen"
-          options={{headerShown: false}}
-          component={LoginandRegistrationScreen}
-        />
+       
+
          <Stack.Screen
           name="WelcomeSumnya"
           component={WelcomeSumnya}
           options={{headerShown: false}}
         />
+
+        
         <Stack.Screen
           name="tab"
           options={{headerShown: false}}
