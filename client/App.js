@@ -14,7 +14,7 @@ import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import ProfileTab from './src/screens/UserProfile/Profile';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
-import VetoProfile from './src/screens/VetoProfile/VetoProfile'
+// import VetoProfile from './src/screens/VetoProfile/VetoProfile'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
@@ -22,13 +22,18 @@ import Cart from './src/screens/cart/cart';
 import CheckOutScreen from './src/screens/cart/checkout';
 import PaytmSuccessFully from './src/screens/cart/paymentSucces';
 import {ProductDetailesScreen} from './src/screens/ProductList/Productdetails';
-
+import NewProduct from './src/screens/ProductList/NewProduct'
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen
+          name="NewProduct"
+          component={NewProduct}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
