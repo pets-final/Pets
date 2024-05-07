@@ -13,7 +13,7 @@ import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
 // import { colors } from '../../utils';
 // import { useSelector } from "react-redux";
 import AppointmentView from './Myvet';
-const ProfileTab = () => {
+const VetProfileTab = () => {
   const  colorrdata = "#feb344"
   const navigation = useNavigation();
   const [DisplayAlert, setDisplayAlert] = useState(0)
@@ -224,4 +224,4 @@ const ProfileTab = () => {
     </View>
   );
 };
-export default ProfileTab;
+export default VetProfileTab;

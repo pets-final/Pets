@@ -9,11 +9,14 @@ import IconA from 'react-native-vector-icons/dist/AntDesign';
 import { Button } from '../../components';
 
 
+
 const ChatDoctorScreen = (props) => {
     // const { 'colorrdata' } = useSelector(state => state.commonReducer) || {};
     // const { doctoreDetaile } = useSelector(state => state.doctorDataReducer) || { doctoreDetaile };
     const { navigation } = props;
     const [checked, setChecked] = React.useState('first');
+
+
     return (
 
         <View style={[PaymentHistoryStyle.setcontainer, { backgroundColor: ProductitemList.bgcolorset }]}>
