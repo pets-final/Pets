@@ -230,7 +230,7 @@ const SignUpScreen = () => {
         <View style={Login.centeredView}>
           {error && <SweetaelertModal message={error} />}
           {DisplayAlert !== 0 ? 
-           <SweetaelertModal message='SignUp Successful' link={"tab"}   />           
+           <SweetaelertModal message='SignUp Successful' link={"WelcomeSumnya"}   />           
             :
             null
           }

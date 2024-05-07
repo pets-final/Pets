@@ -77,7 +77,11 @@ const Nav = () => {
 
   return (
    
-   <Tab.Navigator>
+    <Tab.Navigator
+    tabBarOptions={{
+      activeTintColor: '#861088', // Set your desired color code here
+    }}
+  >
      
    <Tab.Screen name="Home"  options={{
           headerShown: false,
@@ -136,6 +140,7 @@ const Nav = () => {
               focused={focused}
               tintColor={color}
               name="product-hunt"
+
             />
           ),
         }} component={ProductTab} />

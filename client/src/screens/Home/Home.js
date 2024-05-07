@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, ScrollView, Text, KeyboardAvoidingView, TouchableOpacity, Image, FlatList, StatusBar } from "react-native";
 import Styles from '../../styles/Tab/HometabStyle';
-// import { RouteName } from '../../../routes';
+// import { '' from '../../../routes';
 import { MedicineCategoryHomeTab, MegaMedicine, MedicineFalteList, DoctorListData } from '../../utils/Sliderimagedata';
 // import { useDispatch } from "react-redux";
 import  Button  from '../../components/Button';
@@ -176,10 +176,7 @@ const HomeTabset = (props) => {
       "offdecount": 'Up to 60% Off',
     },
   ]
-  const doctordata = (docterdata) => {
-    dispatch(get_doctore_detailes_action(docterdata))
-    navigation.navigate(RouteName.PRODUCT_DETAILS_SCREEN)
-  }
+
   const MedicineDeals = (item, index) => {
     return (
       <View style={[Styles.setbgcolorviewtimewrap, Styles.bgcolorset]}>
@@ -205,7 +202,7 @@ const HomeTabset = (props) => {
               </View>
               <View style={Styles.flexrocenterjusty}>
                 <View style={Styles.addbutttonwidth}>
-                  <Button onPress={() => navigation.navigate(RouteName.CART_SCREEN)} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={item.buttonaadtext} />
+                  <Button onPress={() => navigation.navigate('')} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={item.buttonaadtext} />
                 </View>
               </View>
               <View style={[Styles.settextinbgcolor, { opacity: 0.6 }, { backgroundColor: "#861088" }]}>
@@ -232,7 +229,7 @@ const HomeTabset = (props) => {
               </View>
               <View style={Styles.flexrocenterjusty}>
                 <View style={Styles.addbutttonwidth}>
-                  <Button onPress={() => navigation.navigate(RouteName.CART_SCREEN)} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={item.buttonaadtext} />
+                  <Button onPress={() => navigation.navigate('')} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={item.buttonaadtext} />
                 </View>
               </View>
               <View style={[Styles.settextinbgcolor, { backgroundColor: "#861088" }]}>
@@ -246,7 +243,7 @@ const HomeTabset = (props) => {
   }
   const doctordatatendingmenu = (docterdata) => {
     dispatch(get_doctore_detailes_action(docterdata))
-    navigation.navigate(RouteName.CART_SCREEN)
+    navigation.navigate('')
   }
   const MegaMedicineStore = (item, index) => {
     return (
@@ -256,7 +253,7 @@ const HomeTabset = (props) => {
             <Image style={[Styles.whiteboximagetwoset, Styles.whiteboximagetwosettwo]} resizeMode='contain' source={item.image} />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate((RouteName.PRODUCT_DETAILS_SCREEN), { title: item.text, img: item.image, hname: item.hospitalname })}>
+            onPress={() => navigation.navigate((''), { title: item.text, img: item.image, hname: item.hospitalname })}>
             <Text style={[Styles.settextcolorcenter, { color: "#861088" }]}>{item.text}</Text>
           </TouchableOpacity>
           <Text style={Styles.settextcolorcentertwo}>{item.hospitalname}</Text>
@@ -299,7 +296,7 @@ const HomeTabset = (props) => {
   }
   const doctordataset = (docterdata) => {
     dispatch(get_doctore_detailes_action(docterdata))
-    navigation.navigate(RouteName.PRODUCT_DETAILS_SCREEN)
+    navigation.navigate('')
   }
   const MedicineBox = (item) => {
     return (
@@ -332,7 +329,7 @@ const HomeTabset = (props) => {
   }
   const doctordatacategoryes = (doctordatacategoryes) => {
     dispatch(get_doctore_category_action(doctordatacategoryes))
-    navigation.navigate(RouteName.PRODUCT_TAB)
+    navigation.navigate('')
   }
   const CategoryListBox = (item) => {
     return (
@@ -357,7 +354,7 @@ const HomeTabset = (props) => {
     return (
       <View style={Styles.Doctorbox}>       
           <View style={Styles.doctorimagbox}>
-            <TouchableOpacity onPress={() => navigation.navigate(RouteName.CHAT_WITH_DOCTOR_SCREEN)}>
+            <TouchableOpacity onPress={() => navigation.navigate('')}>
               <Image style={Styles.Doctorimage} resizeMode="contain" source={item.doctorImg} />
             </TouchableOpacity>
             <Text style={[Styles.Doctornametext, { color: "#861088" }]} >{item.doctorname}</Text>
