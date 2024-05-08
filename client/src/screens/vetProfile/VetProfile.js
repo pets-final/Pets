@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
 // import { colors } from '../../utils';
 // import { useSelector } from "react-redux";
-import AppointmentView from './MyVet';
+import AppointmentView from './Myvet';
 const VetProfileTab = () => {
   const  colorrdata = "#feb344"
   const navigation = useNavigation();

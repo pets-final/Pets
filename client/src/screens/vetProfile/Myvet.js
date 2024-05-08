@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from "react-native";
 import {styles} from '../../styles/VetStyle/Appointement'
+import { useNavigation } from '@react-navigation/native'
 const AppointmentView = ({ appointment }) => {
   const [approved, setApproved] = useState(false);
   const [declined, setDeclined] = useState(false);
-
+  const navigation = useNavigation(); 
   const handleApprove = () => {
     setApproved(true);
     setDeclined(false);
@@ -16,6 +17,7 @@ const AppointmentView = ({ appointment }) => {
   };
   const handleContact = () => {
     console.log('contact to chat');
+    navigation.navigate('ChatScreen');
   };
 
   return (

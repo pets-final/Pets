@@ -9,7 +9,7 @@ import IconM from 'react-native-vector-icons/Foundation';
 import firestore from '@react-native-firebase/firestore';
 import 'firebase/database';
 
-const ChartScreenset = () => {
+const ChatScreenset = () => {
   const [colorrdata] = useState('');
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
@@ -81,4 +81,4 @@ const ChartScreenset = () => {
   );
 };
 
-export default ChartScreenset;
+export default ChatScreenset;

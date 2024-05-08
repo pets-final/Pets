@@ -15,7 +15,7 @@ import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 import VetProfileTab from './src/screens/VetProfile/VetProfile'
 import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
-import MyVet from './src/screens/VetProfile/MyVet'
+import MyVet from './src/screens/VetProfile/Myvet'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
@@ -37,7 +37,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      
+{/*       
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -180,7 +180,7 @@ function App() {
           }}
           name="EditProfile"
           component={EditProfileScreen}
-        />
+        /> */}
              {/* <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
