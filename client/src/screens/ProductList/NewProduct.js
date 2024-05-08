@@ -1,5 +1,5 @@
 import React, { useState,useEffect} from "react";
-import { View, TextInput,Text  } from "react-native";
+import { View, TextInput, Text, Platform, KeyboardAvoidingView } from "react-native";
 import Styles from '../../styles/LoginRegisterStyle/LoginScreenStyle';
 import Style from '../../styles/CommonStyle/Style';
 import  Button  from '../../components/Button';
@@ -7,6 +7,8 @@ import  Button  from '../../components/Button';
 // import RNPickerSelect from 'react-native-picker-select';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
+import { ScrollView } from "react-native-gesture-handler";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 
@@ -20,7 +22,6 @@ const NewProduct = () => {
     // Get the current user when the component mounts
     const subscriber = auth().onAuthStateChanged((user) => {
       setUser(user);
-      console.log('subscriber',user.uid);
     });
     // Cleanup subscription on unmount
     return subscriber;
@@ -54,27 +55,55 @@ const addProduct=()=>{
       Description:Description,
       ImgUrl:imageUrl,
       Name:Productname,
-
       Price:Price,
       Promos:10,
       ShopName:ShopName,
       Size:Quantity,
-      IdShoper:user.uid,
+      UserId:user.uid,
     }).then((res)=>{
-      Alert.alert("Product posted")
+      console.log(user.uid);
+      setPrice('')
+      setproductname('')
+      setimageUrl('')
+      setDescription('')
+      setQuantity('')
+      setSelectedValue(null)
+      setAdresseShop('')
+      setShopName('')
+      
+      // firestore()
+      // .collection('Product')
+      // .where('UserId', '==', user.uid)
+      // .get()
+      // .then(querySnapshot => {
+      //   const products = querySnapshot.docs.map(doc => doc.data());
+      //   console.log('User products: ', products);
+      // })
+      // .catch(error => {
+      //   console.log('Error getting user products: ', error);
+      // });
 
     }).catch((err)=>{
       console.log(err);
 
     })
   }
-
+  useEffect(() => {
+ 
+  }, []);
   return (
+<GestureHandlerRootView style={{flex: 1}}>
+<KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{flex: 1}}
+      >
     <View style={Styles.mincolorwhite}>
+      
       <View style={Styles.tabminview}>
       <View>
         <Text style={{ color: "#861088", fontWeight: "bold" }}>ADD NEW PRODUCT</Text>
       </View>
+      <ScrollView>
 
       <View style={Style.inputUnderLine}>
           <TextInput
@@ -165,13 +194,15 @@ const addProduct=()=>{
           />
         </View>
 
-    
+        </ScrollView>
 
 
         
-
       </View>
     </View>
+    </KeyboardAvoidingView>
+
+    </GestureHandlerRootView>
   );
 };
 

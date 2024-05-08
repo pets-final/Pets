@@ -32,6 +32,8 @@ import ChatScreen from './src/screens/ChatScreenFolder/ChatScreen'
 import WelcomeSumnya from './src/screens/Map/ConfirmAdress'
 import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
+
+
 import NewProduct from './src/screens/ProductList/NewProduct'
 const Stack = createNativeStackNavigator();
 
@@ -46,11 +48,6 @@ function App() {
         />
 
 
-         <Stack.Screen
-          name="NewProduct"
-          component={NewProduct}
-          options={{headerShown: false}}
-        />
 
 
         <Stack.Screen
@@ -66,7 +63,11 @@ function App() {
           options={{headerShown: false}}
         />
        
-
+       <Stack.Screen
+          name="LoginandRegistrationScreen"
+          options={{headerShown: false}}
+          component={LoginandRegistrationScreen}
+        />
          <Stack.Screen
           name="WelcomeSumnya"
           component={WelcomeSumnya}
@@ -79,10 +80,21 @@ function App() {
           options={{headerShown: false}}
           component={Nav}
         />
+        
         <Stack.Screen
-          options={{headerShown: false}}
-          name="Home"
-          component={Home}
+          name="NewProduct"
+          component={NewProduct}
+          options={{
+            headerShadowVisible: true,
+            title: 'New Product',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            },
+          }}
         />
         <Stack.Screen
           options={{headerShown: false}}
@@ -235,8 +247,8 @@ function App() {
             fontSize: 20,
             marginLeft: 17,
           },
-        }}  name="VetProfileTab" component={VetProfileTab} />
-                   <Stack.Screen options={{
+        }}  name="VetProfileTab" component={VetProfile} />
+                   {/* <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
           title: 'MyVet',
@@ -247,9 +259,9 @@ function App() {
             fontSize: 20,
             marginLeft: 17,
           },
-        }}  name="Myvet" component={MyVet} />
+        }}  name="Myvet" component={MyVet} /> */}
          
-           <Stack.Screen options={{
+           {/* <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
           title: 'ChatScreen',
@@ -260,7 +272,7 @@ function App() {
             fontSize: 20,
             marginLeft: 17,
           },
-        }}  name="ChatScreen" component={ChatScreen} />
+        }}  name="ChatScreen" component={ChatScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

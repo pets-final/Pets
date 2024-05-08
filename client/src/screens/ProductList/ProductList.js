@@ -65,12 +65,7 @@ const ProductTab = () => {
 
   return (
     <SafeAreaView >
-      <Button title="Add New Product"
-        onPress={()=> (navigation.navigate('NewProduct'))}
-        buttonStyle={Styles.setbuttonborderradius}
-        buttonTextStyle={Styles.textcolorsetwhite}
-      
-      />
+  
     <View style={[ProductitemList.minstyleviewphotograpgy, ProductitemList.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
       <View style={Styles.flexrowbutton}>
