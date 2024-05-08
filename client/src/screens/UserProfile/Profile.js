@@ -8,12 +8,9 @@ import IconR from 'react-native-vector-icons/Entypo';
 import IconI from 'react-native-vector-icons/Ionicons';
 import { Button, SweetaelertModal } from '../../components';
 import { useNavigation } from '@react-navigation/native';
-// import { RouteName } from '../../../routes';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
-import { colors } from '../../utils';
-// import { useSelector } from "react-redux";
 import auth from '@react-native-firebase/auth';
-
+import { CommonActions } from '@react-navigation/native';
 const ProfileTab = ({route}) => {
   console.log('route.params.key',route.params?.key);
 
@@ -44,22 +41,21 @@ const ProfileTab = ({route}) => {
     if(route.params?.key){
       setIsFilled(route.params.key)
     }
-    // Cleanup subscription on unmount
     return subscriber;
   }, []);
 
 
   const paymentscreen = () => {
-    navigation.navigate(RouteName.PAYMENTSCREEN);
+    navigation.navigate('');
   }
   const bookmarkscreen = () => {
-    navigation.navigate(RouteName.ALL_BOOK_MARK_SCREEN);
+    navigation.navigate('');
   }
   const settingscreen = () => {
-    navigation.navigate(RouteName.SETTTING_SCREEN);
+    navigation.navigate('');
   }
   const notificationscreen = () => {
-    navigation.navigate(RouteName.NOTIFICATION_SCREEN);
+    navigation.navigate('');
   }
   const [setuserdata] = useState([
     {
@@ -90,7 +86,7 @@ const ProfileTab = ({route}) => {
           <Text style={{ color: colorrdata }}>{item.seticonview}</Text>
         </View>
       </TouchableOpacity>
-    );
+    )
   }
   return (
     <View style={[AccountTabStyle.minstyleviewphotograpgy, AccountTabStyle.bgcolorset]}>
@@ -111,15 +107,15 @@ const ProfileTab = ({route}) => {
                 </TouchableOpacity>
               </View>
               <View style={AccountTabStyle.useraccountwhitebox}>
+               { true && <Icon name="checkcircleo" size={30} color="#4F8EF7" style={{ position: 'absolute', top: 10, left: 309 }} />}
                 <View style={AccountTabStyle.fleximageandtext}>
-                <Icon name="bookmark" size={30} color="#4F8EF7" style={{ position: 'absolute', top: 0, left: 0 }} />
 
                   <TouchableOpacity>
                     <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={images.Ningthty_img} />
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
-                    <Text style={AccountTabStyle.sumanyatextset}>{ User.displayName}</Text>
-                    <Text style={AccountTabStyle.setgimailtext}>{ User.email}</Text>
+                    <Text style={AccountTabStyle.sumanyatextset}>{ User?.displayName}</Text>
+                    <Text style={AccountTabStyle.setgimailtext}>{ User?.email}</Text>
                     <Text style={AccountTabStyle.setgimailtext}>Verified : {isFilled ? 'Yes' : 'No'}</Text>
                     <Text style={AccountTabStyle.setgimailtextwo}>+91 xxxxxxxxxxx</Text>
                     <Text style={AccountTabStyle.addreshtext}>1417 Timberbrook Lane, Denver, CO 80204, United States</Text>
@@ -168,13 +164,13 @@ const ProfileTab = ({route}) => {
                 style={AccountTabStyle.flatelistGrid}
               />
               <View style={AccountTabStyle.fourtextminview}>
-                <TouchableOpacity onPress={() => navigation.navigate(RouteName.RATING_SCREEN_SET)}>
+                <TouchableOpacity onPress={() => navigation.navigate('')}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Send Feedback</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate(RouteName.HOME_SCREEN)}>
+                <TouchableOpacity onPress={() => navigation.navigate('')}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Report an Emergency</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate(RouteName.HOME_SCREEN)}>
+                <TouchableOpacity onPress={() => navigation.navigate('')}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Rate us on the Play Store</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Slider')}>
@@ -190,7 +186,7 @@ const ProfileTab = ({route}) => {
               </TouchableOpacity>
               <View style={AccountTabStyle.centeredView}>
                 {DisplayAlert !== 0 ?
-                  <SweetaelertModal message='Update Successful' link={RouteName.OFFERS_TAB} />
+                  <SweetaelertModal message='Update Successful' link={''} />
                   :
                   null
                 }

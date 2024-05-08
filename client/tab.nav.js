@@ -97,7 +97,7 @@ const Nav = () => {
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
             <TabBarIcon
-              focused={focused}
+              focused={focused}     
               tintColor={color}
               name="user"
             />

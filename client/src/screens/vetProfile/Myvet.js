@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from "react-native";
-import {styles} from '../../styles/VetStyle/Appointement'
+import styles from '../../styles/VetStyle/Appointement'
 const AppointmentView = ({ appointment }) => {
   const [approved, setApproved] = useState(false);
   const [declined, setDeclined] = useState(false);

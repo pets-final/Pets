@@ -23,13 +23,20 @@ import {ProductDetailesScreen} from './src/screens/ProductList/Productdetails';
 import WelcomeSumnya from './src/screens/Map/ConfirmAdress'
 import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
+
+
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      
+{/*       
+        <Stack.Screen
+          name="ProfileTab"
+          component={ProfileTab}
+          options={{headerShown: false}}
+        /> */}
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -55,11 +62,7 @@ function App() {
           options={{headerShown: false}}
           component={Nav}
         />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Home"
-          component={Home}
-        />
+        
         <Stack.Screen
           options={{headerShown: false}}
           name="cart"
