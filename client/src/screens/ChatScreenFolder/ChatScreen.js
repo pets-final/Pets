@@ -1,66 +1,102 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, Image, ScrollView, KeyboardAvoidingView, TextInput, TouchableOpacity } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { Text, View, Image, ScrollView, KeyboardAvoidingView, TextInput, TouchableOpacity, Keyboard } from "react-native";
 import { ChatScreenStyle } from '../../styles/ChatDoctorStylemain/ChatScreenStyle';
 import images from '../../index';
 import IconP from 'react-native-vector-icons/FontAwesome5';
 import IconL from 'react-native-vector-icons/AntDesign';
 import IconO from 'react-native-vector-icons/Ionicons';
 import IconM from 'react-native-vector-icons/Foundation';
-import firestore from '@react-native-firebase/firestore';
 import 'firebase/database';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import { set } from "firebase/database";
+
+const doctor = {
+  name: 'Dr. John Doe',
+  specialty: 'Cardiologist',
+  location: 'New York',
+  image: 'https://placeimg.com/100/100/people',
+  id: 1,
+};
+const db = firestore();
 
 const ChatScreen = () => {
   const [colorrdata] = useState('');
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
+  const [user, setuser] = useState([]);
+  const [refetch, setrefetch] = useState(true);
+  
+  const scrollViewRef = useRef();
 
   useEffect(() => {
-    const messagesRef = firestore().collection('Chats');
-    const unsubscribe = messagesRef.onSnapshot(querySnapshot => {
-      const messagesData = [];
-      querySnapshot.forEach(doc => {
-        messagesData.push({ id: doc.id, ...doc.data() });
-      });
-      setMessages(messagesData);
+    const subscriber = auth().onAuthStateChanged((user) => {
+      setuser(user);
+      console.log('subscriber',user);
+  
+      if (user) {
+        const unsubscribe = db.collection(`chats/${user.uid}_${doctor.id}/messages`)
+          .orderBy('timestamp')
+          .onSnapshot(snapshot => {
+            const data = snapshot.docs.map(doc => ({
+              id: doc.id,
+              ...doc.data()
+            }));
+            setMessages(data);
+          });
+  
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+      }
     });
-    return () => unsubscribe();
-  }, []);
+  }, [refetch]);
+  
+  const sendMessage = async () => {
+    if (message.trim() !== '') {
+      const localTimestamp = Date.now();
+      const newMessage = {
+        senderId: user.uid,
+        text: message,
+        timestamp: localTimestamp
+      };
 
-  const sendMessage = () => {
-    if (!message.trim()) return; // Prevent sending empty messages
-    const newMessage = {
-      senderId: "3",
-      receiverId: "1",
-      senderName: "Johndd Doe",
-      receiverName: "Jane Doe",
-      message: message,
-      timestamp: firestore.FieldValue.serverTimestamp() // Auto-generated timestamp
-    };
-    firestore().collection('Chats').add(newMessage);
-    setMessage('');
+      await db.collection(`chats/${user.uid}_${doctor.id}/messages`).add({
+        ...newMessage,
+        timestamp: firestore.FieldValue.serverTimestamp()
+      });
+
+      setMessage('');
+      Keyboard.dismiss();
+      setrefetch(true);
+    }
   };
 
-    
+  useEffect(() => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({ animated: false });
+    }
+  }, [messages]);
+
   return (
     <View style={ChatScreenStyle.minstyleviewphotograpgy}>
       <ScrollView
-        style={{ flex: 1 }}
+        ref={scrollViewRef}
+        style={{ flex: 0.9 }}
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={ChatScreenStyle.scrollViewContent}
       >
         {messages.map((msg, index) => (
-          <View key={msg.id} style={[ChatScreenStyle.messageContainer, { alignSelf: msg.senderId === "1" ? 'flex-end' : 'flex-start' }]}>
-            <View style={[ChatScreenStyle.chartviewsetbgcolor, { backgroundColor: msg.senderId === "1" ? '#DCF8C6' : '#E5E5EA' }]}>
+          <View key={msg.id} style={[ChatScreenStyle.messageContainer, { alignSelf: msg.senderId === user.uid ? 'flex-end' : 'flex-start' }]}>
+            <View style={[ChatScreenStyle.chartviewsetbgcolor, { backgroundColor: msg.senderId === user.uid ? '#DCF8C6' : '#E5E5EA' }]}>
               <Text style={ChatScreenStyle.textcolormessage}>
-                {msg.message}
+                {msg.text}
               </Text>
               <Text style={ChatScreenStyle.textcolormessagetwoset}>
-                {msg.timestamp ? msg.timestamp.toDate().toLocaleString() : ''}
+                {msg.timestamp ? new Date(msg.timestamp._seconds * 1000).toLocaleString() : ''}
               </Text>
             </View>
           </View>
         ))}
-      </ScrollView>
       <View style={ChatScreenStyle.postionabsoluteview}>
         <View style={ChatScreenStyle.textmessageview}>
           <View style={ChatScreenStyle.flexrowsetsendmesasagew}>
@@ -77,6 +113,7 @@ const ChatScreen = () => {
           </View>
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };

@@ -8,11 +8,9 @@ import IconR from 'react-native-vector-icons/Entypo';
 import IconI from 'react-native-vector-icons/Ionicons';
 import { Button, SweetaelertModal } from '../../components';
 import { useNavigation } from '@react-navigation/native';
-// import { RouteName } from '../../../routes';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
 // import { colors } from '../../utils';
 // import { useSelector } from "react-redux";
-import AppointmentView from './MyVet';
 const VetProfileTab = () => {
   const  colorrdata = "#feb344"
   const navigation = useNavigation();
@@ -25,16 +23,16 @@ const VetProfileTab = () => {
     });
   }, [navigation]);
   const paymentscreen = () => {
-    navigation.navigate(RouteName.PAYMENTSCREEN);
+    navigation.navigate('');
   }
   const bookmarkscreen = () => {
-    navigation.navigate(RouteName.ALL_BOOK_MARK_SCREEN);
+    navigation.navigate('');
   }
   const settingscreen = () => {
-    navigation.navigate(RouteName.SETTTING_SCREEN);
+    navigation.navigate('');
   }
   const notificationscreen = () => {
-    navigation.navigate(RouteName.NOTIFICATION_SCREEN);
+    navigation.navigate('');
   }
   const [setuserdata] = useState([
     {

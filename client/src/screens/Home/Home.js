@@ -1,11 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, ScrollView, Text, KeyboardAvoidingView, TouchableOpacity, Image, FlatList, StatusBar } from "react-native";
 import Styles from '../../styles/Tab/HometabStyle';
-// import { '' from '../../../routes';
 import { MedicineCategoryHomeTab, MegaMedicine, MedicineFalteList, DoctorListData } from '../../utils/Sliderimagedata';
-// import { useDispatch } from "react-redux";
 import  Button  from '../../components/Button';
-// import { get_doctore_category_action } from '../../../redux/action/DoctoreCategoryAction';
 import { useSelector } from "react-redux";
 import images from '../../../index';
 import { Rating } from 'react-native-ratings';
