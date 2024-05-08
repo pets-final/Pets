@@ -13,6 +13,10 @@ import ProductList from './src/screens/ProductList/ProductList';
 import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
+import VetProfileTab from './src/screens/VetProfile/VetProfile'
+import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
+import MyVet from './src/screens/VetProfile/MyVet'
+import AppointContact from './src/screens/AppointContact/Appoint';
 // import VetoProfile from './src/screens/VetoProfile/VetoProfile'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
@@ -21,6 +25,11 @@ import Cart from './src/screens/cart/cart';
 import CheckOutScreen from './src/screens/cart/checkout';
 import PaytmSuccessFully from './src/screens/cart/paymentSucces';
 import {ProductDetailesScreen} from './src/screens/ProductList/Productdetails';
+import ChatDoctorScreen from './src/screens/ChatScreen/ChatDoctorScreen';
+import ChatScreen from './src/screens/ChatScreenFolder/ChatScreen'
+// import DrawerChatScreen from './src/screens/ChatScreenFolder/DrawerChatScreen'
+
+
 import WelcomeSumnya from './src/screens/Map/ConfirmAdress'
 import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
@@ -189,6 +198,70 @@ function App() {
           name="EditProfile"
           component={EditProfileScreen}
         />
+         <Stack.Screen
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+            title: 'Doctor Page',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontSize: 17,
+              fontSize: 20,
+              marginLeft: 17,
+            },
+          }}
+          name="AppointContact"
+          component={AppointContact}
+        />
+             {/* <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'Edit Vet Profile',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="EditVetProfile" component={EditVetProfileScreen} /> */}
+   <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'VetProfileTab',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="VetProfileTab" component={VetProfileTab} />
+                   <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'MyVet',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="Myvet" component={MyVet} />
+         
+           <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'ChatScreen',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="ChatScreen" component={ChatScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
