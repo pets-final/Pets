@@ -16,6 +16,7 @@ import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 import VetProfileTab from './src/screens/VetProfile/VetProfile'
 import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
 import MyVet from './src/screens/VetProfile/Myvet'
+import AppointContact from './src/screens/AppointContact/Appoint';
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
@@ -37,7 +38,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-{/*       
+      
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -180,7 +181,23 @@ function App() {
           }}
           name="EditProfile"
           component={EditProfileScreen}
-        /> */}
+        />
+         <Stack.Screen
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+            title: 'Doctor Page',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontSize: 17,
+              fontSize: 20,
+              marginLeft: 17,
+            },
+          }}
+          name="AppointContact"
+          component={AppointContact}
+        />
              {/* <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
