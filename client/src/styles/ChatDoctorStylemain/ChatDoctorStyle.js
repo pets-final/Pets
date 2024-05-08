@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { SF, SH, SW, Fonts, colors, ColorTheme, heightPercent } from '../../utils';
 
-export default StyleSheet.create({
+export const ChatDoctorStyle=StyleSheet.create({
 
     bgtopBox: {
         position: 'relative',

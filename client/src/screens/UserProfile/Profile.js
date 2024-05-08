@@ -139,12 +139,12 @@ const ProfileTab = ({route}) => {
                     <Text style={AccountTabStyle.bookmarktextstyle}>Notifications</Text>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => settingscreen()} style={AccountTabStyle.setbgcolorwhite}>
+                <TouchableOpacity onPress={() => navigation.navigate('NewProduct')} style={AccountTabStyle.setbgcolorwhite}>
                   <View>
                     <View style={AccountTabStyle.flexrowsettile}>
                       <Icon name="setting" size={20} color={colorrdata} />
                     </View>
-                    <Text style={AccountTabStyle.bookmarktextstyle}>Settings</Text>
+                    <Text style={AccountTabStyle.bookmarktextstyle}>Add Product</Text>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => paymentscreen()} style={AccountTabStyle.setbgcolorwhite}>
