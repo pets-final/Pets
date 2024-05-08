@@ -13,11 +13,10 @@ import ProductList from './src/screens/ProductList/ProductList';
 import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
-import VetProfileTab from './src/screens/VetProfile/VetProfile'
 import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
 import MyVet from './src/screens/VetProfile/MyVet'
 import AppointContact from './src/screens/AppointContact/Appoint';
-// import VetoProfile from './src/screens/VetoProfile/VetoProfile'
+import VetProfileTab from './src/screens/VetProfile/VetProfile'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
@@ -40,7 +39,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
           name="LoginandRegistrationScreen"
           options={{headerShown: false}}
           component={LoginandRegistrationScreen}
@@ -213,7 +212,7 @@ function App() {
           }}
           name="AppointContact"
           component={AppointContact}
-        />
+        /> */}
              {/* <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,

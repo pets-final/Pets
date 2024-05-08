@@ -4,7 +4,7 @@ import Styles from '../../styles/LoginRegisterStyle/LoginScreenStyle';
 import Style from '../../styles/CommonStyle/Style';
 import  Button  from '../../components/Button';
 // import { RouteName } from '../../routes';
-import RNPickerSelect from 'react-native-picker-select';
+// import RNPickerSelect from 'react-native-picker-select';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
 
