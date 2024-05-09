@@ -37,6 +37,8 @@ const AddPetsScreen = () => {
   const [ImgUrlererror, setUrlImgererror] = useState(0);
   const [Sex, setSex] = useState('');
   const [Sexererror, setSexerror] = useState(0);
+  const [image, setImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   const [imageSource, setImageSource] = useState(null);
 
@@ -85,16 +87,18 @@ const AddPetsScreen = () => {
   const uploadImage = async () => {
  const uploadUri=imageUrl;
  let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
- console.log("eeeeeeee",filename);
+ 
   
       try {
         await storage().ref(filename).putFile(uploadUri);
+        setUploading(false);
        
  
   
        
       } catch (error) {
         console.error('Error uploading image:', error);
+        setImage(null)
       }
 
   };
@@ -138,52 +142,11 @@ const AddPetsScreen = () => {
 
 
 
-  renderInner = () => (
-    <View style={styles.panel}>
-      <View style={{alignItems: 'center'}}>
-        <Text style={styles.panelTitle}>Upload Photo</Text>
-        <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
-      </View>
-      <TouchableOpacity style={styles.panelButton} onPress={takePhotoFromCamera}>
-        <Text style={styles.panelButtonTitle}>Take Photo</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.panelButton} onPress={choosePhotoFromLibrary}>
-        <Text style={styles.panelButtonTitle}>Choose From Library</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.panelButton}
-        onPress={() => this.bs.current.snapTo(1)}>
-        <Text style={styles.panelButtonTitle}>Cancel</Text>
-      </TouchableOpacity>
-    </View>
-  );
+
 
   return (
     <View style={Styles.mincolorwhite}>
       <View style={Styles.tabminview}>
-
-        
-        <View style={Style.inputUnderLine}>
-          <TextInput
-            placeholder="ImgeUrl"
-            style={Style.inputtextstyle}
-            placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
-            onChangeText={(value) => { setUrlImgererror(0); setImg(value); }}
-          />
-        </View>
-        {ImgUrlererror === 1 ?
-          <Text style={Styles.pleseentername}>* Please Enter the Location </Text>
-          : null
-        }
-
-
-
-
-
-
-
-
-
         <View style={Style.inputUnderLine}>
           <TextInput
             placeholder="Name"
