@@ -39,8 +39,10 @@ const AddPetsScreen = () => {
   const [Sexererror, setSexerror] = useState(0);
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
-
   const [imageSource, setImageSource] = useState(null);
+  const [value, setValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
+  const [imageUrl, setimageUrl] = useState('https://api.adorable.io/avatars/80/abott@adorable.png');
 
 
 
@@ -54,13 +56,9 @@ const AddPetsScreen = () => {
   ];
   const dataSex = [
     { label: 'Male', value: 'MAle' },
-    { label: 'Female', value: 'Female' },
-    
+    { label: 'Female', value: 'Female' },   
    
   ];
-  const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState(false);
-  const [imageUrl, setimageUrl] = useState('https://api.adorable.io/avatars/80/abott@adorable.png');
 
   const validateIsEmail = (item) => {
     SetEmail(item);
@@ -86,22 +84,37 @@ const AddPetsScreen = () => {
 
   const uploadImage = async () => {
  const uploadUri=imageUrl;
- let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
- 
-  
+ let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1); 
       try {
         await storage().ref(filename).putFile(uploadUri);
-        setUploading(false);
-       
- 
-  
-       
+        const url = await storage().ref(filename).getDownloadURL();
+        console.log(url)
+        setImg(url)
+        setUploading(false);       
       } catch (error) {
         console.error('Error uploading image:', error);
         setImage(null)
       }
 
   };
+
+  const addPetsToAdopt=()=>{
+    firestore().collection('Animal').add({
+      Adresse:Location,
+      Age:age,
+      Breed:Breed,
+      Description:Description,
+      ImgUrl:ImgUrl,
+      Name:fullname,
+      Sex:Sex,      
+    }).then((res)=>{
+      Alert.alert("pets added")
+
+    }).catch((err)=>{
+      console.log(err);
+
+    })
+  }
 
 
 
@@ -274,7 +287,7 @@ const AddPetsScreen = () => {
       <View style={[Styles.flexrowbutton,{paddingTop:"auto"}]}>
           <Button title="Update"
             onPress={()=> 
-              ImagePicker()
+              addPetsToAdopt()
 
               }
             buttonStyle={Styles.setbuttonborderradius}
