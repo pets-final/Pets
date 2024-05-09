@@ -27,7 +27,7 @@ import {ProductDetailesScreen} from './src/screens/ProductList/Productdetails';
 import ChatDoctorScreen from './src/screens/ChatScreen/ChatDoctorScreen';
 import ChatScreen from './src/screens/ChatScreenFolder/ChatScreen'
 // import DrawerChatScreen from './src/screens/ChatScreenFolder/DrawerChatScreen'
-
+import DoctorList from './src/screens/doctorList/DoctoList';
 
 import WelcomeSumnya from './src/screens/Map/ConfirmAdress'
 import Slider from './src/screens/vetSliderScreen/Slider';
@@ -41,19 +41,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen options={{
-          headerShown: true,
-          headerShadowVisible: false,
-          title: 'ChatScreen',
-          headerTintColor: "#feb344",
-          headerTitleStyle: {
-            color: "#feb344",
-            fontSize: 17,
-            fontSize: 20,
-            marginLeft: 17,
-          },
-        }}  name="ChatScreen" component={ChatScreen} />
-
+    
 
 
 
@@ -113,7 +101,31 @@ function App() {
           name="checkout"
           component={CheckOutScreen}
         />
-       
+         <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'ChatScreen',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="ChatScreen" component={ChatScreen} />
+         <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'DoctorList',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="DoctorList" component={DoctorList} />
+
         <Stack.Screen
           options={{headerShown: false}}
           name="Slider"
