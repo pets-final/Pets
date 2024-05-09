@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bacc645d-e961-40dd-9aab-0439fbf1dad3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/client/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/android/app/src/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/android/app/src/main/java/com/myproject/MainApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/client/android/app/src/main/java/com/myproject/MainApplication.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/client/android/settings.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/screens/ProductList/NewProduct.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/ProductList/NewProduct.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/VetProfile/EditVetProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/VetProfile/EditVetProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/VetProfile/MyVet.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/VetProfile/MyVet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/VetProfile/VetProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/VetProfile/VetProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/blogs/addBlogs.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/blogs/addBlogs.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

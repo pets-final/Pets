@@ -1,5 +1,5 @@
 import React, { useState,useEffect} from "react";
-import { View, TextInput,Text  } from "react-native";
+import { View, TextInput,Text,TouchableOpacity  } from "react-native";
 import Styles from '../../styles/LoginRegisterStyle/LoginScreenStyle';
 import Style from '../../styles/CommonStyle/Style';
 import  Button  from '../../components/Button';
@@ -7,12 +7,58 @@ import  Button  from '../../components/Button';
 import RNPickerSelect from 'react-native-picker-select';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
+import ImagePicker from 'react-native-image-picker';
+import storage from '@react-native-firebase/storage';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 
 
 
 const NewProduct = () => {
+
+  const ImagePicker=()=>{
+    let option={
+      storageOptions: {
+        path: 'image',
+      },
+    }
+    launchImageLibrary(option,response=>{
+      setimageUrl(response.assets[0].uri)
+      console.log(response.assets[0].uri)
+      uploadImage(response.assets[0].uri)
+    })
+    
+
+  }
+
+
+  const uploadImage = async () => {
+    if (imageUrl) {
+      const storageRef = storage().ref(); // Get a reference to the root of storage
+      const filename = imageUrl.split('/').pop(); // Extract the filename from the URI
+      const imageRef = storageRef.child(`images/${filename}`); // Create a reference with a path inside 'images' folder
+  
+      try {
+        await imageRef.putFile(imageUrl); // Upload the image
+  
+        const imageUrl = await imageRef.getDownloadURL(); // Get the download URL after upload
+  
+        // Push the download URL to Firestore (or your chosen database)
+        console.log('Image uploaded successfully!', imageUrl);
+        return imageUrl; // You can return the imageUrl here
+  
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+    } else {
+      console.warn('Please select an image first.');
+    }
+  
+    return null; // Indicate no image uploaded in case of errors
+  };
+
 
   const [user, setUser] = useState(null); // State to 
   
@@ -26,6 +72,9 @@ const NewProduct = () => {
     return subscriber;
   }, []);
 
+
+
+
   console.log(user)
   const [Productname, setproductname] = useState('');
   const [imageUrl, setimageUrl] = useState('');
@@ -35,6 +84,7 @@ const NewProduct = () => {
   const [selectedValue, setSelectedValue] = useState(null);
   const [AdresseShop,setAdresseShop]=useState('')
   const [ShopName,setShopName]=useState('')
+
   const placeholder = {
     label: 'Select an option...',
     value: null,
@@ -47,6 +97,7 @@ const NewProduct = () => {
     { label: 'Hygiene', value: 'Hygiene' },
     { label: 'Supplies', value: 'Supplies' },
   ];
+
 const addProduct=()=>{
     firestore().collection('Product').add({
       AdresseShop:AdresseShop,
@@ -68,7 +119,11 @@ const addProduct=()=>{
 
     })
   }
+  
 
+ 
+
+  
   return (
     <View style={Styles.mincolorwhite}>
       <View style={Styles.tabminview}>
@@ -147,12 +202,24 @@ const addProduct=()=>{
 
 
     
-        <View style={Style.inputUnderLine}>
+        {/* <View style={Style.inputUnderLine}>
           <TextInput
             placeholder="Image Url"
             style={Style.inputtextstyle}
             placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
             onChangeText={(value) => {  setimageUrl(value) }}
+          />
+        </View> */}
+
+
+        {/* //test Image */}
+        <View>
+     
+
+          <Button title=" Add Product Image "
+         onPress={()=>ImagePicker()}
+            buttonStyle={Styles.setbuttonborderradius}
+            buttonTextStyle={Styles.textcolorsetwhite}
           />
         </View>
 
