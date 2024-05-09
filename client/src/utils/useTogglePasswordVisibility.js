@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 
 const useTogglePasswordVisibility = () => {
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const [passwordVisibilitytwo, setPasswordVisibilitytwo] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(true);
+  const [passwordVisibilitytwo, setPasswordVisibilitytwo] = useState(true);
   const [passwordVisibilitytwoth, setPasswordVisibilitytwoth] = useState(false);
   const [bookmarkiconvisibility, setbookmarkiconvisibility] = useState(false);
   const [rightIcon, setRightIcon] = useState('eye-off');

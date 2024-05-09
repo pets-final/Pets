@@ -1,6 +1,7 @@
 const image = {
   app_logo: require('./80by80.png'),
   testpets1: require('./testpets1.jpeg'),
+  app_logo: require('./logo.png'),
   Googleimg_set: require('./googleicon.png'),
   Search_image: require('./Searchimage.png'),
   Location_image: require('./Locationimg.png'),

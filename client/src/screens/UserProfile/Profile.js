@@ -10,15 +10,17 @@ import Button  from '../../components/Button';
 import SweetaelertModal  from '../../components/SweetAlertModal';
 import { useNavigation } from '@react-navigation/native';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
-import { colors } from '../../utils';
 import auth from '@react-native-firebase/auth';
+import { CommonActions } from '@react-navigation/native';
+const ProfileTab = ({route}) => {
+  console.log('route.params.key',route.params?.key);
 
-const ProfileTab = () => {
   const  colorrdata = "#861088"
   const navigation = useNavigation();
   const [DisplayAlert, setDisplayAlert] = useState(0)
   const [modalVisible, setModalVisible] = useState(false);
   const [User,setUser] = useState('')
+  const [isFilled,setIsFilled] = useState(false)
   const handleLogout = async () => {
     try {
       await auth().signOut();
@@ -37,22 +39,24 @@ const ProfileTab = () => {
       setUser(user);
       console.log('subscriber',user);
     });
-    // Cleanup subscription on unmount
+    if(route.params?.key){
+      setIsFilled(route.params.key)
+    }
     return subscriber;
   }, []);
 
 
   const paymentscreen = () => {
-    navigation.navigate(RouteName.PAYMENTSCREEN);
+    navigation.navigate('');
   }
   const bookmarkscreen = () => {
-    navigation.navigate(RouteName.ALL_BOOK_MARK_SCREEN);
+    navigation.navigate('');
   }
   const settingscreen = () => {
-    navigation.navigate(RouteName.SETTTING_SCREEN);
+    navigation.navigate('');
   }
   const notificationscreen = () => {
-    navigation.navigate(RouteName.NOTIFICATION_SCREEN);
+    navigation.navigate('');
   }
   const [setuserdata] = useState([
     {
@@ -83,7 +87,7 @@ const ProfileTab = () => {
           <Text style={{ color: colorrdata }}>{item.seticonview}</Text>
         </View>
       </TouchableOpacity>
-    );
+    )
   }
   return (
     <View style={[AccountTabStyle.minstyleviewphotograpgy, AccountTabStyle.bgcolorset]}>
@@ -104,13 +108,16 @@ const ProfileTab = () => {
                 </TouchableOpacity>
               </View>
               <View style={AccountTabStyle.useraccountwhitebox}>
+               { true && <Icon name="checkcircleo" size={30} color="#4F8EF7" style={{ position: 'absolute', top: 10, left: 309 }} />}
                 <View style={AccountTabStyle.fleximageandtext}>
+
                   <TouchableOpacity>
                     <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={images.Ningthty_img} />
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
-                    <Text style={AccountTabStyle.sumanyatextset}>{ User.displayName}</Text>
-                    <Text style={AccountTabStyle.setgimailtext}>{ User.email}</Text>
+                    <Text style={AccountTabStyle.sumanyatextset}>{ User?.displayName}</Text>
+                    <Text style={AccountTabStyle.setgimailtext}>{ User?.email}</Text>
+                    <Text style={AccountTabStyle.setgimailtext}>Verified : {isFilled ? 'Yes' : 'No'}</Text>
                     <Text style={AccountTabStyle.setgimailtextwo}>+91 xxxxxxxxxxx</Text>
                     <Text style={AccountTabStyle.addreshtext}>1417 Timberbrook Lane, Denver, CO 80204, United States</Text>
                   </View>
@@ -133,12 +140,12 @@ const ProfileTab = () => {
                     <Text style={AccountTabStyle.bookmarktextstyle}>Notifications</Text>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => settingscreen()} style={AccountTabStyle.setbgcolorwhite}>
+                <TouchableOpacity onPress={() => navigation.navigate('NewProduct')} style={AccountTabStyle.setbgcolorwhite}>
                   <View>
                     <View style={AccountTabStyle.flexrowsettile}>
                       <Icon name="setting" size={20} color={colorrdata} />
                     </View>
-                    <Text style={AccountTabStyle.bookmarktextstyle}>Settings</Text>
+                    <Text style={AccountTabStyle.bookmarktextstyle}>Add Product</Text>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => paymentscreen()} style={AccountTabStyle.setbgcolorwhite}>
@@ -158,14 +165,17 @@ const ProfileTab = () => {
                 style={AccountTabStyle.flatelistGrid}
               />
               <View style={AccountTabStyle.fourtextminview}>
-                <TouchableOpacity onPress={() => navigation.navigate(RouteName.RATING_SCREEN_SET)}>
+                <TouchableOpacity onPress={() => navigation.navigate('')}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Send Feedback</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate(RouteName.HOME_SCREEN)}>
+                <TouchableOpacity onPress={() => navigation.navigate('')}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Report an Emergency</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate(RouteName.HOME_SCREEN)}>
+                <TouchableOpacity onPress={() => navigation.navigate('')}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Rate us on the Play Store</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Slider')}>
+                  <Text style={AccountTabStyle.sendfeedbacktext}>Become A Vet</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setModalVisible(true)}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Log Out</Text>
@@ -177,7 +187,7 @@ const ProfileTab = () => {
               </TouchableOpacity>
               <View style={AccountTabStyle.centeredView}>
                 {DisplayAlert !== 0 ?
-                  <SweetaelertModal message='Update Successful' link={RouteName.OFFERS_TAB} />
+                  <SweetaelertModal message='Update Successful' link={''} />
                   :
                   null
                 }

@@ -9,16 +9,16 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import { useSelector } from "react-redux";
 import Geocoder from 'react-native-geocoding';
-import env from '../../../env'
-Geocoder.init(env.GOOGLE_MAPS_API_KEY);
+// import env from '../../../env'
+// Geocoder.init(env.GOOGLE_MAPS_API_KEY);
 const ConformLocation = () => {
   const colorrdata = "#861088";
   const navigation = useNavigation();
   const OnLoginPress = () => {
-    navigation.replace(RouteName.LOCATION_HOME_OFFICE_SCREEN);
+    navigation.replace('');
   }
   const Homescreenonpress = () => {
-    navigation.replace(RouteName.HOME_SCREEN);
+    navigation.replace('');
   }
 
   const [position, setPosition] = useState({
@@ -124,7 +124,7 @@ const ConformLocation = () => {
           <View>
             <Button title="Confirm Location "
               buttonStyle={{ backgroundColor: colorrdata }}
-              onPress={() => Homescreenonpress()}
+              onPress={() => navigation.navigate('WelcomeSumnya', { address })}
             />
           </View>
         </View>

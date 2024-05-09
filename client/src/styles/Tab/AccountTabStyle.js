@@ -210,6 +210,8 @@ export default StyleSheet.create({
   textstyleupdate: {
     color:'white'
   },
+  flatelistGrid:{}
+  ,
   setbuttonstyleview:{
     marginTop:20,
     marginBottom:40,
