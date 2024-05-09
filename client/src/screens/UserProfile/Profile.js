@@ -73,9 +73,9 @@ const ProfileTab = ({route}) => {
     },
     {
       "id": 3,
-      "title": "Help",
+      "title": "Cart",
       "seticonview": <IconR name="chevron-right" size={20} />,
-      "url": '',
+      "url": 'cart',
     }
   ])
 

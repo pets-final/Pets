@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, ScrollView, KeyboardAvoidingView, TextInput, StatusBar, TouchableOpacity, } from "react-native";
+import { Text, View, Image, ScrollView,FlatList, KeyboardAvoidingView, TextInput, StatusBar, TouchableOpacity, } from "react-native";
 import Styles from '../../styles/Tab/CartTabStyle';
 import Icon from 'react-native-vector-icons/Feather';
 import IconM from 'react-native-vector-icons/MaterialIcons';
@@ -8,10 +8,16 @@ import IconC from 'react-native-vector-icons/AntDesign';
 import  Button from '../../components/Button';
 import  SweetaelertModal from '../../components/SweetAlertModal';
 import { useNavigation } from '@react-navigation/native';
+import { CartTabStyle } from '../../styles';
+import IconA from 'react-native-vector-icons/Entypo';
+
 import images from '../../index';
 
 const CheckOutScreen = ({ route }) => {
-  const colorrdata = "#feb344"
+  const totalPrice = route.params?.totalPrice;
+  const cartItems = route.params?.cartItems;
+  console.log('total',totalPrice);
+  const colorrdata = "#861088"
   const  pricesymboldata = '$'
   const navigation = useNavigation();
   const [DisplayAlert, setDisplayAlert] = useState(0)
@@ -19,7 +25,32 @@ const CheckOutScreen = ({ route }) => {
   const [Applycoupon, setApplycoupon] = useState(0);
   let PriceSymbol = '$';
 
- 
+  const Render = ({item,index})=>{
+    return (
+      <View style={[CartTabStyle.flexminviewcount, CartTabStyle.bgcolorset]}>
+      <View style={CartTabStyle.flexiconandimagetext}>
+        <View>
+          <Image style={CartTabStyle.setimagehightwidth} resizeMode="contain" source={item.image} />
+        </View>
+        <View>
+
+          <Text style={CartTabStyle.pistahouse}>{item.name}</Text>
+        </View>
+      </View>
+      <View style={[CartTabStyle.flexiconandimagetext, CartTabStyle.bgcolorset]}>
+        <View style={[ { borderColor: colorrdata }]}>
+
+          <Text style={[CartTabStyle.minustextstyle, { color: colorrdata }]}>{item.count}</Text>
+        
+        </View>
+      
+          <TouchableOpacity>
+            <Text style={[CartTabStyle.digitalsawtwext, { color: colorrdata }]}>{pricesymboldata} {item.price}</Text>
+          </TouchableOpacity>
+      </View>
+    </View>
+    )
+  }
 
   return (
     <View style={[Styles.minstyleviewphotograpgy, Styles.bgcolorset]}>
@@ -72,90 +103,15 @@ const CheckOutScreen = ({ route }) => {
                   </View>
                 </View>
                 <View>
-                  <View style={Styles.flexminviewcount}>
-                    <View style={Styles.flexiconandimagetext}>
-                      <View>
-                        <Image style={Styles.setimagehightwidth} resizeMode="contain" source={images.Cart_screen_img1} />
-                      </View>
-                      <View>
-                        <Text style={Styles.pistahouse}>Barks & Wags Plaid Pet House</Text>
-                      </View>
-                    </View>
-                    <View style={Styles.flexiconandimagetext}>
-                      {Applycoupon === 0 ?
-                        <TouchableOpacity>
-                          <Text style={[Styles.digitalsawtwext, { color: colorrdata }]}>{pricesymboldata} {15 * count}</Text>
-                        </TouchableOpacity>
-                        :
-                        <TouchableOpacity>
-                          <Text style={[Styles.digitalsawtwext, { color: colorrdata }]}>{pricesymboldata} {105 * count}</Text>
-                        </TouchableOpacity>
-                      }
-                    </View>
-                  </View>
-                  <View style={Styles.flexminviewcount}>
-                    <View style={Styles.flexiconandimagetext}>
-                      <View>
-                        <Image style={Styles.setimagehightwidth} resizeMode="contain" source={images.Cart_screen_img2} />
-                      </View>
-                      <View>
-                        <Text style={Styles.pistahouse}>Dog Food - Chicken & Egg, Puppy</Text>
-                      </View>
-                    </View>
-                    <View style={Styles.flexiconandimagetext}>
-                      {Applycoupon === 0 ?
-                        <TouchableOpacity>
-                          <Text style={[Styles.digitalsawtwext, { color: colorrdata }]}>{pricesymboldata} {10 * count}</Text>
-                        </TouchableOpacity>
-                        :
-                        <TouchableOpacity>
-                          <Text style={[Styles.digitalsawtwext, { color: colorrdata }]}>{pricesymboldata} {105 * count}</Text>
-                        </TouchableOpacity>
-                      }
-                    </View>
-                  </View>
-                  <View style={Styles.flexminviewcount}>
-                    <View style={Styles.flexiconandimagetext}>
-                      <View>
-                        <Image style={Styles.setimagehightwidth} resizeMode="contain" source={images.Cart_screen_img3} />
-                      </View>
-                      <View>
-                        <Text style={Styles.pistahouse}>Moochie Beauty skin & coat</Text>
-                      </View>
-                    </View>
-                    <View style={Styles.flexiconandimagetext}>
-                      {Applycoupon === 0 ?
-                        <TouchableOpacity>
-                          <Text style={[Styles.digitalsawtwext, { color: colorrdata }]}>{pricesymboldata} {3 * count}</Text>
-                        </TouchableOpacity>
-                        :
-                        <TouchableOpacity>
-                          <Text style={[Styles.digitalsawtwext, { color: colorrdata }]}>{pricesymboldata} {105 * count}</Text>
-                        </TouchableOpacity>
-                      }
-                    </View>
-                  </View>
-                  <View style={Styles.flexminviewcount}>
-                    <View style={Styles.flexiconandimagetext}>
-                      <View>
-                        <Image style={Styles.setimagehightwidth} resizeMode="contain" source={images.Cart_screen_img4} />
-                      </View>
-                      <View>
-                        <Text style={Styles.pistahouse}>Summer Sunglasses</Text>
-                      </View>
-                    </View>
-                    <View style={Styles.flexiconandimagetext}>
-                      {Applycoupon === 0 ?
-                        <TouchableOpacity>
-                          <Text style={[Styles.digitalsawtwext, { color: colorrdata }]}>{pricesymboldata} {11 * count}</Text>
-                        </TouchableOpacity>
-                        :
-                        <TouchableOpacity>
-                          <Text style={[Styles.digitalsawtwext, { color: colorrdata }]}>{pricesymboldata} {105 * count}</Text>
-                        </TouchableOpacity>
-                      }
-                    </View>
-                  </View>
+                <FlatList
+        data={cartItems}
+        renderItem={Render}
+        keyExtractor={item => item.id}
+      />
+
+                 
+                  
+                 
                   <View style={Styles.textinputandbuttonflex}>
                     <View>
                       <TextInput

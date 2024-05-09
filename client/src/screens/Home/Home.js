@@ -4,15 +4,17 @@ import Styles from '../../styles/Tab/HometabStyle';
 import { MedicineCategoryHomeTab, MegaMedicine, MedicineFalteList, DoctorListData } from '../../utils/Sliderimagedata';
 import  Button  from '../../components/Button';
 import { useSelector } from "react-redux";
-import images from '../../../index';
+import images from '../../index';
 import { Rating } from 'react-native-ratings';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import HeaderScreenAddress from '../../components/HeaderScreenAddress'
 import firestore from '@react-native-firebase/firestore';
+import image from '../../images';
 
 
+const db = firestore();
 
 
 const HomeTabset = (props) => {
@@ -30,6 +32,7 @@ const HomeTabset = (props) => {
   const [start, setStart] = useState(true);
   const tick = useRef();
   const [user, setUser] = useState(null); // State to hold the user object 
+  const [EmailSendAlert, setEmailSendAlert] = useState(0);
 
 
   useEffect(() => {
@@ -53,11 +56,25 @@ const HomeTabset = (props) => {
     return hours + ':' + minutes + ':' + seconds;
   };
 
+  const HandleAddToCart =  async (item) => {
+    let Product = {
+      id: item.id,
+      image: item.imageUrl,
+      price: item.price.trim(), // Remove leading and trailing spaces
+      count: 1,
+      name: item.text
+    }
+    console.log('Product',Product); // Log the Product object to check its properties
 
+    await db.collection(`Cart/${user.uid}/item`).add(
+        Product
+    )
+    setEmailSendAlert(1)
+  }
   const TodayDeals = [
     {
       "id": 1,
-      "image": images.Home_DealsOfTheDay_img1,
+      "imageUrl": images.Home_DealsOfTheDay_img1,
       "ratingset": images.one_hundred_thirty,
       "text": 'Barks & Wags Plaid Pet House',
       "hospitalname": '(S, Pink Plaid)',
@@ -73,7 +90,7 @@ const HomeTabset = (props) => {
         isDisabled={false}
         style={{ paddingVertical: 10 }}
       />,
-      price: ' ' + '15',
+      "price": ' ' + '15',
       "pricetwo": ' ' + '20',
       "dealendtext": 'Deal Ends :',
       "time": '02:53:18',
@@ -82,7 +99,7 @@ const HomeTabset = (props) => {
     },
     {
       "id": 2,
-      "image": images.Home_DealsOfTheDay_img2,
+      "imageUrl": images.Home_DealsOfTheDay_img2,
       "ratingset": images.one_hundred_thirty,
       "text": 'Combo Dog Harness for Easy Walk',
       "hospitalname": 'Small, Big',
@@ -108,7 +125,7 @@ const HomeTabset = (props) => {
     },
     {
       "id": 3,
-      "image": images.Home_DealsOfTheDay_img3,
+      "imageUrl": images.Home_DealsOfTheDay_img3,
       "ratingset": images.one_hundred_thirty,
       "text": 'Meat Up Meat and Rice',
       "hospitalname": '10kg',
@@ -133,7 +150,7 @@ const HomeTabset = (props) => {
     },
     {
       "id": 4,
-      "image": images.Home_DealsOfTheDay_img4,
+      "imageUrl": images.Home_DealsOfTheDay_img4,
       "ratingset": images.one_hundred_thirty,
       "text": 'Classic Pet Chunk Dog Food - Adult',
       "hospitalname": 'Medium, 1.2 Kg',
@@ -159,7 +176,7 @@ const HomeTabset = (props) => {
     },
     {
       "id": 5,
-      "image": images.Home_DealsOfTheDay_img5,
+      "imageUrl": images.Home_DealsOfTheDay_img5,
       "ratingset": images.one_hundred_thirty,
       "text": 'Woof Natural Chicken and Milk',
       "hospitalname": ' 2.2 kg',
@@ -188,36 +205,7 @@ const HomeTabset = (props) => {
     return (
       <View style={[Styles.setbgcolorviewtimewrap, Styles.bgcolorset]}>
         <View style={Styles.setbgcolorviewtime}>
-          {index === 1 || index === 3 ?
-            <View>
-              <View style={{ opacity: 0.4 }}>
-                <TouchableOpacity style={Styles.flexrowsecenterimage}
-                  onPress={() => navigation.navigate('productDetails')}>
-                  <Image style={Styles.whiteboximage} resizeMode="contain" source={item.image} />
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
-                <Text style={[Styles.setnormatextstyle, { color: "#861088" }]}>{item.text}</Text>
-              </TouchableOpacity>
-              <Text style={[Styles.settextcolorcenterthree, Styles.settextcolorcenterthreetow]}>{item.hospitalname}</Text>
-              <View style={Styles.flexrowjuctycenter}>
-                {item.rating}
-              </View>
-              <View style={Styles.flexrowsettext}>
-                <Text style={[Styles.settextprice, { color: "#861088" }]}>{pricesymboldata}{item.price}</Text>
-                <Text style={Styles.settextpricetwo}>{item.pricetwo}</Text>
-              </View>
-              <View style={Styles.flexrocenterjusty}>
-                <View style={Styles.addbutttonwidth}>
-                  <Button onPress={() => navigation.navigate('')} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={item.buttonaadtext} />
-                </View>
-              </View>
-              <View style={[Styles.settextinbgcolor, { opacity: 0.6 }, { backgroundColor: "#861088" }]}>
-                <Text style={Styles.setdescounrtextstyle}>{item.offdecount}</Text>
-              </View>
-              <Text style={Styles.outoftextset}>{item.outofstock}</Text>
-            </View>
-            :
+          
             <View>
               <TouchableOpacity style={Styles.flexrowsecenterimage}
                 onPress={() => navigation.navigate('productDetails')}>
@@ -232,18 +220,17 @@ const HomeTabset = (props) => {
               </View>
               <View style={Styles.flexrowsettext}>
                 <Text style={[Styles.settextprice, { color: "#861088" }]}>{pricesymboldata}{item.price}</Text>
-                <Text style={Styles.settextpricetwo}>{item.pricetwo}</Text>
               </View>
               <View style={Styles.flexrocenterjusty}>
                 <View style={Styles.addbutttonwidth}>
-                  <Button onPress={() => navigation.navigate('')} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={item.buttonaadtext} />
+                  <Button onPress={() => HandleAddToCart(item)} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={item.buttonaadtext} />
                 </View>
               </View>
-              <View style={[Styles.settextinbgcolor, { backgroundColor: "#861088" }]}>
+              {/* <View style={[Styles.settextinbgcolor, { backgroundColor: "#861088" }]}>
                 <Text style={Styles.setdescounrtextstyle}>{item.offdecount}</Text>
-              </View>
+              </View> */}
             </View>
-          }
+          
         </View>
       </View>
     );
