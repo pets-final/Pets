@@ -20,6 +20,9 @@ export default StyleSheet.create({
   bgcolorset: {
     backgroundColor: ColorTheme.BGScreen
   },
+  bgcolorset2: {
+    backgroundColor: "#FFFFFF"
+  },
   minviewsigninscreen: {
     width: '100%',
     paddingHorizontal:'5%',

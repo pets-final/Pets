@@ -9,7 +9,7 @@ import { Rating } from 'react-native-ratings';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
 import auth from '@react-native-firebase/auth'; // Import the auth module
-
+import HeaderScreenAddress from '../../components/HeaderScreenAddress'
 import firestore from '@react-native-firebase/firestore';
 
 
@@ -379,6 +379,8 @@ const HomeTabset = (props) => {
   }
 
   return (
+    <View>
+      <HeaderScreenAddress/>
     <View style={[Styles.minstyleviewphotograpgy, Styles.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
       <ScrollView
@@ -466,6 +468,7 @@ const HomeTabset = (props) => {
 
  
     
+    </View>
     </View>
   );
 };

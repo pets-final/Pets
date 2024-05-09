@@ -2,7 +2,6 @@ import React from "react";
 import { View, TouchableOpacity} from "react-native";
 import IconE from 'react-native-vector-icons/EvilIcons';
 import Styles from '../styles/CommonStyle/Style';
-import { useSelector } from "react-redux";
 
 const NavigationDrawerStructure = (props) => {
   const {marginrighthome} = props;

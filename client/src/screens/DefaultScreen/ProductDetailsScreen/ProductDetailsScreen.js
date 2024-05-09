@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, Image, ScrollView, StatusBar, KeyboardAvoidingView, TouchableOpacity, } from "react-native";
-import { ProductDetailes, Style } from '../../styles';
+import { ProductDetailes, Style } from '../../../styles';
 import { useNavigation } from '@react-navigation/native';
 import IconF from 'react-native-vector-icons/MaterialIcons';
-import Icon from 'react-native-vector-icons/Entypo'; // Changed from 'react-native-vector-icons/FontAwesome'
-import IconH from 'react-native-vector-icons/FontAwesome'; // Changed from 'react-native-vector-icons/MaterialIcons'
+import Icon from 'react-native-vector-icons/Entypo';
+import IconH from 'react-native-vector-icons/FontAwesome';
 import IconL from 'react-native-vector-icons/Feather';
-import { useTogglePasswordVisibility } from '../../utils';
+import { RouteName } from '../../../routes';
+import { useTogglePasswordVisibility } from '../../../utils';
+import { useSelector, useDispatch } from "react-redux";
+import { price_symbol_action } from '../../../redux/action/CommonAction';
 
-const doctoreDetaile = {
-  "id": 1,
-  "image": require("../../images/200by150.png"),
-  "price": 120,
-  "text": "Kitchen Items",
-  "description": "Kitchen Items are essential tools used in the kitchen for cooking, serving, and preparing food. They include utensils, cookware, bakeware, and appliances.",
-};
-
- export const ProductDetailesScreen = () => {
+const ProductDetailesScreen = ({ route }) => {
   const [count, setCount] = useState(1);
-  const colorrdata = "#861088"
-  ;
-  const pricesymboldata = '$';
+  const { colorrdata } = useSelector(state => state.commonReducer) || {};
+  const { doctoreDetaile } = useSelector(state => state.doctorDataReducer) || { doctoreDetaile };
+  const { pricesymboldata } = useSelector(state => state.commonReducer) || {};
+  const dispatch = useDispatch();
+  let PriceSymbol = '$';
 
-  const { hearticon, hearticonworthsetthree } = useTogglePasswordVisibility();
+  useEffect(() => {
+    dispatch(price_symbol_action(PriceSymbol));
+  }, []);
+
+  const { hearticon, hearticonworthsetthree } =
+    useTogglePasswordVisibility();
   const navigation = useNavigation();
-
   const backarrow = () => {
-    navigation.navigate('tab');
+    navigation.navigate(RouteName.PRODUCT_TAB);
   }
-
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibletwo, setModalVisibletwo] = useState(false);
   const [sleact, setsleact] = useState('');
@@ -115,7 +115,7 @@ const doctoreDetaile = {
       "id": 19,
       "textsimple": 'Cake',
     },
-  ]);
+  ])
 
   return (
     <View style={ProductDetailes.minstyleviewphotograpgy}>
@@ -129,7 +129,7 @@ const doctoreDetaile = {
         <KeyboardAvoidingView enabled>
           <View style={[ProductDetailes.minflexview, ProductDetailes.bgcolorset]} >
             <View style={[ProductDetailes.minviewsigninscreen, ProductDetailes.bgcolorset]}>
-              <TouchableOpacity style={ProductDetailes.flrxfireiocnview} onPress={() => navigation.navigate('tab')}>
+              <TouchableOpacity style={ProductDetailes.flrxfireiocnview} onPress={() => navigation.navigate(RouteName.RATING_SCREEN_SET)}>
                 <View style={ProductDetailes.setdotflex}>
                   <Text style={ProductDetailes.setbgcolor}></Text>
                   <Text style={ProductDetailes.setbgcolortwo}></Text>
@@ -184,7 +184,7 @@ const doctoreDetaile = {
       </ScrollView>
       <View style={[ProductDetailes.setbgcolorviewtwo, { backgroundColor: colorrdata }]}>
         <TouchableOpacity style={ProductDetailes.setwidthprice}>
-          <Text style={ProductDetailes.pricetextsetviewtwo}>{pricesymboldata} {count}</Text>
+          <Text style={ProductDetailes.pricetextsetviewtwo}>{pricesymboldata} {doctoreDetaile.price * count}</Text>
         </TouchableOpacity>
         <View style={ProductDetailes.plusandminusflexview}>
           <TouchableOpacity onPress={() => { if (count > 1) { setCount(count - 1) } }}>
@@ -196,12 +196,12 @@ const doctoreDetaile = {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity style={ProductDetailes.setbgcolorwhite} onPress={() => navigation.navigate('tab')}>
+          <TouchableOpacity style={ProductDetailes.setbgcolorwhite} onPress={() => navigation.navigate(RouteName.CART_SCREEN)}>
             <IconH name="shopping-basket" color={'black'} size={24} />
           </TouchableOpacity>
         </View>
       </View>
     </View>
   );
-}
-
+};
+export default ProductDetailesScreen;

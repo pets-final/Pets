@@ -4,14 +4,18 @@ import Styles from '../styles/Tab/HometabStyle';
 import IconM from 'react-native-vector-icons/Feather';
 import IconP from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import NavigationDrawerStructure from './HeaderSidemenuIcon'
+
 
 const SearchHeaderScreen = () => {
   const navigation = useNavigation();
   return (
     <View>
+
       <View style={Styles.minheaderflexview}>
         {/* <TouchableOpacity style={Styles.flexhomeimgandtext} onPress={() => navigation.navigate(RouteName.EDIT_LOCATION_SCREEN)}> */}
         <TouchableOpacity style={Styles.flexhomeimgandtext} onPress={() => navigation.navigate()}>
+      <NavigationDrawerStructure/>
           <View>
             <IconM style={Styles.homeimagstyle} name="home" size={25} color={"#861088"} />
           </View>

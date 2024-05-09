@@ -11,7 +11,6 @@ import SweetaelertModal  from '../../components/SweetAlertModal';
 import { useNavigation } from '@react-navigation/native';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
 import { colors } from '../../utils';
-// import { useSelector } from "react-redux";
 import auth from '@react-native-firebase/auth';
 
 const ProfileTab = () => {
@@ -101,7 +100,7 @@ const ProfileTab = () => {
               <View style={[AccountTabStyle.flexrowtwxtspace, AccountTabStyle.bgcolorset]}>
                 <Text style={AccountTabStyle.persnaltext}>Personal details</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
-                  <Text style={[AccountTabStyle.edittextset, { color: colorrdata }]}>Edit</Text>
+                  <Text style={[AccountTabStyle.edittextset, { color: "#861088" }]}>Edit</Text>
                 </TouchableOpacity>
               </View>
               <View style={AccountTabStyle.useraccountwhitebox}>
