@@ -64,7 +64,7 @@ const WelcomeSumnya = ({route}) => {
                     }}
 
                   />
-                </View>
+                   </View>
               </View>
             </View>
           </KeyboardAvoidingView>

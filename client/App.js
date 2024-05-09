@@ -10,10 +10,9 @@ import OTP_VERIFY_SCREEN from './src/screens/RegistrationScreen/OtpVerifyScreen'
 import FORGET_PASSWORD_SCREEN from './src/screens/RegistrationScreen/ForgotPassword';
 import EDIT_PROFILE_SCREEN from './src/screens/EditProfile/EditProfileScreen';
 import ProductList from './src/screens/ProductList/ProductList';
-import Category from './src/screens/Categories/Categories';
+import Category from './src/screens/Adopt/AdoptList';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
-// import VetoProfile from './src/screens/VetoProfile/VetoProfile'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
@@ -21,30 +20,26 @@ import Cart from './src/screens/cart/cart';
 import CheckOutScreen from './src/screens/cart/checkout';
 import PaytmSuccessFully from './src/screens/cart/paymentSucces';
 import {ProductDetailesScreen} from './src/screens/ProductList/Productdetails';
+import ChatDoctorScreen from './src/screens/ChatScreen/ChatDoctorScreen';
+import ChatScreen from './src/screens/ChatScreenFolder/ChatScreen'
+// import DrawerChatScreen from './src/screens/ChatScreenFolder/DrawerChatScreen'
+import DoctorList from './src/screens/doctorList/DoctoList';
 import WelcomeSumnya from './src/screens/Map/ConfirmAdress'
 import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
 import NewProduct from './src/screens/ProductList/NewProduct'
+import AdoptList from './src/screens/Adopt/AdoptList';
+import AppointContact from './src/screens/AppointContact/Appoint';
+// import VetProfile from './src/screens/vetProfile/VetProfile';
+import AddPetsScreen from './src/screens/Adopt/AddPets';
+// import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
 const Stack = createNativeStackNavigator();
-
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
-          name="LoginandRegistrationScreen"
-          options={{headerShown: false}}
-          component={LoginandRegistrationScreen}
-        />
-
-
-         <Stack.Screen
-          name="NewProduct"
-          component={NewProduct}
-          options={{headerShown: false}}
-        />
-
-
+       
+       
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -58,7 +53,11 @@ function App() {
           options={{headerShown: false}}
         />
        
-
+       <Stack.Screen
+          name="LoginandRegistrationScreen"
+          options={{headerShown: false}}
+          component={LoginandRegistrationScreen}
+        />
          <Stack.Screen
           name="WelcomeSumnya"
           component={WelcomeSumnya}
@@ -71,22 +70,58 @@ function App() {
           options={{headerShown: false}}
           component={Nav}
         />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Home"
-          component={Home}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="cart"
-          component={Cart}
-        />
-        <Stack.Screen
+           <Stack.Screen
+            options={{headerShown: false}}
+            name="cart"
+            component={Cart}
+          />
+      <Stack.Screen
           options={{headerShown: false}}
           name="checkout"
           component={CheckOutScreen}
         />
+        <Stack.Screen
+          name="NewProduct"
+          component={NewProduct}
+          options={{
+            headerShadowVisible: true,
+            title: 'New Product',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            },
+          }}
+        />
        
+       
+         <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'ChatScreen',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="ChatScreen" component={ChatScreen} />
+         <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'DoctorList',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="DoctorList" component={DoctorList} />
+
         <Stack.Screen
           options={{headerShown: false}}
           name="Slider"
@@ -122,6 +157,10 @@ function App() {
           options={{headerShown: false}}
           component={map}
         />
+        {/* <Stack.Screen 
+        name="DrawerNavigationNotification" 
+        options={{ headerShown: false }} 
+        component={DrawerNavigationNotification} /> */}
 
         <Stack.Screen
           name="blogDetails"
@@ -171,7 +210,7 @@ function App() {
         <Stack.Screen
           options={{headerShown: false}}
           name="Favorites"
-          component={FavoriteTab}
+          component={Category}
         />
         <Stack.Screen
           options={{
@@ -181,6 +220,7 @@ function App() {
             headerTintColor: '#861088',
             headerTitleStyle: {
               color: '#861088',
+              color: "#861088",
               fontSize: 17,
               fontSize: 20,
               marginLeft: 17,
@@ -189,7 +229,95 @@ function App() {
           name="EditProfile"
           component={EditProfileScreen}
         />
+         <Stack.Screen
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+            title: 'Doctor Page',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontSize: 17,
+              fontSize: 20,
+              marginLeft: 17,
+            },
+          }}
+          name="AppointContact"
+          component={AppointContact}
+        />
+             {/* <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'Edit Vet Profile',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="EditVetProfile" component={EditVetProfileScreen} /> */}
+  
+                   {/* <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'MyVet',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="Myvet" component={MyVet} /> */}
+         
+           {/* <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'ChatScreen',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="ChatScreen" component={ChatScreen} /> */}
+          <Stack.Screen
+          
+          name="AdoptList"
+          component={AdoptList}
+          options={{
+            headerShown: true,
+            headerShadowVisible: true,
+            title: 'AddPets',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: "#861088",
+              fontSize: 17,
+              fontSize: 20,
+              marginLeft: 17,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="AddPetsScreen"
+          component={AddPetsScreen}
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+            title: 'AddPets',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: "#861088",
+              fontSize: 17,
+              fontSize: 20,
+              marginLeft: 17,
+            },
+          }}
+        />
+
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 }

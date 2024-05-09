@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import SweetaelertModal from '../../components/SweetAlertModal';
 import Style from '../../styles/CommonStyle/Style';
 import ImagePicker from 'react-native-image-picker';
+import Icon from 'react-native-vector-icons/dist/AntDesign';
 
 const VetForm = () => {
   const [fullname, setfullname] = useState('');
@@ -114,7 +115,7 @@ const VetForm = () => {
       <KeyboardAvoidingView style={Styles.mincolorwhite} behavior="padding" enabled>
         <View style={Styles.tabminview}>
         <Text style={{ color: '#861088', fontSize: 26, fontFamily: 'Arial', margin: 10 }}>Welcome Veterinarians!</Text>
-<Text style={{ color: '#861088', fontSize: 20, fontFamily: 'Arial', margin: 10,marginBottom:20 }}>Apply to become a Vet on our App</Text>
+<Text style={{ color: '#861088', fontSize: 20, fontFamily: 'Arial', margin: 10,marginBottom:30 }}>Apply to become a Vet on our App</Text>
         
           <View style={Style.inputUnderLine }>
             <TextInput
@@ -148,59 +149,12 @@ const VetForm = () => {
               onChangeText={(value) => setGraduationDate(value)}
             />
           </View>
-          {/* <View style={Style.inputUnderLine}>
-            <TextInput
-              placeholder="How many patients can you accept in a week?"
-              style={Style.inputtextstyle}
-              placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
-              onChangeText={(value) => setMaxPatients(value)}
-            />
-          </View>
          
-          <View style={Style.inputUnderLine}>
-            <TextInput
-              placeholder="Previous employers"
-              style={Style.inputtextstyle}
-              placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
-              onChangeText={(value) => setPreviousEmployer(value)}
-            />
-          </View>
-          <View style={Style.inputUnderLine}>
-            <TextInput
-              placeholder="Dates of employment"
-              style={Style.inputtextstyle}
-              placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
-              onChangeText={(value) => setEmploymentDates(value)}
-            />
-          </View>
-          <View style={Style.inputUnderLine}>
-            <TextInput
-              placeholder="Relevant courses/seminars attended"
-              style={Style.inputtextstyle}
-              placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
-              onChangeText={(value) => setCoursesAttended(value)}
-            />
-          </View> */}
-          {/* <View style={Style.inputUnderLine}>
-          <TextInput
-  placeholder="Contact info for references"
-  style={Style.inputtextstyle}
-  placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
-  onChangeText={(value) => setReferences(value)}
-/>
-          </View> */}
-          {/* <View style={Style.inputUnderLine}>
-            <TouchableOpacity onPress={handleDocumentUpload}>
-              <Text style={{ ...Style.inputtextstyle, marginTop: Platform.OS === 'ios' ? 15 : 10, }}>
-                {legalDocument ? 'Document Uploaded' : 'Upload your legal document'}
-              </Text>
-            </TouchableOpacity>
-          </View> */}
           <View style={Styles.flexrowbutton}>
           <Button
   title="Update"
   onPress={signupbutton}
-  buttonStyle={{...Styles.setbuttonborderradius, marginBottom: 80}}
+  buttonStyle={{...Styles.setbuttonborderradius, padding: 10, width: '100%', marginTop: 160, backgroundColor: '#861088'}}
   buttonTextStyle={Styles.textcolorsetwhite}
 />
           </View>

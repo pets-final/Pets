@@ -20,6 +20,9 @@ export default StyleSheet.create({
   bgcolorset: {
     backgroundColor: ColorTheme.BGScreen
   },
+  bgcolorset2: {
+    backgroundColor: "#FFFFFF"
+  },
   minviewsigninscreen: {
     width: '100%',
     paddingHorizontal:'5%',
@@ -207,6 +210,8 @@ export default StyleSheet.create({
   textstyleupdate: {
     color:'white'
   },
+  flatelistGrid:{}
+  ,
   setbuttonstyleview:{
     marginTop:20,
     marginBottom:40,

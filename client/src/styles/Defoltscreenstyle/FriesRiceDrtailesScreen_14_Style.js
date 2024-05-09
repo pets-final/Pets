@@ -46,8 +46,8 @@ export default StyleSheet.create({
     marginTop: 20,
   },
   pharamacyimagestyle: {
-    width: 90,
-    height: 80,
+    width: '100%',
+    height: '100%',
   },
   Cat_pharamacyimagestyle: {
     width: 90,
@@ -103,6 +103,13 @@ export default StyleSheet.create({
     width: 160,
     flex: 1,
   },
+  bgwhiteboxminview2: {
+    color: 'black',
+    paddingBottom: 20,
+    width: 360,
+    height: 500,
+    flex: 1,
+  },
   Catbgwhiteboxminview: {
     color: 'black',
   },
@@ -122,6 +129,13 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     width: '100%',
+    padding: SH(5)
+  },
+  setimageviewstyle2: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+    height:300,
     padding: SH(5)
   },
   textstylesimple: {
