@@ -104,7 +104,7 @@ const ProductTab = () => {
       </TouchableOpacity> */}
       <View style={[AccountTabStyle.flexrowtwxtspace, AccountTabStyle.bgcolorset]}>
                 <Text style={AccountTabStyle.persnaltext}>All Pets</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('AddPetsScreen')}>
+                <TouchableOpacity onPress={() => navigation.replace('AddPetsScreen')}>
                   <Text style={[AccountTabStyle.edittextset, { color: "#861088" }]}>Add your Pets</Text>
                 </TouchableOpacity>
               </View>

@@ -1,4 +1,4 @@
-import React, { useState,} from "react";
+import React, { useState,useRef,Image  } from "react";
 import { Text, View, TextInput, StyleSheet,Alert } from "react-native";
 import Styles from '../../styles/LoginRegisterStyle/LoginScreenStyle';
 import  Button from '../../components/Button';
@@ -8,6 +8,11 @@ import Style from '../../styles/CommonStyle/Style';
 import { Dropdown } from 'react-native-element-dropdown';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+// import * as ImagePicker from 'react-native-image-picker'
+import { utils } from '@react-native-firebase/app';
+
 
 
 
@@ -33,6 +38,9 @@ const AddPetsScreen = () => {
   const [Sex, setSex] = useState('');
   const [Sexererror, setSexerror] = useState(0);
 
+  const [imageSource, setImageSource] = useState(null);
+
+
 
   const dataBreed = [
     { label: 'Dog', value: 'Dog' },
@@ -50,11 +58,54 @@ const AddPetsScreen = () => {
   ];
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
-
+  const [imageUrl, setimageUrl] = useState('https://api.adorable.io/avatars/80/abott@adorable.png');
 
   const validateIsEmail = (item) => {
     SetEmail(item);
+  }
+
+
+
+
+  const ImagePicker=()=>{
+    let option={
+      storageOptions: {
+        path: 'image',
+      },
+    }
+    launchImageLibrary(option,response=>{
+      setimageUrl(response.assets[0].uri)
+      console.log(response.assets[0].uri)
+      uploadImage()
+    })
+    
+
+  }
+
+  const uploadImage = async () => {
+ const uploadUri=imageUrl;
+ let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
+ console.log("eeeeeeee",filename);
+  
+      try {
+        await storage().ref(filename).putFile(uploadUri);
+       
+ 
+  
+       
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+
   };
+
+
+
+
+
+
+
+
 
  
   const signupbutton = () => {
@@ -86,23 +137,26 @@ const AddPetsScreen = () => {
 
 
 
-  const addPetsToAdopt=()=>{
-    firestore().collection('Animal').add({
-      Adresse:Location,
-      Age:age,
-      Breed:Breed,
-      Description:Description,
-      ImgUrl:ImgUrl,
-      Name:fullname,
-      Sex:Sex,      
-    }).then((res)=>{
-      Alert.alert("pets added")
 
-    }).catch((err)=>{
-      console.log(err);
-
-    })
-  }
+  renderInner = () => (
+    <View style={styles.panel}>
+      <View style={{alignItems: 'center'}}>
+        <Text style={styles.panelTitle}>Upload Photo</Text>
+        <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
+      </View>
+      <TouchableOpacity style={styles.panelButton} onPress={takePhotoFromCamera}>
+        <Text style={styles.panelButtonTitle}>Take Photo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.panelButton} onPress={choosePhotoFromLibrary}>
+        <Text style={styles.panelButtonTitle}>Choose From Library</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.panelButton}
+        onPress={() => this.bs.current.snapTo(1)}>
+        <Text style={styles.panelButtonTitle}>Cancel</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <View style={Styles.mincolorwhite}>
@@ -235,18 +289,21 @@ const AddPetsScreen = () => {
 
 
 
+ <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      {imageSource && <Image source={imageSource} style={{ width: 200, height: 200 }} />}
+      <Button title="Select Image" onPress={ImagePicker} />
+    </View>
 
 
 
 
-
-        <View style={[HelpScreenStyle.minflexview2]}>
+        {/* <View style={[HelpScreenStyle.minflexview2]}>
             <View style={HelpScreenStyle.minviewsigninscreen2}>
               <View>
                 <TextInput style={HelpScreenStyle.settextinputwidth2} placeholder="Description"/>
               </View>
             </View>
-        </View>
+        </View> */}
        
 
          
@@ -254,7 +311,7 @@ const AddPetsScreen = () => {
       <View style={[Styles.flexrowbutton,{paddingTop:"auto"}]}>
           <Button title="Update"
             onPress={()=> 
-              addPetsToAdopt()
+              ImagePicker()
 
               }
             buttonStyle={Styles.setbuttonborderradius}
