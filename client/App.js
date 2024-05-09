@@ -24,12 +24,9 @@ import ChatDoctorScreen from './src/screens/ChatScreen/ChatDoctorScreen';
 import ChatScreen from './src/screens/ChatScreenFolder/ChatScreen'
 // import DrawerChatScreen from './src/screens/ChatScreenFolder/DrawerChatScreen'
 import DoctorList from './src/screens/doctorList/DoctoList';
-
 import WelcomeSumnya from './src/screens/Map/ConfirmAdress'
 import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
-
-
 import NewProduct from './src/screens/ProductList/NewProduct'
 import AdoptList from './src/screens/Adopt/AdoptList';
 import AppointContact from './src/screens/AppointContact/Appoint';
