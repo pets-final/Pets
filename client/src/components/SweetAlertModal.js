@@ -25,7 +25,7 @@ function SweetaelertModal(props) {
                             <View style={Style.modalView}>
                                 <View style={Style.setroundcenter}>
                                     <View style={[Style.checkiconright,{ borderColor:props.color || "#861088" }]}>
-                                        <IconF style={[Style.setbackgroundicon,{color: props.color || "#861088"}]} name={  'block' || 'check'} size={45} />
+                                        <IconF style={[Style.setbackgroundicon,{color: props.color || "#861088"}]} name={'check'} size={45} />
                                     </View>
                                 </View>
                                 <View style={Style.registertextset}>
