@@ -434,7 +434,12 @@ const HomeTabset = (props) => {
                 </View>
                 {/* Doctor Profiles */}
                 <View style={Styles.topspacesetminview}>
-                  <Text style={Styles.settopcategoriestwo}>Consultant</Text>                 
+                  <Text style={Styles.settopcategoriestwo}>Consultant</Text>  
+                  <View style={{ alignItems: 'flex-end', position:'absolute', left:320, top:16 }}> 
+                  <TouchableOpacity onPress={() => navigation.navigate('DoctorList')}>
+                  <Text style={[ { textAlign:'left',color: "#861088", fontSize:20}]}>See All</Text>
+                </TouchableOpacity>      
+                </View>        
                   <FlatList
                     data={DoctorListData}
                     renderItem={({ item, index }) => DoctorList(item, index)}
