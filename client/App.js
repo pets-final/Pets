@@ -13,10 +13,6 @@ import ProductList from './src/screens/ProductList/ProductList';
 import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
-// import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
-// import MyVet from './src/screens/VetProfile/Myvet'
-import AppointContact from './src/screens/AppointContact/Appoint';
-import VetProfile from './src/screens/vetProfile/VetProfile'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
@@ -35,16 +31,17 @@ import VetForm from './src/screens/vetSliderScreen/VetForm';
 
 
 import NewProduct from './src/screens/ProductList/NewProduct'
+import AdoptList from './src/screens/Adopt/AdoptList';
+import AppointContact from './src/screens/AppointContact/Appoint';
+import VetProfile from './src/screens/vetProfile/VetProfile';
+import AddPetsScreen from './src/screens/Adopt/AddPets';
+// import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-    
-
-
-
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -161,6 +158,10 @@ function App() {
           options={{headerShown: false}}
           component={map}
         />
+        {/* <Stack.Screen 
+        name="DrawerNavigationNotification" 
+        options={{ headerShown: false }} 
+        component={DrawerNavigationNotification} /> */}
 
         <Stack.Screen
           name="blogDetails"
@@ -210,7 +211,7 @@ function App() {
         <Stack.Screen
           options={{headerShown: false}}
           name="Favorites"
-          component={FavoriteTab}
+          component={Category}
         />
         <Stack.Screen
           options={{
@@ -220,6 +221,7 @@ function App() {
             headerTintColor: '#861088',
             headerTitleStyle: {
               color: '#861088',
+              color: "#861088",
               fontSize: 17,
               fontSize: 20,
               marginLeft: 17,
@@ -292,7 +294,42 @@ function App() {
             marginLeft: 17,
           },
         }}  name="ChatScreen" component={ChatScreen} /> */}
+          <Stack.Screen
+          
+          name="AdoptList"
+          component={AdoptList}
+          options={{
+            headerShown: true,
+            headerShadowVisible: true,
+            title: 'AddPets',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: "#861088",
+              fontSize: 17,
+              fontSize: 20,
+              marginLeft: 17,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="AddPetsScreen"
+          component={AddPetsScreen}
+          options={{
+            headerShown: true,
+            headerShadowVisible: false,
+            title: 'AddPets',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: "#861088",
+              fontSize: 17,
+              fontSize: 20,
+              marginLeft: 17,
+            },
+          }}
+        />
+
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 }

@@ -1016,7 +1016,7 @@ export const ProductCategoryData = [
 export const ProductData = [
     {
         "id": 1,
-        "image": images.Product_screen_img1,
+        "image": images.testpets1,
         "text": 'Barks & Wags Plaid Pet House',
         "price": '10.00',
         "iconplusset": <IconS name="plus" size={20} color={'white'} />,

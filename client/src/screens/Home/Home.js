@@ -8,11 +8,20 @@ import images from '../../../index';
 import { Rating } from 'react-native-ratings';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
-
 import auth from '@react-native-firebase/auth'; // Import the auth module
+import HeaderScreenAddress from '../../components/HeaderScreenAddress'
+import firestore from '@react-native-firebase/firestore';
+
+
 
 
 const HomeTabset = (props) => {
+
+  const getdatatest= async ()=>{
+    const usersCollection =  await firestore().collection('User').get();
+    console.log("all ifno ",usersCollection.docs[0].data());
+
+  }
   const { navigation } = props;
  
    const pricesymboldata  = '$'
@@ -20,11 +29,12 @@ const HomeTabset = (props) => {
   const [timer, setTimer] = useState(24339); // 25 minutes
   const [start, setStart] = useState(true);
   const tick = useRef();
-  const [user, setUser] = useState(null); // State to hold the user object
+  const [user, setUser] = useState(null); // State to hold the user object 
 
 
   useEffect(() => {
     // Get the current user when the component mounts
+    getdatatest()
     const subscriber = auth().onAuthStateChanged((user) => {
       setUser(user);
       console.log('subscriber',user);
@@ -366,6 +376,8 @@ const HomeTabset = (props) => {
   }
 
   return (
+    <View>
+      <HeaderScreenAddress/>
     <View style={[Styles.minstyleviewphotograpgy, Styles.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
       <ScrollView
@@ -458,6 +470,7 @@ const HomeTabset = (props) => {
 
  
     
+    </View>
     </View>
   );
 };
