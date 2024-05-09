@@ -30,7 +30,11 @@ import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
 
 
-import NewProduct from './src/screens/ProductList/NewProduct'import AdoptList from './src/screens/Adopt/AdoptList';
+import NewProduct from './src/screens/ProductList/NewProduct'
+import AdoptList from './src/screens/Adopt/AdoptList';
+import AppointContact from './src/screens/AppointContact/Appoint';
+import VetProfile from './src/screens/vetProfile/VetProfile';
+import AddPetsScreen from './src/screens/Adopt/AddPets';
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
 const Stack = createNativeStackNavigator();
 
