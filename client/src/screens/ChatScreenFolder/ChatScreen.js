@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Text, View, Image, ScrollView, KeyboardAvoidingView, TextInput, TouchableOpacity, Keyboard } from "react-native";
 import { ChatScreenStyle } from '../../styles/ChatDoctorStylemain/ChatScreenStyle';
 import images from '../../index';
@@ -9,6 +9,7 @@ import IconM from 'react-native-vector-icons/Foundation';
 import 'firebase/database';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import { set } from "firebase/database";
 
 const doctor = {
   name: 'Dr. John Doe',
@@ -17,7 +18,6 @@ const doctor = {
   image: 'https://placeimg.com/100/100/people',
   id: 'Qg183pzPiycd8HKclBHWquVFH9b2',
 };
-
 const db = firestore();
 
 const ChatScreen = () => {
@@ -25,16 +25,11 @@ const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [user, setuser] = useState([]);
-const [refresh,setrefresh]=useState(false)
-  useEffect(() => {
-    const unsubscribe = db.collection(`chats/${user.uid}_${doctor.id}/messages`)
-      .orderBy('timestamp')
-      .onSnapshot(snapshot => {
-        const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setMessages(data);
-        setrefresh(true)
-      });
+  const [refetch, setrefetch] = useState(true);
+  
+  const scrollViewRef = useRef();
 
+  useEffect(() => {
     const subscriber = auth().onAuthStateChanged((user) => {
       setuser(user);
         console.log(user);
@@ -61,19 +56,21 @@ const [refresh,setrefresh]=useState(false)
   
   const sendMessage = async () => {
     if (message.trim() !== '') {
-      db.collection(`chats/${user.uid}_${doctor.id}/messages`).add({
-        senderId: doctor.id,
+      const localTimestamp = Date.now();
+      const newMessage = {
+        senderId: user.uid,
         text: message,
         timestamp: localTimestamp
       };
 
-      await db.collection(`chats/${user.uid}_${doctor.id}/messages`).add({
+      await db.collection(`chats/SLSwA3222ndTMGd8aKK6qKmdX2G2_${doctor.id}/messages`).add({
         ...newMessage,
         timestamp: firestore.FieldValue.serverTimestamp()
       });
+
       setMessage('');
-      setrefresh(false)
-      Keyboard.dismiss()
+      Keyboard.dismiss();
+      setrefetch(true);
     }
   };
 
@@ -81,11 +78,12 @@ const [refresh,setrefresh]=useState(false)
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollToEnd({ animated: false });
     }
-  }, [messages]);
+  }, []);
 
   return (
 
     <View style={ChatScreenStyle.minstyleviewphotograpgy}>
+      
       <ScrollView
         ref={scrollViewRef}
         style={{ flex: 0.9 }}
@@ -93,10 +91,14 @@ const [refresh,setrefresh]=useState(false)
         contentContainerStyle={ChatScreenStyle.scrollViewContent}
       >
         {messages.map((msg, index) => (
-          <View key={msg.id} style={[ChatScreenStyle.messageContainer, { alignSelf: msg.senderId === doctor.id ? 'flex-end' : 'flex-start' }]}>
-            <View style={[ChatScreenStyle.chartviewsetbgcolor, { backgroundColor: msg.senderId === doctor.id ? '#DCF8C6' : '#E5E5EA' }]}>
-              <Text style={ChatScreenStyle.textcolormessage}>{msg.text}</Text>
-              <Text style={ChatScreenStyle.textcolormessagetwoset}>{msg.timestamp ? msg.timestamp.toDate().toLocaleString() : ''}</Text>
+          <View key={msg.id} style={[ChatScreenStyle.messageContainer, { alignSelf: msg.senderId === user.uid ? 'flex-end' : 'flex-start' }]}>
+            <View style={[ChatScreenStyle.chartviewsetbgcolor, { backgroundColor: msg.senderId === user.uid ? '#DCF8C6' : '#E5E5EA' }]}>
+              <Text style={ChatScreenStyle.textcolormessage}>
+                {msg.text}
+              </Text>
+              <Text style={ChatScreenStyle.textcolormessagetwoset}>
+                {msg.timestamp ? new Date(msg.timestamp._seconds * 1000).toLocaleString() : ''}
+              </Text>
             </View>
           </View>
         ))}
