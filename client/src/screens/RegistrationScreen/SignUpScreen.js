@@ -183,38 +183,8 @@ const SignUpScreen = () => {
         <Text style={Login.pleseentername}>* Please Enter Confirm Password</Text>
         : null
       }
-      <View style={Style.inputUnderLine}>
-        <View style={Login.roleContainer}>
-          <TouchableOpacity
-            style={[Login.roleButton, role === "User" ? Login.selectedRole : null]}
-            onPress={() => { setRole("User"); setRoleError(''); }}
-          >
-            <Text style={Login.roleButtonText}>User</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[Login.roleButton, role === "Vet" ? Login.selectedRole : null]}
-            onPress={() => { setRole("Vet"); setRoleError(''); }}
-          >
-            <Text style={Login.roleButtonText}>Vet</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[Login.roleButton, role === "Shoper" ? Login.selectedRole : null]}
-            onPress={() => { setRole("Shoper"); setRoleError(''); }}
-          >
-            <Text style={Login.roleButtonText}>Shoper</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[Login.roleButton, role === "Hotel" ? Login.selectedRole : null]}
-            onPress={() => { setRole("Hotel"); setRoleError(''); }}
-          >
-            <Text style={Login.roleButtonText}>Hotel</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      {roleError !== '' ?
-        <Text style={Login.pleseentername}>* {roleError}</Text>
-        : null
-      }
+      
+     
       <View style={Login.allreadylogintext} >
         <Text style={Login.settextstyle}>Already a Member? </Text>      
          <TouchableOpacity onPress={() => (navigation.replace("LoginandRegistrationScreen"))}><Text style={[Login.logintext, { color:  "#861088" }]}>Login</Text></TouchableOpacity> 
