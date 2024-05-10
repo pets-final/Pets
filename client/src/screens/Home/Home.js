@@ -304,14 +304,14 @@ const HomeTabset = (props) => {
               <Text style={[Styles.settextpricebold, { color: "#861088" }]} >{item.text}</Text>
             </TouchableOpacity>
             <Text style={[Styles.settextcolorcentertwo]}>{item.hospitalname}</Text>
-            <View style={Styles.flexstarticon}>
+            {/* <View style={Styles.flexstarticon}>
               {item.ratings}
               <Text style={Styles.ratingtextnumber}>(4.3)</Text>
-            </View>
+            </View> */}
             <View style={Styles.flexrowsetrating}>
-              <View style={Styles.dicscounttextflex}>
+              {/* <View style={Styles.dicscounttextflex}>
                 <Text style={[Styles.settextpricebold, { color: "#861088" }]}>{pricesymboldata} {item.price}</Text>
-              </View>
+              </View> */}
             </View>
           </View>
           <TouchableOpacity style={Styles.setplusicon} onPress={() => navigation.navigate('productDetails')}>
@@ -408,7 +408,13 @@ const HomeTabset = (props) => {
                   />
                 </View>
                 <View style={[Styles.topspacesetminview, Styles.topspacesetminviewTop]}>
-                  <Text style={Styles.settopcategories}>Top Selling</Text>
+                <View style={Styles.FlexRowBetwn}>
+                <Text style={Styles.settopcategories}>Pets To Adopt</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('AdoptList')}>
+                  <Text style={[Styles.SeeAlltext, { color: "#861088" }]}>See All</Text>
+                </TouchableOpacity>
+              </View>
+                  
                   <FlatList
                     data={MedicineFalteList}
                     renderItem={({ item, index }) => MedicineBox(item, index)}

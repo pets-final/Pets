@@ -10,7 +10,7 @@ import OTP_VERIFY_SCREEN from './src/screens/RegistrationScreen/OtpVerifyScreen'
 import FORGET_PASSWORD_SCREEN from './src/screens/RegistrationScreen/ForgotPassword';
 import EDIT_PROFILE_SCREEN from './src/screens/EditProfile/EditProfileScreen';
 import ProductList from './src/screens/ProductList/ProductList';
-import Category from './src/screens/Categories/Categories';
+import Category from './src/screens/Adopt/AdoptList';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 import map from './src/screens/Map/map';
@@ -34,6 +34,7 @@ import AppointContact from './src/screens/AppointContact/Appoint';
 import AddPetsScreen from './src/screens/Adopt/AddPets';
 import NotificationScreen from './src/screens/UserProfile/notification';
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
+
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -76,6 +77,7 @@ function App() {
           options={{headerShown: false}}
           component={LoginandRegistrationScreen}
         />
+
          <Stack.Screen
           name="WelcomeSumnya"
           component={WelcomeSumnya}
@@ -113,6 +115,7 @@ function App() {
             },
           }}
         />
+        
        
        
          <Stack.Screen options={{

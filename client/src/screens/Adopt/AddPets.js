@@ -1,4 +1,4 @@
-import React, { useState,} from "react";
+import React, { useState,useRef,Image  } from "react";
 import { Text, View, TextInput, StyleSheet,Alert } from "react-native";
 import Styles from '../../styles/LoginRegisterStyle/LoginScreenStyle';
 import  Button from '../../components/Button';
@@ -8,6 +8,11 @@ import Style from '../../styles/CommonStyle/Style';
 import { Dropdown } from 'react-native-element-dropdown';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+// import * as ImagePicker from 'react-native-image-picker'
+import { utils } from '@react-native-firebase/app';
+
 
 
 
@@ -32,6 +37,13 @@ const AddPetsScreen = () => {
   const [ImgUrlererror, setUrlImgererror] = useState(0);
   const [Sex, setSex] = useState('');
   const [Sexererror, setSexerror] = useState(0);
+  const [image, setImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [imageSource, setImageSource] = useState(null);
+  const [value, setValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
+  const [imageUrl, setimageUrl] = useState('https://api.adorable.io/avatars/80/abott@adorable.png');
+
 
 
   const dataBreed = [
@@ -44,17 +56,73 @@ const AddPetsScreen = () => {
   ];
   const dataSex = [
     { label: 'Male', value: 'MAle' },
-    { label: 'Female', value: 'Female' },
-    
+    { label: 'Female', value: 'Female' },   
    
   ];
-  const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState(false);
-
 
   const validateIsEmail = (item) => {
     SetEmail(item);
+  }
+
+
+
+
+  const ImagePicker=()=>{
+    let option={
+      storageOptions: {
+        path: 'image',
+      },
+    }
+    launchImageLibrary(option,response=>{
+      setimageUrl(response.assets[0].uri)
+      console.log(response.assets[0].uri)
+      uploadImage()
+    })
+    
+
+  }
+
+  const uploadImage = async () => {
+ const uploadUri=imageUrl;
+ let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1); 
+      try {
+        await storage().ref(filename).putFile(uploadUri);
+        const url = await storage().ref(filename).getDownloadURL();
+        console.log(url)
+        setImg(url)
+        setUploading(false);       
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        setImage(null)
+      }
+
   };
+
+  const addPetsToAdopt=()=>{
+    firestore().collection('Animal').add({
+      Adresse:Location,
+      Age:age,
+      Breed:Breed,
+      Description:Description,
+      ImgUrl:ImgUrl,
+      Name:fullname,
+      Sex:Sex,      
+    }).then((res)=>{
+      Alert.alert("pets added")
+
+    }).catch((err)=>{
+      console.log(err);
+
+    })
+  }
+
+
+
+
+
+
+
+
 
  
   const signupbutton = () => {
@@ -86,50 +154,12 @@ const AddPetsScreen = () => {
 
 
 
-  const addPetsToAdopt=()=>{
-    firestore().collection('Animal').add({
-      Adresse:Location,
-      Age:age,
-      Breed:Breed,
-      Description:Description,
-      ImgUrl:ImgUrl,
-      Name:fullname,
-      Sex:Sex,      
-    }).then((res)=>{
-      Alert.alert("pets added")
 
-    }).catch((err)=>{
-      console.log(err);
 
-    })
-  }
 
   return (
     <View style={Styles.mincolorwhite}>
       <View style={Styles.tabminview}>
-
-        
-        <View style={Style.inputUnderLine}>
-          <TextInput
-            placeholder="ImgeUrl"
-            style={Style.inputtextstyle}
-            placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
-            onChangeText={(value) => { setUrlImgererror(0); setImg(value); }}
-          />
-        </View>
-        {ImgUrlererror === 1 ?
-          <Text style={Styles.pleseentername}>* Please Enter the Location </Text>
-          : null
-        }
-
-
-
-
-
-
-
-
-
         <View style={Style.inputUnderLine}>
           <TextInput
             placeholder="Name"
@@ -235,18 +265,21 @@ const AddPetsScreen = () => {
 
 
 
+ <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      {imageSource && <Image source={imageSource} style={{ width: 200, height: 200 }} />}
+      <Button title="Select Image" onPress={ImagePicker} />
+    </View>
 
 
 
 
-
-        <View style={[HelpScreenStyle.minflexview2]}>
+        {/* <View style={[HelpScreenStyle.minflexview2]}>
             <View style={HelpScreenStyle.minviewsigninscreen2}>
               <View>
                 <TextInput style={HelpScreenStyle.settextinputwidth2} placeholder="Description"/>
               </View>
             </View>
-        </View>
+        </View> */}
        
 
          
