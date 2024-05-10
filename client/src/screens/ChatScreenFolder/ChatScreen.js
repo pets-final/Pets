@@ -27,7 +27,7 @@ const ChatScreen = () => {
   const [user, setuser] = useState([]);
 const [refresh,setrefresh]=useState(false)
   useEffect(() => {
-    const unsubscribe = db.collection(`chats/mbhwEE8i2WYWyoNaUwxCh6uGvBi1_${doctor.id}/messages`)
+    const unsubscribe = db.collection(`chats/${user.uid}_${doctor.id}/messages`)
       .orderBy('timestamp')
       .onSnapshot(snapshot => {
         const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -46,7 +46,7 @@ const [refresh,setrefresh]=useState(false)
 
   const sendMessage = () => {
     if (message.trim() !== '') {
-      db.collection(`chats/mbhwEE8i2WYWyoNaUwxCh6uGvBi1_${doctor.id}/messages`).add({
+      db.collection(`chats/${user.uid}_${doctor.id}/messages`).add({
         senderId: doctor.id,
         text: message,
         timestamp: firestore.FieldValue.serverTimestamp()
