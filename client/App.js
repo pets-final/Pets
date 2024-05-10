@@ -312,6 +312,18 @@ function App() {
             },
           }}
         />
+         <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'ChatScreen',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="ChatScreen" component={ChatScreen} />
         <Stack.Screen
           name="AddPetsScreen"
           component={AddPetsScreen}

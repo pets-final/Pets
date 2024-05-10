@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Image, StatusBar, FlatList, KeyboardAvoidingView, TouchableOpacity ,Alert} from "react-native";
+import { Text, View, Image, StatusBar, FlatList, KeyboardAvoidingView, TouchableOpacity ,Alert,AppState} from "react-native";
 import { ProductitemList,AccountTabStyle } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import { ProductData } from '../../utils/Sliderimagedata';
@@ -7,9 +7,11 @@ import { colors } from '../../utils';
 import Icon from "react-native-vector-icons/AntDesign";
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
+import messaging from '@react-native-firebase/messaging';
 
 
 const ProductTab = () => {
+ 
   const pricesymboldata ='$';
   const navigation = useNavigation();
   const [hearticon, Sethearticon] = useState(0);
@@ -47,11 +49,13 @@ const ProductTab = () => {
     return (
       
       <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>
-        {console.log("adopt ",adoptPets)}
+        {/* {console.log("adopt ",adoptPets)} */}
         <View style={ProductitemList.bgwhiteboxminview2}>
           <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
             <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
-              <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={item.image} />
+              <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{uri:item.ImgUrl}}/>
+             { console.log("image url",item.ImgUrl)}
+
             </TouchableOpacity>
           </View>
           <TouchableOpacity >
@@ -99,9 +103,7 @@ const ProductTab = () => {
 
   return (
     <View>
-      {/* <TouchableOpacity style={[ProductitemList.setplusbgcolorset, { backgroundColor: "#861088" }]}  >
-              <Text>add</Text>
-      </TouchableOpacity> */}
+    
       <View style={[AccountTabStyle.flexrowtwxtspace, AccountTabStyle.bgcolorset]}>
                 <Text style={AccountTabStyle.persnaltext}>All Pets</Text>
                 <TouchableOpacity onPress={() => navigation.replace('AddPetsScreen')}>

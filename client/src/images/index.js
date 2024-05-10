@@ -76,7 +76,7 @@ const image = {
   videoimg5: require('./80by80.png'),
   videoimg6: require('./80by80.png'),
   Videoplaymg: require('./200by150.png'),
-  HomePageCateImg1: require('./test.png'),
+  HomePageCateImg1: require('./categoryfood.png'),
   HomePageCateImg2: require('./test.png'),
   HomePageCateImg3: require('./test.png'),
   HomePageCateImg4: require('./test.png'),
