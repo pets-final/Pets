@@ -32,15 +32,45 @@ import AdoptList from './src/screens/Adopt/AdoptList';
 import AppointContact from './src/screens/AppointContact/Appoint';
 // import VetProfile from './src/screens/vetProfile/VetProfile';
 import AddPetsScreen from './src/screens/Adopt/AddPets';
+import NotificationScreen from './src/screens/UserProfile/notification';
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
 
 const Stack = createNativeStackNavigator();
+
 function App() {
+  
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'ChatScreen',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="ChatScreen" component={ChatScreen} />
        
-       
+{/*        
+        <Stack.Screen
+          name="NotificationScreen"
+          component={NotificationScreen}
+          options={{
+            headerShadowVisible: true,
+            title: 'NotificationScreen',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            },
+          }}
+        /> */}
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -100,18 +130,7 @@ function App() {
         
        
        
-         <Stack.Screen options={{
-          headerShown: true,
-          headerShadowVisible: false,
-          title: 'ChatScreen',
-          headerTintColor: "#feb344",
-          headerTitleStyle: {
-            color: "#feb344",
-            fontSize: 17,
-            fontSize: 20,
-            marginLeft: 17,
-          },
-        }}  name="ChatScreen" component={ChatScreen} />
+        
          <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
@@ -273,18 +292,7 @@ function App() {
           },
         }}  name="Myvet" component={MyVet} /> */}
          
-           {/* <Stack.Screen options={{
-          headerShown: true,
-          headerShadowVisible: false,
-          title: 'ChatScreen',
-          headerTintColor: "#feb344",
-          headerTitleStyle: {
-            color: "#feb344",
-            fontSize: 17,
-            fontSize: 20,
-            marginLeft: 17,
-          },
-        }}  name="ChatScreen" component={ChatScreen} /> */}
+         
           <Stack.Screen
           
           name="AdoptList"
