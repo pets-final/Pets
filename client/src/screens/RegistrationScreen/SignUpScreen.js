@@ -9,6 +9,9 @@ import  SweetaelertModal from '../../components/SweetAlertModal';
 import IconA from 'react-native-vector-icons/EvilIcons';
 import IconG from 'react-native-vector-icons/Ionicons';
 import auth from "@react-native-firebase/auth";
+import firestore from '@react-native-firebase/firestore';
+
+const db = firestore();
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -31,7 +34,7 @@ const SignUpScreen = () => {
   const { passwordVisibilitytwo, rightIcontwo, handlePasswordVisibilitytwo } =
     useTogglePasswordVisibility();
 
-  const signupbutton = () => {
+  const signupbutton = async () => {
     if (!fullname.trim()) {
       setfullnameaerror(1);
       return;
@@ -60,22 +63,21 @@ const SignUpScreen = () => {
     auth().createUserWithEmailAndPassword(Email,password)
     .then((userCredential) => {
       const user = userCredential.user;
-      return user.updateProfile({
-        displayName: fullname,
-        phoneNumber: mobilenumber,
-        Role: role
-      });
-    })
-    .then(() => {
-      setDisplayAlert(1);
-      console.log('Success');
+      const userData = {
+        fullname: fullname,
+        mobilenumber: mobilenumber,
+        role: role,
+      };
+
+       db.collection(`User/users/${user.uid}`).add(
+        userData,
+       );
     })
     .catch((error) => {
-      console.error(error.message);          
-      setError(error.message);
+      console.error('Error creating user:', error);
     });
-  };
-
+  
+  }
   return (
     <View style={Login.tabminview}>
       <View style={Login.flexrowtwxtandgoogle}>
