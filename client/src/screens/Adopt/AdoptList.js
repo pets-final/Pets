@@ -11,98 +11,7 @@ import messaging from '@react-native-firebase/messaging';
 
 
 const ProductTab = () => {
-  // useEffect(() => {
-  //   // Requesting permission to use push notifications
-  //   const requestUserPermission = async () => {
-  //     const settings = await messaging().requestPermission();
-  
-  //     if (settings) {
-  //       console.log('Permission settings:', settings);
-  //     }
-  //   };
-  
-  //   // Register background handler
-  //   messaging().setBackgroundMessageHandler(async remoteMessage => {
-  //     console.log('Message handled in the background!', remoteMessage);
-  //     // You can also display the notification here
-  //     // Alert.alert('Background Message', JSON.stringify(remoteMessage));
-  //   });
-  
-  //   // Register foreground handler for both notification and data messagesuguigiugiug
-  //   const unsubscribeForeground = messaging().onMessage(async remoteMessage => {
-  //     console.log('Message handled in the foreground!', remoteMessage);
-  //     // Display the notification if it's a notification message
-  //     if (remoteMessage.notification) {
-  //       Alert.alert(remoteMessage.notification.title, remoteMessage.notification.body);
-  //     }
-  //   });
-
-  //   requestUserPermission();
-
-  //   // Get the device token
-  //   const getDeviceToken = async () => {
-  //     const token = await messaging().getToken();
-  //     console.log('Device/**************************************************************************************** Token:', token);
-  //   };
-
-  //   getDeviceToken();
-
-  //   return () => {
-  //     unsubscribeForeground();
-  //   };
-
-  // }, []);
-  // useEffect(() => {
-  //   // Handle app state change
-  //   const handleAppStateChange = (nextAppState) => {
-  //     if (nextAppState === 'active') {
-  //       messaging()
-  //         .getInitialNotification()
-  //         .then(remoteMessage => {
-  //           if (remoteMessage) {
-  //             console.log(
-  //               'Notification caused app to open from quit state:',
-  //               remoteMessage.notification,
-  //             );
-  //             // Display the notification if it's a notification message
-  //             if (remoteMessage.notification) {
-  //               Alert.alert(remoteMessage.notification.title, remoteMessage.notification.body);
-  //             }
-  //           }
-  //         });
-  //     }
-  //   };
-
-  //   AppState.addEventListener('change', handleAppStateChange);
-
-  //   return () => {
-  //     AppState.removeEventListener('change', handleAppStateChange);
-  //   };
-  // }, []);
-  // const sendNotification = async () => {
-  //   try {
-     
-  
-  //     // Get the device token
-  //     const token = await messaging().getToken()
-      
-  //     // Construct the message
-  //     const message = {
-  //       notification: {
-  //         title: 'Title of your notification',
-  //         body: 'Body of your notification',
-  //       },
-  //       token: "cQSWf4JqSU-TijlwWOVMg9:APA91bFCHikL-Nbd2rUrvsXJAiKhSTCyGtrJq88-t-K9OI6h_8K2zWEB4Z_5p_fuDBsTxg2-kniSAybyydXaDnZyW48-mBTx2T4nwW8a4mVfM2Tfs0doqTJOtxhYKOkdfPQmKZpt3CGa",
-  //     };
-  
-  //     // Send the message
-  //     await messaging().sendMessage(message);
-  //     console.log('Notification sent successfully!');
-  //   } catch (error) {
-  //     console.log('Error sending notification:', error);
-  //   }
-  // };
-  // sendNotification()
+ 
   const pricesymboldata ='$';
   const navigation = useNavigation();
   const [hearticon, Sethearticon] = useState(0);
@@ -140,11 +49,13 @@ const ProductTab = () => {
     return (
       
       <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>
-        {console.log("adopt ",adoptPets)}
+        {/* {console.log("adopt ",adoptPets)} */}
         <View style={ProductitemList.bgwhiteboxminview2}>
           <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
             <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
               <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{uri:item.ImgUrl}}/>
+             { console.log("image url",item.ImgUrl)}
+
             </TouchableOpacity>
           </View>
           <TouchableOpacity >

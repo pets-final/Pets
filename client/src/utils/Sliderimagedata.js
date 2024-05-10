@@ -1036,6 +1036,67 @@ export const ProductData = [
         "hospitalname": '(S, Pink Plaid)'
     },
     {
+        "id": 1,
+        "image": images.testpets1,
+        "text": 'Barks & Wags Plaid Pet House',
+        "price": '10.00',
+        "iconplusset": <IconS name="plus" size={20} color={'white'} />,
+        "ratingsset": <Rating
+            type='custom'
+            ratingColor='#FFC000'
+            ratingBackgroundColor='#c8c7c8'
+            ratingCount={5}
+            tintColor={'white'}
+            imageSize={16}
+            startingValue={5}
+            isDisabled={false}
+            style={{ paddingVertical: 5 }} />,
+        "ratingtext": '(4.9)',
+        "hearticon": 'hearto',
+        "unhearticon": 'heart',
+        "hospitalname": '(S, Pink Plaid)'
+    }, {
+        "id": 1,
+        "image": images.testpets1,
+        "text": 'Barks & Wags Plaid Pet House',
+        "price": '10.00',
+        "iconplusset": <IconS name="plus" size={20} color={'white'} />,
+        "ratingsset": <Rating
+            type='custom'
+            ratingColor='#FFC000'
+            ratingBackgroundColor='#c8c7c8'
+            ratingCount={5}
+            tintColor={'white'}
+            imageSize={16}
+            startingValue={5}
+            isDisabled={false}
+            style={{ paddingVertical: 5 }} />,
+        "ratingtext": '(4.9)',
+        "hearticon": 'hearto',
+        "unhearticon": 'heart',
+        "hospitalname": '(S, Pink Plaid)'
+    }, {
+        "id": 1,
+        "image": images.testpets1,
+        "text": 'Barks & Wags Plaid Pet House',
+        "price": '10.00',
+        "iconplusset": <IconS name="plus" size={20} color={'white'} />,
+        "ratingsset": <Rating
+            type='custom'
+            ratingColor='#FFC000'
+            ratingBackgroundColor='#c8c7c8'
+            ratingCount={5}
+            tintColor={'white'}
+            imageSize={16}
+            startingValue={5}
+            isDisabled={false}
+            style={{ paddingVertical: 5 }} />,
+        "ratingtext": '(4.9)',
+        "hearticon": 'hearto',
+        "unhearticon": 'heart',
+        "hospitalname": '(S, Pink Plaid)'
+    },
+    {
         "id": 2,
         "image": images.Product_screen_img2,
         "text": 'Pets Like Dog Combo Dog Harness for Puppy| Easy Walk',

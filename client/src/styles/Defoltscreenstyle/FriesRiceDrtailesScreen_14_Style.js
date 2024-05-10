@@ -129,6 +129,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     width: '100%',
+    height:300,
+
     padding: SH(5)
   },
   setimageviewstyle2: {
@@ -161,6 +163,20 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  setplusbgcolorset2: {
+    backgroundColor: colors.theme_backgound,
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    // borderBottomRightRadius: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    top:"95%",
+    left:200,
+    position: 'absolute',
+    zIndex: 10
   },
   justicenterflexrow: {
     flexDirection: 'row',

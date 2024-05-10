@@ -16,7 +16,7 @@ const doctor = {
   specialty: 'Cardiologist',
   location: 'New York',
   image: 'https://placeimg.com/100/100/people',
-  id: 1,
+  id: 'Qg183pzPiycd8HKclBHWquVFH9b2',
 };
 const db = firestore();
 
@@ -32,10 +32,10 @@ const ChatScreen = () => {
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged((user) => {
       setuser(user);
-      console.log('subscriber',user);
-  
+        console.log(user);
       if (user) {
-        const unsubscribe = db.collection(`chats/${user.uid}_${doctor.id}/messages`)
+      
+          const unsubscribe = db.collection(`chats/SLSwA3222ndTMGd8aKK6qKmdX2G2_${doctor.id}/messages`)
           .orderBy('timestamp')
           .onSnapshot(snapshot => {
             const data = snapshot.docs.map(doc => ({
@@ -43,13 +43,16 @@ const ChatScreen = () => {
               ...doc.data()
             }));
             setMessages(data);
+           
           });
+       
+        
   
         // Cleanup subscription on unmount
         return () => unsubscribe();
       }
     });
-  }, [refetch]);
+  }, []);
   
   const sendMessage = async () => {
     if (message.trim() !== '') {
@@ -60,7 +63,7 @@ const ChatScreen = () => {
         timestamp: localTimestamp
       };
 
-      await db.collection(`chats/${user.uid}_${doctor.id}/messages`).add({
+      await db.collection(`chats/SLSwA3222ndTMGd8aKK6qKmdX2G2_${doctor.id}/messages`).add({
         ...newMessage,
         timestamp: firestore.FieldValue.serverTimestamp()
       });
@@ -75,10 +78,12 @@ const ChatScreen = () => {
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollToEnd({ animated: false });
     }
-  }, [messages]);
+  }, []);
 
   return (
+
     <View style={ChatScreenStyle.minstyleviewphotograpgy}>
+      
       <ScrollView
         ref={scrollViewRef}
         style={{ flex: 0.9 }}
@@ -97,10 +102,10 @@ const ChatScreen = () => {
             </View>
           </View>
         ))}
-      <View style={ChatScreenStyle.postionabsoluteview}>
+       <View style={ChatScreenStyle.postionabsoluteview}>
         <View style={ChatScreenStyle.textmessageview}>
           <View style={ChatScreenStyle.flexrowsetsendmesasagew}>
-            <TextInput
+            <TextInput 
               style={ChatScreenStyle.textinputborderbottom}
               placeholder="Write a reply..."
               placeholderTextColor={'gray'}

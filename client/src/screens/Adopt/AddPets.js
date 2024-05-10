@@ -33,19 +33,16 @@ const AddPetsScreen = () => {
   const [Descriptionerror, setDescriptionerror] = useState(0);
   const [Location, setLocation] = useState('');
   const [locationererror, setlocationererror] = useState(0);
-  const [ImgUrl, setImg] = useState('');
-  const [ImgUrlererror, setUrlImgererror] = useState(0);
   const [Sex, setSex] = useState('');
   const [Sexererror, setSexerror] = useState(0);
-  const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
-  const [imageSource, setImageSource] = useState(null);
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+  // const [image, setImage] = useState(null);
+
+  const [ImgUrl, setImg] = useState('');
+  const [imageSource, setImageSource] = useState(null);
   const [imageUrl, setimageUrl] = useState('https://api.adorable.io/avatars/80/abott@adorable.png');
-
-
-
   const dataBreed = [
     { label: 'Dog', value: 'Dog' },
     { label: 'Cat', value: 'Cat' },
@@ -63,10 +60,6 @@ const AddPetsScreen = () => {
   const validateIsEmail = (item) => {
     SetEmail(item);
   }
-
-
-
-
   const ImagePicker=()=>{
     let option={
       storageOptions: {
@@ -78,7 +71,6 @@ const AddPetsScreen = () => {
       console.log(response.assets[0].uri)
       uploadImage()
     })
-    
 
   }
 
@@ -93,7 +85,7 @@ const AddPetsScreen = () => {
         setUploading(false);       
       } catch (error) {
         console.error('Error uploading image:', error);
-        setImage(null)
+        setImg(null)
       }
 
   };
@@ -190,12 +182,6 @@ const AddPetsScreen = () => {
        
         <Dropdown
           style={[styles.dropdown, isFocus && { borderColor: "#861088" }]}
-        //   placeholderStyle={styles.placeholderStyle}
-        //   selectedTextStyle={styles.selectedTextStyle}
-        //   inputSearchStyle={styles.inputSearchStyle}
-        //   iconStyle={styles.iconStyle}
-        //   search
-        //   searchPlaceholder="Search..."
           data={dataBreed}
           maxHeight={300}
           labelField="label"
@@ -261,28 +247,11 @@ const AddPetsScreen = () => {
          <Text style={Styles.pleseentername}>* Please Enter the sex</Text>
          : null
        }
- 
-
-
 
  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       {imageSource && <Image source={imageSource} style={{ width: 200, height: 200 }} />}
       <Button title="Select Image" onPress={ImagePicker} />
-    </View>
-
-
-
-
-        {/* <View style={[HelpScreenStyle.minflexview2]}>
-            <View style={HelpScreenStyle.minviewsigninscreen2}>
-              <View>
-                <TextInput style={HelpScreenStyle.settextinputwidth2} placeholder="Description"/>
-              </View>
-            </View>
-        </View> */}
-       
-
-         
+    </View>         
 
       <View style={[Styles.flexrowbutton,{paddingTop:"auto"}]}>
           <Button title="Update"
