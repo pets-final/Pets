@@ -321,6 +321,9 @@ const HomeTabset = (props) => {
       </View>
     );
   }
+  let temp = MedicineFalteList
+  temp.length = 2;
+  console.log(temp);
   const doctordatacategoryes = (doctordatacategoryes) => {
     dispatch(get_doctore_category_action(doctordatacategoryes))
     navigation.navigate('')
@@ -416,7 +419,7 @@ const HomeTabset = (props) => {
               </View>
                   
                   <FlatList
-                    data={MedicineFalteList}
+                    data={temp}
                     renderItem={({ item, index }) => MedicineBox(item, index)}
                     keyExtractor={item => item.id}
                     horizontal
