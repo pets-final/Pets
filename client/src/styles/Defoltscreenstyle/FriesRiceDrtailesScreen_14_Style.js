@@ -129,7 +129,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     width: '100%',
-    height:300,
+    // height:300,
 
     padding: SH(5)
   },

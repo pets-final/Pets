@@ -16,7 +16,7 @@ import { utils } from '@react-native-firebase/app';
 const NewProduct = () => {
   
   
-  console.log(user)
+  // console.log(user)
   const [Productname, setproductname] = useState('');
   const [Description, setDescription] = useState('');
   const [Price, setPrice] = useState('');
@@ -67,7 +67,7 @@ const NewProduct = () => {
     }
     launchImageLibrary(option,response=>{
       setimageUrl(response.assets[0].uri)
-      console.log(response.assets[0].uri)
+      // console.log(response.assets[0].uri)
       uploadImage()
     })
 
@@ -79,7 +79,7 @@ const NewProduct = () => {
       try {
         await storage().ref(filename).putFile(uploadUri);
         const url = await storage().ref(filename).getDownloadURL();
-        console.log(url)
+        // console.log(url)
         setImg(url)
         setUploading(false);       
       } catch (error) {
@@ -105,7 +105,7 @@ const addProduct=()=>{
       Size:Quantity,
       UserId:user.uid,
     }).then((res)=>{
-      console.log(user.uid);
+      // console.log(user.uid);
       setPrice('')
       setproductname('')
       setimageUrl('')

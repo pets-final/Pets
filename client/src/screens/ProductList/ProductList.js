@@ -24,6 +24,12 @@ const ProductTab = () => {
 
 
   const getdata=()=>{
+  
+  }
+ 
+
+
+  useEffect(() => {
     const subscriber = firestore()
     .collection('Product')
     .onSnapshot(querySnapshot => {
@@ -39,12 +45,6 @@ const ProductTab = () => {
       setproductlist(productlist);
       setLoading(false);
     });
-  }
- 
-
-
-  useEffect(() => {
-    getdata()
   
    
   }, []);
@@ -71,7 +71,7 @@ const ProductTab = () => {
 
 
 
-            <TouchableOpacity style={ProductitemList.setimageviewstyle} onPress={() => doctordata(item)}>
+            <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
               <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{uri:item.ImgUrl}}/>
              { console.log("image url",item.ImgUrl)}
 
