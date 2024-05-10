@@ -56,7 +56,7 @@ const ProfileTab = ({route}) => {
     navigation.navigate('');
   }
   const notificationscreen = () => {
-    navigation.navigate('');
+    navigation.navigate('NotificationScreen');
   }
   const [setuserdata] = useState([
     {

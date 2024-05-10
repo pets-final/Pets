@@ -21,7 +21,8 @@ export default StyleSheet.create({
   minviewsigninscreen: {
     width: '100%',
     height: '100%',
-    paddingBottom: 30,
+    paddingBottom: 5,
+    paddingTop: 5,
   },
   minflexview: {
     width: '100%',
@@ -59,8 +60,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: ColorTheme.BGFEF7DC,
     paddingHorizontal: '5%',
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingVertical: 10,
     borderBottomColor: ColorTheme.LighGrey,
     borderBottomWidth: 1,
   },
