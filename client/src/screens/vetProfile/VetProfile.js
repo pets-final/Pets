@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, ScrollView, KeyboardAvoidingView, Modal, FlatList, StatusBar, TouchableOpacity, } from "react-native";
+import { Text, View, Image, ScrollView, KeyboardAvoidingView, Modal, FlatList, StatusBar, TouchableOpacity } from "react-native";
 import { AccountTabStyle } from '../../styles';
 import images from '../../index';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -9,33 +9,15 @@ import IconI from 'react-native-vector-icons/Ionicons';
 import { Button, SweetaelertModal } from '../../components';
 import { useNavigation } from '@react-navigation/native';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
-// import { colors } from '../../utils';
-// import { useSelector } from "react-redux";
-// import AppointmentView from './MyVet';
+import AppointmentView from './Myvet';
+import firestore from '@react-native-firebase/firestore'; // Import firestore
+
 const VetProfileTab = () => {
-  const  colorrdata = "#feb344"
+  const colorrdata = "#feb344";
   const navigation = useNavigation();
-  const [DisplayAlert, setDisplayAlert] = useState(0)
+  const [DisplayAlert, setDisplayAlert] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  useEffect(() => {
-    navigation.addListener('focus', () => {
-      setModalVisible(false);
-      setDisplayAlert(0);
-    });
-  }, [navigation]);
-  const paymentscreen = () => {
-    navigation.navigate('');
-  }
-  const bookmarkscreen = () => {
-    navigation.navigate('');
-  }
-  const settingscreen = () => {
-    navigation.navigate('');
-  }
-  const notificationscreen = () => {
-    navigation.navigate('');
-  }
-  const [setuserdata] = useState([
+  const [userSettingsData] = useState([
     {
       "id": 1,
       "title": "my Vet",
@@ -60,11 +42,56 @@ const VetProfileTab = () => {
       "seticonview": <IconR name="chevron-right" size={20} />,
       "url": '',
     }
-  ])
+  ]);
+
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      setModalVisible(false);
+      setDisplayAlert(0);
+    });
+  }, [navigation]);
+
+  const paymentscreen = () => {
+    navigation.navigate('');
+  }
+
+  const bookmarkscreen = () => {
+    navigation.navigate('');
+  }
+
+  const settingscreen = () => {
+    navigation.navigate('');
+  }
+
+  const notificationscreen = () => {
+    navigation.navigate('');
+  }
+
+  // Function to fetch appointments associated with user ID
+  const fetchAppointments = async (userId) => {
+    try {
+      const appointmentsSnapshot = await firestore()
+        .collection('appointments')
+        .where('userId', '==', userId)
+        .get();
+      const appointments = appointmentsSnapshot.docs.map(doc => doc.data());
+      return appointments;
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+      return [];
+    }
+  };
+
+  // Function to handle navigation to MyVet screen
+  const navigateToMyVet = async () => {
+    const dummyUserId = '1'; // Replace with your dummy user ID
+    const appointments = await fetchAppointments(dummyUserId);
+    navigation.navigate('Myvet', { appointments });
+  };
 
   const Userdatatext = (item, index) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate(item.url)}>
+      <TouchableOpacity onPress={navigateToMyVet}>
         <View style={AccountTabStyle.setbgcolordata}>
           <Text style={[AccountTabStyle.usertextstyle, { color: colorrdata }]}>{item.title}</Text>
           <Text style={{ color: colorrdata }}>{item.seticonview}</Text>
@@ -137,13 +164,10 @@ const VetProfileTab = () => {
                   </View>
                 </TouchableOpacity>
               </View>
-            
-  
-
               <FlatList
-                data={setuserdata}
+                data={userSettingsData}
                 renderItem={({ item, index }) => Userdatatext(item, index)}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.id.toString()}
                 numColumns={1}
                 style={AccountTabStyle.flatelistGrid}
               />
@@ -223,4 +247,5 @@ const VetProfileTab = () => {
     </View>
   );
 };
+
 export default VetProfileTab;
