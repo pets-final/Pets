@@ -33,6 +33,7 @@ import AppointContact from './src/screens/AppointContact/Appoint';
 // import VetProfile from './src/screens/vetProfile/VetProfile';
 import AddPetsScreen from './src/screens/Adopt/AddPets';
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
+
 const Stack = createNativeStackNavigator();
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
           options={{headerShown: false}}
           component={LoginandRegistrationScreen}
         />
+
          <Stack.Screen
           name="WelcomeSumnya"
           component={WelcomeSumnya}
@@ -95,6 +97,7 @@ function App() {
             },
           }}
         />
+        
        
        
          <Stack.Screen options={{
