@@ -15,7 +15,7 @@ const doctor = {
   specialty: 'Cardiologist',
   location: 'New York',
   image: 'https://placeimg.com/100/100/people',
-  id: 1,
+  id: 'Qg183pzPiycd8HKclBHWquVFH9b2',
 };
 
 const db = firestore();
@@ -37,18 +37,38 @@ const [refresh,setrefresh]=useState(false)
 
     const subscriber = auth().onAuthStateChanged((user) => {
       setuser(user);
-      console.log('subscriber', user);
+        console.log(user);
+      if (user) {
+      
+          const unsubscribe = db.collection(`chats/SLSwA3222ndTMGd8aKK6qKmdX2G2_${doctor.id}/messages`)
+          .orderBy('timestamp')
+          .onSnapshot(snapshot => {
+            const data = snapshot.docs.map(doc => ({
+              id: doc.id,
+              ...doc.data()
+            }));
+            setMessages(data);
+           
+          });
+       
+        
+  
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+      }
     });
-
-    // Cleanup subscription on unmount
-    return () => unsubscribe();
-  }, [message]);
-
-  const sendMessage = () => {
+  }, []);
+  
+  const sendMessage = async () => {
     if (message.trim() !== '') {
       db.collection(`chats/${user.uid}_${doctor.id}/messages`).add({
         senderId: doctor.id,
         text: message,
+        timestamp: localTimestamp
+      };
+
+      await db.collection(`chats/${user.uid}_${doctor.id}/messages`).add({
+        ...newMessage,
         timestamp: firestore.FieldValue.serverTimestamp()
       });
       setMessage('');
@@ -57,9 +77,21 @@ const [refresh,setrefresh]=useState(false)
     }
   };
 
+  useEffect(() => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({ animated: false });
+    }
+  }, [messages]);
+
   return (
+
     <View style={ChatScreenStyle.minstyleviewphotograpgy}>
-      <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps="handled" contentContainerStyle={ChatScreenStyle.scrollViewContent}>
+      <ScrollView
+        ref={scrollViewRef}
+        style={{ flex: 0.9 }}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={ChatScreenStyle.scrollViewContent}
+      >
         {messages.map((msg, index) => (
           <View key={msg.id} style={[ChatScreenStyle.messageContainer, { alignSelf: msg.senderId === doctor.id ? 'flex-end' : 'flex-start' }]}>
             <View style={[ChatScreenStyle.chartviewsetbgcolor, { backgroundColor: msg.senderId === doctor.id ? '#DCF8C6' : '#E5E5EA' }]}>
@@ -68,10 +100,10 @@ const [refresh,setrefresh]=useState(false)
             </View>
           </View>
         ))}
-      <View style={ChatScreenStyle.postionabsoluteview}>
+       <View style={ChatScreenStyle.postionabsoluteview}>
         <View style={ChatScreenStyle.textmessageview}>
           <View style={ChatScreenStyle.flexrowsetsendmesasagew}>
-            <TextInput
+            <TextInput 
               style={ChatScreenStyle.textinputborderbottom}
               placeholder="Write a reply..."
               placeholderTextColor={'gray'}

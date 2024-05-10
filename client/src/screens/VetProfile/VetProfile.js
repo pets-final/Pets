@@ -6,14 +6,13 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import IconF from 'react-native-vector-icons/Feather';
 import IconR from 'react-native-vector-icons/Entypo';
 import IconI from 'react-native-vector-icons/Ionicons';
-import { Button, SweetaelertModal } from '../../components';
+import Button  from '../../components/Button';
+import SweetaelertModal  from '../../components/SweetAlertModal';
 import { useNavigation } from '@react-navigation/native';
-// import { RouteName } from '../../../routes';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
 // import { colors } from '../../utils';
 // import { useSelector } from "react-redux";
-import AppointmentView from './MyVet';
-const ProfileTab = () => {
+const VetProfileTab = () => {
   const  colorrdata = "#feb344"
   const navigation = useNavigation();
   const [DisplayAlert, setDisplayAlert] = useState(0)
@@ -25,16 +24,16 @@ const ProfileTab = () => {
     });
   }, [navigation]);
   const paymentscreen = () => {
-    navigation.navigate(RouteName.PAYMENTSCREEN);
+    navigation.navigate('');
   }
   const bookmarkscreen = () => {
-    navigation.navigate(RouteName.ALL_BOOK_MARK_SCREEN);
+    navigation.navigate('');
   }
   const settingscreen = () => {
-    navigation.navigate(RouteName.SETTTING_SCREEN);
+    navigation.navigate('');
   }
   const notificationscreen = () => {
-    navigation.navigate(RouteName.NOTIFICATION_SCREEN);
+    navigation.navigate('');
   }
   const [setuserdata] = useState([
     {
@@ -224,4 +223,4 @@ const ProfileTab = () => {
     </View>
   );
 };
-export default ProfileTab;
+export default VetProfileTab;

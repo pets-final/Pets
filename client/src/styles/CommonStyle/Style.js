@@ -423,7 +423,13 @@ export default StyleSheet.create({
     borderRadius: 13,
     marginRight: 12,
   },
+
   imagsetstylefoodyitemdata: {
+    width: 80,
+    height: 80,
+    borderRadius: 100,
+  },
+  imagsetstylefoodyitemdata2: {
     width: 50,
     height: 50,
     borderRadius: 100,

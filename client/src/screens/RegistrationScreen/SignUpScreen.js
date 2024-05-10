@@ -9,6 +9,9 @@ import  SweetaelertModal from '../../components/SweetAlertModal';
 import IconA from 'react-native-vector-icons/EvilIcons';
 import IconG from 'react-native-vector-icons/Ionicons';
 import auth from "@react-native-firebase/auth";
+import firestore from '@react-native-firebase/firestore';
+
+const db = firestore();
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -31,7 +34,7 @@ const SignUpScreen = () => {
   const { passwordVisibilitytwo, rightIcontwo, handlePasswordVisibilitytwo } =
     useTogglePasswordVisibility();
 
-  const signupbutton = () => {
+  const signupbutton = async () => {
     if (!fullname.trim()) {
       setfullnameaerror(1);
       return;
@@ -60,22 +63,21 @@ const SignUpScreen = () => {
     auth().createUserWithEmailAndPassword(Email,password)
     .then((userCredential) => {
       const user = userCredential.user;
-      return user.updateProfile({
-        displayName: fullname,
-        phoneNumber: mobilenumber,
-        Role: role
-      });
-    })
-    .then(() => {
-      setDisplayAlert(1);
-      console.log('Success');
+      const userData = {
+        fullname: fullname,
+        mobilenumber: mobilenumber,
+        role: role,
+      };
+
+       db.collection(`User/users/${user.uid}`).add(
+        userData,
+       );
     })
     .catch((error) => {
-      console.error(error.message);          
-      setError(error.message);
+      console.error('Error creating user:', error);
     });
-  };
-
+  
+  }
   return (
     <View style={Login.tabminview}>
       <View style={Login.flexrowtwxtandgoogle}>
@@ -181,38 +183,8 @@ const SignUpScreen = () => {
         <Text style={Login.pleseentername}>* Please Enter Confirm Password</Text>
         : null
       }
-      <View style={Style.inputUnderLine}>
-        <View style={Login.roleContainer}>
-          <TouchableOpacity
-            style={[Login.roleButton, role === "User" ? Login.selectedRole : null]}
-            onPress={() => { setRole("User"); setRoleError(''); }}
-          >
-            <Text style={Login.roleButtonText}>User</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[Login.roleButton, role === "Vet" ? Login.selectedRole : null]}
-            onPress={() => { setRole("Vet"); setRoleError(''); }}
-          >
-            <Text style={Login.roleButtonText}>Vet</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[Login.roleButton, role === "Shoper" ? Login.selectedRole : null]}
-            onPress={() => { setRole("Shoper"); setRoleError(''); }}
-          >
-            <Text style={Login.roleButtonText}>Shoper</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[Login.roleButton, role === "Hotel" ? Login.selectedRole : null]}
-            onPress={() => { setRole("Hotel"); setRoleError(''); }}
-          >
-            <Text style={Login.roleButtonText}>Hotel</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      {roleError !== '' ?
-        <Text style={Login.pleseentername}>* {roleError}</Text>
-        : null
-      }
+      
+     
       <View style={Login.allreadylogintext} >
         <Text style={Login.settextstyle}>Already a Member? </Text>      
          <TouchableOpacity onPress={() => (navigation.replace("LoginandRegistrationScreen"))}><Text style={[Login.logintext, { color:  "#861088" }]}>Login</Text></TouchableOpacity> 

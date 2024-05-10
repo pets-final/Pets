@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconS from 'react-native-vector-icons/Entypo';
-// import Style from '../styles/CommonStyle/Style';
+import Style from '../styles/CommonStyle/Style';
 import images from '../index';
 import IconR from 'react-native-vector-icons/Ionicons';
 import IconE from 'react-native-vector-icons/Entypo';
 import IconA from 'react-native-vector-icons/MaterialIcons';
 import { Rating } from 'react-native-ratings';
-const Style ={}
+
 export const carouselItems = [
     {
         title: 'Senitizer',
@@ -78,26 +78,36 @@ export const carouselItems = [
 export const MedicineCategoryHomeTab = [
     {
         "id": 1,
-        "image": <Image style={Style.imagsetstylefoodyitemdata} resizeMode="contain" source={images.HomePageCateImg1} />,
-        "text": 'doctors',
+        "image": <Image style={Style.imagsetstylefoodyitemdata2} resizeMode="contain" source={images.HomePageCateImg1} />,
+        "text": 'Food',
     },
     {
         "id": 2,
         "image": <Image style={Style.imagsetstylefoodyitemdata} resizeMode="contain" source={images.HomePageCateImg2} />,
-        "text": 'Shop',
+        "text": 'Treat',
     },
     {
         "id": 3,
         "image": <Image style={Style.imagsetstylefoodyitemdata} resizeMode="contain" source={images.HomePageCateImg3} />,
-        "text": 'Contact us',
+        "text": 'Walking Essential',
 
     },
+   
     {
         "id": 4,
         "image": <Image style={Style.imagsetstylefoodyitemdata} resizeMode="contain" source={images.HomePageCateImg4} />,
-        "text": 'Profile',
+        "text": 'Health',
     },
-   
+    {
+        "id": 5,
+        "image": <Image style={Style.imagsetstylefoodyitemdata} resizeMode="contain" source={images.HomePageCateImg4} />,
+        "text": 'Hygiene',
+    },
+    {
+        "id": 5,
+        "image": <Image style={Style.imagsetstylefoodyitemdata} resizeMode="contain" source={images.HomePageCateImg4} />,
+        "text": 'Suplies',
+    },
  
 ]
 export const MegaMedicine = [
@@ -1016,7 +1026,68 @@ export const ProductCategoryData = [
 export const ProductData = [
     {
         "id": 1,
-        "image": images.Product_screen_img1,
+        "image": images.testpets1,
+        "text": 'Barks & Wags Plaid Pet House',
+        "price": '10.00',
+        "iconplusset": <IconS name="plus" size={20} color={'white'} />,
+        "ratingsset": <Rating
+            type='custom'
+            ratingColor='#FFC000'
+            ratingBackgroundColor='#c8c7c8'
+            ratingCount={5}
+            tintColor={'white'}
+            imageSize={16}
+            startingValue={5}
+            isDisabled={false}
+            style={{ paddingVertical: 5 }} />,
+        "ratingtext": '(4.9)',
+        "hearticon": 'hearto',
+        "unhearticon": 'heart',
+        "hospitalname": '(S, Pink Plaid)'
+    },
+    {
+        "id": 1,
+        "image": images.testpets1,
+        "text": 'Barks & Wags Plaid Pet House',
+        "price": '10.00',
+        "iconplusset": <IconS name="plus" size={20} color={'white'} />,
+        "ratingsset": <Rating
+            type='custom'
+            ratingColor='#FFC000'
+            ratingBackgroundColor='#c8c7c8'
+            ratingCount={5}
+            tintColor={'white'}
+            imageSize={16}
+            startingValue={5}
+            isDisabled={false}
+            style={{ paddingVertical: 5 }} />,
+        "ratingtext": '(4.9)',
+        "hearticon": 'hearto',
+        "unhearticon": 'heart',
+        "hospitalname": '(S, Pink Plaid)'
+    }, {
+        "id": 1,
+        "image": images.testpets1,
+        "text": 'Barks & Wags Plaid Pet House',
+        "price": '10.00',
+        "iconplusset": <IconS name="plus" size={20} color={'white'} />,
+        "ratingsset": <Rating
+            type='custom'
+            ratingColor='#FFC000'
+            ratingBackgroundColor='#c8c7c8'
+            ratingCount={5}
+            tintColor={'white'}
+            imageSize={16}
+            startingValue={5}
+            isDisabled={false}
+            style={{ paddingVertical: 5 }} />,
+        "ratingtext": '(4.9)',
+        "hearticon": 'hearto',
+        "unhearticon": 'heart',
+        "hospitalname": '(S, Pink Plaid)'
+    }, {
+        "id": 1,
+        "image": images.testpets1,
         "text": 'Barks & Wags Plaid Pet House',
         "price": '10.00',
         "iconplusset": <IconS name="plus" size={20} color={'white'} />,

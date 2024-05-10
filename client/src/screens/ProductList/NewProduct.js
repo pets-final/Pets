@@ -1,43 +1,36 @@
 import React, { useState,useEffect} from "react";
-import { View, TextInput, Text, Platform, KeyboardAvoidingView } from "react-native";
+import { View, TextInput, Text,TouchableOpacity, Platform, KeyboardAvoidingView,ScrollView } from "react-native";
 import Styles from '../../styles/LoginRegisterStyle/LoginScreenStyle';
 import Style from '../../styles/CommonStyle/Style';
 import  Button  from '../../components/Button';
-// import { RouteName } from '../../routes';
-// import RNPickerSelect from 'react-native-picker-select';
+import RNPickerSelect from 'react-native-picker-select';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
-import { ScrollView } from "react-native-gesture-handler";
+import storage from '@react-native-firebase/storage';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
-
+import { utils } from '@react-native-firebase/app';
 
 
 
 const NewProduct = () => {
-
-  const [user, setUser] = useState(null); // State to 
   
-  useEffect(() => {
-    // Get the current user when the component mounts
-    const subscriber = auth().onAuthStateChanged((user) => {
-      setUser(user);
-    });
-    // Cleanup subscription on unmount
-    return subscriber;
-  }, []);
-
-  console.log(user)
+  
+  // console.log(user)
   const [Productname, setproductname] = useState('');
-  const [imageUrl, setimageUrl] = useState('');
   const [Description, setDescription] = useState('');
   const [Price, setPrice] = useState('');
   const [Quantity,setQuantity]= useState('')
   const [selectedValue, setSelectedValue] = useState(null);
   const [AdresseShop,setAdresseShop]=useState('')
   const [ShopName,setShopName]=useState('')
+  const [uploading, setUploading] = useState(false);
+  const [ImgUrl, setImg] = useState('');
+  const [imageSource, setImageSource] = useState(null);
+  const [imageUrl, setimageUrl] = useState('https://api.adorable.io/avatars/80/abott@adorable.png');
+
   const placeholder = {
-    label: 'Select an option...',
+    label: 'Select an Category...',
     value: null,
   };
   const options = [
@@ -48,12 +41,63 @@ const NewProduct = () => {
     { label: 'Hygiene', value: 'Hygiene' },
     { label: 'Supplies', value: 'Supplies' },
   ];
+
+
+
+
+
+
+
+  const [user, setUser] = useState(null); // State to 
+    
+  useEffect(() => {
+    // Get the current user when the component mounts
+    const subscriber = auth().onAuthStateChanged((user) => {
+      setUser(user);
+    });
+    // Cleanup subscription on unmount
+    return subscriber;
+  }, []);
+
+  const ImagePicker=()=>{
+    let option={
+      storageOptions: {
+        path: 'image',
+      },
+    }
+    launchImageLibrary(option,response=>{
+      setimageUrl(response.assets[0].uri)
+      // console.log(response.assets[0].uri)
+      uploadImage()
+    })
+
+  }
+
+  const uploadImage = async () => {
+ const uploadUri=imageUrl;
+ let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1); 
+      try {
+        await storage().ref(filename).putFile(uploadUri);
+        const url = await storage().ref(filename).getDownloadURL();
+        // console.log(url)
+        setImg(url)
+        setUploading(false);       
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        setImg(null)
+      }
+
+  };
+
+
+  
+
 const addProduct=()=>{
     firestore().collection('Product').add({
       AdresseShop:AdresseShop,
       Category:selectedValue,
       Description:Description,
-      ImgUrl:imageUrl,
+      ImgUrl:ImgUrl,
       Name:Productname,
       Price:Price,
       Promos:10,
@@ -61,7 +105,7 @@ const addProduct=()=>{
       Size:Quantity,
       UserId:user.uid,
     }).then((res)=>{
-      console.log(user.uid);
+      // console.log(user.uid);
       setPrice('')
       setproductname('')
       setimageUrl('')
@@ -88,9 +132,7 @@ const addProduct=()=>{
 
     })
   }
-  useEffect(() => {
- 
-  }, []);
+
   return (
 <GestureHandlerRootView style={{flex: 1}}>
 <KeyboardAvoidingView
@@ -100,9 +142,7 @@ const addProduct=()=>{
     <View style={Styles.mincolorwhite}>
       
       <View style={Styles.tabminview}>
-      <View>
-        <Text style={{ color: "#861088", fontWeight: "bold" }}>ADD NEW PRODUCT</Text>
-      </View>
+    
       <ScrollView>
 
       <View style={Style.inputUnderLine}>
@@ -124,7 +164,7 @@ const addProduct=()=>{
         </View>
 
         <View>
-          <Text>Select Category :</Text>
+          
             <RNPickerSelect
               placeholder={placeholder}
               items={options}
@@ -176,12 +216,14 @@ const addProduct=()=>{
 
 
     
-        <View style={Style.inputUnderLine}>
-          <TextInput
-            placeholder="Image Url"
-            style={Style.inputtextstyle}
-            placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
-            onChangeText={(value) => {  setimageUrl(value) }}
+
+        <View>
+     
+
+          <Button  style={{top:10} } title=" Add Product Image "
+         onPress={()=>ImagePicker()}
+            buttonStyle={Styles.setbuttonborderradius}
+            buttonTextStyle={Styles.textcolorsetwhite}
           />
         </View>
 

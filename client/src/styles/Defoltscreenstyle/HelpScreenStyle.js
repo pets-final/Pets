@@ -25,6 +25,11 @@ export default StyleSheet.create({
     height:'100%',
     marginHorizontal: '5%',
   },
+  minviewsigninscreen2: {
+    width: '100%',
+    height:'100%',
+    marginHorizontal: '5%',
+  },
   minflexview: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -32,6 +37,15 @@ export default StyleSheet.create({
     width: '100%',
     height: '100%',
     paddingBottom:200,
+    paddingTop:5,
+  },
+  minflexview2: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: "auto",
+    paddingBottom:50,
     paddingTop:5,
   },
   settextinputwidth: {
@@ -42,6 +56,14 @@ export default StyleSheet.create({
     paddingRight:10,
     color: ColorTheme.TextGreyColor,
     fontFamily:Fonts.Metropolis_Medium,
+  },
+  settextinputwidth2: {
+    backgroundColor: "#f2f2f2",
+    borderRadius:7,
+    paddingBottom:100,   
+    color: ColorTheme.TextGreyColor,
+    fontFamily:Fonts.Metropolis_Medium,
+    width:"100%"
   },
   settextinputtext: {
     fontFamily:Fonts.Metropolis_Medium,

@@ -1,4 +1,6 @@
 const image = {
+  app_logo: require('./80by80.png'),
+  testpets1: require('./testpets1.jpeg'),
   app_logo: require('./logo.png'),
   Googleimg_set: require('./googleicon.png'),
   Search_image: require('./Searchimage.png'),
@@ -74,7 +76,7 @@ const image = {
   videoimg5: require('./80by80.png'),
   videoimg6: require('./80by80.png'),
   Videoplaymg: require('./200by150.png'),
-  HomePageCateImg1: require('./test.png'),
+  HomePageCateImg1: require('./categoryfood.png'),
   HomePageCateImg2: require('./test.png'),
   HomePageCateImg3: require('./test.png'),
   HomePageCateImg4: require('./test.png'),

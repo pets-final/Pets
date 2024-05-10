@@ -6,7 +6,8 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import IconF from 'react-native-vector-icons/Feather';
 import IconR from 'react-native-vector-icons/Entypo';
 import IconI from 'react-native-vector-icons/Ionicons';
-import { Button, SweetaelertModal } from '../../components';
+import Button  from '../../components/Button';
+import SweetaelertModal  from '../../components/SweetAlertModal';
 import { useNavigation } from '@react-navigation/native';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
 import auth from '@react-native-firebase/auth';
@@ -72,9 +73,9 @@ const ProfileTab = ({route}) => {
     },
     {
       "id": 3,
-      "title": "Help",
+      "title": "Cart",
       "seticonview": <IconR name="chevron-right" size={20} />,
-      "url": '',
+      "url": 'cart',
     }
   ])
 
@@ -103,7 +104,7 @@ const ProfileTab = ({route}) => {
               <View style={[AccountTabStyle.flexrowtwxtspace, AccountTabStyle.bgcolorset]}>
                 <Text style={AccountTabStyle.persnaltext}>Personal details</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
-                  <Text style={[AccountTabStyle.edittextset, { color: colorrdata }]}>Edit</Text>
+                  <Text style={[AccountTabStyle.edittextset, { color: "#861088" }]}>Edit</Text>
                 </TouchableOpacity>
               </View>
               <View style={AccountTabStyle.useraccountwhitebox}>

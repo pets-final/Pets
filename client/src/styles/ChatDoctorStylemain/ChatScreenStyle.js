@@ -10,6 +10,8 @@ export const ChatScreenStyle= StyleSheet.create({
   scrollViewContent: {
     flexGrow: 1,
     justifyContent: 'flex-end',
+    marginBottom:40,
+    paddingBottom:90
   },
   messageContainer: {
     marginBottom: 10,

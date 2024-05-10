@@ -421,7 +421,8 @@ export default StyleSheet.create({
     marginHorizontal: SH(5),
     backgroundColor: '#f3f3f3',
     borderRadius: 7,
-    paddingVertical: SH(5)
+    paddingVertical: SH(5),
+    height:120
   },
   widtsetnew: {
     width: 77,

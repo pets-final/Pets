@@ -6,7 +6,7 @@ import images from '../../index';
 import { PaymentHistoryStyle, ProductitemList} from '../../styles';
 import {ChatDoctorStyle} from '../../styles/ChatDoctorStylemain/ChatDoctorStyle'
 import IconA from 'react-native-vector-icons/dist/AntDesign';
-import { Button } from '../../components';
+import  Button  from '../../components/Button';
 
 
 

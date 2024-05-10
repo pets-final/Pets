@@ -6,8 +6,8 @@ import Icon from 'react-native-vector-icons/Entypo';
 import IconM from 'react-native-vector-icons/MaterialIcons';
 import IconA from 'react-native-vector-icons/AntDesign';
 import Style from '../../styles/CommonStyle/Style';
-import { RouteName } from "../../routes";
-import { Button, SweetaelertModal } from '../../components';
+import Button  from '../../components/Button';
+import SweetaelertModal  from '../../components/SweetAlertModal';
 
 
 const ForgotPassword = () => {
