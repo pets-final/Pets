@@ -85,23 +85,20 @@ const AddPetsScreen = () => {
   }
 
   const uploadImage = async () => {
- const uploadUri=imageUrl;
- let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
- 
-  
-      try {
-        await storage().ref(filename).putFile(uploadUri);
-        setUploading(false);
-       
- 
-  
-       
-      } catch (error) {
-        console.error('Error uploading image:', error);
-        setImage(null)
-      }
-
-  };
+    const uploadUri=imageUrl;
+    let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1); 
+         try {
+           await storage().ref(filename).putFile(uploadUri);
+           const url = await storage().ref(filename).getDownloadURL();
+           console.log(url)
+           setImg(url)
+           setUploading(false);
+         } catch (error) {
+           console.error('Error uploading image:', error);
+           setImage(null)
+         }
+   
+     };
 
 
 
