@@ -40,6 +40,7 @@ const ConformLocation = () => {
           latitudeDelta: 0.001,
           longitudeDelta: 0.001,
         });
+
         getAddressFromCoords(crd.latitude, crd.longitude);
       }
     })
