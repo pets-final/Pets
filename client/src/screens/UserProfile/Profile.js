@@ -51,9 +51,6 @@ const ProfileTab = ({route}) => {
         return () => unsubscribe();
       }
     });
-    if(route.params?.key){
-      setIsFilled(route.params.key)
-    }
     return subscriber;
   }, []);
 
@@ -93,7 +90,7 @@ const ProfileTab = ({route}) => {
 
   const Userdatatext = (item, index) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate(item.url)}>
+      <TouchableOpacity onPress={() => navigation.navigate(item.url,{user:User})}>
         <View style={AccountTabStyle.setbgcolordata}>
           <Text style={[AccountTabStyle.usertextstyle, { color: colorrdata }]}>{item.title}</Text>
           <Text style={{ color: colorrdata }}>{item.seticonview}</Text>
@@ -124,7 +121,7 @@ const ProfileTab = ({route}) => {
                 <View style={AccountTabStyle.fleximageandtext}>
 
                   <TouchableOpacity>
-                    <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={images.Ningthty_img} />
+                    <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={{ uri: User.ImgUrl}} />
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
                     <Text style={AccountTabStyle.sumanyatextset}>{ User?.fullname}</Text>

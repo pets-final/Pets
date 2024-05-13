@@ -12,7 +12,8 @@ import firestore from '@react-native-firebase/firestore';
 import images from '../../index';
 const db = firestore();
 
-const Cart = () => {
+const Cart = ({route}) => {
+  
   const  colorrdata = "#861088"
   const pricesymboldata  = '$'
 
@@ -199,7 +200,7 @@ const Render = ({item,index})=>{
             <Button title="Checkout"
               buttonTextStyle={CartTabStyle.textstylepayment}
               buttonStyle={{ backgroundColor: colorrdata }}
-              onPress={() => navigation.navigate('checkout',{totalPrice:totalPrice,cartItems:cartItems})}
+              onPress={() => navigation.navigate('checkout',{totalPrice:totalPrice,cartItems:cartItems,user:route.params.user})}
             />
           </View>
         </View>
