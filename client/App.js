@@ -14,7 +14,7 @@ import Category from './src/screens/Adopt/AdoptList';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
-import MyVet from './src/screens/VetProfile/Myvet'
+import MyVet from './src/screens/VetProfile/MyVet'
 import AppointContact from './src/screens/AppointContact/Appoint';
 import VetProfileTab from './src/screens/VetProfile/VetProfile'
 import map from './src/screens/Map/map';
@@ -33,7 +33,7 @@ import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
 import NewProduct from './src/screens/ProductList/NewProduct'
 import AdoptList from './src/screens/Adopt/AdoptList';
-import AppointContact from './src/screens/AppointContact/Appoint';
+// import AppointContact from './src/screens/AppointContact/Appoint';
 // import VetProfile from './src/screens/vetProfile/VetProfile';
 import AddPetsScreen from './src/screens/Adopt/AddPets';
 import NotificationScreen from './src/screens/UserProfile/notification';
@@ -327,7 +327,7 @@ function App() {
             },
           }}
         />
-         <Stack.Screen options={{
+         {/* <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
           title: 'ChatScreen',
@@ -338,7 +338,7 @@ function App() {
             fontSize: 20,
             marginLeft: 17,
           },
-        }}  name="ChatScreen" component={ChatScreen} />
+        }}  name="ChatScreen" component={ChatScreen} /> */}
         <Stack.Screen
           name="AddPetsScreen"
           component={AddPetsScreen}
