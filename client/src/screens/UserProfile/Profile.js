@@ -12,8 +12,10 @@ import { useNavigation } from '@react-navigation/native';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
 import auth from '@react-native-firebase/auth';
 import { CommonActions } from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
+
+const db = firestore();
 const ProfileTab = ({route}) => {
-  console.log('route.params.key',route.params?.key);
 
   const  colorrdata = "#861088"
   const navigation = useNavigation();
@@ -35,9 +37,19 @@ const ProfileTab = ({route}) => {
     }
   };
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged((user) => {
-      setUser(user);
-      console.log('subscriber',user);
+    const subscriber = auth().onAuthStateChanged((authUser) => {
+      if(authUser){
+        const unsubscribe = db.collection('users').doc(authUser.uid).onSnapshot((doc) => {
+          if (doc.exists) {
+            const userData = doc.data()
+            setUser(userData);
+            console.log("Current data: ", userData);
+          } else {
+            console.log("No such document!");
+          }
+        });
+        return () => unsubscribe();
+      }
     });
     if(route.params?.key){
       setIsFilled(route.params.key)
@@ -56,7 +68,7 @@ const ProfileTab = ({route}) => {
     navigation.navigate('');
   }
   const notificationscreen = () => {
-    navigation.navigate('');
+    navigation.navigate('NotificationScreen');
   }
   const [setuserdata] = useState([
     {
@@ -115,11 +127,11 @@ const ProfileTab = ({route}) => {
                     <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={images.Ningthty_img} />
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
-                    <Text style={AccountTabStyle.sumanyatextset}>{ User?.displayName}</Text>
+                    <Text style={AccountTabStyle.sumanyatextset}>{ User?.fullname}</Text>
                     <Text style={AccountTabStyle.setgimailtext}>{ User?.email}</Text>
                     <Text style={AccountTabStyle.setgimailtext}>Verified : {isFilled ? 'Yes' : 'No'}</Text>
-                    <Text style={AccountTabStyle.setgimailtextwo}>+91 xxxxxxxxxxx</Text>
-                    <Text style={AccountTabStyle.addreshtext}>1417 Timberbrook Lane, Denver, CO 80204, United States</Text>
+                    <Text style={AccountTabStyle.setgimailtextwo}>{User?.mobilenumber}</Text>
+                    <Text style={AccountTabStyle.addreshtext}>{User?.address}</Text>
                   </View>
                 </View>
               </View>
