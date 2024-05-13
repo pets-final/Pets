@@ -13,6 +13,40 @@ export default StyleSheet.create({
    bgcolorset: {
     backgroundColor: ColorTheme.BGScreen
   },
+  container: {
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    padding: 20,
+    backgroundColor: '#f8f8f8',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  image: {
+    width: 200, 
+    height: 200, 
+    marginBottom: 20,
+    borderRadius: 100
+  },
+  title: {
+    fontSize: 24, 
+    fontWeight: 'bold', 
+    marginBottom: 10,
+    color: '#333'
+  },
+  subtitle: {
+    fontSize: 16, 
+    textAlign: 'center',
+    color: '#666',
+    marginHorizontal: 20,
+    marginBottom: 20
+  },
   minviewsigninscreen: {
     width: '100%',
     height: '100%'

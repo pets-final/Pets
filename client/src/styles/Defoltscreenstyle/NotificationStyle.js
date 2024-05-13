@@ -15,6 +15,42 @@ export default StyleSheet.create({
     height: '100%',
     width: '100%',
   },
+  container: {
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    padding: 20,
+    backgroundColor: '#f8f8f8',
+  },
+  image: {
+    width: 200, 
+    height: 200, 
+    marginBottom: 20,
+    borderRadius: 100
+  },
+  title: {
+    fontSize: 24, 
+    fontWeight: 'bold', 
+    marginBottom: 10,
+    color: '#333'
+  },
+  subtitle: {
+    fontSize: 16, 
+    textAlign: 'center',
+    color: '#666',
+    marginHorizontal: 20,
+    marginBottom: 20
+  },
+  button: {
+    backgroundColor: '#FF6347',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18
+  },
   bgcolorset: {
     backgroundColor: ColorTheme.BGScreen
   },

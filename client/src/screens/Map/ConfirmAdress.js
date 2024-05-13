@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Text, View, Image, ScrollView, KeyboardAvoidingView, StatusBar, TouchableOpacity, } from "react-native";
 import { WelcomeSumnaya } from '../../styles';
 import images from '../../index';
@@ -7,7 +7,9 @@ import { Style } from '../../styles';
 import IconF from 'react-native-vector-icons/Feather';
 import { Fonts } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
-
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+const db = firestore();
 const WelcomeSumnya = ({route}) => {
   const { address } = route.params || {}
    
@@ -15,7 +17,25 @@ const WelcomeSumnya = ({route}) => {
     
   const  colorrdata = "#861088"
   const navigation = useNavigation();
- 
+  const [user, setuser] = useState(null);
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged((user) => {
+      setuser(user);
+        console.log(user)
+    });
+  }, []);
+  const handleContiue = ()=>{
+    db.collection('users').doc(user.uid).update({
+      address: address,
+    }).then(() => {
+      navigation.navigate('tab');
+    
+    })
+    }
+   const Homescreendiraction =()=>{
+    navigation.navigate('tab');
+   }
 
   return (
     <View style={[WelcomeSumnaya.minstyleviewphotograpgy, { backgroundColor: colorrdata }]}>
@@ -71,7 +91,7 @@ const WelcomeSumnya = ({route}) => {
         </ScrollView>
 
                   <Button title="continue"
-                    onPress={() =>navigation.navigate('tab') }
+                    onPress={() =>handleContiue() }
                     imagesource={images.Three_Slider}
                     buttonStyle={WelcomeSumnaya.buttonsearchstyle}
                     buttonTextStyle={{
@@ -80,6 +100,8 @@ const WelcomeSumnya = ({route}) => {
                       fontSize: 17,
                       fontFamily: Fonts.Poppins_Medium,
                       color: colorrdata,
+                      disable:true
+                    
                     }}
 
                   />
