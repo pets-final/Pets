@@ -34,6 +34,7 @@
     "jsonwebtoken": "^9.0.2",
     "lottie-react-native": "^6.7.2",
     "metro": "^0.80.8",
+    "nodemailer": "^6.9.13",
     "npm": "^10.7.0",
     "react": "18.2.0",
     "react-native": "0.74.0",
