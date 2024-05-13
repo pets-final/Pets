@@ -3,19 +3,17 @@ import { Text, View, TouchableOpacity, } from "react-native";
 import Styles from '../styles/Tab/HometabStyle';
 import IconM from 'react-native-vector-icons/Feather';
 import IconP from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
 import NavigationDrawerStructure from './HeaderSidemenuIcon'
+import IconF from 'react-native-vector-icons/dist/FontAwesome';
 
 
-const SearchHeaderScreen = () => {
-  const navigation = useNavigation();
+const SearchHeaderScreen = ({navigation}) => {
+  console.log('navigation',navigation);
   return (
     <View>
-
       <View style={Styles.minheaderflexview}>
-        {/* <TouchableOpacity style={Styles.flexhomeimgandtext} onPress={() => navigation.navigate(RouteName.EDIT_LOCATION_SCREEN)}> */}
         <TouchableOpacity style={Styles.flexhomeimgandtext} onPress={() => navigation.navigate()}>
-      <NavigationDrawerStructure/>
+        <NavigationDrawerStructure navigationProps={navigation} />
           <View>
             <IconM style={Styles.homeimagstyle} name="home" size={25} color={"#861088"} />
           </View>
@@ -24,6 +22,13 @@ const SearchHeaderScreen = () => {
             <Text style={[Styles.addreshtext, { color: "#861088" }]}>1417 Timberbrook...</Text>
           </View>
         </TouchableOpacity>
+        <View style={{marginRight:30}}>
+          <TouchableOpacity onPress={()=>{
+            navigation.navigate('cart')
+          }}>
+            <IconF name="shopping-cart" size={30} color="#000" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

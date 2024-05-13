@@ -12,17 +12,21 @@ import auth from '@react-native-firebase/auth'; // Import the auth module
 import HeaderScreenAddress from '../../components/HeaderScreenAddress'
 import firestore from '@react-native-firebase/firestore';
 import image from '../../images';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 const db = firestore();
 
 
 const HomeTabset = (props) => {
+  const insets = useSafeAreaInsets();
 
-  const getdatatest= async ()=>{
-    const usersCollection =  await firestore().collection('User').get();
-    console.log("all ifno ",usersCollection.docs[0].data());
-
+  const getdatatest = async () => {
+    const currentUser = auth().currentUser;
+    if (currentUser) {
+      const userDoc = await firestore().collection('User').doc(currentUser.uid).get();
+      console.log("user info", userDoc.data());
+    }
   }
   const { navigation } = props;
  
@@ -40,7 +44,11 @@ const HomeTabset = (props) => {
     getdatatest()
     const subscriber = auth().onAuthStateChanged((user) => {
       setUser(user);
-     
+      console.log('subscriber',user);
+      const r = db.collection('users').doc(user.uid).onSnapshot((doc) => {
+        console.log('User:', doc.data());
+        setUser(doc.data());
+      });
     });
     // Cleanup subscription on unmount
     return subscriber;
@@ -366,8 +374,8 @@ const HomeTabset = (props) => {
   }
 
   return (
-    <View>
-      <HeaderScreenAddress/>
+<View style={{ flex: 1, paddingBottom: insets.bottom + 50}}>
+      <HeaderScreenAddress navigation={navigation}/>
     <View style={[Styles.minstyleviewphotograpgy, Styles.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
       <ScrollView
