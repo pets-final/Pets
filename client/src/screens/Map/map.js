@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import Geocoder from 'react-native-geocoding';
 import env from '../../../env'
 Geocoder.init(env.GOOGLE_MAPS_API_KEY);
-const ConformLocation = () => {
+const ConformLocation = ({route}) => {
   const colorrdata = "#861088";
   const navigation = useNavigation();
   const OnLoginPress = () => {
@@ -29,6 +29,7 @@ const ConformLocation = () => {
   });
 
   const [address, setAddress] = useState('');
+  const [back, setback] = useState('');
 
   useEffect(() => {
     Geolocation.getCurrentPosition((pos) => {
@@ -42,6 +43,12 @@ const ConformLocation = () => {
         });
 
         getAddressFromCoords(crd.latitude, crd.longitude);
+        if(route.params?.back){
+          setback('checkout', { address:address })
+        }
+        else {
+          setback('WelcomeSumnya')
+        }
       }
     })
   }, []);
@@ -96,7 +103,7 @@ const ConformLocation = () => {
           </View>
         </KeyboardAvoidingView>
       </ScrollView>
-      <TouchableOpacity onPress={() => OnLoginPress()} style={Conformlocation.settextstyle}>
+      <TouchableOpacity onPress={() => navigation.goBack({address:address})} style={Conformlocation.settextstyle}>
         <View style={[Conformlocation.setbgcolorviewtwoview, { backgroundColor: colorrdata }]}>
           <Text style={Conformlocation.textstyle}>
             <IconH name="chevrons-left" size={27} color="white" />
@@ -125,7 +132,7 @@ const ConformLocation = () => {
           <View>
             <Button title="Confirm Location "
               buttonStyle={{ backgroundColor: colorrdata }}
-              onPress={() => navigation.navigate('WelcomeSumnya', { address })}
+              onPress={() => navigation.navigate(back, { address })}
             />
           </View>
         </View>

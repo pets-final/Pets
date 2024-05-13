@@ -23,7 +23,7 @@ const NotificationScreen = ({navigation}) => {
   const [lastDoc, setLastDoc] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-
+    
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(user => {
       if (user) {

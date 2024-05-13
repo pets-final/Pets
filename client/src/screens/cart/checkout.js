@@ -16,18 +16,26 @@ import images from '../../index';
 const CheckOutScreen = ({ route }) => {
   const totalPrice = route.params?.totalPrice;
   const cartItems = route.params?.cartItems;
-  console.log('total',totalPrice);
+  console.log('dddddddddddddd',route.params.address);
   const colorrdata = "#861088"
   const  pricesymboldata = '$'
   const navigation = useNavigation();
   const [DisplayAlert, setDisplayAlert] = useState(0)
   const [count, setCount] = useState(1);
   const [Applycoupon, setApplycoupon] = useState(0);
-  let PriceSymbol = '$';
-
+  const [userAddress, setuserAddress] = useState(0);
+  let PriceSymbol = '$'
+  useEffect(() => {
+    if(route.params.address){
+      setuserAddress(route.params.address);
+    }
+    else { 
+      setuserAddress(route.params.user.address);
+    }
+  }, [route.params.address])
   const Render = ({item,index})=>{
     return (
-      <View style={[CartTabStyle.flexminviewcount, CartTabStyle.bgcolorset]}>
+      <View style={[CartTabStyle.flexminviewcount, CartTabStyle.bgcolorset]}> 
       <View style={CartTabStyle.flexiconandimagetext}>
         <View>
           <Image style={CartTabStyle.setimagehightwidth} resizeMode="contain" source={item.image} />
@@ -83,11 +91,11 @@ const CheckOutScreen = ({ route }) => {
                         <IconW name="md-home-outline" size={27} color={'white'} />
                       </View>
                       <View>
-                        <Text style={Styles.satyanilayam}>1417 Timberbrook Lane</Text>
-                        <Text style={Styles.homeaddreshtext}>Denver, CO 80204, United States</Text>
+                        <Text style={Styles.satyanilayam}>{userAddress}</Text>
+                        
                       </View>
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate(RouteName.EDIT_LOCATION_SCREEN)}>
+                    <TouchableOpacity onPress={() => navigation.navigate('map',{back:'checkout'})}>
                       <Icon name='edit' size={25} color={'white'} />
                     </TouchableOpacity>
                   </View>
