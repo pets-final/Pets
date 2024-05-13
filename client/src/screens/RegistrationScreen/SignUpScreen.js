@@ -65,9 +65,15 @@ const SignUpScreen = () => {
 
       };
 
+   user.sendEmailVerification()
+
+
+      
       db.collection('users').doc(user.uid).set(userData).then(() => {
         setDisplayAlert(1);
+        //  sendEmailVerification(user.email)
       })
+
     })
     .catch((error) => {
       console.error('Error creating user:', error);
