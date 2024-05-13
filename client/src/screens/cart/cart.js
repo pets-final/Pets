@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image,FlatList, ScrollView, KeyboardAvoidingView, TextInput, StatusBar, TouchableOpacity, } from "react-native";
+import { Text, View, Image,FlatList, ActivityIndicator,ScrollView, KeyboardAvoidingView, TextInput, StatusBar, TouchableOpacity, } from "react-native";
 import { CartTabStyle } from '../../styles';
 import Icon from 'react-native-vector-icons/Feather';
 import IconA from 'react-native-vector-icons/Entypo';
@@ -7,7 +7,6 @@ import IconF from 'react-native-vector-icons/AntDesign';
 import  Button  from '../../components/Button';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth'; // Import the auth module
-
 import firestore from '@react-native-firebase/firestore';
 
 import images from '../../index';
@@ -21,39 +20,11 @@ const Cart = () => {
   const [DisplayAlert, setDisplayAlert] = useState(0)
   const [count, setCount] = useState(1);
   const [Applycoupon, setApplycoupon] = useState(0);
-  const [cartItems, setCartItems] = useState( [
-    {
-      id: '1',
-      name: 'Barks & Wags Plaid Pet House',
-      image: images.Cart_screen_img1,
-      price: 15,
-      count: 1
-    },
-    {
-      id: '2',
-      name: 'Dog Food - Chicken & Egg, Puppy',
-      image: images.Cart_screen_img2,
-      price: 10,
-      count: 1
-    },
-    {
-      id: '3',
-      name: 'Moochie Beauty skin & coat',
-      image: images.Cart_screen_img3,
-      price: 5,
-      count: 1
-    },
-    {
-      id: '4',
-      name: 'Summer Sunglasses',
-      image: images.Cart_screen_img4,
-      price: 11,
-      count: 1
-    }
-  ],);
+  const [cartItems, setCartItems] = useState([]);
   const [user, setUser] = useState(null); // State to hold the user object 
   const [total, setTotal] = useState(0); // State to hold the user object 
   const [counts, setCounts] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   
 // When you want to increment the count of an item, you can do something like this:
 function incrementCount(itemId) {
@@ -92,6 +63,7 @@ const getAllData = async (user) => {
       ...doc.data() // Document data
     }));
     setCartItems(data);
+    setIsLoading(false);
   }
 }
 
@@ -101,15 +73,27 @@ function decrementCount(itemId) {
     [itemId]: (prevCounts[itemId] || 0) - 1,
   }));
 }
-
+const EmptyCart = () => (
+  <View style={CartTabStyle.container}>
+    <Image 
+      source={{ uri: 'https://assets.materialup.com/uploads/16e7d0ed-140b-4f86-9b7e-d9d1c04edb2b/preview.png' }} 
+      style={CartTabStyle.image} 
+    />
+    <Text style={CartTabStyle.title}>Your cart is empty!</Text>
+    <Text style={CartTabStyle.subtitle}>Looks like you haven't added anything to your cart yet.</Text>
+    <Button title="Go to Shop" onPress={() => navigation.navigate('tab')} />
+  </View>
+);
 const Render = ({item,index})=>{
     return (
       <View style={[CartTabStyle.flexminviewcount, CartTabStyle.bgcolorset]}>
+    
       <View style={CartTabStyle.flexiconandimagetext}>
         <View>
           <Image style={CartTabStyle.setimagehightwidth} resizeMode="contain" source={item.image} />
         </View>
         <View>
+          
 
           <Text style={CartTabStyle.pistahouse}>{item.name}</Text>
         </View>
@@ -139,7 +123,9 @@ const Render = ({item,index})=>{
 
   return (
     <View style={[CartTabStyle.minstyleviewphotograpgy, CartTabStyle.bgcolorset]}>
+      
       <StatusBar barStyle="dark-content" backgroundColor={'#ffffff'} />
+     
       <ScrollView
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
@@ -162,7 +148,7 @@ const Render = ({item,index})=>{
                         <Text style={CartTabStyle.twodigitset}>{cartItems.length}</Text>
                       </View>
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate('checkout',)}>
+                    <TouchableOpacity onPress={() => navigation.navigate('tab',)}>
                       <IconF name="close" size={20} color={'#010101'} />
                     </TouchableOpacity>
                   </View>
@@ -175,12 +161,18 @@ const Render = ({item,index})=>{
         data={cartItems}
         renderItem={Render}
         keyExtractor={item => item.id}
-      />
-
+        />
 
                   </View>
+        {isLoading ? (
+          <ActivityIndicator style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center',flex:1 }} size="large" color="#0000ff" />
+        ) : (
+          null
+        )}
+        <View style={{height:500, marginTop:20}}>
+        {isLoading === false && cartItems.length === 0 ? <EmptyCart/> : null}
+        </View>
                 </View>
-
               </View>
             </View>
           </View>

@@ -46,23 +46,8 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
-          name="map"
-          options={{headerShown: false}}
-          component={map}
-        />
-      <Stack.Screen options={{
-          headerShown: true,
-          headerShadowVisible: false,
-          title: 'ChatScreen',
-          headerTintColor: "#feb344",
-          headerTitleStyle: {
-            color: "#feb344",
-            fontSize: 17,
-            fontSize: 20,
-            marginLeft: 17,
-          },
-        }}  name="ChatScreen" component={ChatScreen} />  
+     
+   
            
      
        
@@ -85,7 +70,7 @@ function App() {
           component={LoginandRegistrationScreen}
         />
 
-         <Stack.Screen
+<Stack.Screen
           name="WelcomeSumnya"
           component={WelcomeSumnya}
           options={{headerShown: false}}
@@ -162,6 +147,12 @@ function App() {
           options={{headerShown: false}}
           name="paymentSucces"
           component={PaytmSuccessFully}
+        />
+
+      <Stack.Screen
+          name="map"
+          options={{headerShown: false}}
+          component={map}
         />
         <Stack.Screen
           options={{
