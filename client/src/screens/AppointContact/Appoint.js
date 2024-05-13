@@ -34,7 +34,7 @@ const AppointContact = ({route}) => {
 
   const sendAppointment = () => {
     if (user && user.uid) {
-      db.collection(`Appointments`).doc(doctor.id.toString()).collection('appoint').doc(user.uid).add({
+      db.collection(`Appointments`).doc(doctor.id.toString()).collection('appoint').doc(user.uid.toString).add({
         userId: user.uid,
         doctorId: doctor.id,
         state: false,
