@@ -20,12 +20,10 @@ const SignUpScreen = () => {
   const [Email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [conformpassword, setconformpassword] = useState('');
-  const [role, setRole] = useState('');
   const [fullnameaerror, setfullnameaerror] = useState(0);
   const [mobilenumbererror, setmobilenumbererror] = useState(0);
   const [passwordrerror, setpasswordrerror] = useState(0);
   const [conformpasswordaerror, setconformpasswordaerror] = useState(0);
-  const [roleError, setRoleError] = useState('');
   const [DisplayAlert, setDisplayAlert] = useState(0);
   const [error, setError] = useState(null);
 
@@ -51,10 +49,6 @@ const SignUpScreen = () => {
       setconformpasswordaerror(1);
       return;
     }
-    if (!role) {
-      setRoleError("Please select a role");
-      return;
-    }
     if (password !== conformpassword) {
       setError("Passwords do not match");
       return;
@@ -66,12 +60,14 @@ const SignUpScreen = () => {
       const userData = {
         fullname: fullname,
         mobilenumber: mobilenumber,
-        role: role,
+        email: Email,
+        uid: user.uid,
+
       };
 
-       db.collection(`User/users/${user.uid}`).add(
-        userData,
-       );
+      db.collection('users').doc(user.uid).set(userData).then(() => {
+        setDisplayAlert(1);
+      })
     })
     .catch((error) => {
       console.error('Error creating user:', error);
