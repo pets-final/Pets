@@ -47,7 +47,7 @@ function App() {
           options={{headerShown: false}}
           component={map}
         />
-      <Stack.Screen options={{
+      {/* <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
           title: 'ChatScreen',
@@ -58,7 +58,7 @@ function App() {
             fontSize: 20,
             marginLeft: 17,
           },
-        }}  name="ChatScreen" component={ChatScreen} />  
+        }}  name="ChatScreen" component={ChatScreen} />   */}
            
      
        
