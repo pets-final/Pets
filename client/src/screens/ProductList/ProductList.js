@@ -59,49 +59,17 @@ const ProductTab = () => {
         {console.log("product",productlist)}
 
 
-      <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>
-
-
-         
+      <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>         
         <View style={ProductitemList.bgwhiteboxminview}>
           <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
-
-
-
-
-
-
             <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
               <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{uri:item.ImgUrl}}/>
              { console.log("image url",item.ImgUrl)}
 
             </TouchableOpacity>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </View>
           <TouchableOpacity onPress={() => navigation.navigate(('test'), { img: item.image, title: item.Description, hname: item.ShopName })}>
-            <Text style={[ProductitemList.textoftitle, { color: "#861088" }]}>{item.Name}</Text>
+            <Text   numberOfLines={2} style={[ProductitemList.textoftitle, { color: "#861088",height:40 }]}>{item.Name}</Text>
           </TouchableOpacity>
           <Text style={ProductitemList.settextcolorcenterlist}>{item.ShopName}</Text>
           {/* <View style={ProductitemList.setflexstadr}>
@@ -137,10 +105,7 @@ const ProductTab = () => {
   }
 
   return (
-    <SafeAreaView >
-
-       
-  
+    <SafeAreaView >  
     <View style={[ProductitemList.minstyleviewphotograpgy, ProductitemList.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
       <View style={Styles.flexrowbutton}>

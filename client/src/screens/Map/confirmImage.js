@@ -8,19 +8,56 @@ import IconF from 'react-native-vector-icons/Feather';
 import { Fonts } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
 import auth from '@react-native-firebase/auth';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+
+
+
+
+const WelcomeSumnya2 = ({route}) => {
+    const [ImgUrl, setImg] = useState('');
+const [imageSource, setImageSource] = useState(null);
+const [imageUrl, setimageUrl] = useState('https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074_640.jpg');
+const [uploading, setUploading] = useState(false);
+
 const db = firestore();
-const WelcomeSumnya = ({route}) => {
-
-
-
-  const { address } = route.params || {}
-   
-        console.log('address',address);
     
   const  colorrdata = "#861088"
   const navigation = useNavigation();
   const [user, setuser] = useState(null);
+
+
+
+
+  const ImagePicker=()=>{
+    let option={
+      storageOptions: {
+        path: 'image',
+      },
+    }
+    launchImageLibrary(option,response=>{
+        console.log("aaaaaaaaa",response.assets[0].uri)
+      setimageUrl(response.assets[0].uri)
+      uploadImage()
+    })
+
+  }
+
+  const uploadImage = async () => {
+ const uploadUri=imageUrl;
+ let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1); 
+      try {
+        await storage().ref(filename).putFile(uploadUri);
+        const url = await storage().ref(filename).getDownloadURL();
+       
+        setImg(url)
+        setUploading(false);       
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        setImg(null)
+      }  
+  };
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged((user) => {
@@ -28,12 +65,14 @@ const WelcomeSumnya = ({route}) => {
         console.log(user)
     });
   }, []);
+
+
+
   const handleContiue = ()=>{
     db.collection('users').doc(user.uid).update({
-      address: address,
-     
+      ImgUrl: ImgUrl,
     }).then(() => {
-      navigation.navigate('tab');
+      navigation.navigate('WelcomeSumnya');
     
     })
     }
@@ -41,10 +80,15 @@ const WelcomeSumnya = ({route}) => {
     navigation.navigate('tab');
    }
 
-  
+
+
+
+
+
   return (
     <View style={[WelcomeSumnaya.minstyleviewphotograpgy, { backgroundColor: colorrdata }]}>
       <StatusBar barStyle="dark-content" backgroundColor={colorrdata} />
+      {console.log("ii",ImgUrl)}
       <View>
         <ScrollView
           keyboardShouldPersistTaps="handled"
@@ -74,21 +118,19 @@ const WelcomeSumnya = ({route}) => {
                   </Text>
                 </View>
                 <View style={WelcomeSumnaya.setbottomviewwidth}>
-                  <Text style={WelcomeSumnaya.sllectlocationscreen}>SELECT LOCATION</Text>
+                  <Text style={WelcomeSumnaya.sllectlocationscreen}>chose your photo</Text>
                  
-                  <Button title="Provide Delivery Location"
-                    onPress={() =>navigation.navigate('map') }
-                    imagesource={images.Location_image}
-                    buttonStyle={WelcomeSumnaya.buttonsearchstyle}
-                    buttonTextStyle={{
-                      marginLeft: 14,
-                      position: 'relative',
-                      fontSize: 17,
-                      fontFamily: Fonts.Poppins_Medium,
-                      color: colorrdata,
-                    }}
+                 
+     
 
-                  />
+                        <Button  style={{top:"15"} } title=" Add Image "
+                        onPress={()=>ImagePicker()}
+                        buttonStyle={Style.setbuttonborderradius}
+                        buttonTextStyle={Style.textcolorsetwhite}
+                        />
+
+
+                 
                    </View>
               </View>
             </View>
@@ -122,4 +164,4 @@ const WelcomeSumnya = ({route}) => {
     </View>
   );
 };
-export default WelcomeSumnya;
+export default WelcomeSumnya2;

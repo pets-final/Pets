@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, View, Image, Linking, Pressable, TextInput, TouchableOpacity } from "react-native";
+import React, { useState,useEffect } from "react";
+import { Text, View, Image, Linking, Pressable, TextInput, TouchableOpacity,Alert } from "react-native";
 import { Login, Style } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import { useTogglePasswordVisibility } from '../../utils';
@@ -10,9 +10,16 @@ import IconA from 'react-native-vector-icons/EvilIcons';
 import IconG from 'react-native-vector-icons/Ionicons';
 import auth from "@react-native-firebase/auth";
 import firestore from '@react-native-firebase/firestore';
+// import Style from '../../styles/CommonStyle/Style';
+import Styles from '../../styles/LoginRegisterStyle/LoginScreenStyle';
+import storage from '@react-native-firebase/storage';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+
+
 
 const db = firestore();
-
+ 
 const SignUpScreen = () => {
   const navigation = useNavigation();
   const [fullname, setfullname] = useState('');
@@ -26,6 +33,9 @@ const SignUpScreen = () => {
   const [conformpasswordaerror, setconformpasswordaerror] = useState(0);
   const [DisplayAlert, setDisplayAlert] = useState(0);
   const [error, setError] = useState(null);
+  const [ImgUrl, setImg] = useState('');
+  const [imageSource, setImageSource] = useState(null);
+  const [imageUrl, setimageUrl] = useState('https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074_640.jpg');
 
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
@@ -62,6 +72,7 @@ const SignUpScreen = () => {
         mobilenumber: mobilenumber,
         email: Email,
         uid: user.uid,
+        
 
       };
 
@@ -72,19 +83,53 @@ const SignUpScreen = () => {
     .catch((error) => {
       console.error('Error creating user:', error);
     });
-  
   }
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: '220888624389-hnk7n8nrgeqodnaf7l3ugc534lt3m0f7.apps.googleusercontent.com',
+    });
+
+  },[])
+
+  async function onGoogleButtonPress() {
+    try {
+      // Check if your device supports Google Play
+      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+      
+      // Get the user's ID token
+      const { idToken } = await GoogleSignin.signIn();
+      
+     
+    
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    
+      // Sign-in the user with the credential
+      await auth().signInWithCredential(googleCredential);
+      console.log("idToken", idToken);
+      Alert.alert('done');
+    } catch (error) {
+      // Handle the error here
+      console.error("Google sign-in error:", error);
+      // You can show an alert or perform other actions based on the error
+      Alert.alert("Google sign-in failed");
+    }
+  }
+   
+  
+ 
   return (
     <View style={Login.tabminview}>
+      
       <View style={Login.flexrowtwxtandgoogle}>
         <View>
           <Text style={[Login.registertextstyle, { color:  "#861088" }]}>Register</Text>
         </View>
         <View style={Login.flexrowtwxtanimage}>
-          <TouchableOpacity style={Login.gooleiconsetwhiteshadow} onPress={() => Linking.openURL('https://accounts.google.com/signin/v2/challenge/pwd?rart=ANgoxcdbbNxH1nYXChBQ7n_DhSet9sRm1XXzUFTdrodQQJThJv3oPCktvjFuZq-YDK8WsXHW_gXYeU7G-XB1iBPG0qMJAeBgcA&TL=AKqFyY83GsHjazXV_PwFHjgH9TWEYKp_-8XvbZBPldYwb-yZ9LPv7QjDq-AK6ysc&flowName=GlifWebSignIn&cid=1&flowEntry=ServiceLogin')}>
+          <TouchableOpacity style={Login.gooleiconsetwhiteshadow}  onPress={onGoogleButtonPress}>
             <Image style={Login.googleimage} resizeMode='cover' source={images.Googleimg_set} />
           </TouchableOpacity>
-          <TouchableOpacity style={Login.gooleiconsetwhiteshadow} onPress={() => Linking.openURL('https://www.facebook.com/login/?privacy_mutation_token=eyJ0eXBlIjowLCJjcmVhdGlvbl90aW1lIjoxNjU5Njk2NDc2LCJjYWxsc2l0ZV9pZCI6MjY5NTQ4NDUzMDcyMDk1MX0%3D')}>
+          <TouchableOpacity style={Login.gooleiconsetwhiteshadow} onPress={onGoogleButtonPress}>
             <View style={Login.facbookbgcolorset}>
               <IconA name="sc-facebook" size={30} color="white" />
             </View>
@@ -180,6 +225,8 @@ const SignUpScreen = () => {
         : null
       }
       
+
+      
      
       <View style={Login.allreadylogintext} >
         <Text style={Login.settextstyle}>Already a Member? </Text>      
@@ -198,7 +245,7 @@ const SignUpScreen = () => {
         <View style={Login.centeredView}>
           {error && <SweetaelertModal message={error} />}
           {DisplayAlert !== 0 ? 
-           <SweetaelertModal message='SignUp Successful' link={"WelcomeSumnya"}   />           
+           <SweetaelertModal message='SignUp Successful' link={"UpdateImage"}   />           
             :
             null
           }

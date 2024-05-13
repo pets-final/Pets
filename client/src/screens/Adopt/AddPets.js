@@ -42,7 +42,7 @@ const AddPetsScreen = () => {
 
   const [ImgUrl, setImg] = useState('');
   const [imageSource, setImageSource] = useState(null);
-  const [imageUrl, setimageUrl] = useState('https://api.adorable.io/avatars/80/abott@adorable.png');
+  const [imageUrl, setimageUrl] = useState('https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074_640.jpg');
   const dataBreed = [
     { label: 'Dog', value: 'Dog' },
     { label: 'Cat', value: 'Cat' },
@@ -60,6 +60,9 @@ const AddPetsScreen = () => {
   const validateIsEmail = (item) => {
     SetEmail(item);
   }
+
+
+
   const ImagePicker=()=>{
     let option={
       storageOptions: {
@@ -68,7 +71,7 @@ const AddPetsScreen = () => {
     }
     launchImageLibrary(option,response=>{
       setimageUrl(response.assets[0].uri)
-      console.log(response.assets[0].uri)
+      // console.log(response.assets[0].uri)
       uploadImage()
     })
 
@@ -80,7 +83,7 @@ const AddPetsScreen = () => {
       try {
         await storage().ref(filename).putFile(uploadUri);
         const url = await storage().ref(filename).getDownloadURL();
-        console.log(url)
+        console.log("url imagee ",url)
         setImg(url)
         setUploading(false);       
       } catch (error) {
@@ -89,6 +92,14 @@ const AddPetsScreen = () => {
       }
 
   };
+
+
+
+
+
+
+
+
 
   const addPetsToAdopt=()=>{
     firestore().collection('Animal').add({
@@ -151,6 +162,8 @@ const AddPetsScreen = () => {
 
   return (
     <View style={Styles.mincolorwhite}>
+      {/* {setImg(imageUrl)} */}
+
       <View style={Styles.tabminview}>
         <View style={Style.inputUnderLine}>
           <TextInput

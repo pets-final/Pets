@@ -25,6 +25,7 @@ import ChatScreen from './src/screens/ChatScreenFolder/ChatScreen'
 // import DrawerChatScreen from './src/screens/ChatScreenFolder/DrawerChatScreen'
 import DoctorList from './src/screens/doctorList/DoctoList';
 import WelcomeSumnya from './src/screens/Map/ConfirmAdress'
+import UpdateImage from './src/screens/Map/confirmImage'
 import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
 import NewProduct from './src/screens/ProductList/NewProduct'
@@ -42,8 +43,6 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-     
-   
            
      
        
@@ -66,11 +65,17 @@ function App() {
           component={LoginandRegistrationScreen}
         />
 
-<Stack.Screen
+        <Stack.Screen
           name="WelcomeSumnya"
           component={WelcomeSumnya}
           options={{headerShown: false}}
         />
+         <Stack.Screen
+          name="UpdateImage"
+          component={UpdateImage}
+          options={{headerShown: false}}
+        />
+
 
         
         <Stack.Screen

@@ -102,6 +102,7 @@ export default StyleSheet.create({
     paddingBottom: 20,
     width: 160,
     flex: 1,
+    // height:400 
   },
   bgwhiteboxminview2: {
     color: 'black',

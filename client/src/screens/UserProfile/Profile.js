@@ -124,7 +124,8 @@ const ProfileTab = ({route}) => {
                 <View style={AccountTabStyle.fleximageandtext}>
 
                   <TouchableOpacity>
-                    <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={images.Ningthty_img} />
+                    <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover'source={{uri:User?.ImgUrl}} />
+                    {console.log(User?.ImgUrl)}
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
                     <Text style={AccountTabStyle.sumanyatextset}>{ User?.fullname}</Text>
