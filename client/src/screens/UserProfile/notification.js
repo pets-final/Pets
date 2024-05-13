@@ -112,7 +112,6 @@ const NotificationScreen = ({navigation}) => {
               padding: 0,
               margin: 0,
             }}
-           
             >
             <View
               style={[
@@ -131,8 +130,7 @@ const NotificationScreen = ({navigation}) => {
                 data={notifications}
                 keyExtractor={item => item.id}
                 onEndReached={loadMoreNotifications}
-  onEndReachedThreshold={0.1} // call loadMoreNotifications when the end of the content is within 10% of the visible content
-
+  onEndReachedThreshold={0.1}
                 renderItem={({item}) => (
                   <View
                     style={[

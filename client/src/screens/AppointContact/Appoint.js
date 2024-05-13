@@ -6,8 +6,8 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
 const AppointContact = ({route}) => {
-  const {id} = route.params
-  console.log('cccccccccccc',id);
+  // const {id} = route.params
+  // console.log('cccccccccccc',id);
   // onsole.log('cccccccccccc',user.id);
 
   const [showContactButton, setShowContactButton] = useState(false);
@@ -34,7 +34,7 @@ const AppointContact = ({route}) => {
 
   const sendAppointment = () => {
     if (user && user.uid) {
-      db.collection(`Appointments`).doc(doctor.id.toString()).collection('appoint').doc(user.uid.toString).add({
+      db.collection(`Appointments`).doc(doctor.id.toString()).collection(`${user.uid}`).add({
         userId: user.uid,
         doctorId: doctor.id,
         state: false,

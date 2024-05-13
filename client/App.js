@@ -14,7 +14,7 @@ import Category from './src/screens/Adopt/AdoptList';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
-import MyVet from './src/screens/VetProfile/MyVet'
+import MyVet from './src/screens/VetProfile/Myvet'
 import AppointContact from './src/screens/AppointContact/Appoint';
 import VetProfileTab from './src/screens/VetProfile/VetProfile'
 import map from './src/screens/Map/map';
@@ -45,7 +45,7 @@ function App() {
   
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+       <Stack.Navigator>
      
    
            

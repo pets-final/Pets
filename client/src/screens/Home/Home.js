@@ -8,7 +8,7 @@ import images from '../../index';
 import { Rating } from 'react-native-ratings';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
-import auth from '@react-native-firebase/auth'; // Import the auth module
+import auth from '@react-native-firebase/auth';
 import HeaderScreenAddress from '../../components/HeaderScreenAddress'
 import firestore from '@react-native-firebase/firestore';
 import image from '../../images';
@@ -351,7 +351,7 @@ const HomeTabset = (props) => {
     return (
       <View style={Styles.Doctorbox}>       
           <View style={Styles.doctorimagbox}>
-            <TouchableOpacity onPress={() => navigation.navigate('AppointContact',{id: item.id})}>
+            <TouchableOpacity onPress={() => navigation.navigate('AppointContact',{doctor:item})}>
               <Image style={Styles.Doctorimage} resizeMode="contain" source={item.doctorImg} />
             </TouchableOpacity>
             <Text style={[Styles.Doctornametext, { color: "#861088" }]} >{item.doctorname}</Text>
