@@ -43,11 +43,6 @@ const NewProduct = () => {
   ];
 
 
-
-
-
-
-
   const [user, setUser] = useState(null); // State to 
     
   useEffect(() => {
