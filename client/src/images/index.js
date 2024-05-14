@@ -5,7 +5,7 @@ const image = {
   Googleimg_set: require('./googleicon.png'),
   Search_image: require('./Searchimage.png'),
   Location_image: require('./Locationimg.png'),
-  Ningthty_img: require('./hundred.png'),
+  Ningthty_img: require('./profile.jpg'),
   Successfully_color_picker_image: require('./colorpicker.png'),
   paypal_img: require('./paypal.png'),
   paytem_img: require('./paytem.png'),

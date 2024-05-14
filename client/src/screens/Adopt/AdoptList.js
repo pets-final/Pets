@@ -54,7 +54,7 @@ const ProductTab = () => {
           <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
             <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
               <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{uri:item.ImgUrl}}/>
-             { console.log("image url",item.ImgUrl)}
+             {/* { console.log("image url",item.ImgUrl)} */}
 
             </TouchableOpacity>
           </View>

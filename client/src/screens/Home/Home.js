@@ -72,7 +72,7 @@ const HomeTabset = (props) => {
       count: 1,
       name: item.text
     }
-    console.log('Product',Product); // Log the Product object to check its properties
+    // console.log('Product',Product); // Log the Product object to check its properties
 
     await db.collection(`Cart/${user.uid}/item`).add(
         Product
@@ -331,7 +331,7 @@ const HomeTabset = (props) => {
   }
   let temp = MedicineFalteList
   temp.length = 2;
-  console.log(temp);
+  // console.log(temp);
   const doctordatacategoryes = (doctordatacategoryes) => {
     dispatch(get_doctore_category_action(doctordatacategoryes))
     navigation.navigate('')

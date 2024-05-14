@@ -125,6 +125,7 @@ const ProfileTab = ({route}) => {
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
                     <Text style={AccountTabStyle.sumanyatextset}>{ User?.fullname}</Text>
+                    { console.log(User?.fullname)}
                     <Text style={AccountTabStyle.setgimailtext}>{ User?.email}</Text>
                     <Text style={AccountTabStyle.setgimailtext}>Verified : {isFilled ? 'Yes' : 'No'}</Text>
                     <Text style={AccountTabStyle.setgimailtextwo}>{User?.mobilenumber}</Text>
