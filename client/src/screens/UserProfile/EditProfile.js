@@ -1,105 +1,89 @@
-import React, { useState,} from "react";
-import { Text, View, TextInput,  } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, TextInput } from "react-native";
 import Styles from '../../styles/LoginRegisterStyle/LoginScreenStyle';
-import  Button from '../../components/Button';
-import  SweetaelertModal from '../../components/SweetAlertModal';
+import Button from '../../components/Button';
+import SweetaelertModal from '../../components/SweetAlertModal';
 import Style from '../../styles/CommonStyle/Style';
-// import { RouteName } from '../../routes';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const EditProfileScreen = () => {
-  const [fullname, setfullname] = useState('');
-  const [mobilenumber, setmobilenumber] = useState('');
-  const [fullnameaerror, setfullnameaerror] = useState(0);
-  const [mobilenumbererror, setmobilenumbererror] = useState(0);
-  const [email, SetEmail] = useState('');
-  const [emailValidError, setEmailValidError] = useState(0);
-  const [emailValidError1, setEmailValidError1] = useState(0);
-  const [EmailSendAlert, setEmailSendAlert] = useState(0);
+  const [user, setUser] = useState(null);
+  const [fullname, setFullname] = useState('');
+  const [fullnameError, setFullnameError] = useState('');
+  const [mobilenumber, setMobilenumber] = useState('');
+  const [mobilenumberError, setMobilenumberError] = useState('');
+  const [EmailSendAlert, setEmailSendAlert] = useState(false);
 
-  const validateIsEmail = (item) => {
-    SetEmail(item);
-  };
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged((user) => {
+      setUser(user);
+    });
+    return subscriber;
+  }, []);
 
- 
-  const signupbutton = () => {
+  const signupbutton = async () => {
     if (!fullname.trim()) {
-      setfullnameaerror(1)
+      setFullnameError('Please enter your full name.');
       return;
     }
+
     if (!mobilenumber.trim()) {
-      setmobilenumbererror(1)
+      setMobilenumberError('Please enter your mobile number.');
       return;
     }
-  
-    if (email !== '') {
-      let emaildata = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-      if (!emaildata) {
-        setEmailValidError1(1);
+
+    try {
+      const userId = user.uid;
+      const docRef = firestore().collection('users').doc(userId);
+      const doc = await docRef.get();
+
+      if (doc.exists) {
+        await docRef.update({
+          fullname,
+          mobilenumber,
+        });
+        setEmailSendAlert(true);
+      } else {
+        console.error('Document does not exist');
+        // Handle the case where the document does not exist
       }
-      else if (emaildata == emaildata) {
-        setEmailSendAlert(1);
-      }
+    } catch (error) {
+      console.error('Error updating user:', error);
+      // Handle other errors
     }
-    if (!email.trim()) {
-      setEmailValidError(1);
-    }
-    if (!email.trim() && fullname !== '' && mobilenumber !=='' && email !=='') {
-      setEmailSendAlert(1);
-    }
-  }
+  };
 
   return (
     <View style={Styles.mincolorwhite}>
       <View style={Styles.tabminview}>
         <View style={Style.inputUnderLine}>
           <TextInput
-            placeholder="Name"
+            placeholder={user?.displayName}
             style={Style.inputtextstyle}
             placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
-            onChangeText={(value) => { setfullnameaerror(0); setfullname(value); }}
+            onChangeText={(value) => { setFullnameError(''); setFullname(value); }}
           />
         </View>
-        {fullnameaerror === 1 ?
-          <Text style={Styles.pleseentername}>* Please Enter the  Name</Text>
-          : null
+        {fullnameError !== '' &&
+          <Text style={Styles.pleseentername}>* {fullnameError}</Text>
         }
         <View style={Style.inputUnderLine}>
           <TextInput
-            placeholder="Mobile Number"
+            placeholder={user?.phoneNumber || "+21698000000"}
             style={Style.inputtextstyle}
             keyboardType="numeric"
             placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
-            onChangeText={(value) => { setmobilenumbererror(0); setmobilenumber(value); }}
+            onChangeText={(value) => { setMobilenumberError(''); setMobilenumber(value); }}
           />
         </View>
-        {mobilenumbererror === 1 ?
-          <Text style={Styles.pleseentername}>* Please Enter the Mobile number</Text>
-          : null
-        }
-        <View style={Style.inputUnderLine}>
-          <View style={Style.setpasswordwidtbg}>
-            <TextInput
-               placeholder="Enter your email address"
-               placeholderTextColor={'#676767'}
-               style={Style.inputtextstyle}
-               onChangeText={(e) => { setEmailValidError1(0); validateIsEmail(e); setEmailValidError(0) }}
-               keyboardType={'email-address'}
-               value={email}
-            />
-          </View>
-        </View>
-        {emailValidError === 1 ?
-          <Text style={Styles.pleseentername}>* Please Enter Email address</Text>
-          : null
-        }
-        {emailValidError1 === 1 ?
-          <Text style={Styles.pleseentername}>* Please enter a valid email address</Text>
-          : null
+        {mobilenumberError !== '' &&
+          <Text style={Styles.pleseentername}>* {mobilenumberError}</Text>
         }
 
         <View style={Styles.flexrowbutton}>
           <Button title="Update"
-            onPress={()=> signupbutton()}
+            onPress={signupbutton}
             buttonStyle={Styles.setbuttonborderradius}
             buttonTextStyle={Styles.textcolorsetwhite}
           />
@@ -107,10 +91,8 @@ const EditProfileScreen = () => {
 
       </View>
       <View style={Styles.centeredView}>
-        {EmailSendAlert !== 0 ?
+        {EmailSendAlert &&
           <SweetaelertModal message='Profile Update Successfully' link={'UserProfile'} />
-          :
-          null
         }
       </View>
     </View>

@@ -422,7 +422,7 @@ export default StyleSheet.create({
     backgroundColor: '#f3f3f3',
     borderRadius: 7,
     paddingVertical: SH(5),
-    height:120
+    height:110
   },
   widtsetnew: {
     width: 77,
