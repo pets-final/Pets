@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View ,TextInput} from 'react-native'
 import React, { useState,useEffect} from "react";
 import Styles from '../../styles/LoginRegisterStyle/LoginScreenStyle';
 import Style from '../../styles/CommonStyle/Style';
@@ -6,7 +6,13 @@ import  Button  from '../../components/Button';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { useNavigation } from '@react-navigation/native';
+// import { View, TextInput, Text,TouchableOpacity, Platform, KeyboardAvoidingView,ScrollView } from "react-native";
 
+
+
+const addBlogs = () => {
+  
 
 const [Title, setTitle] = useState('');
 const [Body,setBody] = useState('')
@@ -44,14 +50,17 @@ const [user, setUser] = useState(null); // State to
       ImgUrl:Media,
       IdShoper:user.uid,
     }).then((res)=>{
+      setTitle('')
+      setBody('')
       Alert.alert("Blog posted")
+     
+  
 
     }).catch((err)=>{
       console.log(err);
 
     })
   }
-const addBlogs = () => {
   return (
 
     <View>
@@ -70,7 +79,7 @@ const addBlogs = () => {
 
         <View style={Style.inputUnderLine}>
           <TextInput
-            placeholder="Blog Title"
+            placeholder="Description"
             multiline={true}
             numberOfLines={10}
             style={Style.inputtextstyle}
