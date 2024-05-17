@@ -41,7 +41,6 @@ const ProductTab = () => {
           key: documentSnapshot.id,
         });
       });
-
       setproductlist(productlist);
       setLoading(false);
     });
@@ -52,11 +51,11 @@ const ProductTab = () => {
 
 
 
+
   const Docterproductdataitem = ({ item, index }) => {
     return ( 
 
      <View >
-        {console.log("product",productlist)}
 
 
       <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>         
@@ -64,7 +63,6 @@ const ProductTab = () => {
           <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
             <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
               <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{uri:item.ImgUrl}}/>
-             { console.log("image url",item.ImgUrl)}
 
             </TouchableOpacity>
           </View>
