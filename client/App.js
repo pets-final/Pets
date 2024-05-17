@@ -34,6 +34,7 @@ import AppointContact from './src/screens/AppointContact/Appoint';
 // import VetProfile from './src/screens/vetProfile/VetProfile';
 import AddPetsScreen from './src/screens/Adopt/AddPets';
 import NotificationScreen from './src/screens/UserProfile/notification';
+import addBlogs from './src/screens/blogs/addBlogs'
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
 import messaging from '@react-native-firebase/messaging';
 
@@ -135,6 +136,21 @@ function App() {
           options={{
             headerShadowVisible: true,
             title: 'New Product',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            },
+          }}
+        />
+         <Stack.Screen
+          name="addBlogs"
+          component={addBlogs}
+          options={{
+            headerShadowVisible: true,
+            title: 'addBlogs',
             headerTintColor: '#861088',
             headerTitleStyle: {
               color: '#861088',
