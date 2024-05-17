@@ -34,7 +34,7 @@ import AppointContact from './src/screens/AppointContact/Appoint';
 // import VetProfile from './src/screens/vetProfile/VetProfile';
 import AddPetsScreen from './src/screens/Adopt/AddPets';
 import NotificationScreen from './src/screens/UserProfile/notification';
-import addBlogs from './src/screens/blogs/addBlogs'
+import AddBlogs from './src/screens/blogs/addBlogs'
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
 import messaging from '@react-native-firebase/messaging';
 
@@ -76,12 +76,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-           
-      <Stack.Screen
-          name="map"
-          options={{headerShown: false}}
-          component={map}
-        />
+    
        
         <Stack.Screen
           name="SplashScreen"
@@ -120,6 +115,12 @@ function App() {
           options={{headerShown: false}}
           component={Nav}
         />
+               
+      <Stack.Screen
+          name="map"
+          options={{headerShown: false}}
+          component={map}
+        />
            <Stack.Screen
             options={{headerShown: false}}
             name="cart"
@@ -142,12 +143,12 @@ function App() {
               fontFamily: Fonts.Metropolis_Medium,
               fontSize: 17,
               fontWeight: '700',
-            },
+            }, 
           }}
         />
          <Stack.Screen
           name="addBlogs"
-          component={addBlogs}
+          component={AddBlogs}
           options={{
             headerShadowVisible: true,
             title: 'addBlogs',

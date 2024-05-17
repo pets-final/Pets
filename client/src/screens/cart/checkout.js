@@ -16,7 +16,7 @@ import images from '../../index';
 const CheckOutScreen = ({ route }) => {
   const totalPrice = route.params?.totalPrice;
   const cartItems = route.params?.cartItems;
-  console.log('dddddddddddddd',route.params.address);
+  console.log('dddddddddddddd',route.params.user);
   const colorrdata = "#861088"
   const  pricesymboldata = '$'
   const navigation = useNavigation();
