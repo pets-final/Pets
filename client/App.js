@@ -34,8 +34,40 @@ import AppointContact from './src/screens/AppointContact/Appoint';
 // import VetProfile from './src/screens/vetProfile/VetProfile';
 import AddPetsScreen from './src/screens/Adopt/AddPets';
 import NotificationScreen from './src/screens/UserProfile/notification';
-import addBlogs from './src/screens/blogs/addBlogs'
+import AddBlogs from './src/screens/blogs/addBlogs'
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
+import messaging from '@react-native-firebase/messaging';
+
+// Function to request permission for receiving notifications
+const requestUserPermission = async () => {
+  const settings = await messaging().requestPermission();
+
+  if (settings) {
+    console.log('Permission settings:', settings);
+  }
+};
+
+// Initialize Firebase Messaging
+const initializeMessaging = async () => {
+  await requestUserPermission();
+
+  // Get the device token
+  const token = await messaging().getToken();
+  console.log('Device Token:', token);
+
+  // Handle messages when the app is in the foreground
+  messaging().onMessage(async remoteMessage => {
+    console.log('Foreground Message:', remoteMessage);
+  });
+
+  // Handle messages when the app is in the background
+  messaging().setBackgroundMessageHandler(async remoteMessage => {
+    console.log('Background Message:', remoteMessage);
+  });
+};
+
+// Call initializeMessaging when the app starts
+initializeMessaging();
 
 const Stack = createNativeStackNavigator();
 
@@ -44,8 +76,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-           
-     
+    
        
         <Stack.Screen
           name="SplashScreen"
@@ -84,6 +115,12 @@ function App() {
           options={{headerShown: false}}
           component={Nav}
         />
+               
+      <Stack.Screen
+          name="map"
+          options={{headerShown: false}}
+          component={map}
+        />
            <Stack.Screen
             options={{headerShown: false}}
             name="cart"
@@ -106,12 +143,12 @@ function App() {
               fontFamily: Fonts.Metropolis_Medium,
               fontSize: 17,
               fontWeight: '700',
-            },
+            }, 
           }}
         />
          <Stack.Screen
           name="addBlogs"
-          component={addBlogs}
+          component={AddBlogs}
           options={{
             headerShadowVisible: true,
             title: 'addBlogs',
@@ -166,11 +203,7 @@ function App() {
           component={PaytmSuccessFully}
         />
 
-      <Stack.Screen
-          name="map"
-          options={{headerShown: false}}
-          component={map}
-        />
+     
         <Stack.Screen
           options={{
             headerShadowVisible: true,

@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-const addBlogs = () => {
+const AddBlogs = () => {
   
 
 const [Title, setTitle] = useState('');
@@ -112,4 +112,4 @@ const [user, setUser] = useState(null); // State to
   )
 }
 
-export default addBlogs
+export default AddBlogs
