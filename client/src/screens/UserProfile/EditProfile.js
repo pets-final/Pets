@@ -20,7 +20,7 @@ const EditProfileScreen = () => {
     });
     return subscriber;
   }, []);
-console.log(user)
+console.log("this is user data ",user)
   const signupbutton = async () => {
     if (!fullname.trim()) {
       setFullnameError('Please enter your full name.');
@@ -39,8 +39,8 @@ console.log(user)
 
       if (doc.exists) {
         await docRef.update({
-          fullname,
-          mobilenumber,
+          fullname:fullname,
+          mobilenumber:mobilenumber,
         });
         setEmailSendAlert(true);
       } else {
