@@ -128,3 +128,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+server/my-petsproject-firebase-adminsdk-p4fen-4e24645823.json
