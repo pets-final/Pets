@@ -8,7 +8,7 @@ import IconF from 'react-native-vector-icons/dist/FontAwesome';
 
 
 const SearchHeaderScreen = ({navigation}) => {
-  console.log('navigation',navigation);
+  // console.log('navigation',navigation);
   return (
     <View>
       <View style={Styles.minheaderflexview}>

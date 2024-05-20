@@ -47,7 +47,7 @@ export default StyleSheet.create({
   },
   pharamacyimagestyle: {
     width: '100%',
-    height: '100%',
+    height: '60%',
   },
   Cat_pharamacyimagestyle: {
     width: 90,
@@ -102,7 +102,7 @@ export default StyleSheet.create({
     paddingBottom: 20,
     width: 160,
     flex: 1,
-    // height:400 
+    height: 220 
   },
   bgwhiteboxminview2: {
     color: 'black',
@@ -138,7 +138,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     width: '100%',
-    height:300,
+    height:200,
     padding: SH(5)
   },
   textstylesimple: {

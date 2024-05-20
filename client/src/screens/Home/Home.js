@@ -20,14 +20,88 @@ const db = firestore();
 
 const HomeTabset = (props) => {
   const insets = useSafeAreaInsets();
+  const [productlist, setproducts] = useState([]);
+  const [petslist, setpets] = useState([]);
+  const [loading, setLoading] = useState(true); // Set loading to true on component mount
+  const [bestDeal, setBestDeal] = useState([]); // Set loading to true on component mount
+
 
   const getdatatest = async () => {
     const currentUser = auth().currentUser;
     if (currentUser) {
       const userDoc = await firestore().collection('User').doc(currentUser.uid).get();
-      console.log("user info", userDoc.data());
+      // console.log("user info", userDoc.data());
     }
   }
+
+  const getdataPrducts = async () => {
+    const subscriber = firestore()
+    .collection('Product')
+    .onSnapshot(querySnapshot => { 
+
+      querySnapshot.forEach(documentSnapshot => {
+        productlist.push({
+          ...documentSnapshot.data(),
+          key: documentSnapshot.id,
+        });
+      });
+
+      setproducts(productlist);
+      setLoading(false);
+      productlist.length = 5;
+      // console.log("zzzzzzzzzzzzzzzzzzzzzz",productlist.length);
+    });
+
+  }
+  const getBestDeal = async () => {
+    const subscriber = firestore()
+    .collection('Product')
+    .onSnapshot(querySnapshot => { 
+
+      querySnapshot.forEach(documentSnapshot => {
+        bestDeal.push({
+          ...documentSnapshot.data(),
+          key: documentSnapshot.id,
+        });
+      });
+
+      setproducts(bestDeal.sort((a,b) => (a.Promos > b.Promos) ? 1 : ((b.Promos > a.Promos) ? -1 : 0)));
+      setLoading(false);
+      bestDeal.length = 5;
+      // console.log("zzzzzzzzzzzzzzzzzzzzzz",bestDeal);
+    });
+
+
+
+    const array=productlist.sort((a,b) => (a.Promos > b.Promos) ? 1 : ((b.Promos > a.Promos) ? -1 : 0))
+    
+    setBestDeal(array)
+   
+
+
+    
+  }
+
+  const getdataPets = async () => {
+    const subscriber = firestore()
+    .collection('Animal')
+    .onSnapshot(querySnapshot => { 
+
+      querySnapshot.forEach(documentSnapshot => {
+        petslist.push({
+          ...documentSnapshot.data(),
+          key: documentSnapshot.id,
+        });
+      });
+
+      setproducts(petslist);
+      setLoading(false);
+      // petslist.length = 5;
+      // console.log("zzzzzzzzzzzzzzzzzzzzzz",petslist);
+    });
+
+  }
+
   const { navigation } = props;
  
    const pricesymboldata  = '$'
@@ -42,11 +116,16 @@ const HomeTabset = (props) => {
   useEffect(() => {
     // Get the current user when the component mounts
     getdatatest()
+    getdataPrducts()
+    getdataPets()
+    getBestDeal()
+
+    
     const subscriber = auth().onAuthStateChanged((user) => {
       setUser(user);
-      console.log('subscriber',user);
+      // console.log('subscriber',user);
       const r = db.collection('users').doc(user.uid).onSnapshot((doc) => {
-        console.log('User:', doc.data());
+        // console.log('User:', doc.data());
         setUser(doc.data());
       });
     });
@@ -216,22 +295,22 @@ const HomeTabset = (props) => {
           
             <View>
               <TouchableOpacity style={Styles.flexrowsecenterimage}
-                onPress={() => navigation.navigate('productDetails')}>
-                <Image style={Styles.whiteboximage} resizeMode="contain" source={item.image} />
+                onPress={() =>  navigation.navigate('productDetails',{item:item})}>
+                <Image style={Styles.whiteboximage} resizeMode="contain" source={{uri:item.ImgUrl}} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
-                <Text style={[Styles.setnormatextstyle, { color: "#861088" }]}>{item.text}</Text>
+              <TouchableOpacity onPress={() =>  navigation.navigate('productDetails',{item:item})}>
+                <Text  numberOfLines={2} style={[Styles.setnormatextstyle, { color: "#861088" ,height:35}]}>{item.Name}</Text>
               </TouchableOpacity>
               <Text style={[Styles.settextcolorcenterthree, Styles.settextcolorcenterthreetow]}>{item.hospitalname}</Text>
               <View style={Styles.flexrowjuctycenter}>
                 {item.rating}
               </View>
               <View style={Styles.flexrowsettext}>
-                <Text style={[Styles.settextprice, { color: "#861088" }]}>{pricesymboldata}{item.price}</Text>
+                <Text style={[Styles.settextprice, { color: "black" }]}>{pricesymboldata}{item.Price}</Text>
               </View>
               <View style={Styles.flexrocenterjusty}>
                 <View style={Styles.addbutttonwidth}>
-                  <Button onPress={() => HandleAddToCart(item)} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={item.buttonaadtext} />
+                  <Button onPress={() => HandleAddToCart(item)} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={'ADD'} />
                 </View>
               </View>
               {/* <View style={[Styles.settextinbgcolor, { backgroundColor: "#861088" }]}>
@@ -251,14 +330,14 @@ const HomeTabset = (props) => {
     return (
       <View>
         <View style={Styles.minbgviewset}>
-          <TouchableOpacity style={Styles.imagecengter} onPress={() => navigation.navigate('productDetails')}>
-            <Image style={[Styles.whiteboximagetwoset, Styles.whiteboximagetwosettwo]} resizeMode='contain' source={item.image} />
+          <TouchableOpacity style={Styles.imagecengter} onPress={() => navigation.navigate('productDetails',{item:item})}>
+            <Image style={[Styles.whiteboximagetwoset, Styles.whiteboximagetwosettwo]} resizeMode='contain' source={{uri:item.ImgUrl}} />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate((''), { title: item.text, img: item.image, hname: item.hospitalname })}>
-            <Text style={[Styles.settextcolorcenter, { color: "#861088" }]}>{item.text}</Text>
+            onPress={() => navigation.navigate('productDetails', {item:item})}>
+            <Text numberOfLines={1} style={[Styles.settextcolorcenter, { color: "#861088" }]}>{item.Name}</Text>
           </TouchableOpacity>
-          <Text style={Styles.settextcolorcentertwo}>{item.hospitalname}</Text>
+          <Text style={Styles.settextcolorcentertwo}>{item.AdresseShop}</Text>
           <View style={Styles.flexrowseticon}>
             <View>
               {item.ratings}
@@ -266,14 +345,14 @@ const HomeTabset = (props) => {
           </View>
           <View style={Styles.flexrowseticonNewArrival}>
             <View>
-              <Text style={[Styles.settextpricebold, { color: "#861088" }]}>{pricesymboldata} {item.price}</Text>
+              <Text style={[Styles.settextpricebold, { color: "#861088" }]}>{pricesymboldata} {item.Price}</Text>
             </View>
             <TouchableOpacity onPress={() => doctordatatendingmenu(item)} style={[Styles.seticonbgcolorview, { backgroundColor: "#861088" }]}>
-              <IconF name={item.plusicon} size={20} color={'white'} />
+              <IconF name={'plus'} size={20} color={'white'} />
             </TouchableOpacity>
           </View>
           <View style={[Styles.settextinbgcolor, { backgroundColor: "#861088" }]}>
-            <Text style={Styles.setdescounrtextstyle}>{item.discount}</Text>
+            <Text style={Styles.setdescounrtextstyle}>Up to {item.Promos}% Off </Text>
           </View>
           <TouchableOpacity
             onPress={() => {
@@ -304,27 +383,27 @@ const HomeTabset = (props) => {
     return (
       <View style={Styles.populaitemnearby}>
         <View style={Styles.flexrowtextandimage}>
-          <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
-            <Image style={Styles.whiteboximagetwoset} resizeMode="cover" source={item.image} />
+          <TouchableOpacity onPress={() =>  navigation.navigate('PetsDetailesScreen',{item:item})}>
+            <Image style={Styles.whiteboximagetwoset} resizeMode="cover" source={{uri:item.ImgUrl}}/>
           </TouchableOpacity>
           <View style={Styles.setwidthalltext}>
-            <TouchableOpacity onPress={() => navigation.navigate('productDetails')}>
-              <Text style={[Styles.settextpricebold, { color: "#861088" }]} >{item.text}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('PetsDetailesScreen',{item:item})}>
+              <Text style={[Styles.settextpricebold, { color: "#861088" }]} >{item.Name}</Text>
             </TouchableOpacity>
-            <Text style={[Styles.settextcolorcentertwo]}>{item.hospitalname}</Text>
-            {/* <View style={Styles.flexstarticon}>
+            <Text numberOfLines={2} style={[Styles.settextcolorcentertwo]}>{item.Description}</Text>
+            <View style={Styles.flexstarticon}>
               {item.ratings}
               <Text style={Styles.ratingtextnumber}>(4.3)</Text>
-            </View> */}
+            </View>
             <View style={Styles.flexrowsetrating}>
-              {/* <View style={Styles.dicscounttextflex}>
-                <Text style={[Styles.settextpricebold, { color: "#861088" }]}>{pricesymboldata} {item.price}</Text>
-              </View> */}
+              <View style={Styles.dicscounttextflex}>
+                <Text style={[Styles.settextpricebold, { color: "#861088" }]}> {item.Adresse}</Text>
+              </View>
             </View>
           </View>
-          <TouchableOpacity style={Styles.setplusicon} onPress={() => navigation.navigate('productDetails')}>
+          {/* <TouchableOpacity style={Styles.setplusicon} onPress={() => navigation.navigate('productDetails')}>
             <IconF name={item.plusicon} size={30} color={"#861088"} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     );
@@ -407,11 +486,11 @@ const HomeTabset = (props) => {
               />
               <View>
                 <View style={Styles.topspacesetminview}>
-                  <Text style={Styles.settopcategories}>Deals of the day</Text>
+                  <Text style={Styles.settopcategories}>New Arrivals</Text>
                   <FlatList
-                    data={TodayDeals}
+                    data={productlist}
                     renderItem={({ item, index }) => MedicineDeals(item, index)}
-                    keyExtractor={item => item.id}
+                    // keyExtractor={item => item.id}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     style={Styles.setflex}
@@ -427,9 +506,9 @@ const HomeTabset = (props) => {
               </View>
                   
                   <FlatList
-                    data={temp}
+                    data={petslist}
                     renderItem={({ item, index }) => MedicineBox(item, index)}
-                    keyExtractor={item => item.id}
+                    // keyExtractor={item => item.id}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     style={Styles.setflex}
@@ -437,11 +516,11 @@ const HomeTabset = (props) => {
                   />
                 </View>
                 <View style={Styles.topspacesetminview}>
-                  <Text style={Styles.settopcategoriestwo}>New Arrivals</Text>
+                  <Text style={Styles.settopcategoriestwo}> Deals of the day</Text>
                   <FlatList
-                    data={MegaMedicine}
+                    data={bestDeal}
                     renderItem={({ item, index }) => MegaMedicineStore(item, index)}
-                    keyExtractor={item => item.id}
+                    // keyExtractor={item => item.id}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     style={Styles.setflex}

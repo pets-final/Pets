@@ -20,7 +20,7 @@ const ProductTab = () => {
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
 
   const getdata=()=>{
-    const subscriber = firestore()
+    const subscriber = firestore() 
     .collection('Animal')
     .onSnapshot(querySnapshot => {
       

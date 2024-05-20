@@ -10,12 +10,12 @@ const AppointContact = ({ doctor }) => {
   const handleAppointment = () => {
     // navigation.navigate('AppointmentPage', { doctor });
     setShowContactButton(true)
-    console.log(showContactButton);
+    // console.log(showContactButton);
   };
 
   const handleContact = () => {
       navigation.navigate('ChatScreen');
-      console.log('Contact the doctor');
+      // console.log('Contact the doctor');
 
   };
 

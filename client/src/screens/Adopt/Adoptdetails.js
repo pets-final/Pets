@@ -6,6 +6,8 @@ import IconF from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Entypo'; // Changed from 'react-native-vector-icons/FontAwesome'
 import IconH from 'react-native-vector-icons/FontAwesome'; // Changed from 'react-native-vector-icons/MaterialIcons'
 import IconL from 'react-native-vector-icons/Feather';
+import IconP from 'react-native-vector-icons/EvilIcons';
+
 import { useTogglePasswordVisibility } from '../../utils';
 
 const doctoreDetaile = {
@@ -16,7 +18,9 @@ const doctoreDetaile = {
   "description": "Kitchen Items are essential tools used in the kitchen for cooking, serving, and preparing food. They include utensils, cookware, bakeware, and appliances.",
 };
 
- export const ProductDetailesScreen = () => {
+ export const PetsDetailesScreen = ({route}) => {
+  const {Name,ImgUrl,Adresse,Description,Category,Age,Breed,Sex} = route.params.item
+  {console.log("rrrrrrrr",route.params.item)}
   const [count, setCount] = useState(1);
   const colorrdata = "#861088"
   ;
@@ -140,7 +144,7 @@ const doctoreDetaile = {
                 </TouchableOpacity>
               </TouchableOpacity>
               <View style={[ProductDetailes.setimagestylewidth, { backgroundColor: colorrdata }]}>
-                <Image style={ProductDetailes.imagsetstyle} source={doctoreDetaile.image} resizeMode="contain"/>
+                <Image style={ProductDetailes.imagsetstyle} source={{uri:ImgUrl}}  resizeMode="contain"/>
               </View>
               <TouchableOpacity onPress={() => backarrow()} style={Style.settextstyle}>
                 <View style={[Style.setbgcolorviewtwoview, { backgroundColor: colorrdata }]}>
@@ -150,10 +154,10 @@ const doctoreDetaile = {
                 </View>
               </TouchableOpacity>
               <View style={[ProductDetailes.bgwhiteboxminview, ProductDetailes.bgcolorset]} >
-                <View style={ProductDetailes.bgwhiteboxsmall}>
+                {/* <View style={ProductDetailes.bgwhiteboxsmall}>
                   <Text style={ProductDetailes.settextweight}>{pricesymboldata} {doctoreDetaile.price}</Text>
-                  <Text style={ProductDetailes.settextweight}> 5 Kg</Text>
-                </View>
+                  <Text style={ProductDetailes.settextweight}> </Text>
+                </View> */}
                 {hearticonset === 0 ?
                   <TouchableOpacity onPress={() => sethearticonset(1)} style={[ProductDetailes.HeartIconLike, Style.setbgcolorborder]}>
                     <IconH name="heart" size={25} color={colorrdata} />
@@ -165,16 +169,15 @@ const doctoreDetaile = {
                 }
                 <View style={[ProductDetailes.setallpading, ProductDetailes.bgcolorset]}>
                   <View style={[ProductDetailes.descripitionviewone, ProductDetailes.bgcolorset]}>
-                    <Text style={[ProductDetailes.descriptiontextset, { color: colorrdata }]}>{doctoreDetaile.text}</Text>
+                    <Text style={[ProductDetailes.descriptiontextset, { color: colorrdata }]}>{Name}</Text>
                     {/* <Text style={[ProductDetailes.descriptiontextset, { color: colorrdata }]}>22 % Off</Text> */}
                   </View>
                   <View>
                   </View>
                 </View>
-                <Text style={ProductDetailes.Settextstylefruit}>{doctoreDetaile.text} are the means by which flowering plants (also known as angiosperms) disseminate their seeds.
-                  Edible {doctoreDetaile.text} is a small outdoor structure designed for pets, typically dogs or cats, to use as a shelter from the elements. They can be made from a variety of materials, such as wood, plastic, or metal, and come in a range of sizes to accommodate different sized pets. Some pet houses are insulated to keep pets warm in cold weather, and some have a slanted roof to allow for proper drainage. </Text>
+                <Text style={ProductDetailes.Settextstylefruit}>{Description}</Text>
                   <Text></Text>
-                  <Text style={ProductDetailes.Settextstylefruit}>{doctoreDetaile.text} They can be purchased pre-made or built from a kit, and some pet owners even choose to build their own pet houses. </Text>              
+                  <Text style={ProductDetailes.Settextstylefruit}><IconP name="location" size={27} color={colorrdata} />{Adresse}</Text>              
               </View>
               <View>
               </View>
@@ -184,21 +187,21 @@ const doctoreDetaile = {
       </ScrollView>
       <View style={[ProductDetailes.setbgcolorviewtwo, { backgroundColor: colorrdata }]}>
         <TouchableOpacity style={ProductDetailes.setwidthprice}>
-          <Text style={ProductDetailes.pricetextsetviewtwo}>{pricesymboldata} {count}</Text>
+          <Text style={ProductDetailes.pricetextsetviewtwo}></Text>
         </TouchableOpacity>
         <View style={ProductDetailes.plusandminusflexview}>
-          <TouchableOpacity onPress={() => { if (count > 1) { setCount(count - 1) } }}>
-            <Icon name="minus" size={20} color='white' />
+          <TouchableOpacity onPress={() => { }}>
+            
           </TouchableOpacity>
-          <Text style={ProductDetailes.pricetextsetview}>{count}</Text>
-          <TouchableOpacity onPress={() => setCount(count + 1)}>
-            <Icon name="plus" size={20} color='white' />
+          <Text style={ProductDetailes.pricetextsetview}>Chat</Text>
+          <TouchableOpacity onPress={() =>{}}>
+            
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity style={ProductDetailes.setbgcolorwhite} onPress={() => navigation.navigate('tab')}>
+          {/* <TouchableOpacity style={ProductDetailes.setbgcolorwhite} onPress={() => navigation.navigate('tab')}>
             <IconH name="shopping-basket" color={'black'} size={24} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </View>

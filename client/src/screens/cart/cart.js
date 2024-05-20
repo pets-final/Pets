@@ -37,7 +37,7 @@ function incrementCount(itemId) {
 useEffect(() => {
   const subscriber =  auth().onAuthStateChanged((user) => {
     setUser(user);
-    console.log('subscriber',user);
+    // console.log('subscriber',user);
     
     if (user) { // Check if user is not null
       getAllData(user); // Pass user to getAllData
