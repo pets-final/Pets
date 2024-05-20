@@ -9,8 +9,8 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import { useSelector } from "react-redux";
 import Geocoder from 'react-native-geocoding';
-import env from '../../../env'
-Geocoder.init(env.GOOGLE_MAPS_API_KEY);
+// import env from '../../../env'
+// Geocoder.init(env.GOOGLE_MAPS_API_KEY);
 const ConformLocation = ({route}) => {
   const colorrdata = "#861088";
   const navigation = useNavigation();
