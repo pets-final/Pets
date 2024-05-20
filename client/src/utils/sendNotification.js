@@ -12,7 +12,7 @@ export const addItemToNotifications = async (uid, item) => {
   };
 
   try {
-    const { url, imageUri, category, message, token } = item;
+    const { url, imageUri, category, message, token,timestamp} = item;
     const categoryImageUri = categorisedImages[category] || categorisedImages['General'];
 
     // Add item to Firestore
@@ -21,6 +21,7 @@ export const addItemToNotifications = async (uid, item) => {
       imageUri: imageUri || categoryImageUri,
       category: category || 'General',
       message: message,
+      timestamp:timestamp
     });
     console.log('Item added!');
 

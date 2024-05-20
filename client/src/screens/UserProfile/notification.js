@@ -17,6 +17,8 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import { addItemToNotifications } from '../../utils/sendNotification.js';
+import messaging from '@react-native-firebase/messaging';
+
 const categorisedImages = {
   "General": "https://icones.pro/wp-content/uploads/2022/02/icone-de-cloche-et-d-alerte-violette.png",
   "adoption": "https://i.pinimg.com/736x/01/80/aa/0180aa58526930c0dc0961591fd6a9ef.jpg",
@@ -24,30 +26,40 @@ const categorisedImages = {
 }
 
 const NotificationScreen = ({navigation}) => {
+ 
   const db = firestore();
   const [notifications, setNotifications] = useState([]);
-  const [lastDoc, setLastDoc] = useState(null);
+  // const [lastDoc, setLastDoc] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [User, setuser] = useState(true);
-
-  useEffect(() => {
+  
+  useEffect(async() => {
+    const token = await messaging().getToken();
+    console.log('token',token)
     const subscriber = firestore()
-    .collection('notifications')
-    .doc(auth().currentUser.uid)
-    .collection('items')
-    .onSnapshot(querySnapshot => {
-      querySnapshot.forEach(documentSnapshot => {
-        setNotifications(prevNotifications => [
-          ...prevNotifications,
-          {
+      .collection('notifications')
+      .doc(auth().currentUser.uid)
+      .collection('items')
+      .onSnapshot(querySnapshot => {
+        const newNotifications = [];
+        querySnapshot.forEach(documentSnapshot => {
+          newNotifications.push({
             ...documentSnapshot.data(),
             key: documentSnapshot.id,
-          }
+          });
+        });
+        // Only call setNotifications once per batch of changes
+        setNotifications(prevNotifications => [
+         
+          ...newNotifications,
         ]);
+        // Only call setIsLoading once per batch of changes
+        setIsLoading(false);
       });
-      setIsLoading(false);
-    });
-  }, []);
+  
+    // Unsubscribe from the snapshot listener when the component is unmounted
+    return () => subscriber();
+  }, []); // Empty dependency array means this effect runs once when the component mounts
 
   const formatElapsedTime = (timestamp) => {
     const now = new Date();
@@ -90,35 +102,23 @@ const NotificationScreen = ({navigation}) => {
     }
   };
 
-  // const addItemToNotifications = async (user, item) => {
-  //   try {
-  //     const { url, imageUri, category, message } = item;
-  //     const categoryImageUri = categorisedImages[category] || categorisedImages['General'];
-  
-  //     await db.collection(`notifications/${user.uid}/items`).add({
-  //       url: url || 'tab',
-  //       imageUri: imageUri || categoryImageUri,
-  //       category: category || 'General',
-  //       message: message,
-  //       timestamp: firestore.FieldValue.serverTimestamp(),
-  //     });
-  //     console.log('Item added!');
-  //   } catch (error) {
-  //     console.error('Error adding item: ', error);
-  //   }
-  // };  
+ 
       const handleSendNotification = async (category,message) => {
-        const uid = User.uid;
+        const uid = auth().currentUser.uid
+        console.log('user uid !!!!!!!!!',uid);
         const deviceToken = "cQSWf4JqSU-TijlwWOVMg9:APA91bFCHikL-Nbd2rUrvsXJAiKhSTCyGtrJq88-t-K9OI6h_8K2zWEB4Z_5p_fuDBsTxg2-kniSAybyydXaDnZyW48-mBTx2T4nwW8a4mVfM2Tfs0doqTJOtxhYKOkdfPQmKZpt3CGa";
         
         const item = {
-          category: "adoption",
+          category: "genreal",
           message: "You have a new adoption request", // Add your message here
           token: deviceToken, // Add the token to the item
+          timestamp: firestore.FieldValue.serverTimestamp()
         };
         
         addItemToNotifications(uid, item)
-          .then((res) => console.log("Notification sent successfully", res))
+          .then((res) =>{ console.log("Notification sent successfully")
+          console.log('item',item)
+          })
           .catch((error) => console.error("Failed to send notification", error));}
   const EmptyCart = () => (
     <View style={NotificationStyle.container}>
