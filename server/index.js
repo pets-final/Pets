@@ -8,7 +8,7 @@ app.use(cors()); // Enable CORS if necessary
 app.use(bodyParser.json()); // Add this line
 
 admin.initializeApp({
-  credential: admin.credential.cert(require('./my-petsproject-firebase-adminsdk-p4fen-4e24645823.json')),
+  credential: admin.credential.cert(require('./my-petsproject-firebase-adminsdk-p4fen-eaada982ef.json')),
 });
 app.post('/send-notification', async (req, res) => {
     const { notificationData, deviceToken } = req.body; // Extract data from request body

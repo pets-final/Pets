@@ -8,6 +8,7 @@ import images from '../../index';
 import { Rating } from 'react-native-ratings';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
+import IconY from 'react-native-vector-icons/dist/MaterialIcons';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import HeaderScreenAddress from '../../components/HeaderScreenAddress'
 import image from '../../images';
@@ -321,8 +322,8 @@ const HomeTabset = (props) => {
               </View> */}
             </View>
           </View>
-          <TouchableOpacity style={Styles.setplusicon} onPress={() => navigation.navigate('productDetails')}>
-            <IconF name={item.plusicon} size={30} color={"#861088"} />
+          <TouchableOpacity  style={[Styles.setplusicon,{marginRight:10}]} onPress={() => navigation.navigate('productDetails')}>
+            <IconY  name='pets' size={27} color={"#861088"} />
           </TouchableOpacity>
         </View>
       </View>
