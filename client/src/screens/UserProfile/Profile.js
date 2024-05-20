@@ -37,6 +37,7 @@ const ProfileTab = ({route}) => {
     }
   };
   useEffect(() => {
+    console.log("User");
     const subscriber = auth().onAuthStateChanged((authUser) => {
       if(authUser){
         const unsubscribe = db.collection('users').doc(authUser.uid).onSnapshot((doc) => {
@@ -98,6 +99,7 @@ const ProfileTab = ({route}) => {
       </TouchableOpacity>
     )
   }
+  
   return (
     <View style={[AccountTabStyle.minstyleviewphotograpgy, AccountTabStyle.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
