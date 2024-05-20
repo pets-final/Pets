@@ -106,16 +106,7 @@ const Nav = () => {
             />
           ),
         }} component={Home} />
-      <Tab.Screen name="Profile" options={{
-          headerShown: false,
-          tabBarIcon: ({ focused, color }) => (
-            <TabBarIcon
-              focused={focused}     
-              tintColor={color}
-              name="user"
-            />
-          ),
-        }} component={Profile} />
+   
       <Tab.Screen name="FavoriteTab"  options={{
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
@@ -126,16 +117,7 @@ const Nav = () => {
             />
           ),
         }} component={FavoriteTab} />
-      <Tab.Screen name="Category"  options={{
-          headerShown: false,
-          tabBarIcon: ({ focused, color }) => (
-            <TabBarIcontwo
-              focused={focused}
-              tintColor={color}
-              name="category"
-            />
-          ),
-        }} component={Category} />
+     
       <Tab.Screen name="blogs"  options={{
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
@@ -158,8 +140,17 @@ const Nav = () => {
           ),
         }} component={ProductTab} />
 
-
-        <Tab.Screen name="AddPetsScreen"   options={{
+<Tab.Screen name="Profile" options={{
+          headerShown: false,
+          tabBarIcon: ({ focused, color }) => (
+            <TabBarIcon
+              focused={focused}     
+              tintColor={color}
+              name="user"
+            />
+          ),
+        }} component={Profile} />
+        {/* <Tab.Screen name="AddPetsScreen"   options={{
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
             <TabBarIconoffer
@@ -168,7 +159,7 @@ const Nav = () => {
               name="product-hunt"
             />
           ),
-        }} component={AddPetsScreen} />
+        }} component={AddPetsScreen} /> */}
 
 </Tab.Navigator>
 

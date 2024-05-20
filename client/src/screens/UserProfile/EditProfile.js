@@ -6,7 +6,6 @@ import SweetaelertModal from '../../components/SweetAlertModal';
 import Style from '../../styles/CommonStyle/Style';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-
 const EditProfileScreen = () => {
   const [user, setUser] = useState(null);
   const [fullname, setFullname] = useState('');
@@ -21,7 +20,7 @@ const EditProfileScreen = () => {
     });
     return subscriber;
   }, []);
-
+console.log("this is user data ",user)
   const signupbutton = async () => {
     if (!fullname.trim()) {
       setFullnameError('Please enter your full name.');
@@ -40,8 +39,8 @@ const EditProfileScreen = () => {
 
       if (doc.exists) {
         await docRef.update({
-          fullname,
-          mobilenumber,
+          fullname:fullname,
+          mobilenumber:mobilenumber,
         });
         setEmailSendAlert(true);
       } else {
@@ -59,7 +58,7 @@ const EditProfileScreen = () => {
       <View style={Styles.tabminview}>
         <View style={Style.inputUnderLine}>
           <TextInput
-            placeholder={user?.displayName}
+            placeholder={user?.fullname}
             style={Style.inputtextstyle}
             placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
             onChangeText={(value) => { setFullnameError(''); setFullname(value); }}
@@ -70,7 +69,7 @@ const EditProfileScreen = () => {
         }
         <View style={Style.inputUnderLine}>
           <TextInput
-            placeholder={user?.phoneNumber || "+21698000000"}
+            placeholder={user?.phoneNumber || "+21698000000" }
             style={Style.inputtextstyle}
             keyboardType="numeric"
             placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
@@ -98,5 +97,4 @@ const EditProfileScreen = () => {
     </View>
   );
 };
-
 export default EditProfileScreen;

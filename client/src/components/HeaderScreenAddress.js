@@ -1,14 +1,33 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { Text, View, TouchableOpacity, } from "react-native";
 import Styles from '../styles/Tab/HometabStyle';
 import IconM from 'react-native-vector-icons/Feather';
 import IconP from 'react-native-vector-icons/FontAwesome';
 import NavigationDrawerStructure from './HeaderSidemenuIcon'
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth'; // Import the auth module
 
-
-const SearchHeaderScreen = ({navigation}) => {
-  // console.log('navigation',navigation);
+const SearchHeaderScreen = ({navigation,user}) => {
+  const db = firestore();
+  const [User, setUser] = useState(null); // State to hold the user object
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged((authUser) => {
+      if(authUser){
+        const unsubscribe = db.collection('users').doc(authUser.uid).onSnapshot((doc) => {
+          if (doc.exists) {
+            const userData = doc.data()
+            setUser(userData);
+            console.log("Current data: ", userData);
+          } else {
+            console.log("No such document!");
+          }
+        });
+        return () => unsubscribe();
+      }
+    });
+    return subscriber;
+  }, []);
   return (
     <View>
       <View style={Styles.minheaderflexview}>
@@ -19,7 +38,7 @@ const SearchHeaderScreen = ({navigation}) => {
           </View>
           <View>
             <Text style={[Styles.hometext, { color: "#861088" }]}>Home</Text>
-            <Text style={[Styles.addreshtext, { color: "#861088" }]}>1417 Timberbrook...</Text>
+            <Text style={[Styles.addreshtext, { color: "#861088" }]}> { User && User.address}</Text>
           </View>
         </TouchableOpacity>
         <View style={{marginRight:30}}>

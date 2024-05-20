@@ -184,7 +184,7 @@ const Render = ({item,index})=>{
           {Applycoupon === 0 ?
             <View style={CartTabStyle.textcenyet}>
               <View>
-                <Text style={CartTabStyle.digitaltextsettwo}>{totalPrice}</Text>
+                <Text style={CartTabStyle.digitaltextsettwo}> $ {totalPrice}</Text>
                 <Text style={[CartTabStyle.viewdetailesbilltext, { color: colorrdata }]}>Total Amount</Text>
               </View>
             </View>

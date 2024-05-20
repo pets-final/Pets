@@ -95,26 +95,8 @@ const ConformLocation = ({route}) => {
       longitude: newLon,
     };
   };
-  const mapStyle = [
-    // ...
-    {
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: 'hsl(4.9, 58.1%, 45.9%)', // Replace this with your color
-        },
-      ],
-    },
-    {
-      elementType: 'labels.text.stroke',
-      stylers: [
-        {
-          color: '#fbfbfb', // Replace this with your color
-        },
-      ],
-    },
-    // More style rules...
-  ];
+  
+  const markerPosition = getRandomCoordinate(position, 10000); // 1000 meters = 1 km
   return (
     <View style={Conformlocation.minstyleviewphotograpgy}>
       <StatusBar barStyle="dark-content" backgroundColor="#89b4f8" />
@@ -136,8 +118,6 @@ const ConformLocation = ({route}) => {
                   showsMyLocationButton={true}
                   followsUserLocation={true}
                   showsCompass={true}
-                  customMapStyle={mapStyle}
-
                   zoomEnabled={true}
                   pitchEnabled={true}
                   rotateEnabled={true}
@@ -153,7 +133,7 @@ const ConformLocation = ({route}) => {
                   />
                   <MapViewDirections
                     origin={position}
-                    destination={ getRandomCoordinate(position, 10000)} 
+                    destination={markerPosition} 
                     apikey={env.GOOGLE_MAPS_API_KEY}
                     strokeWidth={3}
                     strokeColor="hotpink"

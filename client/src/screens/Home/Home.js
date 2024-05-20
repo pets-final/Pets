@@ -8,12 +8,13 @@ import images from '../../index';
 import { Rating } from 'react-native-ratings';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 import IconF from 'react-native-vector-icons/dist/FontAwesome';
+import IconY from 'react-native-vector-icons/dist/MaterialIcons';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import HeaderScreenAddress from '../../components/HeaderScreenAddress'
-import firestore from '@react-native-firebase/firestore';
 import image from '../../images';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import firestore from '@react-native-firebase/firestore';
 
 const db = firestore();
 
@@ -129,7 +130,6 @@ const HomeTabset = (props) => {
         setUser(doc.data());
       });
     });
-    // Cleanup subscription on unmount
     return subscriber;
   }, []);
   const dispSecondsAsMins = (value) => {
@@ -401,9 +401,9 @@ const HomeTabset = (props) => {
               </View>
             </View>
           </View>
-          {/* <TouchableOpacity style={Styles.setplusicon} onPress={() => navigation.navigate('productDetails')}>
-            <IconF name={item.plusicon} size={30} color={"#861088"} />
-          </TouchableOpacity> */}
+          <TouchableOpacity  style={[Styles.setplusicon,{marginRight:10}]} onPress={() => navigation.navigate('productDetails')}>
+            <IconY  name='pets' size={27} color={"#861088"} />
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -454,7 +454,7 @@ const HomeTabset = (props) => {
 
   return (
 <View style={{ flex: 1, paddingBottom: insets.bottom + 50}}>
-      <HeaderScreenAddress navigation={navigation}/>
+      <HeaderScreenAddress user={user} navigation={navigation}/>
     <View style={[Styles.minstyleviewphotograpgy, Styles.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
       <ScrollView
@@ -463,6 +463,7 @@ const HomeTabset = (props) => {
           width: '100%',
           height: 'auto',
         }}>
+          
         <View style={Styles.minflexview}>
           <View style={Styles.minviewsigninscreen}>
             <View style={{ paddingTop: -30 }}>
@@ -470,6 +471,7 @@ const HomeTabset = (props) => {
             </View>
             <View style={Styles.marginsetminview}>
               <View style={Styles.FlexRowBetwn}>
+                
                 <Text style={Styles.settopcategories}>Trending Categories</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('Categories')}>
                   <Text style={[Styles.SeeAlltext, { color: "#861088" }]}>See All</Text>

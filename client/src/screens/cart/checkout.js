@@ -144,18 +144,18 @@ const CheckOutScreen = ({ route }) => {
                     {Applycoupon === 0 ?
                       <View style={Styles.flexrowspacebeetveen}>
                         <Text style={Styles.subtotaltext}>Subtotal</Text>
-                        <Text style={Styles.digitaltext}>{pricesymboldata} 175 (4) </Text>
+                        <Text style={Styles.digitaltext}>{pricesymboldata} {route.params.totalPrice} </Text>
                       </View>
                       :
                       <View style={Styles.flexrowspacebeetveen}>
                         <Text style={Styles.subtotaltext}>Subtotal</Text>
-                        <Text style={Styles.digitaltext}>{pricesymboldata} {105 * count}</Text>
+                        <Text style={Styles.digitaltext}>{pricesymboldata} {route.params.totalPrice}</Text>
                       </View>
                     }
                     {Applycoupon === 0 ?
                       <View style={Styles.flexrowspacebeetveen}>
                         <Text style={Styles.subtotaltext}>Delivery</Text>
-                        <Text style={Styles.digitaltext}>{pricesymboldata} 50</Text>
+                        <Text style={Styles.digitaltext}>{pricesymboldata} 10</Text>
                       </View>
                       :
                       <View style={Styles.flexrowspacebeetveen}>
@@ -166,7 +166,7 @@ const CheckOutScreen = ({ route }) => {
                     {Applycoupon === 0 ?
                       <View style={Styles.flexrowspacebeetveen}>
                         <Text style={Styles.digitaltextsettwo}>Total</Text>
-                        <Text style={Styles.digitaltextsettwo}>{pricesymboldata} {750 * count}</Text>
+                        <Text style={Styles.digitaltextsettwo}> $ {route.params.totalPrice + 10}</Text>
                       </View>
                       :
                       <View style={Styles.flexrowspacebeetveen}>
