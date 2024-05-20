@@ -9,8 +9,8 @@ import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
 
-
 const ProductTab = () => {
+ 
  
   const pricesymboldata ='$';
   const navigation = useNavigation();
