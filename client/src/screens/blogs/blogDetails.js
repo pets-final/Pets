@@ -5,7 +5,7 @@ import { AppHeader, VideoView, Button } from '../../components'
 import { SH, SW, Fonts, ColorTheme, } from '../../utils';
 import images from '../../index';
 import { VideoPlayStyle, VideoTabStyle } from '../../styles';
-import Video from 'react-native-video';
+// import Video from 'react-native-video';
 import IconE from "react-native-vector-icons/Entypo";
 
 const VideoPlay = ({ navigation }) => {
@@ -24,7 +24,7 @@ const VideoPlay = ({ navigation }) => {
     return (
         <View>
             <View style={VideoPlayStyle.container}>
-                <Video
+                {/* <Video
                     ref={ref => (videoPlayer.current = ref)}
                     source={images.Dog_Video}
                     style={VideoPlayStyle.backgroundVideo}
@@ -38,7 +38,7 @@ const VideoPlay = ({ navigation }) => {
                     volume={1.0}                 
                     playInBackground={false}
                     playWhenInactive={false}                   
-                />
+                /> */}
                 <ScrollView>
                     <View style={VideoPlayStyle.HeadBoxTextStyle}>
                         <Text style={VideoPlayStyle.itemText}>It is a long established fact that a reader</Text>

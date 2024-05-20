@@ -83,31 +83,27 @@ export const MedicineCategoryHomeTab = [
     },
     {
         "id": 2,
-        "image": <Image style={Style.imagsetstylefoodyitemdata} resizeMode="contain" source={images.HomePageCateImg2} />,
+        "image": <Image style={Style.imagsetstylefoodyitemdata2} resizeMode="contain" source={images.HomePageCateImg2} />,
         "text": 'Treat',
     },
     {
         "id": 3,
-        "image": <Image style={Style.imagsetstylefoodyitemdata} resizeMode="contain" source={images.HomePageCateImg3} />,
+        "image": <Image style={Style.imagsetstylefoodyitemdata2} resizeMode="contain" source={images.HomePageCateImg6} />,
         "text": 'Walking Essential',
 
     },
    
     {
         "id": 4,
-        "image": <Image style={Style.imagsetstylefoodyitemdata} resizeMode="contain" source={images.HomePageCateImg4} />,
+        "image": <Image style={Style.imagsetstylefoodyitemdata2} resizeMode="contain" source={images.HomePageCateImg5} />,
         "text": 'Health',
     },
     {
         "id": 5,
-        "image": <Image style={Style.imagsetstylefoodyitemdata} resizeMode="contain" source={images.HomePageCateImg4} />,
+        "image": <Image style={Style.imagsetstylefoodyitemdata2} resizeMode="contain" source={images.HomePageCateImg4} />,
         "text": 'Hygiene',
     },
-    {
-        "id": 5,
-        "image": <Image style={Style.imagsetstylefoodyitemdata} resizeMode="contain" source={images.HomePageCateImg4} />,
-        "text": 'Suplies',
-    },
+
  
 ]
 export const MegaMedicine = [

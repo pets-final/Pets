@@ -56,7 +56,7 @@ export default StyleSheet.create({
   },
   minviewsigninscreen: {
     width: '100%',
-    height: '100%',
+    height: 200,
     paddingBottom: 5,
     paddingTop: 5,
   },

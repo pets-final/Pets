@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 const NavigationDrawerStructure = (props) => {
   const navigation = useNavigation();
 
-  console.log('props',props.navigationProps.toggleDrawer);
+  // console.log('props',props.navigationProps.toggleDrawer);
   const {marginrighthome} = props;
   const toggleDrawer = () => {
     props.navigationProps.toggleDrawer();

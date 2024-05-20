@@ -125,9 +125,7 @@ const ProfileTab = ({route}) => {
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
                     <Text style={AccountTabStyle.sumanyatextset}>{ User?.fullname}</Text>
-                    { console.log(User?.fullname)}
                     <Text style={AccountTabStyle.setgimailtext}>{ User?.email}</Text>
-                    <Text style={AccountTabStyle.setgimailtext}>Verified : {isFilled ? 'Yes' : 'No'}</Text>
                     <Text style={AccountTabStyle.setgimailtextwo}>{User?.mobilenumber}</Text>
                     <Text style={AccountTabStyle.addreshtext}>{User?.address}</Text>
                   </View>
@@ -153,7 +151,7 @@ const ProfileTab = ({route}) => {
                 <TouchableOpacity onPress={() => navigation.navigate('NewProduct')} style={AccountTabStyle.setbgcolorwhite}>
                   <View>
                     <View style={AccountTabStyle.flexrowsettile}>
-                      <Icon name="setting" size={20} color={colorrdata} />
+                      <Icon name="plus" size={20} color={colorrdata} />
                     </View>
                     <Text style={AccountTabStyle.bookmarktextstyle}>Add Product</Text>
                   </View>
@@ -161,7 +159,7 @@ const ProfileTab = ({route}) => {
                 <TouchableOpacity onPress={() => paymentscreen()} style={AccountTabStyle.setbgcolorwhite}>
                   <View>
                     <View style={AccountTabStyle.flexrowsettile}>
-                      <IconI name="md-wallet-outline" size={20} color={colorrdata} />
+                      <IconI name="wallet" size={20} color={colorrdata} />
                     </View>
                     <Text style={AccountTabStyle.bookmarktextstyle}>Payments</Text>
                   </View>

@@ -32,7 +32,7 @@ const ChatScreen = () => {
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged((user) => {
       setuser(user);
-        console.log(user);
+        // console.log(user);
       if (user) {
       
           const unsubscribe = db.collection(`chats/SLSwA3222ndTMGd8aKK6qKmdX2G2_${doctor.id}/messages`)

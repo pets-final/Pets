@@ -83,7 +83,7 @@ const AddPetsScreen = () => {
       try {
         await storage().ref(filename).putFile(uploadUri);
         const url = await storage().ref(filename).getDownloadURL();
-        console.log("url imagee ",url)
+        // console.log("url imagee ",url)
         setImg(url)
         setUploading(false);       
       } catch (error) {

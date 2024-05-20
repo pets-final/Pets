@@ -591,6 +591,7 @@ export default StyleSheet.create({
     color:'black',
     opacity:0.7,
     paddingHorizontal:10,
+    paddingTop:5
     
   }
 

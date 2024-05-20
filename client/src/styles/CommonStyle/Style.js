@@ -432,10 +432,10 @@ export default StyleSheet.create({
   imagsetstylefoodyitemdata2: {
     width: 50,
     height: 50,
-    borderRadius: 100,
+    // borderRadius: 100,
   },
   setboximage: {
-    height: 150,
+    height: '100%',
     width: '100%',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
