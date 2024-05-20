@@ -7,8 +7,10 @@ const app = express();
 app.use(cors()); // Enable CORS if necessary
 app.use(bodyParser.json()); // Add this line
 
+const serviceAccount = require('../client/env');
+console.log(serviceAccount.GOOGLE_CREDS)
 admin.initializeApp({
-  credential: admin.credential.cert(require('./my-petsproject-firebase-adminsdk-p4fen-eaada982ef.json')),
+  credential: admin.credential.cert(require('../client/env/GOOGLE_CREDS.json')),
 });
 app.post('/send-notification', async (req, res) => {
     const { notificationData, deviceToken } = req.body; // Extract data from request body
