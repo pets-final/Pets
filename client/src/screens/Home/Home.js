@@ -351,7 +351,7 @@ const HomeTabset = (props) => {
     return (
       <View style={Styles.Doctorbox}>       
           <View style={Styles.doctorimagbox}>
-            <TouchableOpacity onPress={() => navigation.navigate('AppointContact',{doctor:item})}>
+            <TouchableOpacity onPress={() => navigation.navigate('AppointContact',{DoctorListData:DoctorListData,doctor:item})}>
               <Image style={Styles.Doctorimage} resizeMode="contain" source={item.doctorImg} />
             </TouchableOpacity>
             <Text style={[Styles.Doctornametext, { color: "#861088" }]} >{item.doctorname}</Text>

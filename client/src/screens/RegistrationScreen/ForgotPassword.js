@@ -8,6 +8,7 @@ import IconA from 'react-native-vector-icons/AntDesign';
 import Style from '../../styles/CommonStyle/Style';
 import Button  from '../../components/Button';
 import SweetaelertModal  from '../../components/SweetAlertModal';
+import auth from '@react-native-firebase/auth';
 
 
 const ForgotPassword = () => {
@@ -24,20 +25,39 @@ const ForgotPassword = () => {
     SetEmail(item);
   };
 
-  const handleValidEmail = (e) => {
+  // const handleValidEmail = (e) => {
+  //   if (email !== '') {
+  //     let emaildata = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+  //     if (!emaildata) {
+  //       setEmailValidError1(1);
+  //     }
+  //     else if (emaildata == emaildata) {
+  //       setEmailSendAlert(1);
+        
+  //     }
+  //   }
+  //   if (!email.trim()) {
+  //     setEmailValidError(1);
+  //   }
+   
+  // };
+  const handleValidEmail = async (e) => {
     if (email !== '') {
       let emaildata = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
       if (!emaildata) {
         setEmailValidError1(1);
+      } else if (emaildata) {
+        try {
+          await auth().sendPasswordResetEmail(email);
+          setEmailSendAlert(1); // Display success message
+        } catch (error) {
+          console.error(error);
+          // Handle errors (e.g., show an error message to the user)
+        }
       }
-      else if (emaildata == emaildata) {
-        setEmailSendAlert(1);
-      }
-    }
-    if (!email.trim()) {
+    } else {
       setEmailValidError(1);
     }
-   
   };
 
   return (

@@ -15,7 +15,8 @@ import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
 import MyVet from './src/screens/VetProfile/Myvet'
-import AppointContact from './src/screens/AppointContact/Appoint';
+// import AppointContact from '';
+import AppointContact from './src/screens/AppointContact/Appoint'
 import VetProfileTab from './src/screens/VetProfile/VetProfile'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
@@ -153,7 +154,7 @@ function App() {
           name="map"
           options={{headerShown: false}}
           component={map}
-        />
+          />
         <Stack.Screen
           options={{
             headerShadowVisible: true,
@@ -288,7 +289,7 @@ function App() {
           },
         }}  name="VetProfileTab" component={VetProfileTab} />
                    <Stack.Screen options={{
-          headerShown: true,
+          headerShown: true,  
           headerShadowVisible: false,
           title: 'MyVet',
           headerTintColor: "#feb344",
@@ -297,7 +298,7 @@ function App() {
             fontSize: 17,
             fontSize: 20,
             marginLeft: 17,
-          },
+          }, 
         }}  name="Myvet" component={MyVet} />
          
          
@@ -318,7 +319,7 @@ function App() {
             },
           }}
         />
-         {/* <Stack.Screen options={{
+         <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
           title: 'ChatScreen',
@@ -329,7 +330,7 @@ function App() {
             fontSize: 20,
             marginLeft: 17,
           },
-        }}  name="ChatScreen" component={ChatScreen} /> */}
+        }}  name="ChatScreen" component={ChatScreen} />
         <Stack.Screen
           name="AddPetsScreen"
           component={AddPetsScreen}
