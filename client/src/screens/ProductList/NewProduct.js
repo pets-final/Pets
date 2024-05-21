@@ -149,7 +149,7 @@ const addProduct=()=>{
           />
         </View>
 
-        <View style={Style.inputUnderLine}>
+        <View style={Style. inputDescription}>
           <TextInput
             placeholder="Product Description"
             style={Style.inputtextstyle}

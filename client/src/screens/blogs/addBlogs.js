@@ -93,7 +93,7 @@ const AddBlogs = () => {
             />
           </View>
 
-          <View style={Style.inputUnderLine}>
+          <View style={Style.inputDescription}>
             <TextInput
               placeholder="Description"
               multiline={true}

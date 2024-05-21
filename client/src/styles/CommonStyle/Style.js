@@ -2,6 +2,28 @@ import { StyleSheet } from 'react-native';
 import { SF, SH, SW, Fonts, colors, widthPercent, ColorTheme } from '../../utils';
 
 export default StyleSheet.create({
+  inputDescription: {
+    backgroundColor: 'hsl(0, 0%, 94.9%)',
+    color: ColorTheme.TextBlackColor,
+    width: '100%',
+    height: 300,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginBottom: 15,
+    shadowColor: '#52006A',
+    fontFamily: 'DMSans-Medium',
+    paddingLeft: 12,
+    paddingRight: 15,
+    shadowOffset: {
+      width: 0,
+      height: Platform.OS === 'ios' ? 0 : 25,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: Platform.OS === 'ios' ? 0 : 25,
+    elevation: Platform.OS === 'ios' ? 0 : 0,
+  },
   setimageviewstyle: {
     height: '100%',
     width: '100%',
