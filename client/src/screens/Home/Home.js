@@ -291,34 +291,47 @@ const HomeTabset = (props) => {
 
   const MedicineDeals = (item, index) => {
     return (
-      <View style={[Styles.setbgcolorviewtimewrap, Styles.bgcolorset]}>
-        <View style={Styles.setbgcolorviewtime}>
-          
+      <View>
+        <View style={Styles.minbgviewset}>
+          <TouchableOpacity style={Styles.imagecengter} onPress={() => navigation.navigate('productDetails',{item:item})}>
+            <Image style={[Styles.whiteboximagetwoset, Styles.whiteboximagetwosettwo]} resizeMode='contain' source={{uri:item.ImgUrl}} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('productDetails', {item:item})}>
+            <Text numberOfLines={1} style={[Styles.settextcolorcenter, { color: "#861088" }]}>{item.Name}</Text>
+          </TouchableOpacity>
+          <Text style={Styles.settextcolorcentertwo}>{item.AdresseShop}</Text>
+          <View style={Styles.flexrowseticon}>
             <View>
-              <TouchableOpacity style={Styles.flexrowsecenterimage}
-                onPress={() =>  navigation.navigate('productDetails',{item:item})}>
-                <Image style={Styles.whiteboximage} resizeMode="contain" source={{uri:item.ImgUrl}} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() =>  navigation.navigate('productDetails',{item:item})}>
-                <Text  numberOfLines={2} style={[Styles.setnormatextstyle, { color: "#861088" ,height:35}]}>{item.Name}</Text>
-              </TouchableOpacity>
-              <Text style={[Styles.settextcolorcenterthree, Styles.settextcolorcenterthreetow]}>{item.hospitalname}</Text>
-              <View style={Styles.flexrowjuctycenter}>
-                {item.rating}
-              </View>
-              <View style={Styles.flexrowsettext}>
-                <Text style={[Styles.settextprice, { color: "black" }]}>{pricesymboldata}{item.Price}</Text>
-              </View>
-              <View style={Styles.flexrocenterjusty}>
-                <View style={Styles.addbutttonwidth}>
-                  <Button onPress={() => HandleAddToCart(item)} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={'ADD'} />
-                </View>
-              </View>
-              {/* <View style={[Styles.settextinbgcolor, { backgroundColor: "#861088" }]}>
-                <Text style={Styles.setdescounrtextstyle}>{item.offdecount}</Text>
-              </View> */}
+              {item.ratings}
             </View>
-          
+          </View>
+          <View style={Styles.flexrowseticonNewArrival}>
+            <View>
+              <Text style={[Styles.settextpricebold, { color: "#861088" }]}>{pricesymboldata} {item.Price}</Text>
+            </View>
+            <TouchableOpacity onPress={() => doctordatatendingmenu(item)} style={[Styles.seticonbgcolorview, { backgroundColor: "#861088" }]}>
+              <IconF name={'plus'} size={20} color={'white'} />
+            </TouchableOpacity>
+          </View>
+         
+          <TouchableOpacity
+            onPress={() => {
+              if (liked.includes(index)) {
+                let unlike = liked.filter((elem) => elem !== index);
+                setLiked(unlike);
+              } else {
+                setLiked([...liked, index]);
+              }
+            }} style={Styles.HeartIconLike}>
+
+            <Icon
+              name="heart"
+              size={25}
+              style={{ color: liked.includes(index) ? 'red' : 'lightgrey' }}
+            />
+          </TouchableOpacity>
+
         </View>
       </View>
     );
