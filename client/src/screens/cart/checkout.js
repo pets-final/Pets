@@ -101,7 +101,7 @@ const CheckOutScreen = ({ route }) => {
     // Alert.alert('Order has been submitted', 'Your order reference is: 12345');
     // Clear cart and navigate to the success screen or another screen if necessary
     navigation.navigate('paymentSucces');
-  };424
+  };
   const Render = ({item,index})=>{
     return (
       <View style={[CartTabStyle.flexminviewcount, CartTabStyle.bgcolorset]}> 
