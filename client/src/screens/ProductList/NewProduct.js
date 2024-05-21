@@ -27,7 +27,7 @@ const NewProduct = () => {
   const [uploading, setUploading] = useState(false);
   const [ImgUrl, setImg] = useState('');
   const [imageSource, setImageSource] = useState(null);
-  const [imageUrl, setimageUrl] = useState('');
+  const [imageUrl, setimageUrl] = useState('https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074_640.jpg');
 
   const placeholder = {
     label: 'Select an Category...',
