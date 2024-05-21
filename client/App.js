@@ -10,7 +10,7 @@ import OTP_VERIFY_SCREEN from './src/screens/RegistrationScreen/OtpVerifyScreen'
 import FORGET_PASSWORD_SCREEN from './src/screens/RegistrationScreen/ForgotPassword';
 import EDIT_PROFILE_SCREEN from './src/screens/EditProfile/EditProfileScreen';
 import ProductList from './src/screens/ProductList/ProductList';
-import Category from './src/screens/Adopt/AdoptList';
+import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 import map from './src/screens/Map/map';
@@ -20,6 +20,7 @@ import Cart from './src/screens/cart/cart';
 import CheckOutScreen from './src/screens/cart/checkout';
 import PaytmSuccessFully from './src/screens/cart/paymentSucces';
 import {ProductDetailesScreen} from './src/screens/ProductList/Productdetails';
+import {PetsDetailesScreen} from './src/screens/Adopt/Adoptdetails'
 import ChatDoctorScreen from './src/screens/ChatScreen/ChatDoctorScreen';
 import ChatScreen from './src/screens/ChatScreenFolder/ChatScreen'
 // import DrawerChatScreen from './src/screens/ChatScreenFolder/DrawerChatScreen'
@@ -226,6 +227,12 @@ function App() {
           options={{headerShown: false}}
           name="productDetails"
           component={ProductDetailesScreen}
+        />
+     
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="PetsDetailesScreen"
+          component={PetsDetailesScreen}
         />
        
         {/* <Stack.Screen 

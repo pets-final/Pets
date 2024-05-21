@@ -69,24 +69,34 @@ const ProductTab = () => {
 
 
   const Docterproductdataitem = ({ item, index }) => {
-    return (
-      <View>
-        <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>
-          <View style={ProductitemList.bgwhiteboxminview}>
+    return ( 
+
+     <View >
+        {/* {console.log("product",productlist)} */}
+
+
+      <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>         
+        <View style={ProductitemList.bgwhiteboxminview}>
+          <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center',height:150 }}>
             <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
               <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{ uri: item.ImgUrl }} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate(('test'), { img: item.image, title: item.Description, hname: item.ShopName })}>
-              <Text numberOfLines={2} style={[ProductitemList.textoftitle, { color: "#861088", height: 40 }]}>{item.Name}</Text>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate(('test'), { img: item.image, title: item.Description, hname: item.ShopName })}>
+            <Text   numberOfLines={2} style={[ProductitemList.textoftitle, { color: "#861088",height:40 }]}>{item.Name}</Text>
+          </TouchableOpacity>
+          {/* <Text style={ProductitemList.settextcolorcenterlist}>{item.ShopName}</Text> */}
+          {/* <View style={ProductitemList.setflexstadr}>
+            {item.ratingsset}
+            <Text style={[ProductitemList.setratingtextstyle, { color: "#861088" }]}>{item.ratingtext}</Text>
+          </View> */}
+          <View style={ProductitemList.justicenterflexrow}>
+            <Text style={ProductitemList.boldpricetext}>{pricesymboldata} {item.Price}</Text>
+            <TouchableOpacity style={[ProductitemList.setplusbgcolorset, { backgroundColor: "#861088" }]} onPress={() => navigation.navigate(RouteName.CART_SCREEN)}>
+              <Text><IconS name="plus" size={20} color={'white'} /></Text>
             </TouchableOpacity>
-            <Text style={ProductitemList.settextcolorcenterlist}>{item.ShopName}</Text>
-            <View style={ProductitemList.justicenterflexrow}>
-              <Text style={ProductitemList.boldpricetext}>{pricesymboldata} {item.Price}</Text>
-              <TouchableOpacity style={[ProductitemList.setplusbgcolorset, { backgroundColor: "#861088" }]} onPress={() => navigation.navigate(RouteName.CART_SCREEN)}>
-                <Text><IconS name="plus" size={20} color={'white'} /></Text>
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity onPress={() => {
+          </View>
+          <TouchableOpacity onPress={() => {
               if (liked.includes(index)) {
                 let unlike = liked.filter((elem) => elem !== index);
                 setLiked(unlike);

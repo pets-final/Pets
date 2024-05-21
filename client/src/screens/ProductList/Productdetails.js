@@ -6,6 +6,7 @@ import IconF from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Entypo'; // Changed from 'react-native-vector-icons/FontAwesome'
 import IconH from 'react-native-vector-icons/FontAwesome'; // Changed from 'react-native-vector-icons/MaterialIcons'
 import IconL from 'react-native-vector-icons/Feather';
+import IconP from 'react-native-vector-icons/EvilIcons';
 import { useTogglePasswordVisibility } from '../../utils';
 import SweetaelertModal from '../../components/SweetAlertModal';
 import auth from '@react-native-firebase/auth';
@@ -20,10 +21,13 @@ const Product = {
 };
 const db = firestore();
 
- export const ProductDetailesScreen = () => {
+ export const ProductDetailesScreen = ({route}) => {
+  const {Name,ImgUrl,AdresseShop,Description,Category,Price,Size} = route.params.item
+  {console.log("rrrrrrrr",route.params.item)}
+
+
   const [count, setCount] = useState(1);
-  const colorrdata = "#861088"
-  ;
+  const colorrdata = "#861088"  ;
   const pricesymboldata = '$';
   const [EmailSendAlert, setEmailSendAlert] = useState(0);
   const [user, setuser] = useState([]);
@@ -50,6 +54,7 @@ const db = firestore();
 
   return (
     <View style={ProductDetailes.minstyleviewphotograpgy}>
+      {console.log(Name)}
       <StatusBar barStyle="dark-content" backgroundColor={colorrdata} />
       <ScrollView
         keyboardShouldPersistTaps="handled"
@@ -67,11 +72,11 @@ const db = firestore();
                 </View>
                 <TouchableOpacity style={ProductDetailes.setdotflex}>
                   <Text style={ProductDetailes.caltextstyle}>4.5</Text>
-                  <Text><Icon name="star" color={'white'} size={19} /></Text>
+                  <Text><Icon name="star" color={'white'} size={19} /></Text> 
                 </TouchableOpacity>
               </TouchableOpacity>
               <View style={[ProductDetailes.setimagestylewidth, { backgroundColor: colorrdata }]}>
-                <Image style={ProductDetailes.imagsetstyle} source={Product.image} resizeMode="contain"/>
+                <Image style={ProductDetailes.imagsetstyle} source={{uri:ImgUrl}} resizeMode="contain"/>
               </View>
               <TouchableOpacity onPress={() => backarrow()} style={Style.settextstyle}>
                 <View style={[Style.setbgcolorviewtwoview, { backgroundColor: colorrdata }]}>
@@ -82,8 +87,8 @@ const db = firestore();
               </TouchableOpacity>
               <View style={[ProductDetailes.bgwhiteboxminview, ProductDetailes.bgcolorset]} >
                 <View style={ProductDetailes.bgwhiteboxsmall}>
-                  <Text style={ProductDetailes.settextweight}>{pricesymboldata} {Product.price}</Text>
-                  <Text style={ProductDetailes.settextweight}> 5 Kg</Text>
+                  <Text style={ProductDetailes.settextweight}>{pricesymboldata} {Price}</Text>
+                  <Text style={ProductDetailes.settextweight}>{Size}</Text>
                 </View>
                 {hearticonset === 0 ?
                   <TouchableOpacity onPress={() => sethearticonset(1)} style={[ProductDetailes.HeartIconLike, Style.setbgcolorborder]}>
@@ -96,16 +101,18 @@ const db = firestore();
                 }
                 <View style={[ProductDetailes.setallpading, ProductDetailes.bgcolorset]}>
                   <View style={[ProductDetailes.descripitionviewone, ProductDetailes.bgcolorset]}>
-                    <Text style={[ProductDetailes.descriptiontextset, { color: colorrdata }]}>{Product.text}</Text>
+                    <Text style={[ProductDetailes.descriptiontextset, { color: colorrdata }]}>{Name}</Text>
                     {/* <Text style={[ProductDetailes.descriptiontextset, { color: colorrdata }]}>22 % Off</Text> */}
                   </View>
                   <View>
                   </View>
                 </View>
-                <Text style={ProductDetailes.Settextstylefruit}>{Product.text} are the means by which flowering plants (also known as angiosperms) disseminate their seeds.
-                  Edible {Product.text} is a small outdoor structure designed for pets, typically dogs or cats, to use as a shelter from the elements. They can be made from a variety of materials, such as wood, plastic, or metal, and come in a range of sizes to accommodate different sized pets. Some pet houses are insulated to keep pets warm in cold weather, and some have a slanted roof to allow for proper drainage. </Text>
+                <Text style={ProductDetailes.Settextstylefruit}>{Description} </Text>
                   <Text></Text>
-                  <Text style={ProductDetailes.Settextstylefruit}>{Product.text} They can be purchased pre-made or built from a kit, and some pet owners even choose to build their own pet houses. </Text>              
+                  <Text style={ProductDetailes.Settextstylefruit}>
+                  <IconP name="location" size={27} color={colorrdata} />
+                    {AdresseShop}
+                    </Text>              
               </View>
               <View>
               </View>

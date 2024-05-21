@@ -25,7 +25,7 @@ const [user, setUser] = useState(null); // State to
     // Get the current user when the component mounts
     const subscriber = auth().onAuthStateChanged((user) => {
       setUser(user);
-      console.log('subscriber',user.uid);
+      // console.log('subscriber',user.uid);
     });
     // Cleanup subscription on unmount
     return subscriber;
@@ -38,7 +38,7 @@ const [user, setUser] = useState(null); // State to
     }
     launchImageLibrary(option,response=>{
       setMedia(response.assets[0].uri)
-      console.log(response)
+      // console.log(response)
     })
 
   }
