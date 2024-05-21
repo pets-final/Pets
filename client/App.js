@@ -37,6 +37,7 @@ import NotificationScreen from './src/screens/UserProfile/notification';
 import AddBlogs from './src/screens/blogs/addBlogs'
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
 import messaging from '@react-native-firebase/messaging';
+import { StripeProvider } from '@stripe/stripe-react-native';
 
 // Function to request permission for receiving notifications
 const requestUserPermission = async () => {
@@ -74,6 +75,7 @@ const Stack = createNativeStackNavigator();
 function App() {
   
   return (
+    <StripeProvider publishableKey="pk_test_51Ox8ao00Q5gLy9r769FH3jifVru8SWzlPsV9txFatQ4I9uMn9duqFIQNtE4sSriKrdmcUxkEIfSfdni0zrwoQN1c00jfBr7of6">
     <NavigationContainer>
       <Stack.Navigator>
     
@@ -389,6 +391,7 @@ function App() {
       </Stack.Navigator>
       
     </NavigationContainer>
+    </StripeProvider>
   );
 }
 
