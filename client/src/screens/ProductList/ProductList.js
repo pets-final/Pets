@@ -72,17 +72,14 @@ const ProductTab = () => {
     return ( 
 
      <View >
-        {/* {console.log("product",productlist)} */}
-
-
       <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>         
         <View style={ProductitemList.bgwhiteboxminview}>
-          <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center',height:150 }}>
+          <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center',height:150 ,borderBlockColor:'black' }}>
             <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
-              <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{ uri: item.ImgUrl }} />
+                <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{ uri: item.ImgUrl }} />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate(('test'), { img: item.image, title: item.Description, hname: item.ShopName })}>
+          <TouchableOpacity onPress={() =>  navigation.navigate('productDetails',{item:item})}>
             <Text   numberOfLines={2} style={[ProductitemList.textoftitle, { color: "#861088",height:40 }]}>{item.Name}</Text>
           </TouchableOpacity>
           {/* <Text style={ProductitemList.settextcolorcenterlist}>{item.ShopName}</Text> */}

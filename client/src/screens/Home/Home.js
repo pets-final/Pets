@@ -12,6 +12,7 @@ import IconY from 'react-native-vector-icons/dist/MaterialIcons';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import HeaderScreenAddress from '../../components/HeaderScreenAddress'
 import image from '../../images';
+import Slide from '../../utils/slide'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import firestore from '@react-native-firebase/firestore';
@@ -470,6 +471,7 @@ const HomeTabset = (props) => {
               {/* <HomeFirstImageSlider /> */}
             </View>
             <View style={Styles.marginsetminview}>
+              <Slide/>
               <View style={Styles.FlexRowBetwn}>
                 
                 <Text style={Styles.settopcategories}>Trending Categories</Text>

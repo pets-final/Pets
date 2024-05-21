@@ -8,6 +8,50 @@ const HEADER_HEIGHT = 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
 
 export default StyleSheet.create({
+  productContainer: {
+    flex: 1,
+    margin: 10,
+  },
+  carouselImageStyle: {
+    width: '100%',
+    height: 200,
+    borderRadius: 10,
+  },
+  bgwhiteboxminviewWrap: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    overflow: 'hidden',
+    margin: 5,
+  },
+  bgwhiteboxminview: {
+    padding: 10,
+    alignItems: 'center',
+  },
+  textoftitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  justicenterflexrow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  boldpricetext: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  setplusbgcolorset: {
+    borderRadius: 50,
+    padding: 10,
+  },
+  HeartIconLike: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
   minstyleviewphotograpgy: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -100,7 +144,7 @@ export default StyleSheet.create({
   bgwhiteboxminview: {
     color: 'black',
     paddingBottom: 20,
-    width: 160,
+    width: 200,
     flex: 1,
     height: 220 
   },
@@ -108,7 +152,7 @@ export default StyleSheet.create({
     color: 'black',
     paddingBottom: 20,
     width: 360,
-    height: 500,
+    height: 400,
     flex: 1,
   },
   Catbgwhiteboxminview: {
@@ -184,7 +228,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 0,
+    bottom: 7,
     borderStyle: 'dashed',
     width: '100%',
   },
@@ -227,6 +271,13 @@ export default StyleSheet.create({
     paddingLeft: SH(10),
     paddingRight: SH(10),
     fontWeight: 'bold',
+    fontFamily: Fonts.Metropolis_Medium,
+    fontSize: SF(14),
+  },
+  textoftitle2: {
+    paddingLeft: SH(10),
+    paddingRight: SH(10),
+    // fontWeight: 'bold',
     fontFamily: Fonts.Metropolis_Medium,
     fontSize: SF(14),
   },
