@@ -137,22 +137,6 @@ const AddPetsScreen = () => {
       setmobilenumbererror(1)
       return;
     }
-  
-    // if (email !== '') {
-    //   let emaildata = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-    //   if (!emaildata) {
-    //     setEmailValidError1(1);
-    //   }
-    //   else if (emaildata == emaildata) {
-    //     setEmailSendAlert(1);
-    //   }
-    // }
-    // if (!email.trim()) {
-    //   setEmailValidError(1);
-    // }
-    // if (!email.trim() && fullname !== '' && mobilenumber !=='' && email !=='') {
-    //   setEmailSendAlert(1);
-    // }
   }
 
 

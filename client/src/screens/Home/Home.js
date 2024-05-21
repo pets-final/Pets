@@ -120,7 +120,7 @@ const HomeTabset = (props) => {
     getdataPrducts()
     getdataPets()
     getBestDeal()
-
+    
     
     const subscriber = auth().onAuthStateChanged((user) => {
       setUser(user);
@@ -287,7 +287,29 @@ const HomeTabset = (props) => {
       "offdecount": 'Up to 60% Off',
     },
   ]
-
+  const handleLike = async (productId) => {
+    try {
+      const user = auth().currentUser;
+      if (user) {
+        const userRef = firestore().collection('users').doc(user.uid);
+        const doc = await userRef.get();
+        if (doc.exists) {
+          const userData = doc.data();
+          if (userData.favorite === undefined) {
+            // If 'favorite' field is not defined, initialize it as an empty array
+            await userRef.update({ favorite: [] });
+          }
+          // Update the 'favorite' field in user's document
+          const updatedFavorites = [...userData.favorite, productId];
+          await userRef.update({ favorite: updatedFavorites });
+        } else {
+          console.log('No such document!');
+        }
+      }
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
+  }
   const MedicineDeals = (item, index) => {
     return (
       <View style={[Styles.setbgcolorviewtimewrap, Styles.bgcolorset]}>
@@ -354,13 +376,17 @@ const HomeTabset = (props) => {
           <View style={[Styles.settextinbgcolor, { backgroundColor: "#861088" }]}>
             <Text style={Styles.setdescounrtextstyle}>Up to {item.Promos}% Off </Text>
           </View>
-          <TouchableOpacity
+
+
+
+          {/* <TouchableOpacity
             onPress={() => {
               if (liked.includes(index)) {
                 let unlike = liked.filter((elem) => elem !== index);
                 setLiked(unlike);
               } else {
                 setLiked([...liked, index]);
+                handleLike(item.id); // Call handleLike function when a user likes a product
               }
             }} style={Styles.HeartIconLike}>
 
@@ -369,7 +395,7 @@ const HomeTabset = (props) => {
               size={25}
               style={{ color: liked.includes(index) ? 'red' : 'lightgrey' }}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
         </View>
       </View>

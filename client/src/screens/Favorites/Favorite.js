@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from "react-native-vector-icons/AntDesign";
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import IconS from 'react-native-vector-icons/Entypo';
+
 
 // Replace with your actual RouteName imports
 // import RouteName from '../../navigation/RouteNames'; 
@@ -15,6 +17,8 @@ const FavoriteTab = () => {
   const navigation = useNavigation();
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [user, setUser] = useState(null);
+  const [liked, setLiked] = useState([]);
+
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged((user) => {
@@ -77,58 +81,37 @@ const FavoriteTab = () => {
   };
 
   const Docterproductdataitem = ({ item }) => (
-    <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>
+    <View >
+    <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>         
       <View style={ProductitemList.bgwhiteboxminview}>
-        <TouchableOpacity 
-          style={ProductitemList.setimageviewstyle2} 
-          onPress={() => navigation.navigate(RouteName.PRODUCT_DETAILS_SCREEN, { 
-            img: item.ImgUrl, title: item.Name, hname: item.ShopName 
-          })}
-        >
-          <Image 
-            style={ProductitemList.pharamacyimagestyle} 
-            resizeMode="contain" 
-            source={{ uri: item.ImgUrl }} 
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity 
-          onPress={() => navigation.navigate(RouteName.PRODUCT_DETAILS_SCREEN, { 
-            img: item.ImgUrl, title: item.Name, hname: item.ShopName 
-          })}
-        >
-          <Text style={[ProductitemList.textoftitle, { color: colorrdata }]}>{item.Name}</Text>
-        </TouchableOpacity>
-
-        <Text style={ProductitemList.settextcolorcenterlist}>{item.ShopName}</Text>
-        <View style={ProductitemList.setflexstadr}>
-          {/* Assuming item.ratingsset is a valid component */}
-          {item.ratingsset} 
-          <Text style={[ProductitemList.setratingtextstyle, { color: colorrdata }]}>
-            {item.ratingtext} 
-          </Text>
-        </View>
-        <View style={ProductitemList.justicenterflexrow}>
-          <Text style={ProductitemList.boldpricetext}>
-            {pricesymboldata} {item.Price}
-          </Text>
-          <TouchableOpacity 
-            style={[ProductitemList.setplusbgcolorset, { backgroundColor: colorrdata }]} 
-            onPress={() => navigation.navigate(RouteName.CART_SCREEN)}
-          >
-            <Text>{item.iconplusset}</Text> 
+        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center',height:150 }}>
+          <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
+            <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{ uri: item.ImgUrl }} />
           </TouchableOpacity>
         </View>
-
-        {/* Heart Icon to Remove from Favorites */}
+        <TouchableOpacity onPress={() => navigation.navigate(('test'), { img: item.image, title: item.Description, hname: item.ShopName })}>
+          <Text   numberOfLines={2} style={[ProductitemList.textoftitle, { color: "#861088",height:40 }]}>{item.Name}</Text>
+        </TouchableOpacity>
+        {/* <Text style={ProductitemList.settextcolorcenterlist}>{item.ShopName}</Text> */}
+        {/* <View style={ProductitemList.setflexstadr}>
+          {item.ratingsset}
+          <Text style={[ProductitemList.setratingtextstyle, { color: "#861088" }]}>{item.ratingtext}</Text>
+        </View> */}
+        <View style={ProductitemList.justicenterflexrow}>
+          <Text style={ProductitemList.boldpricetext}>{pricesymboldata} {item.Price}</Text>
+          <TouchableOpacity style={[ProductitemList.setplusbgcolorset, { backgroundColor: "#861088" }]} onPress={() => navigation.navigate(RouteName.CART_SCREEN)}>
+            <Text><IconS name="plus" size={20} color={'white'} /></Text>
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity 
           onPress={() => removeFromFavorites(item.id)}  
           style={ProductitemList.HeartIconLike}
         >
           <Icon name="heart" size={25} style={{ color: colorrdata }} />
         </TouchableOpacity>
-      </View>
-    </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 
   return (
