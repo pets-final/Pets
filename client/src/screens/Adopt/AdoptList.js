@@ -9,8 +9,8 @@ import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
 
-
 const ProductTab = () => {
+ 
  
   const pricesymboldata ='$';
   const navigation = useNavigation();
@@ -20,7 +20,7 @@ const ProductTab = () => {
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
 
   const getdata=()=>{
-    const subscriber = firestore()
+    const subscriber = firestore() 
     .collection('Animal')
     .onSnapshot(querySnapshot => {
       
@@ -54,7 +54,7 @@ const ProductTab = () => {
           <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
             <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
               <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{uri:item.ImgUrl}}/>
-             { console.log("image url",item.ImgUrl)}
+             {/* { console.log("image url",item.ImgUrl)} */}
 
             </TouchableOpacity>
           </View>

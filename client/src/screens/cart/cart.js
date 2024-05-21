@@ -12,7 +12,8 @@ import firestore from '@react-native-firebase/firestore';
 import images from '../../index';
 const db = firestore();
 
-const Cart = () => {
+const Cart = ({route}) => {
+  
   const  colorrdata = "#861088"
   const pricesymboldata  = '$'
 
@@ -36,7 +37,7 @@ function incrementCount(itemId) {
 useEffect(() => {
   const subscriber =  auth().onAuthStateChanged((user) => {
     setUser(user);
-    console.log('subscriber',user);
+    // console.log('subscriber',user);
     
     if (user) { // Check if user is not null
       getAllData(user); // Pass user to getAllData
@@ -183,7 +184,7 @@ const Render = ({item,index})=>{
           {Applycoupon === 0 ?
             <View style={CartTabStyle.textcenyet}>
               <View>
-                <Text style={CartTabStyle.digitaltextsettwo}>{totalPrice}</Text>
+                <Text style={CartTabStyle.digitaltextsettwo}> $ {totalPrice}</Text>
                 <Text style={[CartTabStyle.viewdetailesbilltext, { color: colorrdata }]}>Total Amount</Text>
               </View>
             </View>
@@ -199,7 +200,7 @@ const Render = ({item,index})=>{
             <Button title="Checkout"
               buttonTextStyle={CartTabStyle.textstylepayment}
               buttonStyle={{ backgroundColor: colorrdata }}
-              onPress={() => navigation.navigate('checkout',{totalPrice:totalPrice,cartItems:cartItems})}
+              onPress={() => navigation.navigate('checkout',{totalPrice:totalPrice,cartItems:cartItems,user:route.params.user})}
             />
           </View>
         </View>

@@ -37,6 +37,7 @@ const ProfileTab = ({route}) => {
     }
   };
   useEffect(() => {
+    console.log("User");
     const subscriber = auth().onAuthStateChanged((authUser) => {
       if(authUser){
         const unsubscribe = db.collection('users').doc(authUser.uid).onSnapshot((doc) => {
@@ -51,9 +52,6 @@ const ProfileTab = ({route}) => {
         return () => unsubscribe();
       }
     });
-    if(route.params?.key){
-      setIsFilled(route.params.key)
-    }
     return subscriber;
   }, []);
 
@@ -93,7 +91,7 @@ const ProfileTab = ({route}) => {
 
   const Userdatatext = (item, index) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate(item.url)}>
+      <TouchableOpacity onPress={() => navigation.navigate(item.url,{user:User})}>
         <View style={AccountTabStyle.setbgcolordata}>
           <Text style={[AccountTabStyle.usertextstyle, { color: colorrdata }]}>{item.title}</Text>
           <Text style={{ color: colorrdata }}>{item.seticonview}</Text>
@@ -101,6 +99,7 @@ const ProfileTab = ({route}) => {
       </TouchableOpacity>
     )
   }
+  
   return (
     <View style={[AccountTabStyle.minstyleviewphotograpgy, AccountTabStyle.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
@@ -124,12 +123,11 @@ const ProfileTab = ({route}) => {
                 <View style={AccountTabStyle.fleximageandtext}>
 
                   <TouchableOpacity>
-                    <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={images.Ningthty_img} />
+                    <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={{ uri: User.ImgUrl}} />
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
                     <Text style={AccountTabStyle.sumanyatextset}>{ User?.fullname}</Text>
                     <Text style={AccountTabStyle.setgimailtext}>{ User?.email}</Text>
-                    <Text style={AccountTabStyle.setgimailtext}>Verified : {isFilled ? 'Yes' : 'No'}</Text>
                     <Text style={AccountTabStyle.setgimailtextwo}>{User?.mobilenumber}</Text>
                     <Text style={AccountTabStyle.addreshtext}>{User?.address}</Text>
                   </View>
@@ -155,7 +153,7 @@ const ProfileTab = ({route}) => {
                 <TouchableOpacity onPress={() => navigation.navigate('NewProduct')} style={AccountTabStyle.setbgcolorwhite}>
                   <View>
                     <View style={AccountTabStyle.flexrowsettile}>
-                      <Icon name="setting" size={20} color={colorrdata} />
+                      <Icon name="plus" size={20} color={colorrdata} />
                     </View>
                     <Text style={AccountTabStyle.bookmarktextstyle}>Add Product</Text>
                   </View>
@@ -163,7 +161,7 @@ const ProfileTab = ({route}) => {
                 <TouchableOpacity onPress={() => paymentscreen()} style={AccountTabStyle.setbgcolorwhite}>
                   <View>
                     <View style={AccountTabStyle.flexrowsettile}>
-                      <IconI name="md-wallet-outline" size={20} color={colorrdata} />
+                      <IconI name="wallet" size={20} color={colorrdata} />
                     </View>
                     <Text style={AccountTabStyle.bookmarktextstyle}>Payments</Text>
                   </View>

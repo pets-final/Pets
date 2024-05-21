@@ -132,7 +132,8 @@ export default StyleSheet.create({
     elevation: Platform.OS === 'ios' ? 1 : 6,
     overflow: 'hidden',
     borderWidth: 0.5,
-    borderColor: '#ededed'
+    borderColor: '#ededed',
+    height: 270
   },
   flexrowsecenterimage: {
     flexDirection: 'row',
@@ -266,7 +267,7 @@ export default StyleSheet.create({
   },
   whiteboximagetwosettwo: {
     width: '100%',
-    height: 70,
+    height: 110,
     borderRadius: 7,
   },
 
@@ -422,7 +423,7 @@ export default StyleSheet.create({
     backgroundColor: '#f3f3f3',
     borderRadius: 7,
     paddingVertical: SH(5),
-    height:120
+    height:90
   },
   widtsetnew: {
     width: 77,

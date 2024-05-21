@@ -11,6 +11,9 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 const db = firestore();
 const WelcomeSumnya = ({route}) => {
+
+
+
   const { address } = route.params || {}
    
         console.log('address',address);
@@ -28,6 +31,7 @@ const WelcomeSumnya = ({route}) => {
   const handleContiue = ()=>{
     db.collection('users').doc(user.uid).update({
       address: address,
+     
     }).then(() => {
       navigation.navigate('tab');
     
@@ -37,6 +41,7 @@ const WelcomeSumnya = ({route}) => {
     navigation.navigate('tab');
    }
 
+  
   return (
     <View style={[WelcomeSumnaya.minstyleviewphotograpgy, { backgroundColor: colorrdata }]}>
       <StatusBar barStyle="dark-content" backgroundColor={colorrdata} />

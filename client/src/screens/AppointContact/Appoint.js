@@ -14,8 +14,8 @@ const AppointContact = () => {
   const [appointmentTime, setAppointmentTime] = useState(null); 
   const [appointmentReason, setAppointmentReason] = useState('');
   const [appointmentPet, setAppointmentPet] = useState(''); 
-  const [appointmentPetBreed, setAppointmentPetBreed] = useState(''); // Add breed
-  const [appointmentPetGender, setAppointmentPetGender] = useState(''); // Add gender
+  const [appointmentPetBreed, setAppointmentPetBreed] = useState('');
+  const [appointmentPetGender, setAppointmentPetGender] = useState(''); 
   const [userName, setUserName] = useState(''); 
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false); 
@@ -51,7 +51,7 @@ const AppointContact = () => {
             }
           })
           .catch(error => console.error("Error fetching user name: ", error));
-        // Example using Authentication:
+       
         // setUserName(user.displayName);
       }
     });
@@ -85,14 +85,14 @@ const AppointContact = () => {
         .add({
           userId: user.uid,
           doctorId: doctor.id,
-          userName: 'testeuuuuuuuur',
+          userName: '',
           state: false, 
           date: appointmentDate,
           time: appointmentTime, 
           reason: appointmentReason,
           pet: appointmentPet, 
-          breed: appointmentPetBreed, // Add breed
-          gender: appointmentPetGender, // Add gender
+          breed: appointmentPetBreed,
+          gender: appointmentPetGender, 
           timestamp: firestore.FieldValue.serverTimestamp(),
         })
         .then(() => {
@@ -100,12 +100,12 @@ const AppointContact = () => {
           setShowContactButton(true);
           Keyboard.dismiss();
           fetchUserAppointments(user.uid);
-          setAppointmentDate(null); // Reset appointmentDate
-          setAppointmentTime(null); // Reset appointmentTime
+          setAppointmentDate(null); 
+          setAppointmentTime(null); 
           setAppointmentReason('');
           setAppointmentPet(''); 
           setAppointmentPetBreed('');
-          setAppointmentPetGender(''); // Reset pet gender after submitting
+          setAppointmentPetGender(''); 
           setDateSelected(false);
         })
         .catch((error) => {

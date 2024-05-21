@@ -5,8 +5,8 @@ import Style from '../../styles/CommonStyle/Style';
 import  Button  from '../../components/Button';
 // import RNPickerSelect from 'react-native-picker-select';
 import auth from '@react-native-firebase/auth'; // Import the auth module
-import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import firestore from '@react-native-firebase/firestore';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { utils } from '@react-native-firebase/app';
@@ -27,7 +27,7 @@ const NewProduct = () => {
   const [uploading, setUploading] = useState(false);
   const [ImgUrl, setImg] = useState('');
   const [imageSource, setImageSource] = useState(null);
-  const [imageUrl, setimageUrl] = useState('https://api.adorable.io/avatars/80/abott@adorable.png');
+  const [imageUrl, setimageUrl] = useState('');
 
   const placeholder = {
     label: 'Select an Category...',
@@ -41,11 +41,6 @@ const NewProduct = () => {
     { label: 'Hygiene', value: 'Hygiene' },
     { label: 'Supplies', value: 'Supplies' },
   ];
-
-
-
-
-
 
 
   const [user, setUser] = useState(null); // State to 

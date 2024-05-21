@@ -10,7 +10,7 @@ import OTP_VERIFY_SCREEN from './src/screens/RegistrationScreen/OtpVerifyScreen'
 import FORGET_PASSWORD_SCREEN from './src/screens/RegistrationScreen/ForgotPassword';
 import EDIT_PROFILE_SCREEN from './src/screens/EditProfile/EditProfileScreen';
 import ProductList from './src/screens/ProductList/ProductList';
-import Category from './src/screens/Adopt/AdoptList';
+import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
 import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
@@ -25,11 +25,13 @@ import Cart from './src/screens/cart/cart';
 import CheckOutScreen from './src/screens/cart/checkout';
 import PaytmSuccessFully from './src/screens/cart/paymentSucces';
 import {ProductDetailesScreen} from './src/screens/ProductList/Productdetails';
+import {PetsDetailesScreen} from './src/screens/Adopt/Adoptdetails'
 import ChatDoctorScreen from './src/screens/ChatScreen/ChatDoctorScreen';
 import ChatScreen from './src/screens/ChatScreenFolder/ChatScreen'
 // import DrawerChatScreen from './src/screens/ChatScreenFolder/DrawerChatScreen'
 import DoctorList from './src/screens/doctorList/DoctoList';
 import WelcomeSumnya from './src/screens/Map/ConfirmAdress'
+import UpdateImage from './src/screens/Map/confirmImage'
 import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
 import NewProduct from './src/screens/ProductList/NewProduct'
@@ -38,7 +40,40 @@ import AdoptList from './src/screens/Adopt/AdoptList';
 // import VetProfile from './src/screens/vetProfile/VetProfile';
 import AddPetsScreen from './src/screens/Adopt/AddPets';
 import NotificationScreen from './src/screens/UserProfile/notification';
+import AddBlogs from './src/screens/blogs/addBlogs'
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
+import messaging from '@react-native-firebase/messaging';
+
+// Function to request permission for receiving notifications
+const requestUserPermission = async () => {
+  const settings = await messaging().requestPermission();
+
+  if (settings) {
+    console.log('Permission settings:', settings);
+  }
+};
+
+// Initialize Firebase Messaging
+const initializeMessaging = async () => {
+  await requestUserPermission();
+
+  // Get the device token
+  const token = await messaging().getToken();
+  console.log('Device Token:', token);
+
+  // Handle messages when the app is in the foreground
+  messaging().onMessage(async remoteMessage => {
+    console.log('Foreground Message:', remoteMessage);
+  });
+
+  // Handle messages when the app is in the background
+  messaging().setBackgroundMessageHandler(async remoteMessage => {
+    console.log('Background Message:', remoteMessage);
+  });
+};
+
+// Call initializeMessaging when the app starts
+initializeMessaging();
 
 const Stack = createNativeStackNavigator();
 
@@ -46,11 +81,8 @@ function App() {
   
   return (
     <NavigationContainer>
-       <Stack.Navigator>
-     
-   
-           
-     
+      <Stack.Navigator>
+    
        
         <Stack.Screen
           name="SplashScreen"
@@ -71,17 +103,29 @@ function App() {
           component={LoginandRegistrationScreen}
         />
 
-<Stack.Screen
+        <Stack.Screen
           name="WelcomeSumnya"
           component={WelcomeSumnya}
           options={{headerShown: false}}
         />
+         <Stack.Screen
+          name="UpdateImage"
+          component={UpdateImage}
+          options={{headerShown: false}}
+        />
+
 
         
         <Stack.Screen
           name="tab"
           options={{headerShown: false}}
           component={Nav}
+        />
+               
+      <Stack.Screen
+          name="map"
+          options={{headerShown: false}}
+          component={map}
         />
            <Stack.Screen
             options={{headerShown: false}}
@@ -99,6 +143,21 @@ function App() {
           options={{
             headerShadowVisible: true,
             title: 'New Product',
+            headerTintColor: '#861088',
+            headerTitleStyle: {
+              color: '#861088',
+              fontFamily: Fonts.Metropolis_Medium,
+              fontSize: 17,
+              fontWeight: '700',
+            }, 
+          }}
+        />
+         <Stack.Screen
+          name="addBlogs"
+          component={AddBlogs}
+          options={{
+            headerShadowVisible: true,
+            title: 'addBlogs',
             headerTintColor: '#861088',
             headerTitleStyle: {
               color: '#861088',
@@ -150,11 +209,7 @@ function App() {
           component={PaytmSuccessFully}
         />
 
-      <Stack.Screen
-          name="map"
-          options={{headerShown: false}}
-          component={map}
-          />
+     
         <Stack.Screen
           options={{
             headerShadowVisible: true,
@@ -175,6 +230,12 @@ function App() {
           options={{headerShown: false}}
           name="productDetails"
           component={ProductDetailesScreen}
+        />
+     
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="PetsDetailesScreen"
+          component={PetsDetailesScreen}
         />
        
         {/* <Stack.Screen 

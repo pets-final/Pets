@@ -3,13 +3,13 @@ import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import { styles } from '../../styles/VetStyle/Appointement';
-import moment from 'moment'; // Import Moment
+import moment from 'moment';
 
 const AppointmentView = ({ route }) => {
   const { DoctorListData, User } = route.params;
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedAppointmentId, setSelectedAppointmentId] = useState(null); // Track selected appointment
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState(null); 
   const navigation = useNavigation();
   const db = firestore();
 
@@ -37,15 +37,15 @@ const AppointmentView = ({ route }) => {
         .doc('3') // Replace '3' with your actual Doctor ID
         .collection('hVWlGICXAoMc4c25O95QIdq2JVi1') // Replace with your actual User ID
         .doc(appointmentId)
-        .update({ state: true }); // Update state to true in Firestore
-      console.log('Appointment approved:', appointmentId); // Log for debugging
+        .update({ state: true }); 
+      // console.log('Appointment approved:', appointmentId);
     } catch (error) {
       console.error('Error updating appointment state:', error);
     }
   };
 
   const handleDecline = () => {
-    setSelectedAppointmentId(null); // Clear selection on decline
+    setSelectedAppointmentId(null); 
   };
 
   const handleContact = () => {
@@ -112,7 +112,7 @@ const AppointmentView = ({ route }) => {
           data={appointments}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
-          style={{ flex: 1 }} // Make the FlatList scrollable
+          style={{ flex: 1 }}
         />
       )}
     </View>
