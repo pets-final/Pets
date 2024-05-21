@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, ScrollView,FlatList, KeyboardAvoidingView, TextInput, StatusBar, TouchableOpacity, } from "react-native";
+import { Text, View, Image, ScrollView,FlatList, KeyboardAvoidingView, TextInput, StatusBar, TouchableOpacity,Pressable } from "react-native";
 import Styles from '../../styles/Tab/CartTabStyle';
 import Icon from 'react-native-vector-icons/Feather';
 import IconM from 'react-native-vector-icons/MaterialIcons';
@@ -10,6 +10,7 @@ import  SweetaelertModal from '../../components/SweetAlertModal';
 import { useNavigation } from '@react-navigation/native';
 import { CartTabStyle } from '../../styles';
 import IconA from 'react-native-vector-icons/Entypo';
+import { useStripe } from '@stripe/stripe-react-native';
 
 import images from '../../index';
 
@@ -20,10 +21,13 @@ const CheckOutScreen = ({ route }) => {
   const colorrdata = "#861088"
   const  pricesymboldata = '$'
   const navigation = useNavigation();
+  const stripe = useStripe();
+
   const [DisplayAlert, setDisplayAlert] = useState(0)
   const [count, setCount] = useState(1);
   const [Applycoupon, setApplycoupon] = useState(0);
   const [userAddress, setuserAddress] = useState(0);
+  const [isLoading, setIsLoading] = useState(0);
   let PriceSymbol = '$'
   useEffect(() => {
     if(route.params.address){
@@ -33,6 +37,71 @@ const CheckOutScreen = ({ route }) => {
       setuserAddress(route.params.user.address);
     }
   }, [route.params.address])
+  const createPaymentIntent = async (paymentInfo) => {
+    // Implement your backend call here
+    // Replace with your server endpoint to create a payment intent
+    try {
+      const response = await fetch('http://10.0.2.2:3000/create-payment-intent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(paymentInfo),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+      return { error };
+    }
+  };
+
+  const onCheckout = async () => {
+    setIsLoading(true);
+
+    // 1. Create a payment intent
+    const response = await createPaymentIntent({
+      amount: Math.floor(totalPrice * 100),
+    });
+
+    if (response.error) {
+      Alert.alert('Something went wrong');
+      setIsLoading(false);
+      return;
+    }
+
+    // 2. Initialize the Payment sheet
+    const { error: initError } = await stripe.initPaymentSheet({
+      paymentIntentClientSecret: response.clientSecret,
+      merchantDisplayName: 'Pets',
+    });
+
+    if (initError) {
+      Alert.alert('Something went wrong', initError.message);
+      setIsLoading(false);
+      return;
+    }
+
+    // 3. Present the Payment Sheet from Stripe
+    const { error: paymentError } = await stripe.presentPaymentSheet();
+
+    if (paymentError) {
+      Alert.alert(`Error code: ${paymentError.code}`, paymentError.message);
+      setIsLoading(false);
+      return;
+    }
+
+    // 4. If payment is successful -> create the order
+    onCreateOrder();
+    setIsLoading(false);
+  };
+
+  const onCreateOrder = async () => {
+    // Implement your order creation logic here
+    // Alert.alert('Order has been submitted', 'Your order reference is: 12345');
+    // Clear cart and navigate to the success screen or another screen if necessary
+    navigation.navigate('paymentSucces');
+  };424
   const Render = ({item,index})=>{
     return (
       <View style={[CartTabStyle.flexminviewcount, CartTabStyle.bgcolorset]}> 
@@ -199,11 +268,12 @@ const CheckOutScreen = ({ route }) => {
             </View>
           }
           <View style={Styles.setbuttonwidthview}>
-            <Button title="Proceed to Pay"
-              buttonTextStyle={Styles.textstylepayment}
-              buttonStyle={{ backgroundColor: colorrdata }}
-              onPress={() => navigation.navigate('paymentSucces')}
-            />
+          <Pressable onPress={onCheckout} style={Styles.button}>
+                  <Text style={Styles.buttonText}>
+                    Checkout
+                    
+                  </Text>
+                </Pressable>
           </View>
         </View>
       </View>
