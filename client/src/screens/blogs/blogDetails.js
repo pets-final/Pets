@@ -8,9 +8,10 @@ import { VideoPlayStyle, VideoTabStyle } from '../../styles';
 // import Video from 'react-native-video';
 import IconE from "react-native-vector-icons/Entypo";
 
-const VideoPlay = ({ navigation }) => {
+const VideoPlay = ({ navigation,route }) => {
     const  colorrdata = "#861088"
-    const route = useRoute();
+    const { title, blogId, img } = route.params;
+    console.log('title', title, blogId, img);
     const videoPlayer = React.useRef();
     const goFullScreen = () => {
         if (videoPlayer.current) {
@@ -41,19 +42,18 @@ const VideoPlay = ({ navigation }) => {
                 /> */}
                 <ScrollView>
                     <View style={VideoPlayStyle.HeadBoxTextStyle}>
-                        <Text style={VideoPlayStyle.itemText}>It is a long established fact that a reader</Text>
-                        <View style={VideoPlayStyle.TimeBox}>
+                        {/* <View style={VideoPlayStyle.TimeBox}> */}
+                            <Image source={{ uri: img }} alt='tt' resizeMode='cover' style={VideoPlayStyle.Setimgdetails} />
                             <IconE name="back-in-time" size={16} color={colorrdata} style={VideoPlayStyle.TimerIcon} />
                             <Text style={VideoTabStyle.itemTextTime}>23,September 2022</Text>
                         </View>
                         <Text style={VideoPlayStyle.setparegraph}>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                         </Text>
-                        <Image source={images.Videoplaymg} resizeMode='cover' style={VideoPlayStyle.Setimgdetails} />
                         <Text style={VideoPlayStyle.setparegraph}>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                         </Text>
-                    </View>
+                    {/* </View> */}
                 </ScrollView>
             </View>
 

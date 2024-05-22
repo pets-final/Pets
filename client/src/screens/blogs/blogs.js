@@ -31,7 +31,7 @@ const VideoTab = () => {
     return (
       <TouchableOpacity 
         style={VideoTabStyle.itemChildeBox} 
-        onPress={() => navigation.navigate('blogDetails', { title: item.Title, blogId: item.id })} 
+        onPress={() => navigation.navigate('blogDetails', { title: item.Title, blogId: item.id,img:item.ImgUrl })} 
       >
         <View style={VideoTabStyle.itemChilde}>
           {/* Use item.ImgUrl if available, otherwise fallback to images.videoimg1 */}
@@ -54,11 +54,13 @@ const VideoTab = () => {
     <View style={[ProductitemList.minstyleviewphotograpgy, ProductitemList.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
       <FlatList
-        data={exerciseList}
-        renderItem={ItemRender}
-        keyExtractor={item => item.id}
-        style={VideoTabStyle.flatelist}
-      />
+  data={exerciseList}
+  renderItem={ItemRender}
+  keyExtractor={item => item.id}
+  style={VideoTabStyle.flatelist}
+  contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-start' }}
+/>
+
       <TouchableOpacity 
         style={[ProductitemList.setplusbgcolorset2, { backgroundColor: "#861088" }]} 
         onPress={() => navigation.navigate('addBlogs')}
