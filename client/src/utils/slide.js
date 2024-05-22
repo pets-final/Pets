@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
     // borderRadius: 15,
     marginHorizontal: 0.0001,
     resizeMode: 'cover',
-    padding: 10
+    padding: 10,
+    margin:50
   },
   pagination: {
     flexDirection: 'row',

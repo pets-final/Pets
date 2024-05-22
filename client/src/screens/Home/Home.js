@@ -114,7 +114,7 @@ const HomeTabset = (props) => {
   const [user, setUser] = useState(null); // State to hold the user object 
   const [EmailSendAlert, setEmailSendAlert] = useState(0);
 
-
+      
   useEffect(() => {
     // Get the current user when the component mounts
     getdatatest()
@@ -127,7 +127,7 @@ const HomeTabset = (props) => {
       setUser(user);
       // console.log('subscriber',user);
       const r = db.collection('users').doc(user.uid).onSnapshot((doc) => {
-        // console.log('User:', doc.data());
+        console.log('User:', doc.data());
         setUser(doc.data());
       });
     });
@@ -143,7 +143,7 @@ const HomeTabset = (props) => {
     if (seconds < 10) { seconds = "0" + seconds; }
     return hours + ':' + minutes + ':' + seconds;
   };
-
+  
   const HandleAddToCart =  async (item) => {
     let Product = {
       id: item.id,

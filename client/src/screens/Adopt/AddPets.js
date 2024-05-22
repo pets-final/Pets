@@ -1,145 +1,337 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, Image, StatusBar, FlatList, KeyboardAvoidingView, TouchableOpacity, SafeAreaView } from "react-native";
-import { ProductitemList } from '../../styles';
-import { useNavigation } from '@react-navigation/native';
-import { colors } from '../../utils';
+import React, { useState,useRef,Image  } from "react";
+import { Text, View, TextInput, StyleSheet,Alert } from "react-native";
 import Styles from '../../styles/LoginRegisterStyle/LoginScreenStyle';
-import Button from '../../components/Button';
-import Icon from "react-native-vector-icons/AntDesign";
-import IconS from 'react-native-vector-icons/Entypo';
+import  Button from '../../components/Button';
+import  SweetaelertModal from '../../components/SweetAlertModal';
+import HelpScreenStyle from '../../styles/Defoltscreenstyle/HelpScreenStyle'
 import Style from '../../styles/CommonStyle/Style';
-
-
+import { Dropdown } from 'react-native-element-dropdown';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+// import * as ImagePicker from 'react-native-image-picker'
+import { utils } from '@react-native-firebase/app';
 
-const ProductTab = () => {
-  const pricesymboldata = '$';
-  const navigation = useNavigation();
-  const [hearticon, Sethearticon] = useState(0);
-  const [liked, setLiked] = useState([]);
-  const [productlist, setproductlist] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const subscriber = firestore()
-      .collection('Product')
-      .onSnapshot(querySnapshot => {
-        const products = [];
-        querySnapshot.forEach(documentSnapshot => {
-          products.push({
-            ...documentSnapshot.data(),
-            id: documentSnapshot.id, // Ensure each product has an id
-          });
-        });
-        setproductlist(products);
-        setLoading(false);
-      });
 
-    // Clean up
-    return () => subscriber();
-  }, []);
 
-  const handleLike = async (productId) => {
-    try {
-      const user = auth().currentUser;
-      if (user) {
-        const userRef = firestore().collection('users').doc(user.uid);
-        const doc = await userRef.get();
-        if (doc.exists) {
-          const userData = doc.data();
-          if (userData.favorite === undefined) {
-            // If 'favorite' field is not defined, initialize it as an empty array
-            await userRef.update({ favorite: [] });
-          }
-          // Update the 'favorite' field in user's document
-          const updatedFavorites = [...userData.favorite, productId];
-          await userRef.update({ favorite: updatedFavorites });
-        } else {
-          console.log('No such document!');
-        }
+const AddPetsScreen = () => {
+  const [fullname, setfullname] = useState('');
+  const [age, setAge] = useState('');
+  const [Breed, setBreed] = useState('');
+  const [mobilenumber, setmobilenumber] = useState('');
+  const [fullnameaerror, setfullnameaerror] = useState(0);
+  const [ageerror, setageerror] = useState(0);
+  const [Breederror, setBreederror] = useState(0);
+  const [mobilenumbererror, setmobilenumbererror] = useState(0);
+  const [email, SetEmail] = useState('');
+  const [emailValidError, setEmailValidError] = useState(0);
+  const [emailValidError1, setEmailValidError1] = useState(0);
+  const [EmailSendAlert, setEmailSendAlert] = useState(0);
+  const [Description, setDescription] = useState('');
+  const [Descriptionerror, setDescriptionerror] = useState(0);
+  const [Location, setLocation] = useState('');
+  const [locationererror, setlocationererror] = useState(0);
+  const [Sex, setSex] = useState('');
+  const [Sexererror, setSexerror] = useState(0);
+  const [uploading, setUploading] = useState(false);
+  const [value, setValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
+  // const [image, setImage] = useState(null);
+
+  const [ImgUrl, setImg] = useState('');
+  const [imageSource, setImageSource] = useState(null);
+  // const [imageUrl, setimageUrl] = useState('https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074_640.jpg');
+  const [imageUrls, setImageUrls] = useState([]);
+  const dataBreed = [
+    { label: 'Dog', value: 'Dog' },
+    { label: 'Cat', value: 'Cat' },
+    { label: 'Fish', value: 'Fish' },
+    { label: 'SmallPet', value: 'SmallPet' },
+    { label: 'Bird', value: 'Bird' },
+   
+  ];
+  const dataSex = [
+    { label: 'Male', value: 'MAle' },
+    { label: 'Female', value: 'Female' },   
+   
+  ];
+
+  const validateIsEmail = (item) => {
+    SetEmail(item);
+  }
+
+
+
+  const ImagePicker = () => {
+    let option = {
+      mediaType: 'photo',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    launchImageLibrary(option, response => {
+      if (response.assets) {
+        const selectedImages = response.assets.map(asset => asset.uri);
+        setImageUrls([...imageUrls, ...selectedImages]);
       }
+    });
+  };
+
+  const uploadImages = async () => {
+    setUploading(true);
+    const uploadPromises = imageUrls.map(async (imageUri) => {
+      const filename = imageUri.substring(imageUri.lastIndexOf('/') + 1);
+      const reference = storage().ref(filename);
+      await reference.putFile(imageUri);
+      return await reference.getDownloadURL();
+    });
+
+    try {
+      const urls = await Promise.all(uploadPromises);
+      setUploading(false);
+      return urls;
     } catch (error) {
-      console.error("Error updating document: ", error);
+      console.error('Error uploading images:', error);
+      setUploading(false);
+      return [];
     }
+  };
+
+
+
+
+
+
+
+
+
+
+  const addPetsToAdopt=async()=>{
+    const urls = await uploadImages();
+
+    firestore().collection('Animal').add({
+      Adresse:Location,
+      Age:age,
+      Breed:Breed,
+      Description:Description,
+      ImgUrls:urls,
+      Name:fullname,
+      Sex:Sex,      
+    }).then((res)=>{
+      Alert.alert("pets added")
+
+    }).catch((err)=>{
+      console.log(err);
+
+    })
   }
 
 
 
 
-  const Docterproductdataitem = ({ item, index }) => {
-    return ( 
 
-     <View >
-      <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>         
-        <View style={ProductitemList.bgwhiteboxminview}>
-          <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center',height:150 }}>
-            <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
-              <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{ uri: item.ImgUrl }} />
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity onPress={() =>  navigation.navigate('productDetails',{item:item})}>
-            <Text   numberOfLines={2} style={[ProductitemList.textoftitle, { color: "#861088",height:40 }]}>{item.Name}</Text>
-          </TouchableOpacity>
-          {/* <Text style={ProductitemList.settextcolorcenterlist}>{item.ShopName}</Text> */}
-          {/* <View style={ProductitemList.setflexstadr}>
-            {item.ratingsset}
-            <Text style={[ProductitemList.setratingtextstyle, { color: "#861088" }]}>{item.ratingtext}</Text>
-          </View> */}
-          <View style={ProductitemList.justicenterflexrow}>
-            <Text style={ProductitemList.boldpricetext}>{pricesymboldata} {item.Price}</Text>
-            <TouchableOpacity style={[ProductitemList.setplusbgcolorset, { backgroundColor: "#861088" }]} onPress={() => navigation.navigate(RouteName.CART_SCREEN)}>
-              <Text><IconS name="plus" size={20} color={'white'} /></Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity onPress={() => {
-              if (liked.includes(index)) {
-                let unlike = liked.filter((elem) => elem !== index);
-                setLiked(unlike);
-              } else {
-                setLiked([...liked, index]);
-                handleLike(item.id); // Call handleLike function when a user likes a product
-              }
-            }} style={ProductitemList.HeartIconLike}>
-              <Icon
-                name="heart"
-                size={25}
-                style={{ color: liked.includes(index) ? "#861088" : 'lightgrey' }}
-              />
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
+
+
+
+
+ 
+  const signupbutton = () => {
+    if (!fullname.trim()) {
+      setfullnameaerror(1)
+      return;
+    }
+    if (!mobilenumber.trim()) {
+      setmobilenumbererror(1)
+      return;
+    }
+  
+    // if (email !== '') {
+    //   let emaildata = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+    //   if (!emaildata) {
+    //     setEmailValidError1(1);
+    //   }
+    //   else if (emaildata == emaildata) {
+    //     setEmailSendAlert(1);
+    //   }
+    // }
+    // if (!email.trim()) {
+    //   setEmailValidError(1);
+    // }
+    // if (!email.trim() && fullname !== '' && mobilenumber !=='' && email !=='') {
+    //   setEmailSendAlert(1);
+    // }
   }
+
+
+
+
+
 
   return (
-    <SafeAreaView>
-      <View style={[ProductitemList.minstyleviewphotograpgy, ProductitemList.bgcolorset]}>
-        <StatusBar barStyle="dark-content" backgroundColor={'white'} />
-        <View style={Styles.flexrowbutton}>
+    <View style={Styles.mincolorwhite}>
+      {/* {setImg(imageUrl)} */}
+
+      <View style={Styles.tabminview}>
+        <View style={Style.inputUnderLine}>
+          <TextInput
+            placeholder="Name"
+            style={Style.inputtextstyle}
+            placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
+            onChangeText={(value) => { setfullnameaerror(0); setfullname(value); }}
+          />
         </View>
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
-          <View style={ProductitemList.minflexview}>
-            <View style={ProductitemList.minviewsigninscreen}>
-              <View style={ProductitemList.bgcolorwhiteset}>
-                <FlatList
-                  data={productlist}
-                  numColumns={2}
-                  renderItem={Docterproductdataitem}
-                  keyExtractor={item => item.id}
-                />
-              </View>
-            </View>
-          </View>
-          <TouchableOpacity style={[ProductitemList.setplusbgcolorset2, { backgroundColor: "#861088" }]} onPress={() => navigation.navigate('NewProduct')}>
-            <Text><IconS name="plus" size={40} color={'white'} /></Text>
-          </TouchableOpacity>
-        </KeyboardAvoidingView>
+        {fullnameaerror === 1 ?
+          <Text style={Styles.pleseentername}>* Please Enter the  Name</Text>
+          : null
+        }
+         <View style={Style.inputUnderLine}>
+          <TextInput
+            placeholder="Age"
+            keyboardType="numeric"
+            style={Style.inputtextstyle}
+            placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
+            onChangeText={(value) => { setageerror(0); setAge(value); }}
+          />
+        </View>
+        {ageerror === 1 ?
+          <Text style={Styles.pleseentername}>* Please Enter the  Age</Text>
+          : null
+        }
+
+        <View style={styles.container}>
+       
+        <Dropdown
+          style={[styles.dropdown, isFocus && { borderColor: "#861088" }]}
+          data={dataBreed}
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder={!isFocus ? 'Select Breed' : '...'}
+          value={Breed}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onChange={item => {
+          
+            setBreed(item.value);
+            setBreederror(0)
+            setIsFocus(false);
+          }}
+         
+        />
+        </View>
+        {Breederror === 1 ?
+          <Text style={Styles.pleseentername}>* Please Enter the  Age</Text>
+          : null
+        }
+
+<View style={Style.inputUnderLine}>
+          <TextInput
+            placeholder="your location"
+            style={Style.inputtextstyle}
+        
+            placeholderTextColor={'rgba(0, 0, 0, 0.54)'}
+            onChangeText={(value) => { setlocationererror(0); setLocation(value); }}
+          />
+        </View>
+        {locationererror === 1 ?
+          <Text style={Styles.pleseentername}>* Please Enter the Location </Text>
+          : null
+        }
+       
+
+
+
+
+        <View style={styles.container}>
+       
+       <Dropdown
+         style={[styles.dropdown, isFocus && { borderColor: "#861088" }]}
+         data={dataSex}
+         maxHeight={300}
+         labelField="label"
+         valueField="value"
+         placeholder={!isFocus ? 'Select Sex' : '...'}
+         value={Sex}
+         onFocus={() => setIsFocus(true)}
+         onBlur={() => setIsFocus(false)}
+         onChange={item => {
+        //    setValue(item.value);
+           setSex(item.value);
+           setSexerror(0)
+           setIsFocus(false);
+         }}
+        
+       />
+     </View>
+       {Sexererror === 1 ?
+         <Text style={Styles.pleseentername}>* Please Enter the sex</Text>
+         : null
+       }
+
+ <View style={{  paddingTop:50}}>
+      {imageSource && <Image source={imageSource} style={{ width: 200, height: 200 }} />}
+      <Button title="Select Image" onPress={ImagePicker} />
+    </View>         
+
+      <View style={[Styles.flexrowbutton,{paddingTop:"auto"}]}>
+          <Button title="add youre pet"
+            onPress={()=> 
+              addPetsToAdopt()
+
+              }
+            buttonStyle={Styles.setbuttonborderradius}
+            buttonTextStyle={Styles.textcolorsetwhite}
+          />
+        </View>
       </View>
-    </SafeAreaView>
+
+    
+    </View>
   );
 };
 
-export default ProductTab;
+export default AddPetsScreen;
+const styles = StyleSheet.create({
+    container: {
+      backgroundColor: 'white',
+      paddingTop: 15,
+         marginBottom: 15,
+
+    },
+    dropdown: {
+      height: 50,
+      borderColor: 'gray',
+      borderWidth: 0.5,
+      borderRadius: 8,
+      paddingHorizontal: 8,
+    },
+    icon: {
+      marginRight: 5,
+    },
+    label: {
+      position: 'absolute',
+      backgroundColor: 'white',
+      left: 22,
+      top: 8,
+      zIndex: 999,
+      paddingHorizontal: 8,
+      fontSize: 14,
+    },
+    placeholderStyle: {
+      fontSize: 16,
+    },
+    selectedTextStyle: {
+      fontSize: 16,
+    },
+    iconStyle: {
+      width: 20,
+      height: 20,
+    },
+    inputSearchStyle: {
+      height: 40,
+      fontSize: 16,
+    },
+  });

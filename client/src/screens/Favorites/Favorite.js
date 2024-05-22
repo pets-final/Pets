@@ -7,8 +7,6 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import IconS from 'react-native-vector-icons/Entypo';
 
-import IconS from 'react-native-vector-icons/Entypo';
-
 
 // Replace with your actual RouteName imports
 // import RouteName from '../../navigation/RouteNames'; 
@@ -85,8 +83,6 @@ const FavoriteTab = () => {
   const Docterproductdataitem = ({ item }) => (
     <View >
     <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>         
-    <View >
-    <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>         
       <View style={ProductitemList.bgwhiteboxminview}>
         <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center',height:150 }}>
           <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
@@ -116,9 +112,6 @@ const FavoriteTab = () => {
         </View>
       </TouchableOpacity>
     </View>
-        </View>
-      </TouchableOpacity>
-    </View>
   );
 
   return (
@@ -139,15 +132,4 @@ const FavoriteTab = () => {
     </View>
   );
 };
-
 export default FavoriteTab;
-
-
-
-
-
-
-
-
-
-
