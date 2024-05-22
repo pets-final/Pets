@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, ScrollView, Text, KeyboardAvoidingView, TouchableOpacity, Image, FlatList, StatusBar } from "react-native";
+import { Pressable,View, ScrollView, Text, KeyboardAvoidingView, TouchableOpacity, Image, FlatList, StatusBar } from "react-native";
 import Styles from '../../styles/Tab/HometabStyle';
 import { MedicineCategoryHomeTab, MegaMedicine, MedicineFalteList, DoctorListData } from '../../utils/Sliderimagedata';
 import  Button  from '../../components/Button';
@@ -478,7 +478,7 @@ const HomeTabset = (props) => {
     return (
       <View style={Styles.Doctorbox}>       
           <View style={Styles.doctorimagbox}>
-            <TouchableOpacity onPress={() => navigation.navigate('AppointContact')}>
+            <TouchableOpacity onPress={() => navigation.navigate('AppointContact',{DoctorListData:DoctorListData,doctor:item})}>
               <Image style={Styles.Doctorimage} resizeMode="contain" source={item.doctorImg} />
             </TouchableOpacity>
             <Text style={[Styles.Doctornametext, { color: "#861088" }]} >{item.doctorname}</Text>
