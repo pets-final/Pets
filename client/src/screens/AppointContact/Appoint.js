@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, Keyboard, TextInput, Modal, ScrollView, Alert } from 'react-native';
+import { 
+  View, 
+  Text, 
+  Image, 
+  TouchableOpacity, 
+  Keyboard, 
+  TextInput, 
+  Modal, 
+  ScrollView, 
+  Alert 
+} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
-import { styles } from '../../styles/VetStyle/Vet';
+import { styles } from '../../styles/VetStyle/Vet'; // Import your styles
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import { Rating } from 'react-native-ratings'; 
-import moment from 'moment'; // Import Moment
+import { Rating } from 'react-native-ratings';
+import moment from 'moment'; 
 
 const AppointContact = () => {
   const [showContactButton, setShowContactButton] = useState(false);
@@ -23,69 +33,82 @@ const AppointContact = () => {
   const [dateSelected, setDateSelected] = useState(false);
   const [userAppointments, setUserAppointments] = useState([]);
   const [user, setUser] = useState(null);
+  const [showFeedbackSection, setShowFeedbackSection] = useState(false)
+  const [doctorFeedbacks, setDoctorFeedbacks] = useState([]);
   const [doctor, setDoctor] = useState({
     name: 'Dr. John Doe',
     specialty: 'Cardiologist',
     location: 'New York',
     image: 'https://placeimg.com/100/100/people',
-    id: 3,
+    id: 3, 
   });
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [feedbackText, setFeedbackText] = useState('');
   const [rating, setRating] = useState(0);
+
+  // State to control appointment form visibility
+  const [showAppointmentForm, setShowAppointmentForm] = useState(false);
+  const [showAppointmentsList, setShowAppointmentsList] = useState(false);
+
+  // State to store appointments with their feedbacks
+  const [appointmentsWithFeedbacks, setAppointmentsWithFeedbacks] = useState([]);
   const navigation = useNavigation();
-  const db = firestore();
+  const database = firestore();
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged((user) => {
       setUser(user);
       if (user && user.uid) {
         fetchUserAppointments(user.uid);
-        // Fetch user name from Firestore or Authentication
-        // Example using Firestore:
-        db.collection('users').doc(user.uid).get()
+        database.collection('users').doc(user.uid).get()
           .then(snapshot => {
             if (snapshot.exists) {
               setUserName(snapshot.data().name); 
             }
           })
           .catch(error => console.error("Error fetching user name: ", error));
-       
-        // setUserName(user.displayName);
       }
     });
 
     return () => subscriber();
   }, []);
+  
 
   const fetchUserAppointments = (userId) => {
-    db.collection('Appointments')
-      .doc(doctor.id.toString())
-      .collection(userId)
-      .orderBy('timestamp', 'desc') 
+    database.collection('Appointments')
+      .doc('3') 
+      .collection("hVWlGICXAoMc4c25O95QIdq2JVi1") 
+      .orderBy('timestamp', 'desc')
       .get()
       .then((querySnapshot) => {
         const appointments = [];
-        querySnapshot.forEach((doc) => {
-          appointments.push({ id: doc.id, ...doc.data() });
+        querySnapshot.forEach((document) => {
+          const appointmentData = document.data();
+
+          // Check if feedback exists for the appointment
+          if (appointmentData.feedback) {
+            appointments.push({ id: document.id, ...appointmentData });
+          }
         });
-        setUserAppointments(appointments);
+
+        setAppointmentsWithFeedbacks(appointments);
       })
       .catch((error) => {
         console.error('Error fetching appointments: ', error);
       });
   };
+  
 
   const sendAppointment = () => {
     if (user && user.uid) {
-      db.collection('Appointments')
+      database.collection('Appointments')
         .doc(doctor.id.toString())
         .collection(user.uid)
         .add({
           userId: user.uid,
           doctorId: doctor.id,
-          userName: '',
+          userName: 'userName', 
           state: false, 
           date: appointmentDate,
           time: appointmentTime, 
@@ -107,6 +130,7 @@ const AppointContact = () => {
           setAppointmentPetBreed('');
           setAppointmentPetGender(''); 
           setDateSelected(false);
+          setShowAppointmentForm(false); // Hide the form after submission
         })
         .catch((error) => {
           console.error('Error adding appointment: ', error);
@@ -115,7 +139,6 @@ const AppointContact = () => {
   };
 
   const handleAppointment = () => {
-    // Set initial values when the picker is shown (not at the start)
     setAppointmentDate(new Date()); 
     setAppointmentTime(new Date());
     setShowDatePicker(true);
@@ -123,7 +146,7 @@ const AppointContact = () => {
   };
 
   const handleDateChange = (event, selectedDate) => {
-    if (selectedDate) { // Check if selectedDate is valid
+    if (selectedDate) { 
       setShowDatePicker(false);
       setAppointmentDate(selectedDate); 
       setDateSelected(true); 
@@ -131,7 +154,7 @@ const AppointContact = () => {
   };
 
   const handleTimeChange = (event, selectedTime) => {
-    if (selectedTime) { // Check if selectedTime is valid
+    if (selectedTime) { 
       setShowTimePicker(false);
       setAppointmentTime(selectedTime); 
     }
@@ -143,7 +166,6 @@ const AppointContact = () => {
   };
 
   const handleFeedback = (appointment) => {
-    // Show the alert here
     if (appointment.state) {
       setSelectedAppointment(appointment);
       setShowFeedbackModal(true);
@@ -158,9 +180,9 @@ const AppointContact = () => {
 
   const submitFeedback = () => {
     if (selectedAppointment.state) {
-      db.collection('Appointments')
-        .doc(doctor.id.toString())
-        .collection(user.uid)
+      database.collection('Appointments')
+        .doc('3')
+        .collection("hVWlGICXAoMc4c25O95QIdq2JVi1")
         .doc(selectedAppointment.id)
         .update({
           feedback: {
@@ -191,83 +213,117 @@ const AppointContact = () => {
     return moment(time).format('h:mm A');
   };
 
+
+  // Function to toggle the appointment form
+  const handleMakeAppointment = () => {
+    setShowAppointmentForm(!showAppointmentForm); 
+  };
+  const toggleAppointmentsList = () => {
+    if (userAppointments.length === 0) {
+      Alert.alert('No Appointments', 'You have no appointments scheduled.');
+    } else {
+      setShowAppointmentsList(!showAppointmentsList);
+    }
+  };
+  
+  const toggleFeedbackSection = () => {
+    if (appointmentsWithFeedbacks.length === 0) {
+      Alert.alert('No Feedbacks', 'There are no feedbacks for your appointments yet.');
+    } else {
+      setShowFeedbackSection(!showFeedbackSection);
+    }
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={{ uri: doctor.image }} style={styles.photo} />
 
-      <View style={styles.detailsContainer}>
-        <Text style={styles.name}>{doctor.name}</Text>
-        <Text style={styles.specialization}>{doctor.specialty}</Text>
-        <Text style={styles.location}>{doctor.location}</Text>
+
+      <Image source={{ uri: doctor.image }} style={styles.doctorImage} />
+
+      <View style={styles.doctorInfoContainer}>
+        <Text style={styles.doctorName}>{doctor.name}</Text>
+        <Text style={styles.doctorSpecialty}>{doctor.specialty}</Text>
+        <Text style={styles.doctorLocation}>{doctor.location}</Text>
       </View>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Enter reason for appointment"
-        value={appointmentReason}
-        onChangeText={setAppointmentReason}
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your pet's name"
-        value={appointmentPet}
-        onChangeText={setAppointmentPet}
-      /> 
-
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your pet's breed"
-        value={appointmentPetBreed}
-        onChangeText={setAppointmentPetBreed}
-      /> 
-
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your pet's gender"
-        value={appointmentPetGender}
-        onChangeText={setAppointmentPetGender}
-      /> 
-
-      <TouchableOpacity style={styles.button} onPress={handleAppointment}>
-        <Text style={styles.buttonText}>Pick a Date</Text>
+      {/* Make Appointment Button */}
+      <TouchableOpacity style={styles.button} onPress={handleMakeAppointment}>
+        <Text style={styles.buttonText}>Make Appointment</Text>
       </TouchableOpacity>
 
-      {showDatePicker && (
-        <DateTimePicker
-          value={appointmentDate}
-          mode="date"
-          display="default" 
-          minimumDate={new Date()}
-          maximumDate={new Date(2024, 12, 31)}
-          onChange={handleDateChange}
-        />
-      )}
+      {/* Appointment Form (Conditionally Rendered) */}
+      {showAppointmentForm && (
+        <View>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter reason for appointment"
+            value={appointmentReason}
+            onChangeText={setAppointmentReason}
+          />
 
-      <TouchableOpacity style={styles.button} onPress={() => setShowTimePicker(true)}>
-        <Text style={styles.buttonText}>Pick a Time</Text>
-      </TouchableOpacity>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your pet's name"
+            value={appointmentPet}
+            onChangeText={setAppointmentPet}
+          />
 
-      {showTimePicker && (
-        <DateTimePicker
-          value={appointmentTime}
-          mode="time"
-          display="default"
-          onChange={handleTimeChange}
-        />
-      )}
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your pet's breed"
+            value={appointmentPetBreed}
+            onChangeText={setAppointmentPetBreed}
+          />
 
-      {dateSelected && (
-        <View style={styles.checkmarkContainer}>
-          <Text style={styles.checkmarkText}>✓</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your pet's gender"
+            value={appointmentPetGender}
+            onChangeText={setAppointmentPetGender}
+          />
+
+          <TouchableOpacity style={styles.button} onPress={handleAppointment}>
+            <Text style={styles.buttonText}>Pick a Date</Text>
+          </TouchableOpacity>
+
+          {showDatePicker && (
+            <DateTimePicker
+              value={appointmentDate}
+              mode="date"
+              display="default"
+              minimumDate={new Date()}
+              maximumDate={new Date(2024, 12, 31)}
+              onChange={handleDateChange}
+            />
+          )}
+
+          <TouchableOpacity style={styles.button} onPress={() => setShowTimePicker(true)}>
+            <Text style={styles.buttonText}>Pick a Time</Text>
+          </TouchableOpacity>
+
+          {showTimePicker && (
+            <DateTimePicker
+              value={appointmentTime}
+              mode="time"
+              display="default"
+              onChange={handleTimeChange}
+            />
+          )}
+
+          {dateSelected && (
+            <View style={styles.checkmarkContainer}>
+              <Text style={styles.checkmarkText}>✓</Text>
+            </View>
+          )}
+
+          {showSubmitButton && (
+            <TouchableOpacity style={[styles.button, styles.submitButton]} onPress={sendAppointment}>
+              <Text style={styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
+          )}
         </View>
       )}
-
-      {showSubmitButton && (
-        <TouchableOpacity style={[styles.button, styles.submitButton]} onPress={sendAppointment}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableOpacity>
-      )}
+      
 
       {showContactButton && (
         <TouchableOpacity style={[styles.button, styles.contactButton]} onPress={handleContact}>
@@ -275,31 +331,39 @@ const AppointContact = () => {
         </TouchableOpacity>
       )}
 
-      <View style={styles.userAppointmentsContainer}>
-        <Text style={styles.userAppointmentsTitle}>Your Appointments:</Text>
-        {userAppointments.map((appointment) => (
-          <TouchableOpacity
-            key={appointment.id}
-            style={styles.appointmentItem}
-            onPress={() => handleFeedback(appointment)}
-          >
-            <Text>{`Date: ${formatDate(appointment.date)}`}</Text> 
-            <Text>{`Time: ${formatTime(appointment.time)}`}</Text> 
-            <Text>{`Pet: ${appointment.pet}`}</Text> 
-            <Text>{`Breed: ${appointment.breed}`}</Text> 
-            <Text>{`Gender: ${appointment.gender}`}</Text> 
+<TouchableOpacity style={styles.button} onPress={toggleAppointmentsList}>
+        <Text style={styles.buttonText}>Show Appointments</Text> 
+      </TouchableOpacity>
+
+      {/* Appointments List (Conditionally Rendered) */}
+      {showAppointmentsList && (
+        <View style={styles.userAppointmentsContainer}>
+          <Text style={styles.userAppointmentsTitle}>Your Appointments:</Text>
+          {userAppointments.map((appointment) => ( 
+            <TouchableOpacity
+              key={appointment.id}
+              style={styles.appointmentItem}
+              onPress={() => handleFeedback(appointment)}
+            >
+            <Text>{`Date: ${formatDate(appointment.date)}`}</Text>
+            <Text>{`Time: ${formatTime(appointment.time)}`}</Text>
+            <Text>{`Pet: ${appointment.pet}`}</Text>
+            <Text>{`Breed: ${appointment.breed}`}</Text>
+            <Text>{`Gender: ${appointment.gender}`}</Text>
             <Text>{`User: ${appointment.userName}`}</Text>
+            <Text>{`User: ${appointment.feedback}`}</Text>
+
             {appointment.state && (
               <Text style={styles.appointmentState}>Appointment Approved</Text>
             )}
             {!appointment.state && (
               <Text style={styles.appointmentState}>Appointment Pending</Text>
             )}
-          </TouchableOpacity>
-        ))}
-      </View>
+        </TouchableOpacity>
+          ))}
+        </View>
+      )}
 
-      {/* Feedback Modal */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -323,7 +387,7 @@ const AppointContact = () => {
               imageSize={20}
               startingValue={rating}
               onFinishRating={(value) => setRating(value)}
-              style={{padding:20 }}
+              style={{ padding: 20 }}
             />
             <TouchableOpacity style={styles.submitButton} onPress={submitFeedback}>
               <Text style={styles.button}>Submit Feedback</Text>
@@ -331,6 +395,35 @@ const AppointContact = () => {
           </View>
         </View>
       </Modal>
+      {/* Show Feedbacks Button */}
+      <TouchableOpacity style={styles.button} onPress={toggleFeedbackSection}>
+        <Text style={styles.buttonText}>Show Feedbacks</Text>
+      </TouchableOpacity>
+
+      {/* Doctor Feedbacks Section (Conditionally Rendered) */}
+      {showFeedbackSection && (
+        <View style={styles.feedbacksContainer}>
+          <Text style={styles.feedbacksTitle}>Feedbacks for Your Appointments:</Text>
+          {appointmentsWithFeedbacks.map((appointment) => (
+            <View key={appointment.id} style={styles.feedbackItem}>
+              {/* Make sure appointment.feedback exists before accessing its properties */}
+              {appointment.feedback && ( 
+                <>
+                  <Text style={styles.feedbackText}>Feedback: {appointment.feedback.text}</Text>
+                  <Rating
+                    type="star"
+                    ratingCount={5}
+                    imageSize={20}
+                    readonly={true}
+                    startingValue={appointment.feedback.rating}
+                    style={{ paddingVertical: 10 }}
+                  />
+                </>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
     </ScrollView>
   );
 };

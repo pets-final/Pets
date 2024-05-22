@@ -1,121 +1,203 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export
+const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f2f2f2',
-    padding: 20,
     flexGrow: 1,
+    padding: 20,
+    backgroundColor: '#f8f4ff', // Light lavender background 
   },
-  photo: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    alignSelf: 'center',
+  // Doctor Info Section
+  doctorInfoContainer: {
+    alignItems: 'center', // Center horizontally
     marginBottom: 20,
+    padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    shadowColor: '#555', 
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4, 
+    shadowRadius: 6, 
+    elevation: 8, 
+    overflow: 'hidden', 
   },
-  detailsContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
+  doctorImage: {
+    width: 120, 
+    height: 120, 
+    borderRadius: 60, 
+    borderWidth: 3,
+    borderColor: '#800080',
+    marginBottom: 15, // Space below the image
   },
-  name: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 5,
+  doctorDetails: {
+    // No need for flex: 1 here as elements are stacked vertically
+    alignItems: 'center', // Center the text elements
   },
-  specialization: {
+  doctorName: {
+    fontSize: 22,
+    fontWeight: '700', 
+    marginBottom: 6,
+    color: '#222', 
+  },
+  doctorSpecialty: {
     fontSize: 18,
-    marginBottom: 5,
+    color: '#663399', 
+    marginBottom: 4,
   },
-  location: {
+  doctorLocation: {
     fontSize: 16,
+    color: '#777',
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    marginBottom: 15,
-    borderRadius: 5,
-  },
+
+  // Buttons
   button: {
-    backgroundColor: '#4CAF50',
-    padding: 10,
+    backgroundColor: '#800080', // Purple 
+    padding: 15,
+    borderRadius: 8,
     alignItems: 'center',
-    borderRadius: 5,
     marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 4, // For Android shadow 
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
-  },
-  submitButton: {
-    backgroundColor: '#008CBA',
-  },
-  contactButton: {
-    backgroundColor: '#00BCD4',
-  },
-  checkmarkContainer: {
-    backgroundColor: '#4CAF50',
-    padding: 10,
-    alignItems: 'center',
-    borderRadius: 5,
-    marginBottom: 15,
-  },
-  checkmarkText: {
-    color: '#fff',
-    fontSize: 18,
     fontWeight: 'bold',
   },
-  userAppointmentsContainer: {
+  submitButton: {
+    backgroundColor: '#4CAF50', // Green
+  },
+  contactButton: {
+    backgroundColor: '#007bff', // Blue - example, you can customize
+  },
+
+  // Appointment Form
+  appointmentForm: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
     marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ddd', 
+    padding: 12,
+    borderRadius: 6,
+    marginBottom: 12,
+    fontSize: 16,
+  },
+  dateTimePickerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  datePickerButton: {
+    backgroundColor: '#e9ecef', // Light gray
+    padding: 12,
+    borderRadius: 6,
+    flex: 1,
+    marginRight: 10,
+  },
+  checkmarkContainer: {
+    marginLeft: 10, // Adjust spacing as needed
+  },
+  checkmarkText: {
+    fontSize: 20,
+    color: 'green',
+  }, 
+
+  // Appointments List
+  userAppointmentsContainer: {
+    marginTop: 20,
   },
   userAppointmentsTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
   },
   appointmentItem: {
     backgroundColor: '#fff',
     padding: 15,
+    borderRadius: 8,
     marginBottom: 10,
-    borderRadius: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 3, 
+  },
+  appointmentState: {
+    marginTop: 5,
+    fontSize: 14,
+    color: '#555',
+  },
+
+  // Feedbacks Section
+  feedbacksContainer: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    marginBottom: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
-    shadowRadius: 2,
+    shadowRadius: 4,
+    elevation: 5,
   },
-  appointmentState: {
-    fontSize: 14,
-    color: '#4CAF50',
-    marginTop: 5,
+  feedbacksTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
+  feedbackItem: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee', 
+    paddingBottom: 15,
+    marginBottom: 15,
+  },
+  feedbackText: {
+    fontSize: 16,
+    marginBottom: 8, 
+  }, 
+
+  // Feedback Modal
   modalContainer: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
     backgroundColor: '#fff',
     padding: 20,
-    borderRadius: 5,
+    borderRadius: 10,
     width: '80%',
   },
   modalTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 15,
   },
   modalTextInput: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#ddd',
     padding: 10,
+    borderRadius: 6,
     marginBottom: 15,
-    borderRadius: 5,
+    fontSize: 16,
   },
   modalText: {
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom: 10, 
   },
 });
 
-export default styles;
+export default styles; 
