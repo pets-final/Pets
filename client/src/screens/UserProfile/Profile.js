@@ -22,7 +22,6 @@ const ProfileTab = ({route}) => {
   const [DisplayAlert, setDisplayAlert] = useState(0)
   const [modalVisible, setModalVisible] = useState(false);
   const [User,setUser] = useState('')
-  const [isFilled,setIsFilled] = useState(false)
   const handleLogout = async () => {
     try {
       await auth().signOut();
@@ -71,9 +70,9 @@ const ProfileTab = ({route}) => {
   const [setuserdata] = useState([
     {
       "id": 1,
-      "title": "Your Orders",
+      "title": "Your Orders History",
       "seticonview": <IconR name="chevron-right" size={20} />,
-      "url": '',
+      "url": 'PaymentHistoryScreen',
     },
     {
       "id": 2,
@@ -119,7 +118,6 @@ const ProfileTab = ({route}) => {
                 </TouchableOpacity>
               </View>
               <View style={AccountTabStyle.useraccountwhitebox}>
-               { true && <Icon name="checkcircleo" size={30} color="#4F8EF7" style={{ position: 'absolute', top: 10, left: 309 }} />}
                 <View style={AccountTabStyle.fleximageandtext}>
 
                   <TouchableOpacity>
