@@ -1,55 +1,59 @@
 import {StyleSheet} from 'react-native'
 export const styles = StyleSheet.create({
     container: {
-      padding: 10,
-      borderWidth: 1,
-      borderColor: '#ccc',
-      borderRadius: 5,
-      marginVertical: 10,
+      flex: 1,
+      padding: 20,
+      backgroundColor: '#f0f0f0', // Light background
     },
     title: {
+      fontSize: 24,
       fontWeight: 'bold',
-      fontSize: 16,
-      marginBottom: 5,
+      marginBottom: 20,
+      color: '#333', // Primary text color
     },
-    buttonContainer: {
+    appointmentItem: {
+      marginBottom: 15,
+      padding: 10,
+      borderRadius: 5,
+      // backgroundColor: '#fff', // White background for better contrast
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginTop: 15,
+      alignItems: 'center',
+    },
+    appointmentDetails: {
+      flex: 1,
+    },
+    detailText: {
+      marginBottom: 5,
+      fontSize: 16,
+      color: '#333', // Secondary text color
+    },
+    actionButtons: {
+      flexDirection: 'row',
     },
     button: {
-      paddingVertical: 10,
-      paddingHorizontal: 20,
+      padding: 10,
       borderRadius: 5,
-      alignItems: 'center',
-      justifyContent: 'center',
+      marginHorizontal: 5,
     },
-    buttonContact: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 8,
-        backgroundColor:'orange',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-    buttonText: {
-      color: '#fff',
-      fontWeight: 'bold',
-    },
-    approveButton: {
-      backgroundColor: 'green',
+    approvedButton: {
+      backgroundColor: '#4CAF50', // Green for approved
     },
     declineButton: {
-      backgroundColor: 'red',
+      backgroundColor: '#F44336', // Red for declined
+    },
+    contactButton: {
+      backgroundColor: '#3F51B5', // Blue for contact
+    },
+    buttonText: {
+      color: '#fff', // White text for buttons
+      textAlign: 'center',
+    },
+    statusContainer: {
+      alignItems: 'center',
     },
     approvedText: {
-      color: 'green',
-      fontWeight: 'bold',
-      marginTop: 10,
-    },
-    declinedText: {
-      color: 'red',
-      fontWeight: 'bold',
-      marginTop: 10,
+      color: '#4CAF50',
     },
   });
+  
