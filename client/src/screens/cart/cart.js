@@ -95,7 +95,7 @@ const Render = ({item,index})=>{
         </View>
         <View>
           
-
+      
           <Text style={CartTabStyle.pistahouse}>{item.name}</Text>
         </View>
       </View>

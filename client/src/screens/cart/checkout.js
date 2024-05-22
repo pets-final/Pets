@@ -11,8 +11,11 @@ import { useNavigation } from '@react-navigation/native';
 import { CartTabStyle } from '../../styles';
 import IconA from 'react-native-vector-icons/Entypo';
 import { useStripe } from '@stripe/stripe-react-native';
+import auth from '@react-native-firebase/auth'; // Import the auth module
+import firestore from '@react-native-firebase/firestore';
 
 import images from '../../index';
+const db = firestore();
 
 const CheckOutScreen = ({ route }) => {
   const totalPrice = route.params?.totalPrice;
@@ -30,6 +33,7 @@ const CheckOutScreen = ({ route }) => {
   const [isLoading, setIsLoading] = useState(0);
   let PriceSymbol = '$'
   useEffect(() => {
+   
     if(route.params.address){
       setuserAddress(route.params.address);
     }
@@ -97,9 +101,16 @@ const CheckOutScreen = ({ route }) => {
   };
 
   const onCreateOrder = async () => {
-    // Implement your order creation logic here
-    // Alert.alert('Order has been submitted', 'Your order reference is: 12345');
-    // Clear cart and navigate to the success screen or another screen if necessary
+    // 5. Add order details to the collection
+    const user = auth().currentUser;
+    const uid = user.uid;
+    const orderData = {
+      totalPrice: route.params.totalPrice,
+      cartItems: route.params.cartItems,
+      address: 'user.address',
+    };
+    console.log('orderData', orderData);
+    await db.collection('orders').doc(uid).set(orderData, { merge: true });
     navigation.navigate('paymentSucces');
   };
   const Render = ({item,index})=>{
