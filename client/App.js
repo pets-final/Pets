@@ -13,6 +13,11 @@ import ProductList from './src/screens/ProductList/ProductList';
 import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
+import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
+import MyVet from './src/screens/VetProfile/Myvet'
+// import AppointContact from '';
+import AppointContact from './src/screens/AppointContact/Appoint'
+import VetProfileTab from './src/screens/VetProfile/VetProfile'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
@@ -31,7 +36,7 @@ import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
 import NewProduct from './src/screens/ProductList/NewProduct'
 import AdoptList from './src/screens/Adopt/AdoptList';
-import AppointContact from './src/screens/AppointContact/Appoint';
+// import AppointContact from './src/screens/AppointContact/Appoint';
 // import VetProfile from './src/screens/vetProfile/VetProfile';
 import AddPetsScreen from './src/screens/Adopt/AddPets';
 import NotificationScreen from './src/screens/UserProfile/notification';
@@ -321,8 +326,8 @@ function App() {
           }}
           name="EditProfile"
           component={EditProfileScreen}
-        />
-         <Stack.Screen
+        /> 
+          <Stack.Screen
           options={{
             headerShown: true,
             headerShadowVisible: false,
@@ -338,7 +343,7 @@ function App() {
           name="AppointContact"
           component={AppointContact}
         />
-             {/* <Stack.Screen options={{
+             <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
           title: 'Edit Vet Profile',
@@ -348,10 +353,21 @@ function App() {
             fontSize: 20,
             marginLeft: 17,
           },
-        }}  name="EditVetProfile" component={EditVetProfileScreen} /> */}
-  
-                   {/* <Stack.Screen options={{
+        }}  name="EditVetProfile" component={EditVetProfileScreen} />
+   <Stack.Screen options={{
           headerShown: true,
+          headerShadowVisible: false,
+          title: 'VetProfileTab',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="VetProfileTab" component={VetProfileTab} />
+                   <Stack.Screen options={{
+          headerShown: true,  
           headerShadowVisible: false,
           title: 'MyVet',
           headerTintColor: "#feb344",
@@ -360,8 +376,8 @@ function App() {
             fontSize: 17,
             fontSize: 20,
             marginLeft: 17,
-          },
-        }}  name="Myvet" component={MyVet} /> */}
+          }, 
+        }}  name="Myvet" component={MyVet} />
          
          
           <Stack.Screen
