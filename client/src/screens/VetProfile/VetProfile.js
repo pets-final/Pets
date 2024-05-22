@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, ScrollView, KeyboardAvoidingView, Modal, FlatList, StatusBar, TouchableOpacity, } from "react-native";
+import { Text, View, Image, ScrollView, KeyboardAvoidingView, Modal, FlatList, StatusBar, TouchableOpacity } from "react-native";
 import { AccountTabStyle } from '../../styles';
 import images from '../../index';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconF from 'react-native-vector-icons/Feather';
 import IconR from 'react-native-vector-icons/Entypo';
 import IconI from 'react-native-vector-icons/Ionicons';
-import Button  from '../../components/Button';
-import SweetaelertModal  from '../../components/SweetAlertModal';
+import Button from '../../components/Button';
+import SweetaelertModal from '../../components/SweetAlertModal';
 import { useNavigation } from '@react-navigation/native';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
-// import { colors } from '../../utils';
-// import { useSelector } from "react-redux";
-const VetProfileTab = () => {
-  const  colorrdata = "#feb344"
+import auth from '@react-native-firebase/auth';
+import { CommonActions } from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
+ 
+const db = firestore();
+const VetProfileTab = ({ route }) => {
+  // const { DoctorListData } = route.params;
+
+  console.log('Route Params:', route);
+  const colorrdata = "#861088";
   const navigation = useNavigation();
   const [DisplayAlert, setDisplayAlert] = useState(0)
   const [modalVisible, setModalVisible] = useState(false);
