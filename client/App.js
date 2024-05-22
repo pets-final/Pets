@@ -44,7 +44,7 @@ import AddBlogs from './src/screens/blogs/addBlogs'
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
 import messaging from '@react-native-firebase/messaging';
 import { StripeProvider } from '@stripe/stripe-react-native';
-
+import PaymentHistoryScreen from './src/screens/DefaultScreen/PaymentHistory/PaymentHistoryScreen';
 // Function to request permission for receiving notifications
 const requestUserPermission = async () => {
   const settings = await messaging().requestPermission();
@@ -86,6 +86,7 @@ function App() {
       <Stack.Navigator>
     
        
+      
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -185,7 +186,21 @@ function App() {
                   },
                 }}
               />
-       
+          <Stack.Screen
+          name="PaymentHistoryScreen"
+          component={PaymentHistoryScreen}
+           options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'DoctorList',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          }}}
+        />
         
          <Stack.Screen options={{
           headerShown: true,
