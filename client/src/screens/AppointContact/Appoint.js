@@ -8,7 +8,12 @@ import auth from '@react-native-firebase/auth';
 import { Rating } from 'react-native-ratings'; 
 import moment from 'moment'; // Import Moment
 
-const AppointContact = () => {
+const AppointContact = ({route}) => {
+
+  const {doctorname,spec   } = route.params.item;
+  // console.log("uuuuuuuuuuuuu",spec)
+
+
   const [showContactButton, setShowContactButton] = useState(false);
   const [appointmentDate, setAppointmentDate] = useState(null); 
   const [appointmentTime, setAppointmentTime] = useState(null); 
@@ -196,8 +201,8 @@ const AppointContact = () => {
       <Image source={{ uri: doctor.image }} style={styles.photo} />
 
       <View style={styles.detailsContainer}>
-        <Text style={styles.name}>{doctor.name}</Text>
-        <Text style={styles.specialization}>{doctor.specialty}</Text>
+        <Text style={styles.name}>{doctorname}</Text>
+        <Text style={styles.specialization}>{spec}</Text>
         <Text style={styles.location}>{doctor.location}</Text>
       </View>
 

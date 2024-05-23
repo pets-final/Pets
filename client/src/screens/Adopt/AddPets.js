@@ -38,6 +38,8 @@ const AddPetsScreen = () => {
   const [uploading, setUploading] = useState(false);
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+  const [DisplayAlert, setDisplayAlert] = useState(0)
+
   // const [image, setImage] = useState(null);
 
   const [ImgUrl, setImg] = useState('');
@@ -112,6 +114,7 @@ const AddPetsScreen = () => {
   const addPetsToAdopt=async()=>{
     const urls = await uploadImages();
 
+
     firestore().collection('Animal').add({
       Adresse:Location,
       Age:age,
@@ -119,9 +122,11 @@ const AddPetsScreen = () => {
       Description:Description,
       ImgUrls:urls,
       Name:fullname,
-      Sex:Sex,      
+      Sex:Sex, 
+      uid: auth().currentUser.uid
     }).then((res)=>{
-      Alert.alert("pets added")
+      setDisplayAlert(1)
+      
 
     }).catch((err)=>{
       console.log(err);
@@ -287,7 +292,11 @@ const AddPetsScreen = () => {
           />
         </View>
       </View>
-
+      {DisplayAlert !== 0 ?
+        <SweetaelertModal message='Applied Successful' link={"tab"} />
+        :
+        null
+      }
     
     </View>
   );

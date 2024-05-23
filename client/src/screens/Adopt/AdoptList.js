@@ -57,7 +57,7 @@ const ProductTab = () => {
         <View style={ProductitemList.bgwhiteboxminview2}>
           <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center',height:270 }}>
             <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
-              <Image style={[ProductitemList.pharamacyimagestyle,{height:250}]} resizeMode="contain" source={{uri:item.ImgUrl}}/>
+              <Image style={[ProductitemList.pharamacyimagestyle,{height:250}]} resizeMode="contain" source={{uri:item.ImgUrls[0]}}/>
              
 
             </TouchableOpacity>
