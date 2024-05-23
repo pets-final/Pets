@@ -49,7 +49,7 @@ const ConformLocation = ({route}) => {
           longitudeDelta: 0.001,
         });
 
-        getAddressFromCoords(crd.latitude, crd.longitude);
+        // getAddressFromCoords(crd.latitude, crd.longitude);
         if (route.params?.back) {
           setback('checkout', {address: address});
         } else {
@@ -59,15 +59,15 @@ const ConformLocation = ({route}) => {
     });
   }, []);
 
-  const getAddressFromCoords = async (latitude, longitude) => {
-    try {
-      const addressResponse = await Geocoder.from({latitude, longitude});
-      const formattedAddress = addressResponse.results[0].formatted_address;
-      setAddress(formattedAddress);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getAddressFromCoords = async (latitude, longitude) => {
+  //   try {
+  //     const addressResponse = await Geocoder.from({latitude, longitude});
+  //     const formattedAddress = addressResponse.results[0].formatted_address;
+  //     setAddress(formattedAddress);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const getRandomCoordinate = (currentPosition, radiusInMeters) => {
     const y0 = currentPosition.latitude;
     const x0 = currentPosition.longitude;
@@ -143,20 +143,20 @@ const ConformLocation = ({route}) => {
                   region={position}
                   onRegionChangeComplete={region => {
                     setPosition(region);
-                    getAddressFromCoords(region.latitude, region.longitude);
+                    // getAddressFromCoords(region.latitude, region.longitude);
                   }}>
                   <Marker
                     title="You are here"
                     description="This is a description"
                     coordinate={position}
                   />
-                  <MapViewDirections
+                  {/* <MapViewDirections
                     origin={position}
                     destination={ getRandomCoordinate(position, 10000)} 
                     apikey={env.GOOGLE_MAPS_API_KEY}
                     strokeWidth={3}
                     strokeColor="hotpink"
-                  />
+                  /> */}
                 </MapView>
               </View>
             </View>

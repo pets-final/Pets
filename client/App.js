@@ -13,11 +13,11 @@ import ProductList from './src/screens/ProductList/ProductList';
 import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
-import EditVetProfileScreen from './src/screens/VetProfile/EditVetProfile'
-import MyVet from './src/screens/VetProfile/Myvet'
+// import EditVetProfileScreen from './src/screens/vetProfile/EditVetProfile'
+import MyVet from './src/screens/vetProfile/Myvet'
 // import AppointContact from '';
 import AppointContact from './src/screens/AppointContact/Appoint'
-import VetProfileTab from './src/screens/VetProfile/VetProfile'
+import VetProfileTab from './src/screens/vetProfile/Myvet'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
@@ -343,7 +343,7 @@ function App() {
           name="AppointContact"
           component={AppointContact}
         />
-             <Stack.Screen options={{
+             {/* <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
           title: 'Edit Vet Profile',
@@ -353,7 +353,7 @@ function App() {
             fontSize: 20,
             marginLeft: 17,
           },
-        }}  name="EditVetProfile" component={EditVetProfileScreen} />
+        }}  name="EditVetProfile" component={EditVetProfileScreen} /> */}
    <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,

@@ -38,11 +38,14 @@ const AddPetsScreen = () => {
   const [uploading, setUploading] = useState(false);
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+  const [DisplayAlert, setDisplayAlert] = useState(0)
+
   // const [image, setImage] = useState(null);
 
   const [ImgUrl, setImg] = useState('');
   const [imageSource, setImageSource] = useState(null);
-  const [imageUrl, setimageUrl] = useState('https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074_640.jpg');
+  // const [imageUrl, setimageUrl] = useState('https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074_640.jpg');
+  const [imageUrls, setImageUrls] = useState([]);
   const dataBreed = [
     { label: 'Dog', value: 'Dog' },
     { label: 'Cat', value: 'Cat' },
@@ -63,34 +66,40 @@ const AddPetsScreen = () => {
 
 
 
-  const ImagePicker=()=>{
-    let option={
+  const ImagePicker = () => {
+    let option = {
+      mediaType: 'photo',
       storageOptions: {
-        path: 'image',
+        skipBackup: true,
+        path: 'images',
       },
-    }
-    launchImageLibrary(option,response=>{
-      setimageUrl(response.assets[0].uri)
-      // console.log(response.assets[0].uri)
-      uploadImage()
-    })
-
-  }
-
-  const uploadImage = async () => {
- const uploadUri=imageUrl;
- let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1); 
-      try {
-        await storage().ref(filename).putFile(uploadUri);
-        const url = await storage().ref(filename).getDownloadURL();
-        // console.log("url imagee ",url)
-        setImg(url)
-        setUploading(false);       
-      } catch (error) {
-        console.error('Error uploading image:', error);
-        setImg(null)
+    };
+    launchImageLibrary(option, response => {
+      if (response.assets) {
+        const selectedImages = response.assets.map(asset => asset.uri);
+        setImageUrls([...imageUrls, ...selectedImages]);
       }
+    });
+  };
 
+  const uploadImages = async () => {
+    setUploading(true);
+    const uploadPromises = imageUrls.map(async (imageUri) => {
+      const filename = imageUri.substring(imageUri.lastIndexOf('/') + 1);
+      const reference = storage().ref(filename);
+      await reference.putFile(imageUri);
+      return await reference.getDownloadURL();
+    });
+
+    try {
+      const urls = await Promise.all(uploadPromises);
+      setUploading(false);
+      return urls;
+    } catch (error) {
+      console.error('Error uploading images:', error);
+      setUploading(false);
+      return [];
+    }
   };
 
 
@@ -101,17 +110,23 @@ const AddPetsScreen = () => {
 
 
 
-  const addPetsToAdopt=()=>{
+
+  const addPetsToAdopt=async()=>{
+    const urls = await uploadImages();
+
+
     firestore().collection('Animal').add({
       Adresse:Location,
       Age:age,
       Breed:Breed,
       Description:Description,
-      ImgUrl:ImgUrl,
+      ImgUrls:urls,
       Name:fullname,
-      Sex:Sex,      
+      Sex:Sex, 
+      uid: auth().currentUser.uid
     }).then((res)=>{
-      Alert.alert("pets added")
+      setDisplayAlert(1)
+      
 
     }).catch((err)=>{
       console.log(err);
@@ -137,6 +152,22 @@ const AddPetsScreen = () => {
       setmobilenumbererror(1)
       return;
     }
+  
+    // if (email !== '') {
+    //   let emaildata = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+    //   if (!emaildata) {
+    //     setEmailValidError1(1);
+    //   }
+    //   else if (emaildata == emaildata) {
+    //     setEmailSendAlert(1);
+    //   }
+    // }
+    // if (!email.trim()) {
+    //   setEmailValidError(1);
+    // }
+    // if (!email.trim() && fullname !== '' && mobilenumber !=='' && email !=='') {
+    //   setEmailSendAlert(1);
+    // }
   }
 
 
@@ -245,13 +276,13 @@ const AddPetsScreen = () => {
          : null
        }
 
- <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+ <View style={{  paddingTop:50}}>
       {imageSource && <Image source={imageSource} style={{ width: 200, height: 200 }} />}
       <Button title="Select Image" onPress={ImagePicker} />
     </View>         
 
       <View style={[Styles.flexrowbutton,{paddingTop:"auto"}]}>
-          <Button title="Update"
+          <Button title="add youre pet"
             onPress={()=> 
               addPetsToAdopt()
 
@@ -261,7 +292,11 @@ const AddPetsScreen = () => {
           />
         </View>
       </View>
-
+      {DisplayAlert !== 0 ?
+        <SweetaelertModal message='Applied Successful' link={"tab"} />
+        :
+        null
+      }
     
     </View>
   );

@@ -18,7 +18,12 @@ import auth from '@react-native-firebase/auth';
 import { Rating } from 'react-native-ratings';
 import moment from 'moment'; 
 
-const AppointContact = () => {
+const AppointContact = ({route}) => {
+
+  const {doctorname,spec   } = route.params.item;
+  // console.log("uuuuuuuuuuuuu",spec)
+
+
   const [showContactButton, setShowContactButton] = useState(false);
   const [appointmentDate, setAppointmentDate] = useState(null); 
   const [appointmentTime, setAppointmentTime] = useState(null); 
