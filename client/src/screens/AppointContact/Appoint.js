@@ -60,7 +60,7 @@ const AppointContact = () => {
     const subscriber = auth().onAuthStateChanged((user) => {
       setUser(user);
       if (user && user.uid) {
-        fetchUserAppointments(user.uid);
+        fetchUserAppointments('KJj0XAbDGDc98a3tJ8SiwdeSVrD2');
         database.collection('users').doc(user.uid).get()
           .then(snapshot => {
             if (snapshot.exists) {
@@ -78,7 +78,7 @@ const AppointContact = () => {
   const fetchUserAppointments = (userId) => {
     database.collection('Appointments')
       .doc('3') 
-      .collection("hVWlGICXAoMc4c25O95QIdq2JVi1") 
+      .collection("KJj0XAbDGDc98a3tJ8SiwdeSVrD2") 
       .orderBy('timestamp', 'desc')
       .get()
       .then((querySnapshot) => {
@@ -182,7 +182,7 @@ const AppointContact = () => {
     if (selectedAppointment.state) {
       database.collection('Appointments')
         .doc('3')
-        .collection("hVWlGICXAoMc4c25O95QIdq2JVi1")
+        .collection("KJj0XAbDGDc98a3tJ8SiwdeSVrD2")
         .doc(selectedAppointment.id)
         .update({
           feedback: {
