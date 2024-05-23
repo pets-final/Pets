@@ -32,7 +32,7 @@ const SearchHeaderScreen = ({navigation,user}) => {
     <View>
       <View style={Styles.minheaderflexview}>
         <TouchableOpacity style={Styles.flexhomeimgandtext} onPress={() => navigation.navigate()}>
-        <NavigationDrawerStructure navigationProps={navigation} />
+        {/* <NavigationDrawerStructure navigationProps={navigation} /> */}
           <View>
             <IconM style={Styles.homeimagstyle} name="home" size={25} color={"#861088"} />
           </View>

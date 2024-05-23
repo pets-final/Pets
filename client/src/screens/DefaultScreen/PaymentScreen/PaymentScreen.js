@@ -7,6 +7,7 @@ import images from '../../../index';
 import { RouteName } from '../../../routes';
 import { useSelector } from "react-redux";
 
+
 const MangePaymentMethode = () => {
   const navigation = useNavigation();
   const { colorrdata } = useSelector(state => state.commonReducer) || {};

@@ -13,11 +13,11 @@ import ProductList from './src/screens/ProductList/ProductList';
 import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
-import EditVetProfileScreen from './src/screens/vetProfile/EditVetProfile'
+// import EditVetProfileScreen from './src/screens/vetProfile/EditVetProfile'
 import MyVet from './src/screens/vetProfile/Myvet'
 // import AppointContact from '';
 import AppointContact from './src/screens/AppointContact/Appoint'
-import VetProfileTab from './src/screens/vetProfile/VetProfile'
+import VetProfileTab from './src/screens/vetProfile/Myvet'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
@@ -44,7 +44,7 @@ import AddBlogs from './src/screens/blogs/addBlogs'
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
 import messaging from '@react-native-firebase/messaging';
 import { StripeProvider } from '@stripe/stripe-react-native';
-
+import PaymentHistoryScreen from './src/screens/DefaultScreen/PaymentHistory/PaymentHistoryScreen';
 // Function to request permission for receiving notifications
 const requestUserPermission = async () => {
   const settings = await messaging().requestPermission();
@@ -86,6 +86,7 @@ function App() {
       <Stack.Navigator>
     
        
+      
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -185,7 +186,21 @@ function App() {
                   },
                 }}
               />
-       
+          <Stack.Screen
+          name="PaymentHistoryScreen"
+          component={PaymentHistoryScreen}
+           options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'DoctorList',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          }}}
+        />
         
          <Stack.Screen options={{
           headerShown: true,
@@ -328,7 +343,7 @@ function App() {
           name="AppointContact"
           component={AppointContact}
         />
-             <Stack.Screen options={{
+             {/* <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
           title: 'Edit Vet Profile',
@@ -338,7 +353,7 @@ function App() {
             fontSize: 20,
             marginLeft: 17,
           },
-        }}  name="EditVetProfile" component={EditVetProfileScreen} />
+        }}  name="EditVetProfile" component={EditVetProfileScreen} /> */}
    <Stack.Screen options={{
           headerShown: true,
           headerShadowVisible: false,
