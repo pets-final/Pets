@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, StyleSheet, View, Image, ScrollView, StatusBar, KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { Text, StyleSheet, View,Dimensions, Image, ScrollView, StatusBar, KeyboardAvoidingView, TouchableOpacity,ActivityIndicator } from "react-native";
 import { ProductDetailes, Style } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import IconF from 'react-native-vector-icons/MaterialIcons';
@@ -8,20 +8,101 @@ import IconH from 'react-native-vector-icons/FontAwesome';
 import IconL from 'react-native-vector-icons/Feather';
 import IconP from 'react-native-vector-icons/EvilIcons';
 import MapView, { Marker } from 'react-native-maps';
-
+// import Slide from '../../utils/slide'
 import { useTogglePasswordVisibility } from '../../utils';
 
-const doctoreDetaile = {
-  "id": 1,
-  "image": require("../../images/200by150.png"),
-  "price": 120,
-  "text": "Kitchen Items",
-  "description": "Kitchen Items are essential tools used in the kitchen for cooking, serving, and preparing food. They include utensils, cookware, bakeware, and appliances.",
-};
+
 
 export const PetsDetailesScreen = ({ route }) => {
-  const { Name, ImgUrl, Adresse, Description, Category, Age, Breed, Sex } = route.params.item;
+
+
+
+
+
+  const Slide = () => {
+   
+  const [dimension, setDimension] = useState(Dimensions.get('window'));
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const scrollRef = useRef();
+
+  const onChange = ({ window }) => {
+    setDimension(window);
+  };
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener('change', onChange);
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSelectedIndex(prevSelectedIndex =>
+        prevSelectedIndex === ImgUrls.length - 1 ? 0 : prevSelectedIndex + 1
+      );
+      scrollRef.current.scrollTo({
+        animated: true,
+        y: 0,
+        x: dimension.width * selectedIndex,
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [dimension.width, selectedIndex]);
+
+ 
+
+  const setIndex = event => {
+    let viewSize = event.nativeEvent.layoutMeasurement.width;
+    let contentOffset = event.nativeEvent.contentOffset.x;
+    let carouselIndex = Math.floor(contentOffset / viewSize);
+    setSelectedIndex(carouselIndex);
+  };
+
+  return (
+    <View style={{ width: 250 , height:250,left:'20%'}}>
+      <ScrollView
+        horizontal
+        ref={scrollRef}
+        onMomentumScrollEnd={setIndex}
+        showsHorizontalScrollIndicator={false}
+        pagingEnabled
+      >
+        {ImgUrls.map((value, key) => (
+          <Image
+            key={key}
+            source={{ uri: `${value}` }}
+            style={[styles.image, { width: dimension.width }]}
+            PlaceholderContent={<ActivityIndicator />}
+          />
+        ))}
+      </ScrollView>
+      <View style={styles.pagination}>
+        {ImgUrls.map((val, key) => (
+          <Text
+            key={key}
+            style={key === selectedIndex ? styles.paginationActiveText : styles.paginationText}
+          >
+            -
+          </Text>
+        ))}
+      </View>
+    </View>
+  );
+};
+
+
+
+  const { Name, ImgUrl, Adresse, Description, Category, Age, Breed, Sex,ImgUrls
+  } = route.params.item;
+  console.log("uuuuuuuuuuuuu",ImgUrls)
   const [count, setCount] = useState(1);
+  // const ImgUrls = [
+  //   { url: 'https://cdn.media.amplience.net/i/petsathome/hp-promo-phase-catlitter-2for20/.webp?w=720&' },
+  //   { url: 'https://www.crbgroup.com/wp-content/uploads/2019/11/processed-pet-foods-mobile-scaled.jpg' },
+  //   { url: 'https://nextlevelpetfood.com/cdn/shop/files/NextLevel_Render_Composition_5_PurposeLine_RGB_25.png?v=1693230150&width=1500'},
+  //   { url: 'https://supertails.com/cdn/shop/files/5th_may_web_2-min_1600x.png?v=1715925375' },
+  //   { url: 'https://supertails.com/cdn/shop/files/20th_may_web_4-min_1600x.png?v=1716183548' },
+  // ];
   const colorrdata = "#861088";
   const pricesymboldata = '$';
 
@@ -50,7 +131,7 @@ export const PetsDetailesScreen = ({ route }) => {
 
   return (
     <View style={ProductDetailes.minstyleviewphotograpgy}>
-      <StatusBar barStyle="dark-content" backgroundColor={colorrdata} />
+      <StatusBar barStyle="dark-content"  />
       <ScrollView
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
@@ -71,7 +152,8 @@ export const PetsDetailesScreen = ({ route }) => {
                 </TouchableOpacity>
               </TouchableOpacity>
               <View style={[ProductDetailes.setimagestylewidth, { backgroundColor: colorrdata }]}>
-                <Image style={ProductDetailes.imagsetstyle} source={{ uri: ImgUrl }} resizeMode="contain" />
+                {/* <Image style={ProductDetailes.imagsetstyle} source={{ uri: ImgUrl }} resizeMode="contain" /> */}
+                <Slide  />
               </View>
               <TouchableOpacity onPress={() => backarrow()} style={Style.settextstyle}>
                 <View style={[Style.setbgcolorviewtwoview, { backgroundColor: colorrdata }]}>
@@ -151,4 +233,31 @@ const styles = StyleSheet.create({
     height: 450,
     width: '100%',
   },
+  image: {
+    //    width: '100%',
+        height: 200,
+        // borderRadius: 15,
+        marginHorizontal: 0.0001,
+        
+        // resizeMode: 'cover',
+        // padding: 10,
+        // margin:10
+      },
+      pagination: {
+        flexDirection: 'row',
+        position: 'absolute',
+        bottom: 10,
+        alignSelf: 'center',
+      },
+      paginationText: {
+        color: '#888',
+        margin: 3,
+        fontSize: 16,
+      },
+      paginationActiveText: {
+        color: 'white',
+        margin: 3,
+        fontSize: 16,
+      },
 });
+

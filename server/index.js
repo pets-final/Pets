@@ -23,11 +23,15 @@ app.post('/create-payment-intent', async (req, res) => {
   } catch (error) {
     res.status(500).send({
       error: error.message,
-    });
+    });a
   }
 });
 admin.initializeApp({
   credential: admin.credential.cert(require('./my-petsproject-firebase-adminsdk-p4fen-4e24645823 2.json')),
+});
+
+admin.initializeApp({
+  credential: admin.credential.cert(require('./tt.json')),
 });
 app.post('/send-notification', async (req, res) => {
     const { notificationData, deviceToken } = req.body; // Extract data from request body
@@ -52,4 +56,4 @@ app.post('/send-notification', async (req, res) => {
   const port = process.env.PORT || 3000; // Use environment variable for port
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
-});
+})

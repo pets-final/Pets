@@ -132,5 +132,4 @@ const FavoriteTab = () => {
     </View>
   );
 };
-
 export default FavoriteTab;

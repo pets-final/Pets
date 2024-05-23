@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './src/screens/Home/Home'
-import Profile from './src/screens/VetProfile/VetProfile'
+import Profile from './src/screens/UserProfile/Profile'
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import Category from './src/screens/Categories/Categories';
 import blogs from './src/screens/blogs/blogs';
