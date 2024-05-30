@@ -42,7 +42,7 @@ const VideoTab = () => {
           />
           <View style={VideoTabStyle.textWidthset}>
             <Text style={VideoTabStyle.itemText}>{item.Title}</Text>
-            <Text style={VideoTabStyle.itemTextTime}>{item.Description}
+            <Text style={VideoTabStyle.itemTextTime}>
               <IconE name="back-in-time" size={16} color={colorrdata} /> {/* Format date from item if needed */}
             </Text>
           </View>
