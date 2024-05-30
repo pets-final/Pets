@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, ScrollView, Text, KeyboardAvoidingView, TouchableOpacity, Image, FlatList, StatusBar } from "react-native";
+import { Pressable,View, ScrollView, Text, KeyboardAvoidingView, TouchableOpacity, Image, FlatList, StatusBar } from "react-native";
 import Styles from '../../styles/Tab/HometabStyle';
 import { MedicineCategoryHomeTab, MegaMedicine, MedicineFalteList, DoctorListData } from '../../utils/Sliderimagedata';
 import  Button  from '../../components/Button';
@@ -12,6 +12,7 @@ import IconY from 'react-native-vector-icons/dist/MaterialIcons';
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import HeaderScreenAddress from '../../components/HeaderScreenAddress'
 import image from '../../images';
+import Slide from '../../utils/slide'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import firestore from '@react-native-firebase/firestore';
@@ -113,7 +114,7 @@ const HomeTabset = (props) => {
   const [user, setUser] = useState(null); // State to hold the user object 
   const [EmailSendAlert, setEmailSendAlert] = useState(0);
 
-
+      
   useEffect(() => {
     // Get the current user when the component mounts
     getdatatest()
@@ -126,7 +127,7 @@ const HomeTabset = (props) => {
       setUser(user);
       // console.log('subscriber',user);
       const r = db.collection('users').doc(user.uid).onSnapshot((doc) => {
-        // console.log('User:', doc.data());
+        console.log('User:', doc.data());
         setUser(doc.data());
       });
     });
@@ -142,7 +143,7 @@ const HomeTabset = (props) => {
     if (seconds < 10) { seconds = "0" + seconds; }
     return hours + ':' + minutes + ':' + seconds;
   };
-
+  
   const HandleAddToCart =  async (item) => {
     let Product = {
       id: item.id,
@@ -312,34 +313,47 @@ const HomeTabset = (props) => {
   }
   const MedicineDeals = (item, index) => {
     return (
-      <View style={[Styles.setbgcolorviewtimewrap, Styles.bgcolorset]}>
-        <View style={Styles.setbgcolorviewtime}>
-          
+      <View>
+        <View style={Styles.minbgviewset}>
+          <TouchableOpacity style={Styles.imagecengter} onPress={() => navigation.navigate('productDetails',{item:item})}>
+            <Image style={[Styles.whiteboximagetwoset, Styles.whiteboximagetwosettwo]} resizeMode='contain' source={{uri:item.ImgUrl}} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('productDetails', {item:item})}>
+            <Text numberOfLines={1} style={[Styles.settextcolorcenter, { color: "#861088" }]}>{item.Name}</Text>
+          </TouchableOpacity>
+          <Text style={Styles.settextcolorcentertwo}>{item.AdresseShop}</Text>
+          <View style={Styles.flexrowseticon}>
             <View>
-              <TouchableOpacity style={Styles.flexrowsecenterimage}
-                onPress={() =>  navigation.navigate('productDetails',{item:item})}>
-                <Image style={Styles.whiteboximage} resizeMode="contain" source={{uri:item.ImgUrl}} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() =>  navigation.navigate('productDetails',{item:item})}>
-                <Text  numberOfLines={2} style={[Styles.setnormatextstyle, { color: "#861088" ,height:35}]}>{item.Name}</Text>
-              </TouchableOpacity>
-              <Text style={[Styles.settextcolorcenterthree, Styles.settextcolorcenterthreetow]}>{item.hospitalname}</Text>
-              <View style={Styles.flexrowjuctycenter}>
-                {item.rating}
-              </View>
-              <View style={Styles.flexrowsettext}>
-                <Text style={[Styles.settextprice, { color: "black" }]}>{pricesymboldata}{item.Price}</Text>
-              </View>
-              <View style={Styles.flexrocenterjusty}>
-                <View style={Styles.addbutttonwidth}>
-                  <Button onPress={() => HandleAddToCart(item)} buttonTextStyle={{ color: 'white' }} buttonStyle={{ height: 35, backgroundColor: "#861088" }} title={'ADD'} />
-                </View>
-              </View>
-              {/* <View style={[Styles.settextinbgcolor, { backgroundColor: "#861088" }]}>
-                <Text style={Styles.setdescounrtextstyle}>{item.offdecount}</Text>
-              </View> */}
+              {item.ratings}
             </View>
-          
+          </View>
+          <View style={Styles.flexrowseticonNewArrival}>
+            <View>
+              <Text style={[Styles.settextpricebold, { color: "#861088" }]}>{pricesymboldata} {item.Price}</Text>
+            </View>
+            <TouchableOpacity onPress={() => doctordatatendingmenu(item)} style={[Styles.seticonbgcolorview, { backgroundColor: "#861088" }]}>
+              <IconF name={'plus'} size={20} color={'white'} />
+            </TouchableOpacity>
+          </View>
+         
+          <TouchableOpacity
+            onPress={() => {
+              if (liked.includes(index)) {
+                let unlike = liked.filter((elem) => elem !== index);
+                setLiked(unlike);
+              } else {
+                setLiked([...liked, index]);
+              }
+            }} style={Styles.HeartIconLike}>
+
+            <Icon
+              name="heart"
+              size={25}
+              style={{ color: liked.includes(index) ? 'red' : 'lightgrey' }}
+            />
+          </TouchableOpacity>
+
         </View>
       </View>
     );
@@ -410,7 +424,7 @@ const HomeTabset = (props) => {
       <View style={Styles.populaitemnearby}>
         <View style={Styles.flexrowtextandimage}>
           <TouchableOpacity onPress={() =>  navigation.navigate('PetsDetailesScreen',{item:item})}>
-            <Image style={Styles.whiteboximagetwoset} resizeMode="cover" source={{uri:item.ImgUrl}}/>
+            <Image style={Styles.whiteboximagetwoset} resizeMode="cover" source={{uri:item.ImgUrls[0]}}/>
           </TouchableOpacity>
           <View style={Styles.setwidthalltext}>
             <TouchableOpacity onPress={() => navigation.navigate('PetsDetailesScreen',{item:item})}>
@@ -464,7 +478,7 @@ const HomeTabset = (props) => {
     return (
       <View style={Styles.Doctorbox}>       
           <View style={Styles.doctorimagbox}>
-            <TouchableOpacity onPress={() => navigation.navigate('AppointContact')}>
+            <TouchableOpacity onPress={() => navigation.navigate('AppointContact',{item})}>
               <Image style={Styles.Doctorimage} resizeMode="contain" source={item.doctorImg} />
             </TouchableOpacity>
             <Text style={[Styles.Doctornametext, { color: "#861088" }]} >{item.doctorname}</Text>
@@ -496,6 +510,7 @@ const HomeTabset = (props) => {
               {/* <HomeFirstImageSlider /> */}
             </View>
             <View style={Styles.marginsetminview}>
+              <Slide/>
               <View style={Styles.FlexRowBetwn}>
                 
                 <Text style={Styles.settopcategories}>Trending Categories</Text>

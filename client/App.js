@@ -13,6 +13,11 @@ import ProductList from './src/screens/ProductList/ProductList';
 import Category from './src/screens/Categories/Categories';
 import FavoriteTab from './src/screens/Favorites/Favorite';
 import EditProfileScreen from './src/screens/UserProfile/EditProfile';
+
+import MyVet from './src/screens/VetProfile/Myvet'
+// import AppointContact from '';
+import AppointContact from './src/screens/AppointContact/Appoint'
+import VetProfileTab from './src/screens/VetProfile/VetProfile'
 import map from './src/screens/Map/map';
 import Nav from './tab.nav';
 import blogDetails from './src/screens/blogs/blogDetails';
@@ -31,7 +36,7 @@ import Slider from './src/screens/vetSliderScreen/Slider';
 import VetForm from './src/screens/vetSliderScreen/VetForm';
 import NewProduct from './src/screens/ProductList/NewProduct'
 import AdoptList from './src/screens/Adopt/AdoptList';
-import AppointContact from './src/screens/AppointContact/Appoint';
+// import AppointContact from './src/screens/AppointContact/Appoint';
 // import VetProfile from './src/screens/vetProfile/VetProfile';
 import AddPetsScreen from './src/screens/Adopt/AddPets';
 import NotificationScreen from './src/screens/UserProfile/notification';
@@ -39,7 +44,7 @@ import AddBlogs from './src/screens/blogs/addBlogs'
 // import DrawerNavigationNotification from './src/screens/DefaultScreen/Notification/DrawerNavigationNotification'
 import messaging from '@react-native-firebase/messaging';
 import { StripeProvider } from '@stripe/stripe-react-native';
-
+import PaymentHistoryScreen from './src/screens/DefaultScreen/PaymentHistory/PaymentHistoryScreen';
 // Function to request permission for receiving notifications
 const requestUserPermission = async () => {
   const settings = await messaging().requestPermission();
@@ -81,6 +86,7 @@ function App() {
       <Stack.Navigator>
     
        
+      
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -180,7 +186,21 @@ function App() {
                   },
                 }}
               />
-       
+          <Stack.Screen
+          name="PaymentHistoryScreen"
+          component={PaymentHistoryScreen}
+           options={{
+          headerShown: true,
+          headerShadowVisible: false,
+          title: 'DoctorList',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          }}}
+        />
         
          <Stack.Screen options={{
           headerShown: true,
@@ -306,8 +326,8 @@ function App() {
           }}
           name="EditProfile"
           component={EditProfileScreen}
-        />
-         <Stack.Screen
+        /> 
+          <Stack.Screen
           options={{
             headerShown: true,
             headerShadowVisible: false,
@@ -334,9 +354,20 @@ function App() {
             marginLeft: 17,
           },
         }}  name="EditVetProfile" component={EditVetProfileScreen} /> */}
-  
-                   {/* <Stack.Screen options={{
+   <Stack.Screen options={{
           headerShown: true,
+          headerShadowVisible: false,
+          title: 'VetProfileTab',
+          headerTintColor: "#feb344",
+          headerTitleStyle: {
+            color: "#feb344",
+            fontSize: 17,
+            fontSize: 20,
+            marginLeft: 17,
+          },
+        }}  name="VetProfileTab" component={VetProfileTab} />
+                   <Stack.Screen options={{
+          headerShown: true,  
           headerShadowVisible: false,
           title: 'MyVet',
           headerTintColor: "#feb344",
@@ -345,8 +376,8 @@ function App() {
             fontSize: 17,
             fontSize: 20,
             marginLeft: 17,
-          },
-        }}  name="Myvet" component={MyVet} /> */}
+          }, 
+        }}  name="Myvet" component={MyVet} />
          
          
           <Stack.Screen

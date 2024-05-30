@@ -1,55 +1,70 @@
 import {StyleSheet} from 'react-native'
 export const styles = StyleSheet.create({
     container: {
-      padding: 10,
-      borderWidth: 1,
-      borderColor: '#ccc',
-      borderRadius: 5,
-      marginVertical: 10,
+      flex: 1,
+      padding: 20,
+      backgroundColor: '#f8f4ff', // Light lavender background
     },
     title: {
-      fontWeight: 'bold',
-      fontSize: 16,
-      marginBottom: 5,
+      fontSize: 28, 
+      fontWeight: '700', // Bolder font weight
+      marginBottom: 25,
+      color: '#333', 
+      textAlign: 'center', // Center the title
     },
-    buttonContainer: {
+    appointmentItem: {
+      marginBottom: 20, 
+      padding: 15,
+      borderRadius: 10,
+      backgroundColor: '#fff', 
+      shadowColor: '#555',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 5, 
+    },
+    appointmentDetails: {
+      flex: 1, 
+      marginBottom: 10, 
+    },
+    detailText: {
+      marginBottom: 5,
+      fontSize: 16,
+      color: '#444', 
+    },
+    actionButtons: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginTop: 15,
+      justifyContent: 'flex-end', // Align buttons to the right
+    },
+    statusContainer: {
+      alignItems: 'center',
     },
     button: {
-      paddingVertical: 10,
-      paddingHorizontal: 20,
-      borderRadius: 5,
-      alignItems: 'center',
-      justifyContent: 'center',
+      padding: 12,
+      borderRadius: 8, 
+      marginHorizontal: 8, 
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 3,
+      elevation: 4, 
     },
-    buttonContact: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 8,
-        backgroundColor:'orange',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-    buttonText: {
-      color: '#fff',
-      fontWeight: 'bold',
-    },
-    approveButton: {
-      backgroundColor: 'green',
+    approvedButton: {
+      backgroundColor: '#4CAF50', 
     },
     declineButton: {
-      backgroundColor: 'red',
+      backgroundColor: '#F44336', 
+    },
+    contactButton: {
+      backgroundColor: '#800080', // Purple
+    },
+    buttonText: {
+      color: '#fff', 
+      fontSize: 16,
+      fontWeight: '600',
     },
     approvedText: {
-      color: 'green',
-      fontWeight: 'bold',
-      marginTop: 10,
-    },
-    declinedText: {
-      color: 'red',
-      fontWeight: 'bold',
-      marginTop: 10,
+      color: '#4CAF50',
+      fontSize: 16,
     },
   });

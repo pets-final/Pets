@@ -5,6 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import { ProductData } from '../../utils/Sliderimagedata';
 import { colors } from '../../utils';
 import Icon from "react-native-vector-icons/AntDesign";
+import IconP from "react-native-vector-icons/MaterialIcons";
+import IconA from "react-native-vector-icons/FontAwesome5";
+import IconS from "react-native-vector-icons/FontAwesome";
+import IconL from "react-native-vector-icons/Entypo";
 import auth from '@react-native-firebase/auth'; // Import the auth module
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
@@ -49,53 +53,67 @@ const ProductTab = () => {
     return (
       
       <TouchableOpacity style={ProductitemList.bgwhiteboxminviewWrap}>
-        {/* {console.log("adopt ",adoptPets)} */}
+     
         <View style={ProductitemList.bgwhiteboxminview2}>
-          <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
+          <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center',height:270 }}>
             <TouchableOpacity style={ProductitemList.setimageviewstyle2} onPress={() => doctordata(item)}>
-              <Image style={ProductitemList.pharamacyimagestyle} resizeMode="contain" source={{uri:item.ImgUrl}}/>
-             {/* { console.log("image url",item.ImgUrl)} */}
+              <Image style={[ProductitemList.pharamacyimagestyle,{height:250}]} resizeMode="contain" source={{uri:item.ImgUrls[0]}}/>
+             
 
             </TouchableOpacity>
           </View>
           <TouchableOpacity >
-            <Text style={[ProductitemList.textoftitle, { color: "#861088" }]}>Name : {item.Name} </Text>
+            <Text style={[ProductitemList.textoftitle, { color: "black" }]}>
+            <IconP
+              name="pets"
+              size={25}
+              style={{ color:  "#861088" }}
+            />
+                 {" "+ item.Name} 
+              
+              </Text>
           </TouchableOpacity>
           <TouchableOpacity >
-            <Text style={[ProductitemList.textoftitle, { color: "#861088" }]}>Age : {item.Age} </Text>
+            <Text  numberOfLines={3} style={[ProductitemList.textoftitle2, { color: "black" }]}>
+        
+              {" "+ item.Description} 
+              
+              </Text>
           </TouchableOpacity>
-          <TouchableOpacity >
-            <Text style={[ProductitemList.textoftitle, { color: "#861088" }]}>Sex : {item.Sex}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity >
-            <Text style={[ProductitemList.textoftitle, { color: "#861088" }]}>Adresse : {item.Adresse} </Text>
-          </TouchableOpacity>
+         
+          
+   
+          
           <Text style={ProductitemList.settextcolorcenterlist}></Text>
           <View style={ProductitemList.setflexstadr}>
             {item.ratingsset}
             <Text style={[ProductitemList.setratingtextstyle, { color: "#861088" }]}>{item.ratingtext}</Text>
           </View>
           <View style={ProductitemList.justicenterflexrow}>
-          <Text style={ProductitemList.boldpricetext}>06/05/2024</Text>
-
-            <TouchableOpacity style={[ProductitemList.setplusbgcolorset, { backgroundColor: "#861088" }]} onPress={() => navigation.navigate(RouteName.CART_SCREEN)}>
-              <Text>{item.iconplusset}</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity onPress={() => {
-              if (liked.includes(index)) {
-                let unlike = liked.filter((elem) => elem !== index);
-                setLiked(unlike);
-              } else {
-                setLiked([...liked, index]);
-              }
-            }} style={ProductitemList.HeartIconLike}>
-            <Icon
-              name="heart"
+          <Text style={[ProductitemList.textoftitle, { color: "black" }]}>
+            <IconL
+              name="location"
               size={25}
-              style={{ color: liked.includes(index) ? "#861088" : 'lightgrey' }}
+              style={{ color:  "#861088" }}
             />
+              { " "+item.Adresse} 
+              
+              </Text>
+
+
+          <TouchableOpacity >
+            <Text style={[ProductitemList.textoftitle, { color: "black" }]}>
+            <IconS
+              name="intersex"
+              size={25}
+              style={{ color:  "#861088" }}
+            />
+              { " "+item.Sex} 
+              
+              </Text>
           </TouchableOpacity>
+          </View>
+      
         </View>
       </TouchableOpacity>
     );

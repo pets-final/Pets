@@ -1,52 +1,92 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, ScrollView, KeyboardAvoidingView, Modal, FlatList, StatusBar, TouchableOpacity, } from "react-native";
+import { Text, View, Image, ScrollView, KeyboardAvoidingView, Modal, FlatList, StatusBar, TouchableOpacity } from "react-native";
 import { AccountTabStyle } from '../../styles';
 import images from '../../index';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconF from 'react-native-vector-icons/Feather';
 import IconR from 'react-native-vector-icons/Entypo';
 import IconI from 'react-native-vector-icons/Ionicons';
-import Button  from '../../components/Button';
-import SweetaelertModal  from '../../components/SweetAlertModal';
+import Button from '../../components/Button';
+import SweetaelertModal from '../../components/SweetAlertModal';
 import { useNavigation } from '@react-navigation/native';
 import Style from '../../styles/CommonStyle/SweetaelertModalStyle';
-// import { colors } from '../../utils';
-// import { useSelector } from "react-redux";
-const VetProfileTab = () => {
-  const  colorrdata = "#feb344"
+import auth from '@react-native-firebase/auth';
+import { CommonActions } from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
+ 
+const db = firestore();
+const VetProfileTab = ({ route }) => {
+  // const { DoctorListData } = route.params;
+
+  console.log('Route Params:', route);
+  const colorrdata = "#861088";
   const navigation = useNavigation();
-  const [DisplayAlert, setDisplayAlert] = useState(0)
+  const [DisplayAlert, setDisplayAlert] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
+  const [User, setUser] = useState(null);
+  const [isFilled, setIsFilled] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await auth().signOut();
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'LoginandRegistrationScreen' }],
+        })
+      );
+    } catch (error) {
+      console.error('Logout Error:', error);
+    }
+  };
+
   useEffect(() => {
-    navigation.addListener('focus', () => {
-      setModalVisible(false);
-      setDisplayAlert(0);
+    const subscriber = auth().onAuthStateChanged((authUser) => {
+      if (authUser) {
+        const unsubscribe = db.collection('users').doc(authUser.uid).onSnapshot((doc) => {
+          if (doc.exists) {
+            const userData = doc.data();
+            setUser(userData);
+            console.log("Current data: ", userData);
+          } else {
+            console.log("No such document!");
+          }
+        });
+        return () => unsubscribe();
+      } else {
+        console.log("User not authenticated");
+      }
     });
-  }, [navigation]);
+
+    if (route.params?.key) {
+      setIsFilled(route.params.key);
+    }
+
+    return subscriber;
+  }, []);
+
   const paymentscreen = () => {
     navigation.navigate('');
-  }
+  };
+
   const bookmarkscreen = () => {
     navigation.navigate('');
-  }
+  };
+
   const settingscreen = () => {
     navigation.navigate('');
-  }
+  };
+
   const notificationscreen = () => {
-    navigation.navigate('');
-  }
-  const [setuserdata] = useState([
+    navigation.navigate('NotificationScreen');
+  };
+
+  const setuserdata = [
     {
       "id": 1,
-      "title": "my Vet",
+      "title": "My Vet",
       "seticonview": <IconR name="chevron-right" size={20} />,
       "url": 'Myvet',
-    },
-    {
-      "id": 1,
-      "title": "Your Orders",
-      "seticonview": <IconR name="chevron-right" size={20} />,
-      "url": '',
     },
     {
       "id": 2,
@@ -56,22 +96,24 @@ const VetProfileTab = () => {
     },
     {
       "id": 3,
-      "title": "Help",
+      "title": "Cart",
       "seticonview": <IconR name="chevron-right" size={20} />,
-      "url": '',
+      "url": 'cart',
     }
-  ])
+  ];
 
   const Userdatatext = (item, index) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate(item.url)}>
+      // <TouchableOpacity onPress={() => navigation.navigate(item.url)}>
+<TouchableOpacity onPress={() => navigation.navigate('Myvet', { User: User })}>
         <View style={AccountTabStyle.setbgcolordata}>
           <Text style={[AccountTabStyle.usertextstyle, { color: colorrdata }]}>{item.title}</Text>
           <Text style={{ color: colorrdata }}>{item.seticonview}</Text>
         </View>
       </TouchableOpacity>
     );
-  }
+  };
+
   return (
     <View style={[AccountTabStyle.minstyleviewphotograpgy, AccountTabStyle.bgcolorset]}>
       <StatusBar barStyle="dark-content" backgroundColor={'white'} />
@@ -80,26 +122,29 @@ const VetProfileTab = () => {
         contentContainerStyle={{
           width: '100%',
           height: 'auto',
-        }}>
+        }}
+      >
         <KeyboardAvoidingView enabled>
           <View style={[AccountTabStyle.minflexview, AccountTabStyle.bgcolorset]}>
             <View style={AccountTabStyle.minviewsigninscreen}>
               <View style={[AccountTabStyle.flexrowtwxtspace, AccountTabStyle.bgcolorset]}>
                 <Text style={AccountTabStyle.persnaltext}>Personal details</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('EditVetProfile')}>
-                  <Text style={[AccountTabStyle.edittextset, { color: colorrdata }]}>Edit</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+                  <Text style={[AccountTabStyle.edittextset, { color: "#861088" }]}>Edit</Text>
                 </TouchableOpacity>
               </View>
               <View style={AccountTabStyle.useraccountwhitebox}>
+                {User && <Icon name="checkcircleo" size={30} color="#4F8EF7" style={{ position: 'absolute', top: 10, left: 309 }} />}
                 <View style={AccountTabStyle.fleximageandtext}>
                   <TouchableOpacity>
                     <Image style={AccountTabStyle.imagesetustwo} resizeMode='cover' source={images.Ningthty_img} />
                   </TouchableOpacity>
                   <View style={AccountTabStyle.setviewwidth}>
-                    <Text style={AccountTabStyle.sumanyatextset}>testt</Text>
-                    <Text style={AccountTabStyle.setgimailtext}>test@gmail.com</Text>
-                    <Text style={AccountTabStyle.setgimailtextwo}>xxxxxxxxxxx</Text>
-                    <Text style={AccountTabStyle.addreshtext}>United States</Text>
+                    <Text style={AccountTabStyle.sumanyatextset}>{User?.fullname}</Text>
+                    <Text style={AccountTabStyle.setgimailtext}>{User?.email}</Text>
+                    <Text style={AccountTabStyle.setgimailtext}>Verified : {isFilled ? 'Yes' : 'No'}</Text>
+                    <Text style={AccountTabStyle.setgimailtextwo}>{User?.mobilenumber}</Text>
+                    <Text style={AccountTabStyle.addreshtext}>{User?.address}</Text>
                   </View>
                 </View>
               </View>
@@ -120,12 +165,12 @@ const VetProfileTab = () => {
                     <Text style={AccountTabStyle.bookmarktextstyle}>Notifications</Text>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => settingscreen()} style={AccountTabStyle.setbgcolorwhite}>
+                <TouchableOpacity onPress={() => navigation.navigate('NewProduct')} style={AccountTabStyle.setbgcolorwhite}>
                   <View>
                     <View style={AccountTabStyle.flexrowsettile}>
                       <Icon name="setting" size={20} color={colorrdata} />
                     </View>
-                    <Text style={AccountTabStyle.bookmarktextstyle}>Settings</Text>
+                    <Text style={AccountTabStyle.bookmarktextstyle}>Add Product</Text>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => paymentscreen()} style={AccountTabStyle.setbgcolorwhite}>
@@ -137,25 +182,26 @@ const VetProfileTab = () => {
                   </View>
                 </TouchableOpacity>
               </View>
-            
-  
-
               <FlatList
+              
                 data={setuserdata}
                 renderItem={({ item, index }) => Userdatatext(item, index)}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.id.toString()}
                 numColumns={1}
                 style={AccountTabStyle.flatelistGrid}
               />
               <View style={AccountTabStyle.fourtextminview}>
-                <TouchableOpacity onPress={() => navigation.navigate(RouteName.RATING_SCREEN_SET)}>
+                <TouchableOpacity onPress={() => navigation.navigate('')}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Send Feedback</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate(RouteName.HOME_SCREEN)}>
+                <TouchableOpacity onPress={() => navigation.navigate('')}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Report an Emergency</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate(RouteName.HOME_SCREEN)}>
+                <TouchableOpacity onPress={() => navigation.navigate('')}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Rate us on the Play Store</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Slider')}>
+                  <Text style={AccountTabStyle.sendfeedbacktext}>Become A Vet</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setModalVisible(true)}>
                   <Text style={AccountTabStyle.sendfeedbacktext}>Log Out</Text>
@@ -167,7 +213,7 @@ const VetProfileTab = () => {
               </TouchableOpacity>
               <View style={AccountTabStyle.centeredView}>
                 {DisplayAlert !== 0 ?
-                  <SweetaelertModal message='Update Successful' link={RouteName.OFFERS_TAB} />
+                  <SweetaelertModal message='Update Successful' link={''} />
                   :
                   null
                 }
@@ -176,6 +222,7 @@ const VetProfileTab = () => {
           </View>
         </KeyboardAvoidingView>
       </ScrollView>
+      {/* Log out Modal start */}
       <View>
         <View style={Style.centeredView}>
           <Modal
@@ -203,7 +250,7 @@ const VetProfileTab = () => {
                       <Button title="Signout"
                         buttonTextStyle={Style.setbuttontextstyle}
                         buttonStyle={Style.setbuttonstyletwo}
-                        onPress={() => navigation.navigate(RouteName.LOGIN_AND_REGISTRATION)}
+                        onPress={() => handleLogout()}
                       />
                     </View>
                     <View style={Style.setokbuttontwo}>
@@ -224,3 +271,4 @@ const VetProfileTab = () => {
   );
 };
 export default VetProfileTab;
+
